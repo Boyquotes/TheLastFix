@@ -90,6 +90,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 280, 1024 )
 
 [node name="Buildings2" type="ParallaxLayer" parent="ParallaxBackground" index="2"]
+z_index = -1024
 motion_scale = Vector2( 0.8, 1 )
 motion_mirroring = Vector2( 120, 0 )
 

@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "BaseScene",
+"language": "GDScript",
+"path": "res://scenes/base_scene.gd"
+}, {
 "base": "EditorVCSInterface",
 "class": "GitAPI",
 "language": "NativeScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://entities/player/player.gd"
 } ]
 _global_script_class_icons={
+"BaseScene": "",
 "GitAPI": "",
 "Grapnel": "",
 "Player": ""

@@ -7,6 +7,7 @@ export var control_enabled = true
 
 const _gravity = 12
 const _friction = 10
+const _crawl_speed = 40
 const _walk_speed = 100
 const _jump_speed = 180
 const _pull_speed = 30
@@ -18,6 +19,7 @@ var _jump_time = -1
 var _grapnel = null
 var _pulling = false
 var _ghook_length = 0
+var _crouching = false
 
 onready var _animation_player = $AnimationPlayer
 onready var _sprite = $Sprite
@@ -32,23 +34,37 @@ func play_animation(name: String):
 
 
 func _walking():
+	var _was_crouching = _crouching
 	_looking.y = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
+	_crouching = _looking.y > 0
 	var _walkdir = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	if not control_enabled:
 		_walkdir = 0
 		_looking.y = 0
 
+	var speed = _crawl_speed if _crouching else _walk_speed 
+
 	if _walkdir == 0:
-		if is_on_floor() and _animation_player.current_animation == "walk":
-			play_animation("idle")
+		if is_on_floor():
+			if _animation_player.current_animation == "walk":
+				play_animation("idle")
+			elif _animation_player.current_animation == "crawl":
+				_animation_player.stop()
 		_looking.x = (-1 if _sprite.flip_h else 1) if _looking.y == 0 else 0
 	else:
 		if is_on_floor():
-			play_animation("walk")
+			play_animation("crawl" if _crouching else "walk")
 		_sprite.flip_h = _walkdir < 0
 		_looking.x = _walkdir
 
-	return lerp((_walk_speed * _walkdir) * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(_velocity.x) / 100) - min(_friction, abs(_velocity.x)) * sign(_velocity.x)
+	if is_on_floor():
+		if _crouching != _was_crouching:
+			if _crouching:
+				play_animation("crouch")
+				return -_velocity.x
+			play_animation("get_up")
+
+	return lerp((speed * _walkdir) * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(_velocity.x) / 100) - min(_friction, abs(_velocity.x)) * sign(_velocity.x)
 
 
 func _jumping():
@@ -92,7 +108,7 @@ func _grappling(delta):
 
 	if _pulling:
 		var dist = _grapnel.position - position
-		if dist.length() < _pull_speed * delta + 2:
+		if dist.length() < _pull_speed * delta + 3:
 			return dist - _velocity
 		return dist.normalized() * _pull_speed
 	return Vector2.ZERO
@@ -112,7 +128,7 @@ func _physics_process(delta):
 	if is_on_floor():
 		_jump_time = -1
 		if was_airborne:
-			play_animation("land")
+			play_animation("crouch" if _crouching else "land")
 	else:
 		if _velocity.y < 0:
 			play_animation("jump")

@@ -11,12 +11,11 @@ const _walk_speed = 100
 const _jump_speed = 180
 const _pull_speed = 30
 const _terminal_velocity = 250
-const _ghook_color = Color(0, 149.0/256.0, 1)
 
 var _velocity = Vector2.ZERO
 var _looking = Vector2.RIGHT
 var _jump_time = -1
-var _grapnel: Grapnel
+var _grapnel = null
 var _pulling = false
 var _ghook_length = 0
 
@@ -26,15 +25,6 @@ onready var _sprite = $Sprite
 
 func _ready():
 	play_animation("idle")
-
-
-func _process(_delta):
-	update()
-
-
-func _draw():
-	if _grapnel.active:
-		draw_line(Vector2.ZERO, _grapnel.position - position, _ghook_color)
 
 
 func play_animation(name: String):
@@ -92,7 +82,7 @@ func _falling():
 	return _gravity * gravity_strength
 
 
-func _grappling(_delta):
+func _grappling(delta):
 	if Input.is_action_pressed("grapple") != _grapnel.active:
 		if Input.is_action_pressed("grapple"):
 			_grapnel.shoot(position, _looking)
@@ -102,19 +92,37 @@ func _grappling(_delta):
 
 	if _pulling:
 		var dist = _grapnel.position - position
-		return dist.normalized() * min(dist.length() / _ghook_length, 1) * _pull_speed
+		if dist.length() < _pull_speed * delta + 2:
+			return dist - _velocity
+		return dist.normalized() * _pull_speed
 	return Vector2.ZERO
 
 
 func _physics_process(delta):
+	var prev_velocity = _velocity
+
 	_velocity.x += _walking()
 	_velocity.y += _falling()
 	_velocity += _jumping() + _grappling(delta)
 	
+	var was_airborne = not is_on_floor()
+	
 	_velocity = move_and_slide(_velocity, Vector2.UP).limit_length(_terminal_velocity)
+	
+	if is_on_floor():
+		_jump_time = -1
+		if was_airborne:
+			play_animation("land")
+	else:
+		if _velocity.y < 0:
+			play_animation("jump")
+		elif _velocity.y > 0:
+			_jump_time = -1
+			if prev_velocity.y <= 0:
+				play_animation("fall")
 
 
-func set_grapnel(node: Grapnel):
+func set_grapnel(node):
 	_grapnel = node
 
 

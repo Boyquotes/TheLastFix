@@ -9,6 +9,7 @@ onready var _camera = $Camera
 
 func _ready():
 	_player.set_grapnel(_grapnel)
+	_grapnel.set_player(_player)
 
 
 func _process(_delta):

@@ -15,11 +15,15 @@ var _velocity = Vector2.ZERO
 var _looking = Vector2.RIGHT
 var _jump_time = -1
 var _grapnel: Grapnel
-var _grappling = false
+var _pulling = false
 var _ghook_length = 0
 
 onready var _animation_player = $AnimationPlayer
 onready var _sprite = $Sprite
+
+
+func _ready():
+	play_animation("idle")
 
 
 func play_animation(name: String):
@@ -79,11 +83,11 @@ func _grappling(delta):
 			_grapnel.shoot(position, _looking)
 		else:
 			_grapnel.hide()
-			_grappling = false
+			_pulling = false
 
-	if _grappling:
+	if _pulling:
 		var dist = _grapnel.position - position
-		return dist.normalized() * (dist.length() / _ghook_length) / delta
+		return dist.normalized() * (dist.length() / _ghook_length) * 30
 	return Vector2.ZERO
 
 
@@ -100,5 +104,5 @@ func set_grapnel(node: Grapnel):
 
 
 func _on_Grapnel_hit(hit_pos: Vector2):
-	_grappling = true
+	_pulling = true
 	_ghook_length = (hit_pos - position).length()

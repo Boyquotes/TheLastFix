@@ -12,6 +12,7 @@ const _walk_speed = 100
 const _jump_speed = 180
 const _pull_speed = 30
 const _terminal_velocity = 250
+const _grapple_suck_dist = 3.5
 
 var _velocity = Vector2.ZERO
 var _looking = Vector2.RIGHT
@@ -30,6 +31,7 @@ func _ready():
 
 
 func play_animation(name: String):
+	_animation_player.playback_active = true
 	_animation_player.play(name)
 
 
@@ -43,13 +45,13 @@ func _walking():
 		_looking.y = 0
 
 	var speed = _crawl_speed if _crouching else _walk_speed 
+	if _animation_player.current_animation == "crawl":
+		_animation_player.playback_active = _walkdir != 0
 
 	if _walkdir == 0:
 		if is_on_floor():
 			if _animation_player.current_animation == "walk":
 				play_animation("idle")
-			elif _animation_player.current_animation == "crawl":
-				_animation_player.stop()
 		_looking.x = (-1 if _sprite.flip_h else 1) if _looking.y == 0 else 0
 	else:
 		if is_on_floor():
@@ -61,6 +63,7 @@ func _walking():
 		if _crouching != _was_crouching:
 			if _crouching:
 				play_animation("crouch")
+				_animation_player.queue("crawl")
 				return -_velocity.x
 			play_animation("get_up")
 
@@ -101,14 +104,15 @@ func _falling():
 func _grappling(delta):
 	if Input.is_action_pressed("grapple") != _grapnel.active:
 		if Input.is_action_pressed("grapple"):
-			_grapnel.shoot(position, _looking)
+			if not _crouching:
+				_grapnel.shoot(position, _looking)
 		else:
 			_grapnel.hide()
 			_pulling = false
 
 	if _pulling:
 		var dist = _grapnel.position - position
-		if dist.length() < _pull_speed * delta + 3:
+		if dist.length() < _grapple_suck_dist:
 			return dist - _velocity
 		return dist.normalized() * _pull_speed
 	return Vector2.ZERO

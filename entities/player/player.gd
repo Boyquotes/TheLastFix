@@ -36,7 +36,7 @@ func play_animation(name: String):
 
 
 func _walking():
-	var _was_crouching = _crouching
+	var prev_look_vertical = _looking.y
 	_looking.y = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
 	_crouching = _looking.y > 0
 	var _walkdir = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -60,12 +60,16 @@ func _walking():
 		_looking.x = _walkdir
 
 	if is_on_floor():
-		if _crouching != _was_crouching:
+		if _crouching != (prev_look_vertical > 0):
 			if _crouching:
 				play_animation("crouch")
 				_animation_player.queue("crawl")
 				return -_velocity.x
 			play_animation("get_up")
+		if _looking.y < 0 and prev_look_vertical >= 0:
+			play_animation("look_up")
+		elif _looking.y >= 0 and prev_look_vertical < 0:
+			play_animation("idle")
 
 	return lerp((speed * _walkdir) * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(_velocity.x) / 100) - min(_friction, abs(_velocity.x)) * sign(_velocity.x)
 

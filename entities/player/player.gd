@@ -12,13 +12,14 @@ const _walk_speed = 100
 const _jump_speed = 180
 const _pull_speed = 30
 const _terminal_velocity = 250
-const _grapple_suck_dist = 4
+const _grapple_suck_dist = 5
 
 var _velocity = Vector2.ZERO
 var _looking = Vector2.RIGHT
 var _jump_time = -1
 var _grapnel = null
 var _pulling = false
+var _holding_wall = false
 var _ghook_length = 0
 var _crouching = false
 
@@ -44,7 +45,7 @@ func play_animation(name: String, show_hook = true, hook_angle = 0):
 func set_grapnel_angle(angle: int):
 	if _flipped and angle % 180 != 90:
 		angle = 180 - angle
-	_grapnel.set_angle(angle)
+	_grapnel.angle = angle
 
 
 func _walking():
@@ -94,12 +95,16 @@ func _jumping():
 		return 0
 
 	if Input.is_action_just_pressed("jump"):
+		if _holding_wall:
+			_jump_time = 0
+			_holding_wall = false
+			_grapnel.retract()
+			_pulling = false
+			_flipped = not _flipped
+			return Vector2((-_jump_speed if _flipped else _jump_speed), -_jump_speed)
 		if is_on_floor():
 			_jump_time = 0
 			return Vector2(0, -_jump_speed)
-		#elif is_on_wall() and _velocity.x != 0:
-		#	_jump_time = 0
-		#	return Vector2(-sign(_velocity.x) * _jump_speed, -_jump_speed)
 
 	if Input.is_action_just_released("jump") and _velocity.y < 0 and _jump_time >= 0:
 		var pushdown = 0.6 * (_jump_speed - 0.7 * _jump_time * _gravity)
@@ -121,7 +126,7 @@ func _falling():
 
 
 func _grappling(delta):
-	if Input.is_action_pressed("grapple") != _grapnel.active:
+	if Input.is_action_just_pressed("grapple") or Input.is_action_just_released("grapple"):
 		if Input.is_action_pressed("grapple"):
 			if not _crouching:
 				_grapnel.shoot(_looking)
@@ -131,9 +136,16 @@ func _grappling(delta):
 
 	if _pulling:
 		var dist = _grapnel.position - position
+		print(dist.length())
 		if dist.length() < _grapple_suck_dist:
+			if (_grapnel.angle == 0 or _grapnel.angle == 180):
+				_holding_wall = true
+				_sprite.frame_coords = Vector2(0, 7)
+				_flipped = _grapnel.angle == 180
 			return dist - _velocity
 		return dist.normalized() * _pull_speed
+	else:
+		_holding_wall = false
 	return Vector2.ZERO
 
 
@@ -141,13 +153,18 @@ func _physics_process(delta):
 	var prev_flipped = _flipped
 	var prev_velocity = _velocity
 
-	_velocity.x += _walking()
+	if not _holding_wall:
+		_velocity.x += _walking()
 	_velocity.y += _falling()
-	_velocity += _jumping() + _grappling(delta)
+	_velocity += _jumping()
+	_velocity += _grappling(delta)
 	
 	var was_airborne = not is_on_floor()
 	
 	_velocity = move_and_slide(_velocity, Vector2.UP).limit_length(_terminal_velocity)
+	
+	if _holding_wall:
+		return
 	
 	if _pulling:
 		_animation_player.stop()

@@ -8,6 +8,7 @@ signal hit(position)
 const _speed = 300
 
 var _held_angle = 0
+export var angle = 0 setget _set_angle
 var _velocity = Vector2.ZERO
 var _origin = null
 
@@ -32,18 +33,19 @@ func _ready():
 	chain_2.region = Rect2(3, 0, 3, 3)
 
 
-func set_angle(angle: int):
-	_held_angle = angle
+func _set_angle(value: int):
+	angle = value
+	_held_angle = value
 	if active:
 		return
 
-	if angle % 90 == 45:
+	if value % 90 == 45:
 		_sprite.frame = 1
-		angle -= 45
+		value -= 45
 	else:
 		_sprite.frame = 0
 	
-	rotation_degrees = -angle
+	rotation_degrees = -value
 
 
 func shoot(direction: Vector2):
@@ -61,7 +63,7 @@ func retract():
 	active = false
 	_particles.visible = false
 	_collision.disabled = true
-	set_angle(_held_angle)
+	_set_angle(_held_angle)
 	update()
 
 

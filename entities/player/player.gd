@@ -22,17 +22,29 @@ var _pulling = false
 var _ghook_length = 0
 var _crouching = false
 
+var _flipped = false
+
 onready var _animation_player = $AnimationPlayer
 onready var _sprite = $Sprite
+onready var _hook_origin = $HookOrigin
 
 
 func _ready():
 	play_animation("idle")
 
 
-func play_animation(name: String):
+func play_animation(name: String, show_hook = true, hook_angle = 0):
 	_animation_player.playback_active = true
 	_animation_player.play(name)
+	if _grapnel != null:
+		_grapnel.visible = show_hook
+		set_grapnel_angle(hook_angle)
+
+
+func set_grapnel_angle(angle: int):
+	if _flipped and angle % 180 != 90:
+		angle = 180 - angle
+	_grapnel.set_angle(angle)
 
 
 func _walking():
@@ -52,11 +64,14 @@ func _walking():
 		if is_on_floor():
 			if _animation_player.current_animation == "walk":
 				play_animation("idle")
-		_looking.x = (-1 if _sprite.flip_h else 1) if _looking.y == 0 else 0
+		_looking.x = (-1 if _flipped else 1) if _looking.y == 0 else 0
 	else:
 		if is_on_floor():
-			play_animation("crawl" if _crouching else "walk")
-		_sprite.flip_h = _walkdir < 0
+			if _crouching:
+				play_animation("crawl", false)
+			else:
+				play_animation("walk")
+		_flipped = _walkdir < 0
 		_looking.x = _walkdir
 
 	if is_on_floor():
@@ -109,9 +124,9 @@ func _grappling(delta):
 	if Input.is_action_pressed("grapple") != _grapnel.active:
 		if Input.is_action_pressed("grapple"):
 			if not _crouching:
-				_grapnel.shoot(position, _looking)
+				_grapnel.shoot(_looking)
 		else:
-			_grapnel.hide()
+			_grapnel.retract()
 			_pulling = false
 
 	if _pulling:
@@ -123,6 +138,7 @@ func _grappling(delta):
 
 
 func _physics_process(delta):
+	var prev_flipped = _flipped
 	var prev_velocity = _velocity
 
 	_velocity.x += _walking()
@@ -144,10 +160,14 @@ func _physics_process(delta):
 			_jump_time = -1
 			if prev_velocity.y <= 0:
 				play_animation("fall")
+	
+	if _flipped != prev_flipped:
+		scale.x = -1
 
 
 func set_grapnel(node):
 	_grapnel = node
+	_grapnel.set_origin(_hook_origin)
 
 
 func _on_Grapnel_hit(hit_pos: Vector2):

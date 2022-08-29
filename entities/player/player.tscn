@@ -54,6 +54,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Vector2( 0, 5 ), Vector2( 1, 5 ), Vector2( 0, 3 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("HookOrigin:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7, 1.5 ) ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "fall"
@@ -118,6 +130,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 2, 0 ), Vector2( 3, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("HookOrigin:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 7, 0.5 ), Vector2( 7, 1.5 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "jump"
@@ -167,6 +191,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=11]
 resource_name = "look_up"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
 tracks/0/interp = 1
@@ -176,8 +201,37 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ Vector2( 0, 4 ), Vector2( 1, 4 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 45 ],
+"method": "set_grapnel_angle"
+}, {
+"args": [ 90 ],
+"method": "set_grapnel_angle"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HookOrigin:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 7, -5 ), Vector2( 3.5, -8 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -195,6 +249,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 2, 1 ), Vector2( 3, 1 ), Vector2( 4, 1 ), Vector2( 5, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HookOrigin:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 7, 1.5 ), Vector2( 7, -1.5 ), Vector2( 7, -0.5 ), Vector2( 7, 0.5 ), Vector2( 7, -2.5 ), Vector2( 7, -0.5 ) ]
 }
 
 [node name="Player" type="KinematicBody2D"]
@@ -232,3 +298,6 @@ range_z_max = -1024
 range_layer_min = -100
 range_layer_max = -100
 shadow_enabled = true
+
+[node name="HookOrigin" type="Node2D" parent="."]
+position = Vector2( 7, 1.5 )

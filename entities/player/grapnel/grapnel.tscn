@@ -4,7 +4,7 @@
 [ext_resource path="res://entities/player/grapnel/grapnel.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.5, 3 )
+extents = Vector2( 2.5, 2.5 )
 
 [sub_resource type="ParticlesMaterial" id=2]
 lifetime_randomness = 1.0
@@ -21,16 +21,14 @@ damping_random = 0.6
 collision_mask = 2
 script = ExtResource( 2 )
 
-[node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2( -0.5, 0 )
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="Collision"]
-position = Vector2( 0.5, 0 )
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 2, 0.5 )
 texture = ExtResource( 1 )
-hframes = 2
 vframes = 2
-frame = 2
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( 1.5, 0 )
+shape = SubResource( 1 )
 
 [node name="Particles" type="Particles2D" parent="."]
 emitting = false

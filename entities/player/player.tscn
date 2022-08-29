@@ -21,6 +21,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 3 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("HookOrigin:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7, 0.5 ) ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "crawl"
@@ -82,6 +94,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Vector2( 1, 2 ), Vector2( 2, 2 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("HookOrigin:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 7, 0.5 ), Vector2( 7, -0.5 ) ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "get_up"
@@ -111,6 +135,18 @@ tracks/1/keys = {
 "args": [ "idle" ],
 "method": "play_animation"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HookOrigin:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 7, 1.5 ), Vector2( 7, 0.5 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -158,6 +194,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Vector2( 0, 2 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("HookOrigin:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7, -0.5 ) ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "land"
@@ -187,6 +235,18 @@ tracks/1/keys = {
 "args": [ "idle" ],
 "method": "play_animation"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HookOrigin:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 7, 1.5 ) ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -300,4 +360,4 @@ range_layer_max = -100
 shadow_enabled = true
 
 [node name="HookOrigin" type="Node2D" parent="."]
-position = Vector2( 7, 1.5 )
+position = Vector2( 7, 0.5 )

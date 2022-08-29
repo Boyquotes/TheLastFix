@@ -12,7 +12,7 @@ const _walk_speed = 100
 const _jump_speed = 180
 const _pull_speed = 30
 const _terminal_velocity = 250
-const _grapple_suck_dist = 3.5
+const _grapple_suck_dist = 4
 
 var _velocity = Vector2.ZERO
 var _looking = Vector2.RIGHT
@@ -50,7 +50,7 @@ func set_grapnel_angle(angle: int):
 func _walking():
 	var prev_look_vertical = _looking.y
 	_looking.y = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
-	_crouching = _looking.y > 0
+	_crouching = is_on_floor() and _looking.y > 0
 	var _walkdir = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	if not control_enabled:
 		_walkdir = 0
@@ -149,7 +149,31 @@ func _physics_process(delta):
 	
 	_velocity = move_and_slide(_velocity, Vector2.UP).limit_length(_terminal_velocity)
 	
-	if is_on_floor():
+	if _pulling:
+		_animation_player.stop()
+		_sprite.frame_coords.y = 6
+		var angle = -(_grapnel.position - position).angle() * 180.0 / PI
+		if angle > 90.0:
+			angle = 180 - angle
+		elif angle < -90.0:
+			angle += 180
+
+		if angle > 80:
+			_sprite.frame_coords.x = 0
+			_hook_origin.position = Vector2(2.5, -9)
+		elif angle > 10:
+			_sprite.frame_coords.x = 1
+			_hook_origin.position = Vector2(6, -6)
+		elif angle > -10:
+			_sprite.frame_coords.x = 2
+			_hook_origin.position = Vector2(7, -2.5)
+		elif angle > -80:
+			_sprite.frame_coords.x = 3
+			_hook_origin.position = Vector2(7, 3)
+		else:
+			_sprite.frame_coords.x = 4
+			_hook_origin.position = Vector2(4.5, 7)
+	elif is_on_floor():
 		_jump_time = -1
 		if was_airborne:
 			play_animation("crouch" if _crouching else "land")

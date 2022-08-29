@@ -21,6 +21,7 @@ var chain_texture = preload("res://entities/player/grapnel/chain.png")
 var chain_1 = null
 var chain_2 = null
 
+
 func _ready():
 	chain_1 = AtlasTexture.new()
 	chain_1.atlas = chain_texture

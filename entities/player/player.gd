@@ -38,20 +38,20 @@ func play_animation(name: String, show_hook = true, hook_angle = 0):
 	_animation_player.playback_active = true
 	_animation_player.play(name)
 	if _grapnel != null:
-		_grapnel.visible = show_hook
-		set_grapnel_angle(hook_angle)
+		set_grapnel_angle(hook_angle, show_hook)
 
 
-func set_grapnel_angle(angle: int):
+func set_grapnel_angle(angle: int, visible: bool = true):
 	if _flipped and angle % 180 != 90:
 		angle = 180 - angle
-	_grapnel.angle = angle
+	_grapnel.hold_angle(angle)
+	_grapnel.visible = visible
 
 
 func _walking():
 	var prev_look_vertical = _looking.y
 	_looking.y = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
-	_crouching = is_on_floor() and _looking.y > 0
+	_crouching = is_on_floor() and _looking.y > 0 and not _grapnel.active
 	var _walkdir = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	if not control_enabled:
 		_walkdir = 0
@@ -76,7 +76,7 @@ func _walking():
 		_looking.x = _walkdir
 
 	if is_on_floor():
-		if _crouching != (prev_look_vertical > 0):
+		if _crouching != (prev_look_vertical > 0) and not _grapnel.active:
 			if _crouching:
 				play_animation("crouch")
 				_animation_player.queue("crawl")
@@ -91,8 +91,8 @@ func _walking():
 
 
 func _jumping():
-	if not control_enabled:
-		return 0
+	if not control_enabled or _crouching:
+		return Vector2.ZERO
 
 	if Input.is_action_just_pressed("jump"):
 		if _holding_wall:
@@ -121,6 +121,8 @@ func _falling():
 	if _jump_time >= 0:
 		gravity_strength = 0.8
 		_jump_time += 1
+	if _pulling:
+		gravity_strength *= 0.6
 		
 	return _gravity * gravity_strength
 
@@ -133,16 +135,18 @@ func _grappling(delta):
 		else:
 			_grapnel.retract()
 			_pulling = false
+			if is_on_floor():
+				play_animation("idle")
 
 	if _pulling:
 		var dist = _grapnel.position - position
-		print(dist.length())
 		if dist.length() < _grapple_suck_dist:
-			if (_grapnel.angle == 0 or _grapnel.angle == 180):
+			if not _holding_wall and (_grapnel.hit_angle == 0 or _grapnel.hit_angle == 180):
+				_animation_player.stop()
 				_holding_wall = true
 				_sprite.frame_coords = Vector2(0, 7)
-				_flipped = _grapnel.angle == 180
-			return dist - _velocity
+				_flipped = _grapnel.hit_angle == 180
+			return dist.normalized() * _pull_speed - _velocity
 		return dist.normalized() * _pull_speed
 	else:
 		_holding_wall = false
@@ -150,8 +154,8 @@ func _grappling(delta):
 
 
 func _physics_process(delta):
-	var prev_flipped = _flipped
 	var prev_velocity = _velocity
+	var prev_flipped = _flipped
 
 	if not _holding_wall:
 		_velocity.x += _walking()
@@ -163,10 +167,13 @@ func _physics_process(delta):
 	
 	_velocity = move_and_slide(_velocity, Vector2.UP).limit_length(_terminal_velocity)
 	
+	if _flipped != prev_flipped:
+		scale.x = -1
+	
 	if _holding_wall:
 		return
 	
-	if _pulling:
+	if _pulling and not (is_on_floor() and _grapnel.hit_angle == -90):
 		_animation_player.stop()
 		_sprite.frame_coords.y = 6
 		var angle = -(_grapnel.position - position).angle() * 180.0 / PI
@@ -193,7 +200,11 @@ func _physics_process(delta):
 	elif is_on_floor():
 		_jump_time = -1
 		if was_airborne:
-			play_animation("crouch" if _crouching else "land")
+			if _looking.y > 0 and not _grapnel.active:
+				play_animation("crouch")
+				_velocity.x = 0
+			else:
+				play_animation("land")
 	else:
 		if _velocity.y < 0:
 			play_animation("jump")
@@ -201,9 +212,6 @@ func _physics_process(delta):
 			_jump_time = -1
 			if prev_velocity.y <= 0:
 				play_animation("fall")
-	
-	if _flipped != prev_flipped:
-		scale.x = -1
 
 
 func set_grapnel(node):

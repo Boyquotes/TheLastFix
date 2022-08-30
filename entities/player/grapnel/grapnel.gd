@@ -8,7 +8,7 @@ signal hit(position)
 const _speed = 300
 
 var _held_angle = 0
-export var angle = 0 setget _set_angle
+export var angle = 0
 var _velocity = Vector2.ZERO
 var _origin = null
 
@@ -17,6 +17,7 @@ onready var _collision = $Collision
 onready var _particles = $Particles
 
 export var active = false
+export var hit_angle = 0
 
 var chain_texture = preload("res://entities/player/grapnel/chain.png")
 var chain_1 = null
@@ -33,11 +34,12 @@ func _ready():
 	chain_2.region = Rect2(3, 0, 3, 3)
 
 
-func _set_angle(value: int):
-	angle = value
+func hold_angle(value: int):
 	_held_angle = value
 	if active:
 		return
+
+	angle = value
 
 	if value % 90 == 45:
 		_sprite.frame = 1
@@ -63,7 +65,7 @@ func retract():
 	active = false
 	_particles.visible = false
 	_collision.disabled = true
-	_set_angle(_held_angle)
+	hold_angle(_held_angle)
 	update()
 
 
@@ -76,6 +78,7 @@ func _physics_process(delta):
 		_particles.visible = true
 		_particles.emitting = true
 		_particles.restart()
+		hit_angle = -round((-collision.normal).angle() * 180 / PI)
 		emit_signal("hit", collision.position)
 		_collision.disabled = true
 		position += _velocity * 2

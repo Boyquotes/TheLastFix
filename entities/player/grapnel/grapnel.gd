@@ -16,6 +16,7 @@ var _origin = null
 var _prev_origin_point = Vector2.ZERO
 var _prev_target_point = Vector2.ZERO
 var _joints = PoolVector2Array()
+var _pushoff = Vector2.ZERO
 
 onready var _sprite = $Sprite
 onready var _collision = $Collision
@@ -69,6 +70,7 @@ func shoot(direction: Vector2):
 	_joints.push_back(position)
 	_prev_origin_point = position
 	_prev_target_point = position
+	_pushoff = Vector2.ZERO
 
 	active = true
 	visible = true
@@ -85,9 +87,11 @@ func retract():
 
 func get_pull(origin: Vector2, velocity: Vector2):
 	var dist = _joints[-2] - origin
+	var pull = dist.normalized() * _pull_speed + _pushoff * 45
+	_pushoff = Vector2.ZERO
 	if _joints.size() <= 3 and dist.length() < _grapple_suck_dist:
-		return dist.normalized() * _pull_speed - velocity
-	return dist.normalized() * _pull_speed
+		pull -= velocity
+	return pull
 
 
 func _physics_process(delta):
@@ -209,6 +213,8 @@ func _remove_joints(space_state: Physics2DDirectSpaceState):
 	var edge_normal = ((next - mid).normalized() + (prev - mid).normalized()).sign()
 	var intersections = space_state.intersect_point(mid + edge_normal * 3, 1, [self], 2)
 	if intersections.empty():
+		var edge = _joints[-2]
+		_pushoff = edge - round_to_tile(edge)
 		_joints.remove(_joints.size() - 2)
 
 

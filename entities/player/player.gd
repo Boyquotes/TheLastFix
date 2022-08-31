@@ -219,6 +219,11 @@ func _physics_process(delta):
 			if prev_velocity.y <= 0:
 				play_animation("fall")
 
+	var space_state = get_world_2d().direct_space_state
+	if space_state.intersect_point(_hook_origin.global_position, 1, [self], 2).empty():
+		_grapnel.set_origin(_hook_origin)
+	else:
+		_grapnel.set_origin(self)
 
 func set_grapnel(node):
 	_grapnel = node

@@ -91,7 +91,7 @@ func _physics_process(delta):
 		position += _velocity * 2
 		_velocity = Vector2.ZERO
 
-	_joints[-1] = _origin.global_position + Vector2.LEFT.rotated(-_held_angle / 180.0 * PI)
+	_joints[-1] = _origin.global_position + 2 * Vector2.LEFT.rotated(-_held_angle / 180.0 * PI)
 	_make_joints()
 	_prev_origin_point = _joints[-1]
 	_prev_target_point = _joints[-2] if _joints.size() > 1 else position
@@ -198,10 +198,11 @@ func _draw():
 		var target = joint - prev_joint
 
 		draw_set_transform(
-			Vector2(0, 1.5) + (prev_joint - position).rotated(-rotation),
+			(prev_joint - position - Vector2(1.5, 1.5).rotated(target.angle())).rotated(-rotation),
 			target.angle() - rotation,
 			Vector2(1, 1)
 		)
+		
 		prev_angle = target.angle()
 		prev_joint = joint
 

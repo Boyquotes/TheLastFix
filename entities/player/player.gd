@@ -185,18 +185,23 @@ func _physics_process(delta):
 		if angle > 80:
 			_sprite.frame_coords.x = 0
 			_hook_origin.position = Vector2(2.5, -9)
+			set_grapnel_angle(90)
 		elif angle > 10:
 			_sprite.frame_coords.x = 1
 			_hook_origin.position = Vector2(6, -6)
+			set_grapnel_angle(45)
 		elif angle > -10:
 			_sprite.frame_coords.x = 2
 			_hook_origin.position = Vector2(7, -2.5)
+			set_grapnel_angle(0)
 		elif angle > -80:
 			_sprite.frame_coords.x = 3
 			_hook_origin.position = Vector2(7, 3)
+			set_grapnel_angle(-45)
 		else:
 			_sprite.frame_coords.x = 4
 			_hook_origin.position = Vector2(4.5, 7)
+			set_grapnel_angle(-90)
 	elif is_on_floor():
 		_jump_time = -1
 		if was_airborne:

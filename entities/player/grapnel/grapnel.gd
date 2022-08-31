@@ -89,7 +89,7 @@ func get_pull(origin: Vector2, velocity: Vector2):
 	var dist = _joints[-2] - origin
 	var pull = dist.normalized() * _pull_speed + _pushoff * 45
 	_pushoff = Vector2.ZERO
-	if _joints.size() <= 3 and dist.length() < _grapple_suck_dist:
+	if dist.length() < _grapple_suck_dist:
 		pull -= velocity
 	return pull
 
@@ -169,11 +169,11 @@ func _make_joints(space_state: Physics2DDirectSpaceState):
 			# it typically means the binary search was TOO accurate,
 			# to the point where the normals can't be calculated. 
 			if opposite_ray_candidate.empty():
-				#print("Stopping raycasting search (no opposite ray found) after ", i, " iterations")
+				print("Stopping raycasting search (no opposite ray found) after ", _i, " iterations")
 				break
 
 			if opposite_ray_candidate.normal.dot(result.normal) != 0 and opposite_ray_candidate.position.distance_to(result.position) < 1:
-				#print("Stopping raycasting search (normals aren't perpendicular) after ", i, " iterations")
+				print("Stopping raycasting search (normals aren't perpendicular) after ", _i, " iterations")
 				break
 
 			obscured_origin_end = middle_origin

@@ -11,7 +11,7 @@ const _crawl_speed = 40
 const _walk_speed = 100
 const _jump_speed = 180
 const _terminal_velocity = 250
-const _grapple_hold_dist = 3
+const _grapple_hold_dist = 5
 
 var _velocity = Vector2.ZERO
 var _looking = Vector2.RIGHT
@@ -99,7 +99,6 @@ func _jumping():
 			_holding_wall = false
 			_grapnel.retract()
 			_pulling = false
-			_flipped = not _flipped
 			return Vector2((-_jump_speed if _flipped else _jump_speed), -_jump_speed)
 		if is_on_floor():
 			_jump_time = 0
@@ -140,14 +139,14 @@ func _grappling(_delta):
 	if _pulling:
 		var pull = _grapnel.get_pull(position, _velocity)
 		if (
-			_grapnel.position.distance_to(_hook_origin.global_position) < _grapple_hold_dist
+			_grapnel.position.distance_to(position) < _grapple_hold_dist
 			and
 			not _holding_wall and (_grapnel.hit_angle == 0 or _grapnel.hit_angle == 180)
 			):
 			_animation_player.stop()
 			_holding_wall = true
 			_sprite.frame_coords = Vector2(0, 7)
-			_flipped = _grapnel.hit_angle == 180
+			_flipped = _grapnel.hit_angle == 0
 		return pull
 	else:
 		_holding_wall = false

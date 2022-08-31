@@ -10,9 +10,8 @@ const _friction = 10
 const _crawl_speed = 40
 const _walk_speed = 100
 const _jump_speed = 180
-const _pull_speed = 30
 const _terminal_velocity = 250
-const _grapple_suck_dist = 5
+const _grapple_hold_dist = 3
 
 var _velocity = Vector2.ZERO
 var _looking = Vector2.RIGHT
@@ -127,7 +126,7 @@ func _falling():
 	return _gravity * gravity_strength
 
 
-func _grappling(delta):
+func _grappling(_delta):
 	if Input.is_action_just_pressed("grapple") or Input.is_action_just_released("grapple"):
 		if Input.is_action_pressed("grapple"):
 			if not _crouching:
@@ -139,15 +138,17 @@ func _grappling(delta):
 				play_animation("idle")
 
 	if _pulling:
-		var dist = _grapnel.position - position
-		if dist.length() < _grapple_suck_dist:
-			if not _holding_wall and (_grapnel.hit_angle == 0 or _grapnel.hit_angle == 180):
-				_animation_player.stop()
-				_holding_wall = true
-				_sprite.frame_coords = Vector2(0, 7)
-				_flipped = _grapnel.hit_angle == 180
-			return dist.normalized() * _pull_speed - _velocity
-		return dist.normalized() * _pull_speed
+		var pull = _grapnel.get_pull(position, _velocity)
+		if (
+			_grapnel.position.distance_to(_hook_origin.global_position) < _grapple_hold_dist
+			and
+			not _holding_wall and (_grapnel.hit_angle == 0 or _grapnel.hit_angle == 180)
+			):
+			_animation_player.stop()
+			_holding_wall = true
+			_sprite.frame_coords = Vector2(0, 7)
+			_flipped = _grapnel.hit_angle == 180
+		return pull
 	else:
 		_holding_wall = false
 	return Vector2.ZERO

@@ -5,7 +5,9 @@ class_name Grapnel
 
 signal hit(position)
 
-const _speed = 300
+const _shoot_speed = 300
+const _pull_speed = 30
+const _grapple_suck_dist = 5
 
 var _held_angle = 0
 export var angle = 0
@@ -81,11 +83,18 @@ func retract():
 	update()
 
 
+func get_pull(origin: Vector2, velocity: Vector2):
+	var dist = _joints[-2] - origin
+	if _joints.size() <= 3 and dist.length() < _grapple_suck_dist:
+		return dist.normalized() * _pull_speed - velocity
+	return dist.normalized() * _pull_speed
+
+
 func _physics_process(delta):
 	if not active:
 		return
 
-	var collision = move_and_collide(_velocity * _speed * delta)
+	var collision = move_and_collide(_velocity * _shoot_speed * delta)
 	if collision != null:
 		_particles.visible = true
 		_particles.emitting = true
@@ -133,8 +142,6 @@ func _make_joints(space_state: Physics2DDirectSpaceState):
 	var obscured_target_end = target
 	var middle_origin = (clear_origin_end + obscured_origin_end) / 2
 	var middle_target = (clear_target_end + obscured_target_end) / 2
-	var colliding_origin = origin
-	var colliding_target = target
 	
 	var previous_ray = space_state.intersect_ray(clear_origin_end, clear_target_end, [self], 2)
 	if not previous_ray.empty():
@@ -143,7 +150,7 @@ func _make_joints(space_state: Physics2DDirectSpaceState):
 	
 
 	var opposite_ray = null
-	for i in range(20):
+	for _i in range(20):
 		var result = space_state.intersect_ray(middle_origin, middle_target, [self], 2)
 		#print(middle_origin, middle_target)
 		if result.empty():

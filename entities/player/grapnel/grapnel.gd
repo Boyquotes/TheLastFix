@@ -18,6 +18,7 @@ var _joints = PoolVector2Array()
 onready var _sprite = $Sprite
 onready var _collision = $Collision
 onready var _particles = $Particles
+onready var _hitbox_area = $HitboxArea
 
 export var active = false
 export var hit_angle = 0
@@ -54,11 +55,15 @@ func hold_angle(value: int):
 
 
 func shoot(direction: Vector2):
+	if not _hitbox_area.get_overlapping_bodies().empty():
+		return
+
 	_velocity = direction
 	_sprite.frame = 1 if _velocity.x != 0 and _velocity.y != 0 else 0
 	rotation = -_velocity.angle_to(Vector2.RIGHT if _sprite.frame != 1 else Vector2(1, -1))
 	_particles.rotation = _velocity.angle() - rotation + PI
 	_collision.disabled = false
+	_joints.push_back(position)
 	_joints.push_back(position)
 	_prev_origin_point = position
 	_prev_target_point = position
@@ -91,10 +96,16 @@ func _physics_process(delta):
 		position += _velocity * 2
 		_velocity = Vector2.ZERO
 
+	_joints[0] = position
 	_joints[-1] = _origin.global_position + 2 * Vector2.LEFT.rotated(-_held_angle / 180.0 * PI)
-	_make_joints()
+	
+	var space_state = get_world_2d().direct_space_state
+	_make_joints(space_state)
+
 	_prev_origin_point = _joints[-1]
-	_prev_target_point = _joints[-2] if _joints.size() > 1 else position
+	_prev_target_point = _joints[-2]
+
+	_remove_joints(space_state)
 
 
 func round_to_tile(point: Vector2):
@@ -103,12 +114,12 @@ func round_to_tile(point: Vector2):
 	return point
 
 
-func _make_joints():
-	var space_state = get_world_2d().direct_space_state
-	
-	
+func _make_joints(space_state: Physics2DDirectSpaceState):
 	var origin = _joints[-1]
-	var target = _joints[-2] if _joints.size() > 1 else position
+	var target = _joints[-2]
+	if not space_state.intersect_point(origin, 1, [self], 2).empty():
+		return
+
 	var colliding_ray = space_state.intersect_ray(origin, target, [self], 2)
 	if colliding_ray.empty():
 		return
@@ -180,6 +191,20 @@ func _make_joints():
 	_joints.insert(_joints.size() - 1, edge)
 
 
+func _remove_joints(space_state: Physics2DDirectSpaceState):
+	if _joints.size() < 3:
+		return
+
+	var prev = _joints[-3]
+	var mid = _joints[-2]
+	var next = _joints[-1]
+	
+	var edge_normal = ((next - mid).normalized() + (prev - mid).normalized()).sign()
+	var intersections = space_state.intersect_point(mid + edge_normal * 3, 1, [self], 2)
+	if intersections.empty():
+		_joints.remove(_joints.size() - 2)
+
+
 func _process(_delta):
 	if active:
 		update()
@@ -191,10 +216,10 @@ func _draw():
 	if not active:
 		return
 
-	var prev_joint = position
-	var prev_angle = rotation
+	var prev_joint = _joints[0]
 	var even = false
-	for joint in _joints:
+	for i in range(1, _joints.size()):
+		var joint = _joints[i]
 		var target = joint - prev_joint
 
 		draw_set_transform(
@@ -202,15 +227,13 @@ func _draw():
 			target.angle() - rotation,
 			Vector2(1, 1)
 		)
-		
-		prev_angle = target.angle()
 		prev_joint = joint
 
 		if target.length() < 1:
 			continue
 
-		for i in range(0, target.length(), 3):
-			draw_texture(chain_1 if even else chain_2, Vector2.RIGHT * i)
+		for j in range(0, target.length(), 3):
+			draw_texture(chain_1 if even else chain_2, Vector2.RIGHT * j)
 			even = not even
 
 

@@ -39,3 +39,11 @@ explosiveness = 1.0
 fixed_fps = 24
 visibility_rect = Rect2( -256, -144, 512, 288 )
 process_material = SubResource( 2 )
+
+[node name="HitboxArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape2D" parent="HitboxArea"]
+position = Vector2( 1.5, 0 )
+shape = SubResource( 1 )

@@ -40,6 +40,13 @@ func play_animation(name: String, show_hook = true, hook_angle = 0):
 		set_grapnel_angle(hook_angle, show_hook)
 
 
+func play_idle():
+	if _looking.y == 0:
+		play_animation("idle")
+	elif _looking.y < 0:
+		play_animation("look_up")
+
+
 func set_grapnel_angle(angle: int, visible: bool = true):
 	if _flipped and angle % 180 != 90:
 		angle = 180 - angle
@@ -62,13 +69,15 @@ func _walking():
 
 	if _walkdir == 0:
 		if is_on_floor():
-			if _animation_player.current_animation == "walk":
-				play_animation("idle")
+			if _animation_player.current_animation == "walk" or _animation_player.current_animation == "walk_point_up":
+				play_idle()
 		_looking.x = (-1 if _flipped else 1) if _looking.y == 0 else 0
 	else:
 		if is_on_floor():
 			if _crouching:
 				play_animation("crawl", false)
+			elif _looking.y < 0:
+				play_animation("walk_point_up", true, 45)
 			else:
 				play_animation("walk")
 		_flipped = _walkdir < 0
@@ -134,7 +143,7 @@ func _grappling(_delta):
 			_grapnel.retract()
 			_pulling = false
 			if is_on_floor():
-				play_animation("idle")
+				play_idle()
 
 	if _pulling:
 		var pull = _grapnel.get_pull(position, _velocity)

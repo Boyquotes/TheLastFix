@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
-"class": "BaseScene",
-"language": "GDScript",
-"path": "res://scenes/base_scene.gd"
-}, {
 "base": "EditorVCSInterface",
 "class": "GitAPI",
 "language": "NativeScript",
@@ -24,22 +19,39 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/player/grapnel/grapnel.gd"
 }, {
+"base": "Node2D",
+"class": "Level",
+"language": "GDScript",
+"path": "res://scenes/level.gd"
+}, {
+"base": "Node2D",
+"class": "Main",
+"language": "GDScript",
+"path": "res://scenes/main/main.gd"
+}, {
+"base": "Level",
+"class": "PlayableLevel",
+"language": "GDScript",
+"path": "res://scenes/playable_level.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://entities/player/player.gd"
 } ]
 _global_script_class_icons={
-"BaseScene": "",
 "GitAPI": "",
 "Grapnel": "",
+"Level": "",
+"Main": "",
+"PlayableLevel": "",
 "Player": ""
 }
 
 [application]
 
 config/name="Plumber Game"
-run/main_scene="res://scenes/main_menu/main_menu.tscn"
+run/main_scene="res://scenes/main/main.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -48,7 +60,7 @@ window/size/width=256
 window/size/height=144
 window/size/test_width=1536
 window/size/test_height=864
-window/stretch/mode="viewport"
+window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
 [editor]

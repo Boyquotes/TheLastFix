@@ -1,6 +1,6 @@
-extends Node2D
+extends Level
 
-class_name BaseScene
+class_name PlayableLevel
 
 onready var _player = $Player
 onready var _grapnel = $Grapnel

@@ -1,4 +1,4 @@
-extends Node2D
+extends Level
 
 
 # Called when the node enters the scene tree for the first time.
@@ -10,6 +10,9 @@ func _ready():
 	$GUI/Start.play("default")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+func _process(delta):
+	$Demo/ParallaxBackground.scroll_base_offset.x -= delta * 40
+	
+	if Input.is_action_pressed("grapple"):
+		game.load_level(load("res://scenes/test/test.tscn"))

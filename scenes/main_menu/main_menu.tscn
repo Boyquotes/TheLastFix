@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/main_menu/road.png" type="Texture" id=1]
 [ext_resource path="res://scenes/main_menu/main_menu.gd" type="Script" id=2]
@@ -120,7 +120,49 @@ animations = [ {
 "speed": 2.5
 } ]
 
-[node name="Level" instance=ExtResource( 10 )]
+[sub_resource type="Animation" id=26]
+resource_name = "start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:zoom_level")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.1 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "load_first_level"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:zoom_center")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 50, -36 ) ]
+}
+
+[node name="MainMenu" instance=ExtResource( 10 )]
 script = ExtResource( 2 )
 
 [node name="Camera" parent="." index="0"]
@@ -198,3 +240,6 @@ texture = ExtResource( 5 )
 [node name="Start" type="AnimatedSprite" parent="GUI" index="1"]
 position = Vector2( 0, 44 )
 frames = SubResource( 25 )
+
+[node name="StartupAnimation" type="AnimationPlayer" parent="." index="3"]
+anims/start = SubResource( 26 )

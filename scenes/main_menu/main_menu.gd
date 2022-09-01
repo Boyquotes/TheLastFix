@@ -15,4 +15,7 @@ func _process(delta):
 	$Demo/ParallaxBackground.scroll_base_offset.x -= delta * 40
 	
 	if Input.is_action_pressed("grapple"):
-		game.load_level(load("res://scenes/test/test.tscn"))
+		$StartupAnimation.play("start")
+
+func load_first_level():
+	game.load_level(load("res://scenes/test/test.tscn"))

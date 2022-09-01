@@ -3,6 +3,7 @@ extends Node2D
 class_name Main
 
 
+onready var _camera = $Camera
 onready var _level_container = $LevelContainer
 
 var _current_level = null
@@ -26,3 +27,7 @@ func load_level(level: Resource):
 
 func reload_current_level():
 	load_level(_current_level)
+
+
+func get_camera() -> Camera2D:
+	return _camera

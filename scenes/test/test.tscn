@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/playable_level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/test/FirstTiles-tmp.png" type="Texture" id=2]
@@ -68,8 +68,24 @@ points = PoolVector2Array( 8, 8, 0, 8, 0, 0, 8, 0 )
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 40, 10 )
 
+[sub_resource type="Animation" id=9]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:zoom_level")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.1, 1.0 ]
+}
+
 [node name="Level" instance=ExtResource( 1 )]
 script = ExtResource( 6 )
+zoom_level = 0.1
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 
@@ -126,6 +142,9 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea" index="0"]
 position = Vector2( 72, 58 )
 shape = SubResource( 8 )
+
+[node name="StartAnimation" type="AnimationPlayer" parent="." index="6"]
+anims/start = SubResource( 9 )
 
 [connection signal="hit" from="Grapnel" to="Player" method="_on_Grapnel_hit"]
 [connection signal="body_entered" from="DeathArea" to="." method="_on_DeathArea_body_entered"]

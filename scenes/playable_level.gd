@@ -4,7 +4,6 @@ class_name PlayableLevel
 
 onready var _player = $Player
 onready var _grapnel = $Grapnel
-onready var _camera = $Camera
 
 
 func _ready():

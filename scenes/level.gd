@@ -3,7 +3,7 @@ extends Node2D
 class_name Level
 
 var game: Main
-export var fade_level = 1.0
+export var fade_level = 1.0 setget _set_fade_level
 export var zoom_level = 1.0 setget _set_zoom_level
 export var zoom_center = Vector2.ZERO setget _set_zoom_center
 
@@ -17,6 +17,14 @@ func set_game(main):
 
 func reload():
 	game.reload_current_level()
+
+
+func _set_fade_level(level: float):
+	fade_level = level
+
+	if game != null:
+		var view = game.get_view()
+		view.modulate = Color(level, level, level)
 
 
 func _set_zoom_level(level: float):

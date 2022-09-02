@@ -71,7 +71,7 @@ extents = Vector2( 40, 10 )
 [sub_resource type="Animation" id=9]
 resource_name = "start"
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:zoom_level")
+tracks/0/path = NodePath(".:fade_level")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -80,12 +80,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.1, 1.0 ]
+"values": [ 0.0, 1.0 ]
 }
 
 [node name="Level" instance=ExtResource( 1 )]
 script = ExtResource( 6 )
-zoom_level = 0.1
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 

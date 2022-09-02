@@ -5,6 +5,7 @@ class_name Main
 
 onready var _camera = $Camera
 onready var _level_container = $LevelContainer
+onready var _level_view = $LevelView
 
 var _current_level = null
 var _current_level_instance = null
@@ -31,3 +32,7 @@ func reload_current_level():
 
 func get_camera() -> Camera2D:
 	return _camera
+
+
+func get_view() -> Sprite:
+	return _level_view

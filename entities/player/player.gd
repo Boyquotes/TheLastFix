@@ -45,6 +45,11 @@ func play_idle():
 		play_animation("idle")
 	elif _looking.y < 0:
 		play_animation("look_up")
+	elif _looking.y > 0:
+		if _pulling:
+			play_animation("idle")
+		else:
+			play_animation("crouch")
 
 
 func set_grapnel_angle(angle: int, visible: bool = true):
@@ -93,7 +98,7 @@ func _walking():
 		if _looking.y < 0 and prev_look_vertical >= 0:
 			play_animation("look_up")
 		elif _looking.y >= 0 and prev_look_vertical < 0:
-			play_animation("idle")
+			play_idle()
 
 	return lerp((speed * _walkdir) * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(_velocity.x) / 100) - min(_friction, abs(_velocity.x)) * sign(_velocity.x)
 

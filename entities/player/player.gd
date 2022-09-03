@@ -139,9 +139,10 @@ func _grappling(_delta):
 		if Input.is_action_pressed("grapple"):
 			if not _crouching:
 				_grapnel.shoot(_looking)
-		else:
+		elif _grapnel.active:
 			_grapnel.retract()
 			_pulling = false
+			play_idle()
 
 	if _pulling:
 		var pull = _grapnel.get_pull(position, _velocity)

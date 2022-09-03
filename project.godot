@@ -89,6 +89,9 @@ vnen.tiled_importer={
 "image_flags": 3,
 "post_import_script": "res://tiled_import.gd"
 }
+vnen.tiled_tileset_importer={
+"image_flags": 3
+}
 
 [input]
 

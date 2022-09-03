@@ -12,5 +12,7 @@ script = ExtResource( 2 )
 z_index = -1
 
 [node name="Player" parent="." index="2" instance=ExtResource( 1 )]
+collision_mask = 6
 
 [connection signal="hit" from="Grapnel" to="Player" method="_on_Grapnel_hit"]
+[connection signal="retract" from="Grapnel" to="Player" method="_on_Grapnel_retract"]

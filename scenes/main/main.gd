@@ -12,7 +12,7 @@ var _current_level_instance = null
 
 
 func _ready():
-	load_level(load("res://scenes/main_menu/main_menu.tscn"))
+	load_level(load("res://scenes/city/city.tscn"))
 
 
 func load_level(level: Resource):

@@ -19,7 +19,6 @@ var _jump_time = -1
 var _grapnel = null
 var _pulling = false
 var _holding_wall = false
-var _ghook_length = 0
 var _crouching = false
 
 var _flipped = false
@@ -64,10 +63,6 @@ func _walking():
 	_looking.y = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
 	_crouching = is_on_floor() and _looking.y > 0 and not _grapnel.active
 	var _walkdir = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	if not control_enabled:
-		_walkdir = 0
-		_looking.y = 0
-
 	var speed = _crawl_speed if _crouching else _walk_speed 
 	if _animation_player.current_animation == "crawl":
 		_animation_player.playback_active = _walkdir != 0
@@ -129,7 +124,7 @@ func _jumping():
 func _falling():
 	var gravity_strength = 1.0
 	if is_on_floor():
-		return 0.01
+		return 0.1
 	if _jump_time >= 0:
 		gravity_strength = 0.8
 		_jump_time += 1
@@ -147,8 +142,6 @@ func _grappling(_delta):
 		else:
 			_grapnel.retract()
 			_pulling = false
-			if is_on_floor():
-				play_idle()
 
 	if _pulling:
 		var pull = _grapnel.get_pull(position, _velocity)
@@ -164,6 +157,7 @@ func _grappling(_delta):
 		return pull
 	else:
 		_holding_wall = false
+
 	return Vector2.ZERO
 
 
@@ -171,11 +165,12 @@ func _physics_process(delta):
 	var prev_velocity = _velocity
 	var prev_flipped = _flipped
 
-	if not _holding_wall:
+	if not _holding_wall and control_enabled:
 		_velocity.x += _walking()
 	_velocity.y += _falling()
 	_velocity += _jumping()
-	_velocity += _grappling(delta)
+	if control_enabled:
+		_velocity += _grappling(delta)
 	
 	var was_airborne = not is_on_floor()
 	
@@ -244,6 +239,9 @@ func set_grapnel(node):
 	_grapnel.set_origin(_hook_origin)
 
 
-func _on_Grapnel_hit(hit_pos: Vector2):
+func _on_Grapnel_hit():
 	_pulling = true
-	_ghook_length = (hit_pos - position).length()
+
+
+func _on_Grapnel_retract():
+	_pulling = false

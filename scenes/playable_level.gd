@@ -5,6 +5,8 @@ class_name PlayableLevel
 onready var _player = $Player
 onready var _grapnel = $Grapnel
 
+var _active_screen: Screen
+
 
 func _ready():
 	_player.set_grapnel(_grapnel)
@@ -19,6 +21,12 @@ func _process(_delta):
 
 
 func set_active_screen(screen: Screen):
+	if _active_screen != null:
+		_active_screen.active = false
+
+	_active_screen = screen
+	screen.active = true
+
 	var limit = screen.get_extents()
 	print("Switched to screen ", screen.name)
 

@@ -3,7 +3,8 @@ extends KinematicBody2D
 class_name Grapnel
 
 
-signal hit(position)
+signal hit()
+signal retract()
 
 const _shoot_speed = 300
 const _pull_speed = 30
@@ -24,6 +25,7 @@ onready var _particles = $Particles
 onready var _hitbox_area = $HitboxArea
 
 export var active = false
+export var stuck = false
 export var hit_angle = 0
 
 var chain_texture = preload("res://entities/player/grapnel/chain.png")
@@ -79,10 +81,12 @@ func shoot(direction: Vector2):
 func retract():
 	active = false
 	_particles.visible = false
-	_collision.disabled = true
+	_collision.set_deferred("disabled", true)
 	hold_angle(_held_angle)
 	_joints.resize(0)
 	update()
+	stuck = false
+	emit_signal("retract")
 
 
 func get_pull(origin: Vector2, velocity: Vector2):
@@ -104,7 +108,8 @@ func _physics_process(delta):
 		_particles.emitting = true
 		_particles.restart()
 		hit_angle = -round((-collision.normal).angle() * 180 / PI)
-		emit_signal("hit", collision.position)
+		stuck = true
+		emit_signal("hit")
 		_collision.disabled = true
 		position += _velocity * 2
 		_velocity = Vector2.ZERO

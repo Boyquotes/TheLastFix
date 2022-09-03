@@ -8,13 +8,23 @@ onready var _collision_area = $ScreenArea/CollisionArea
 
 var _level = null
 
+export var active = false
+
 
 func set_level(level):
 	_level = level
 
 
-func _on_ScreenArea_body_entered(_body):
-	_level.set_active_screen(self)
+func _on_ScreenArea_body_entered(body):
+	if body is Player:
+		_level.set_active_screen(self)
+	elif body is Grapnel and body.active and not active:
+		body.retract()
+
+
+func _on_ScreenArea_body_exited(body):
+	if body is Grapnel and body.active and not body.stuck:
+		body.retract()
 
 
 func get_extents() -> Rect2:

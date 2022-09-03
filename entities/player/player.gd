@@ -238,6 +238,7 @@ func _physics_process(delta):
 	else:
 		_grapnel.set_origin(self)
 
+
 func set_grapnel(node):
 	_grapnel = node
 	_grapnel.set_origin(_hook_origin)

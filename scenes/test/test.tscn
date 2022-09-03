@@ -123,6 +123,8 @@ limit_left = -160
 limit_top = -208
 limit_right = 280
 limit_bottom = 48
+limit_smoothed = false
+smoothing_speed = 3.0
 
 [node name="Player" parent="." index="3"]
 position = Vector2( -18, 0 )

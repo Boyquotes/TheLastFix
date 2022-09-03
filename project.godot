@@ -38,6 +38,11 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://entities/player/player.gd"
+}, {
+"base": "Node2D",
+"class": "Screen",
+"language": "GDScript",
+"path": "res://scenes/screen/screen.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",
@@ -45,7 +50,8 @@ _global_script_class_icons={
 "Level": "",
 "Main": "",
 "PlayableLevel": "",
-"Player": ""
+"Player": "",
+"Screen": ""
 }
 
 [application]
@@ -80,6 +86,7 @@ common/drop_mouse_on_gui_input_disabled=true
 
 vnen.tiled_importer={
 "collision_layer": 2,
+"image_flags": 3,
 "post_import_script": "res://tiled_import.gd"
 }
 

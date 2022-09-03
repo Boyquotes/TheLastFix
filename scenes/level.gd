@@ -7,7 +7,7 @@ export var fade_level = 1.0 setget _set_fade_level
 export var zoom_level = 1.0 setget _set_zoom_level
 export var zoom_center = Vector2.ZERO setget _set_zoom_center
 
-onready var _camera = $Camera
+onready var _camera: Camera2D = $Camera
 
 
 func set_game(main):

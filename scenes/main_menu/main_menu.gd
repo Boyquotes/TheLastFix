@@ -17,5 +17,6 @@ func _process(delta):
 	if Input.is_action_pressed("grapple"):
 		$StartupAnimation.play("start")
 
+
 func load_first_level():
-	game.load_level(load("res://scenes/test/test.tscn"))
+	game.load_level(load("res://scenes/city/city.tscn"))

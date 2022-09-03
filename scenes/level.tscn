@@ -7,6 +7,6 @@ script = ExtResource( 2 )
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true
+limit_smoothed = true
 smoothing_enabled = true
-smoothing_speed = 3.0
 editor_draw_limits = true

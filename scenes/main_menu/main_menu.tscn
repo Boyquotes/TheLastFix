@@ -201,6 +201,7 @@ tracks/5/keys = {
 [node name="MainMenu" instance=ExtResource( 10 )]
 script = ExtResource( 2 )
 fade_level = 0.0
+zoom_center = Vector2( 50, -20 )
 
 [node name="Camera" parent="." index="0"]
 position = Vector2( 128, -72 )
@@ -247,7 +248,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 272, 16 )
 
 [node name="Car" type="AnimatedSprite" parent="Demo" index="2"]
-position = Vector2( 60, -39 )
+position = Vector2( 50.736, -39 )
 frames = SubResource( 21 )
 
 [node name="Head" type="Sprite" parent="Demo/Car" index="0"]

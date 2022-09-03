@@ -19,6 +19,11 @@ func post_import(scene: Node2D):
 			scene.remove_child(node)
 			screen.add_child(node)
 			node.set_owner(screen)
+		elif node is Node2D:  # Object layer
+			for object in node.get_children():
+				match object.get_meta("type"):
+					"spawn":
+						screen.spawnpoint = object.position - size / 2
 
 	screen.get_node("ScreenArea/CollisionArea").shape.extents = size / 2
 	return screen

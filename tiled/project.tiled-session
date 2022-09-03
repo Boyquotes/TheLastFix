@@ -12,24 +12,24 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 128.33333333333331,
-                "y": 71.66666666666666
+                "x": 486.99999999999994,
+                "y": 71
             }
         },
         "02.tmx": {
-            "scale": 2,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 340.75,
-                "y": 17.25
+                "x": 230.33333333333331,
+                "y": 87
             }
         },
         "03.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": -128.25,
-                "y": 137.25
+                "x": 194.75,
+                "y": 33.25
             }
         },
         "bricks.tsx": {
@@ -42,9 +42,11 @@
     "loadedWorlds": [
         "C:/Users/alon1/GodotGames/PlumberGame/tiled/city.world"
     ],
+    "map.height": 18,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 8,
     "map.tileWidth": 8,
+    "map.width": 32,
     "openFiles": [
         "01.tmx",
         "bricks.tsx",

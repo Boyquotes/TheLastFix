@@ -9,6 +9,7 @@ onready var _collision_area = $ScreenArea/CollisionArea
 var _level = null
 
 export var active = false
+export var spawnpoint = Vector2.ZERO
 
 
 func set_level(level):

@@ -14,9 +14,14 @@ var _held_angle = 0
 export var angle = 0
 var _velocity = Vector2.ZERO
 var _origin = null
+var _player = null
 var _prev_joints = PoolVector2Array()
 var _joints = PoolVector2Array()
 var _pushoff = Vector2.ZERO
+
+var _origin_stuck_frames = -1
+var _prev_player_pos = Vector2.ZERO
+var _prev_origin_pos = Vector2.ZERO
 
 onready var _sprite = $Sprite
 onready var _collision = $Collision
@@ -113,9 +118,24 @@ func _physics_process(delta):
 		_velocity = Vector2.ZERO
 
 	_joints[0] = position
-	_joints[-1] = _origin.global_position + 2 * Vector2.LEFT.rotated(-_held_angle / 180.0 * PI)
+	
+	var origin_pos = _origin.global_position + 2 * Vector2.LEFT.rotated(-_held_angle / 180.0 * PI)
+	_joints[-1] = _player.position if _origin_stuck_frames >= 0 else origin_pos
 	
 	var space_state = get_world_2d().direct_space_state
+	if not space_state.intersect_point(origin_pos, 1, [self], 2).empty():
+		if _origin_stuck_frames < 0:
+			_joints[-1] = _prev_player_pos
+			_make_joints(_joints.size() - 1, space_state)
+			_prev_joints[-1] = _prev_player_pos
+		_joints[-1] = _player.position
+		_origin_stuck_frames = 0
+	elif _origin_stuck_frames >= 0:
+		_origin_stuck_frames += 1
+		if _origin_stuck_frames >= 2:
+			_origin_stuck_frames = -1
+			_joints[-1] = origin_pos
+
 	_make_joints(_joints.size() - 1, space_state)
 	if _velocity != Vector2.ZERO:
 		_make_joints(1, space_state)
@@ -123,25 +143,25 @@ func _physics_process(delta):
 	_prev_joints = _joints
 
 	_remove_joints(space_state)
+	
+	_prev_player_pos = _player.position
+	_prev_origin_pos = origin_pos
 
 
 func round_to_tile(point: Vector2):
-	point.x = round(point.x / 8) * 8
-	point.y = round(point.y / 8) * 8
-	return point
+	return (point / 8).round() * 8
 
 
 func _make_joints(index: int, space_state: Physics2DDirectSpaceState):
 	var origin = _joints[index]
 	var target = _joints[index - 1]
-	if not space_state.intersect_point(origin, 1, [self], 2).empty():
-		return
 
 	var colliding_ray = space_state.intersect_ray(origin, target, [self], 2)
 	if colliding_ray.empty():
+		#print("Ray ", origin, " -> ", target, " is clear")
 		return
-	#print("Origin: ", _prev_origin_point, " -> ", origin)
-	#print("Target: ", _prev_target_point, " -> ", target)
+	#print("Origin: ", _prev_joints[index], " -> ", origin)
+	#print("Target: ", _prev_joints[index - 1], " -> ", target)
 
 	# Perform a binary search on raycasting to approximate the edge
 	var clear_origin_end = _prev_joints[index]
@@ -153,7 +173,7 @@ func _make_joints(index: int, space_state: Physics2DDirectSpaceState):
 	
 	var previous_ray = space_state.intersect_ray(clear_origin_end, clear_target_end, [self], 2)
 	if not previous_ray.empty():
-		print("ERROR: Previous ray not clear!")
+		print("ERROR: Previous ray (", clear_origin_end, " -> ", clear_target_end, ") not clear!")
 		return
 	
 
@@ -172,7 +192,7 @@ func _make_joints(index: int, space_state: Physics2DDirectSpaceState):
 			# If the opposite ray candidate fails either of these tests,
 			# it typically means the binary search was TOO accurate,
 			# to the point where the normals can't be calculated. 
-			if opposite_ray_candidate.empty():
+			if opposite_ray_candidate.empty() and space_state.intersect_point(middle_target, 1, [self], 2).empty():
 				print("Stopping raycasting search (no opposite ray found) after ", _i, " iterations")
 				break
 
@@ -255,3 +275,7 @@ func _draw():
 
 func set_origin(origin):
 	_origin = origin
+
+
+func set_player(player):
+	_player = player

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.9" tiledversion="1.9.0" name="Tiles-1" tilewidth="8" tileheight="8" tilecount="15" columns="5">
- <image source="../../Desktop/Aseprite/Plumb/Tiles.png" width="40" height="24"/>
+ <image source="Tiles.png" width="40" height="24"/>
  <tile id="0">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="8" height="8"/>

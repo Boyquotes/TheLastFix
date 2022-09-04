@@ -26,6 +26,7 @@ func set_active_screen(screen: Screen):
 
 	_active_screen = screen
 	screen.active = true
+	_grapnel.retract()
 
 	var limit = screen.get_extents()
 	print("Switched to screen ", screen.name)

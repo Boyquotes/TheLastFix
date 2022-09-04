@@ -14,8 +14,7 @@ var _held_angle = 0
 export var angle = 0
 var _velocity = Vector2.ZERO
 var _origin = null
-var _prev_origin_point = Vector2.ZERO
-var _prev_target_point = Vector2.ZERO
+var _prev_joints = PoolVector2Array()
 var _joints = PoolVector2Array()
 var _pushoff = Vector2.ZERO
 
@@ -70,8 +69,7 @@ func shoot(direction: Vector2):
 	_collision.disabled = false
 	_joints.push_back(position)
 	_joints.push_back(position)
-	_prev_origin_point = position
-	_prev_target_point = position
+	_prev_joints = _joints
 	_pushoff = Vector2.ZERO
 
 	active = true
@@ -118,10 +116,11 @@ func _physics_process(delta):
 	_joints[-1] = _origin.global_position + 2 * Vector2.LEFT.rotated(-_held_angle / 180.0 * PI)
 	
 	var space_state = get_world_2d().direct_space_state
-	_make_joints(space_state)
+	_make_joints(_joints.size() - 1, space_state)
+	if _velocity != Vector2.ZERO:
+		_make_joints(1, space_state)
 
-	_prev_origin_point = _joints[-1]
-	_prev_target_point = _joints[-2]
+	_prev_joints = _joints
 
 	_remove_joints(space_state)
 
@@ -132,9 +131,9 @@ func round_to_tile(point: Vector2):
 	return point
 
 
-func _make_joints(space_state: Physics2DDirectSpaceState):
-	var origin = _joints[-1]
-	var target = _joints[-2]
+func _make_joints(index: int, space_state: Physics2DDirectSpaceState):
+	var origin = _joints[index]
+	var target = _joints[index - 1]
 	if not space_state.intersect_point(origin, 1, [self], 2).empty():
 		return
 
@@ -145,8 +144,8 @@ func _make_joints(space_state: Physics2DDirectSpaceState):
 	#print("Target: ", _prev_target_point, " -> ", target)
 
 	# Perform a binary search on raycasting to approximate the edge
-	var clear_origin_end = _prev_origin_point
-	var clear_target_end = _prev_target_point
+	var clear_origin_end = _prev_joints[index]
+	var clear_target_end = _prev_joints[index - 1]
 	var obscured_origin_end = origin
 	var obscured_target_end = target
 	var middle_origin = (clear_origin_end + obscured_origin_end) / 2
@@ -198,13 +197,12 @@ func _make_joints(space_state: Physics2DDirectSpaceState):
 	var normal_2: Vector2 = opposite_ray.normal
 	if normal_1.dot(normal_2) != 0:
 		print("FAILED: Normals not perpendicular")
-		print(_prev_origin_point, _joints[-1], middle_origin, middle_target, normal_1, normal_2, colliding_ray.position, opposite_ray.position)
 		return
 
 	var edge = round_to_tile((colliding_ray.position + opposite_ray.position) / 2)
 
 	edge += (normal_1 + normal_2) * 1.5
-	_joints.insert(_joints.size() - 1, edge)
+	_joints.insert(index, edge)
 
 
 func _remove_joints(space_state: Physics2DDirectSpaceState):

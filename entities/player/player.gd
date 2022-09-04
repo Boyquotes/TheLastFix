@@ -10,6 +10,7 @@ const _friction = 10
 const _crawl_speed = 40
 const _walk_speed = 100
 const _jump_speed = 180
+const _walljump_speed = 120
 const _terminal_velocity = 250
 const _grapple_hold_dist = 5
 
@@ -108,7 +109,7 @@ func _jumping():
 			_holding_wall = false
 			_grapnel.retract()
 			_pulling = false
-			return Vector2((-_jump_speed if _flipped else _jump_speed), -_jump_speed)
+			return Vector2((-_walljump_speed if _flipped else _walljump_speed), -_jump_speed)
 		if is_on_floor():
 			_jump_time = 0
 			return Vector2(0, -_jump_speed)

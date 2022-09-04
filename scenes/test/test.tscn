@@ -147,5 +147,4 @@ shape = SubResource( 8 )
 [node name="StartAnimation" type="AnimationPlayer" parent="." index="6"]
 anims/start = SubResource( 9 )
 
-[connection signal="hit" from="Grapnel" to="Player" method="_on_Grapnel_hit"]
 [connection signal="body_entered" from="DeathArea" to="." method="_on_DeathArea_body_entered"]

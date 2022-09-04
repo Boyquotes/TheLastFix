@@ -92,6 +92,9 @@ vnen.tiled_importer={
 vnen.tiled_tileset_importer={
 "image_flags": 3
 }
+texture={
+"flags/filter": false
+}
 
 [input]
 

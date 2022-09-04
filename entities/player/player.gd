@@ -21,7 +21,7 @@ var _grapnel = null
 var _pulling = false
 var _holding_wall = false
 var _crouching = false
-
+var _was_airborne = false
 var _flipped = false
 
 onready var _animation_player = $AnimationPlayer
@@ -30,7 +30,7 @@ onready var _hook_origin = $HookOrigin
 
 
 func _ready():
-	play_animation("idle")
+	pass
 
 
 func play_animation(name: String, show_hook = true, hook_angle = 0):
@@ -125,7 +125,7 @@ func _jumping():
 func _falling():
 	var gravity_strength = 1.0
 	if is_on_floor():
-		return 0.1
+		return 1
 	if _jump_time >= 0:
 		gravity_strength = 0.8
 		_jump_time += 1
@@ -174,8 +174,6 @@ func _physics_process(delta):
 	if control_enabled:
 		_velocity += _grappling(delta)
 	
-	var was_airborne = not is_on_floor()
-	
 	_velocity = move_and_slide(_velocity, Vector2.UP).limit_length(_terminal_velocity)
 	
 	if _flipped != prev_flipped:
@@ -215,7 +213,7 @@ func _physics_process(delta):
 			set_grapnel_angle(-90)
 	elif is_on_floor():
 		_jump_time = -1
-		if was_airborne:
+		if _was_airborne:
 			if _looking.y > 0 and not _grapnel.active:
 				play_animation("crouch")
 				_velocity.x = 0
@@ -229,7 +227,7 @@ func _physics_process(delta):
 			if prev_velocity.y <= 0:
 				play_animation("fall")
 
-	var space_state = get_world_2d().direct_space_state
+	_was_airborne = not is_on_floor()
 
 
 func set_grapnel(node):

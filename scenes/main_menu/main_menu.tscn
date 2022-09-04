@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/main_menu/road.png" type="Texture" id=1]
 [ext_resource path="res://scenes/main_menu/main_menu.gd" type="Script" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://scenes/test/bg2.png" type="Texture" id=8]
 [ext_resource path="res://scenes/test/bg3.png" type="Texture" id=9]
 [ext_resource path="res://scenes/level.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/city/car_light.png" type="Texture" id=11]
+[ext_resource path="res://entities/player/light.png" type="Texture" id=12]
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
@@ -67,6 +69,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, 0 ), Vector2( -4, 0 ), Vector2( -8, 0 ), Vector2( -12, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Demo/Car/CarLight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 157, 11 ), Vector2( 157, 12 ) ]
 }
 
 [sub_resource type="Animation" id=23]
@@ -211,6 +225,7 @@ position = Vector2( 128, -72 )
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Demo" index="0"]
 
 [node name="Sky" type="ParallaxLayer" parent="Demo/ParallaxBackground" index="0"]
+z_index = -100
 motion_mirroring = Vector2( 256, 144 )
 
 [node name="Sprite" type="Sprite" parent="Demo/ParallaxBackground/Sky" index="0"]
@@ -218,6 +233,7 @@ texture = ExtResource( 7 )
 centered = false
 
 [node name="Buildings1" type="ParallaxLayer" parent="Demo/ParallaxBackground" index="1"]
+z_index = -99
 motion_scale = Vector2( 0.4, 1 )
 motion_mirroring = Vector2( 56, 0 )
 
@@ -229,7 +245,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 280, 1024 )
 
 [node name="Buildings2" type="ParallaxLayer" parent="Demo/ParallaxBackground" index="2"]
-z_index = -1024
+z_index = -98
 motion_scale = Vector2( 0.8, 1 )
 motion_mirroring = Vector2( 120, 0 )
 
@@ -240,21 +256,42 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 360, 1024 )
 
-[node name="Road" type="Sprite" parent="Demo" index="1"]
-position = Vector2( 136, -8 )
-texture = ExtResource( 1 )
-offset = Vector2( -4, 0 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 272, 16 )
-
-[node name="Car" type="AnimatedSprite" parent="Demo" index="2"]
+[node name="Car" type="AnimatedSprite" parent="Demo" index="1"]
 position = Vector2( 50.736, -39 )
+z_index = -2
 frames = SubResource( 21 )
 
 [node name="Head" type="Sprite" parent="Demo/Car" index="0"]
 position = Vector2( 5, 3 )
+z_index = 2
 texture = ExtResource( 4 )
 hframes = 4
+frame = 3
+
+[node name="CarLight" type="Light2D" parent="Demo/Car" index="1"]
+position = Vector2( 157, 11 )
+texture = ExtResource( 11 )
+texture_scale = 0.25
+range_z_min = -99
+range_layer_min = -100
+
+[node name="PlayerLight" type="Light2D" parent="Demo/Car" index="2"]
+position = Vector2( 4.264, 4 )
+texture = ExtResource( 12 )
+texture_scale = 0.2
+energy = 0.3
+range_z_min = -98
+range_z_max = -2
+range_layer_min = -100
+shadow_enabled = true
+
+[node name="Road" type="Sprite" parent="Demo" index="2"]
+position = Vector2( 136, -8 )
+z_index = -2
+texture = ExtResource( 1 )
+offset = Vector2( -8, 0 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 272, 16 )
 
 [node name="RoadAnimation" type="AnimationPlayer" parent="Demo" index="3"]
 root_node = NodePath("../..")

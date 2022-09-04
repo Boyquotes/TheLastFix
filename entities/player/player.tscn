@@ -376,7 +376,7 @@ texture = ExtResource( 1 )
 hframes = 8
 vframes = 9
 
-[node name="0" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -0.5 )
 shape = SubResource( 1 )
 
@@ -393,13 +393,12 @@ anims/look_up = SubResource( 11 )
 anims/walk = SubResource( 3 )
 anims/walk_point_up = SubResource( 12 )
 
-[node name="Light2D" type="Light2D" parent="."]
+[node name="Light" type="Light2D" parent="."]
 texture = ExtResource( 3 )
 texture_scale = 0.2
-energy = 1.5
-range_z_max = -1024
+range_z_min = -98
+range_z_max = -2
 range_layer_min = -100
-range_layer_max = -100
 shadow_enabled = true
 
 [node name="HookOrigin" type="Node2D" parent="."]

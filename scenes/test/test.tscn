@@ -89,6 +89,7 @@ script = ExtResource( 6 )
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 
 [node name="Sky" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+z_index = -100
 motion_mirroring = Vector2( 256, 144 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/Sky" index="0"]
@@ -96,6 +97,7 @@ texture = ExtResource( 3 )
 centered = false
 
 [node name="Buildings1" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
+z_index = -99
 motion_scale = Vector2( 0.4, 1 )
 motion_mirroring = Vector2( 56, 0 )
 
@@ -107,7 +109,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 280, 1024 )
 
 [node name="Buildings2" type="ParallaxLayer" parent="ParallaxBackground" index="2"]
-z_index = -1024
+z_index = -98
 motion_scale = Vector2( 0.8, 1 )
 motion_mirroring = Vector2( 120, 0 )
 

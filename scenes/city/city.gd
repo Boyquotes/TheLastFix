@@ -11,7 +11,7 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if not _car_stand.get_overlapping_bodies().empty() and _player.is_on_floor():
+	if _car_stand.get_overlapping_bodies().has(_player) and _player.is_on_floor():
 		_stood_on_car = true
 		_car.frame = 11
 	elif _stood_on_car:

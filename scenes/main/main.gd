@@ -77,7 +77,7 @@ func set_dialogue_speaker(speaker: String):
 	var picture = null
 	match speaker:
 		"Boss":
-			picture = load("res://scenes/main_menu/phone.png")
+			picture = load("res://dialogue/phone.png")
 	
 	if picture == null:
 		print("Error: Unknown speaker ", speaker)

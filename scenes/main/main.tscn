@@ -2,22 +2,22 @@
 
 [ext_resource path="res://scenes/main/main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/main_menu/phone.png" type="Texture" id=2]
-[ext_resource path="res://dialogue/boldpx.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://dialogue/pixel5x5.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://dialogue/alone.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://dialogue/alonebold.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("LevelContainer")
 
 [sub_resource type="DynamicFont" id=2]
-size = 9
-font_data = ExtResource( 3 )
+size = 8
+font_data = ExtResource( 4 )
 
 [sub_resource type="Theme" id=3]
 default_font = SubResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 7
-font_data = ExtResource( 4 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="Theme" id=5]
 default_font = SubResource( 4 )
@@ -65,5 +65,5 @@ theme = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 43.0
-margin_top = 11.0
+margin_top = 12.0
 theme = SubResource( 5 )

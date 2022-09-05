@@ -7,9 +7,6 @@ export var fade_level = 1.0 setget _set_fade_level
 export var zoom_level = 1.0 setget _set_zoom_level
 export var zoom_center = Vector2.ZERO setget _set_zoom_center
 
-export var dialogue_speaker = "" setget _set_dialogue_speaker
-export var dialogue = "" setget _set_dialogue
-
 onready var _camera: Camera2D = $Camera
 
 
@@ -18,16 +15,9 @@ func set_game(main):
 	_set_zoom_level(zoom_level)
 
 
-func _set_dialogue_speaker(speaker: String):
-	dialogue_speaker = speaker
-	if game != null:
-		game.set_dialogue_speaker(speaker)
+func play_dialogue_sequence(id: String):
+	game.play_dialogue_sequence(id)
 
-
-func _set_dialogue(text: String):
-	dialogue = text
-	if game != null:
-		game.print_dialogue(text)
 
 
 func reload():

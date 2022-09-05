@@ -360,7 +360,7 @@ position = Vector2( 0, -1 )
 polygon = PoolVector2Array( 0, -8, 0, -17, -8, -17, -8, -22, -14, -22, -14, -8 )
 
 [node name="Light" type="Light2D" parent="01/Car" index="3"]
-position = Vector2( 157, 10 )
+position = Vector2( 24, 10 )
 texture = ExtResource( 12 )
 offset = Vector2( 133, 0 )
 texture_scale = 0.25

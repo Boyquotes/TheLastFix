@@ -1,5 +1,5 @@
-<seq name="boss_fire">
-	<speaker>Boss</speaker>
+<seq id="boss_fire">
+ <speaker>Boss</speaker>
 	<l>You're fired.</l>
 	<l>The council has determined that you are too ugly and stupid.</l>
 	<l>We're throwing money away by continuing to employ you.</l>

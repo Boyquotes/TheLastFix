@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Object",
+"class": "Dialogue",
+"language": "GDScript",
+"path": "res://dialogue/dialogue.gd"
+}, {
 "base": "EditorVCSInterface",
 "class": "GitAPI",
 "language": "NativeScript",
@@ -45,6 +50,7 @@ _global_script_classes=[ {
 "path": "res://scenes/screen/screen.gd"
 } ]
 _global_script_class_icons={
+"Dialogue": "",
 "GitAPI": "",
 "Grapnel": "",
 "Level": "",

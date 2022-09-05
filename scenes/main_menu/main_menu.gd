@@ -10,7 +10,6 @@ func _ready():
 	$GUI/Start.play("default")
 
 
-
 func _process(delta):
 	$Demo/ParallaxBackground.scroll_base_offset.x -= delta * 40
 	

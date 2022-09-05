@@ -1,8 +1,8 @@
 extends PlayableLevel
 
 onready var _cutscene_player = $CutscenePlayer
-onready var _car = $Car
-onready var _car_stand = $Car/CarStandArea
+onready var _car = $"01/Car"
+onready var _car_stand = $"01/Car/CarStandArea"
 var _stood_on_car = false
 
 

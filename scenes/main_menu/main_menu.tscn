@@ -80,7 +80,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 157, 11 ), Vector2( 157, 12 ) ]
+"values": [ Vector2( 24, 11 ), Vector2( 24, 12 ) ]
 }
 
 [sub_resource type="Animation" id=23]
@@ -269,8 +269,9 @@ hframes = 4
 frame = 3
 
 [node name="CarLight" type="Light2D" parent="Demo/Car" index="1"]
-position = Vector2( 157, 11 )
+position = Vector2( 24, 11 )
 texture = ExtResource( 11 )
+offset = Vector2( 133, 0 )
 texture_scale = 0.25
 range_z_min = -99
 range_layer_min = -100
@@ -289,7 +290,6 @@ shadow_enabled = true
 position = Vector2( 136, -8 )
 z_index = -2
 texture = ExtResource( 1 )
-offset = Vector2( -8, 0 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 272, 16 )
 

@@ -251,8 +251,6 @@ b = Vector2( 156, -22 )
 
 [node name="City" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
-zoom_level = 0.5
-zoom_center = Vector2( 16, -40 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 
@@ -296,13 +294,8 @@ limit_right = 256
 limit_bottom = 0
 smoothing_speed = 3.0
 
-[node name="Grapnel" parent="." index="2"]
-visible = false
-
 [node name="Player" parent="." index="3"]
-visible = false
 position = Vector2( 49, -39 )
-control_enabled = false
 
 [node name="CutscenePlayer" type="AnimationPlayer" parent="." index="4"]
 anims/RESET = SubResource( 4 )

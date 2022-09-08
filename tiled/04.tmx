@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="50" height="18" tilewidth="8" tileheight="8" infinite="0" nextlayerid="3" nextobjectid="2">
+<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="50" height="18" tilewidth="8" tileheight="8" infinite="0" nextlayerid="3" nextobjectid="8">
  <tileset firstgid="1" source="bricks.tsx"/>
  <tileset firstgid="3" source="Tiles-1.tsx"/>
  <layer id="1" name="Tile Layer 1" width="50" height="18">
@@ -30,6 +30,18 @@
     <property name="type" value="spawn"/>
    </properties>
    <point/>
+  </object>
+  <object id="3" x="184" y="0">
+   <properties>
+    <property name="limits" type="object" value="7"/>
+    <property name="type" value="camera_area"/>
+   </properties>
+   <polygon points="0,0 0,48 64,48 64,144 216,144 216,0"/>
+  </object>
+  <object id="7" x="144" y="0" width="256" height="144">
+   <properties>
+    <property name="type" value="camera_limits"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

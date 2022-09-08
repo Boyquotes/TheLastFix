@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "02a.tmx",
+    "activeFile": "04.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -25,11 +25,11 @@
             }
         },
         "02a.tmx": {
-            "scale": 1.5,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 63.66666666666666,
-                "y": 113.66666666666666
+                "x": 637,
+                "y": -103
             }
         },
         "03.tmx": {
@@ -41,11 +41,11 @@
             }
         },
         "04.tmx": {
-            "scale": 4,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 199.875,
-                "y": 72.125
+                "x": 184.33333333333331,
+                "y": 74.33333333333334
             }
         },
         "05.tmx": {
@@ -84,14 +84,15 @@
         "02a.tmx"
     ],
     "project": "project.tiled-project",
+    "property.type": "object",
     "recentFiles": [
         "01.tmx",
         "bricks.tsx",
         "02.tmx",
         "03.tmx",
-        "04.tmx",
+        "02a.tmx",
         "05.tmx",
-        "02a.tmx"
+        "04.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

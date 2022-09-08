@@ -1,6 +1,7 @@
 extends Node
 
 const Screen = preload("res://scenes/screen/screen.tscn")
+const CameraArea = preload("res://scenes/screen/camera_area.tscn")
 
 
 func post_import(scene: Node2D):
@@ -22,10 +23,27 @@ func post_import(scene: Node2D):
 			add_occlusion(node.tile_set)
 			
 		elif node is Node2D:  # Object layer
-			for object in node.get_children():
+			var object_layer = node
+			for object in object_layer.get_children():
 				match object.get_meta("type"):
 					"spawn":
 						screen.spawnpoint = object.position - size / 2
+					"camera_area":
+						var limits_body: StaticBody2D = object_layer.get_node(object.get_meta("limits"))
+						var collision: CollisionPolygon2D = object.get_child(0)
+						var camera_area = CameraArea.instance()
+
+						var camera_area_size = limits_body.get_child(0).shape.extents
+						camera_area.limits = Rect2(limits_body.position - size / 2, camera_area_size * 2)
+						collision.build_mode = CollisionPolygon2D.BUILD_SOLIDS
+						object.remove_child(collision)
+
+						camera_area.add_child(collision)
+						screen.add_child(camera_area)
+						camera_area.position = object.position - size / 2
+
+						camera_area.set_owner(screen)
+						collision.set_owner(screen)
 
 	screen.get_node("ScreenArea/CollisionArea").shape.extents = size / 2
 	return screen

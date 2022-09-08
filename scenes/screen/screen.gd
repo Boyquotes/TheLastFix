@@ -14,6 +14,10 @@ export var spawnpoint = Vector2.ZERO
 
 func set_level(level):
 	_level = level
+	for child in get_children():
+		if child is CameraArea:
+			child.set_level(level)
+			child.set_screen(self)
 
 
 func _on_ScreenArea_body_entered(body):

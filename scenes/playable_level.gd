@@ -17,7 +17,7 @@ func _ready():
 
 
 func _process(_delta):
-	_camera.position = _player.position
+	camera.position = _player.position
 
 
 func set_active_screen(screen: Screen):
@@ -31,7 +31,7 @@ func set_active_screen(screen: Screen):
 	var limit = screen.get_extents()
 	print("Switched to screen ", screen.name)
 
-	_camera.limit_left = limit.position.x
-	_camera.limit_top = limit.position.y
-	_camera.limit_right = limit.end.x
-	_camera.limit_bottom = limit.end.y
+	camera.limit_left = limit.position.x
+	camera.limit_top = limit.position.y
+	camera.limit_right = limit.end.x
+	camera.limit_bottom = limit.end.y

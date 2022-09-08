@@ -66,8 +66,7 @@ func parse():
 func parse_node(parser: XMLParser):
 	if parser.get_node_type() == XMLParser.NODE_TEXT:
 		var data = parser.get_node_data()
-		if data.strip_edges().empty():
-			parser.read()
+		if data.strip_edges().empty() and parser.read() == OK:
 			parse_node(parser)
 			return
 
@@ -91,8 +90,7 @@ func parse_node(parser: XMLParser):
 				_current_sequence.actions.append(speaker)
 
 		while parser.read() == OK:
-			if parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
-				parser.read()
+			if parser.get_node_type() == XMLParser.NODE_ELEMENT_END and parser.read() == OK:
 				break
 
 			parse_node(parser)

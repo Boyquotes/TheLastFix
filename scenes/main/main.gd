@@ -39,14 +39,19 @@ func _process(delta):
 			_dialogue_time = 0
 			advance_dialogue()
 
-	if _action_end_paused and Input.is_action_just_pressed("grapple"):
-		var action = dialogue.next_action()
-		if action != null:
-			execute_action(action)
-		else:
-			_dialogue_box.visible = false
-			_action_end_paused = false
-			emit_signal("dialogue_ended")
+	if _current_line != null and Input.is_action_just_pressed("dialogue_next"):
+		if _action_end_paused:
+			var action = dialogue.next_action()
+			if action != null:
+				execute_action(action)
+			else:
+				_dialogue_box.visible = false
+				_action_end_paused = false
+				_current_line = null
+				emit_signal("dialogue_ended")
+		elif _current_line.nodes.size() == 1 and _current_line.nodes[0] is Dialogue.TextNode:
+			_dialogue_label.text = _current_line.nodes[0].content
+			end_dialogue_line()
 
 
 func load_level(level: Resource):
@@ -94,15 +99,17 @@ func play_dialogue_sequence(id: String):
 
 func execute_action(action):
 	_action_end_paused = false
-	if action is Dialogue.SpeakerAction:
-		set_dialogue_speaker(action.name)
-		execute_action(dialogue.next_action())
-	elif action is Dialogue.LineAction:
+	if action is Dialogue.LineAction:
 		_dialogue_label.text = ""
 		_current_line = action
 		_current_node_index = 0
 		_char_in_node_index = 0
 		_dialogue_time = 0
+	else:
+		_current_line = null
+		if action is Dialogue.SpeakerAction:
+			set_dialogue_speaker(action.name)
+			execute_action(dialogue.next_action())
 
 
 func advance_dialogue():
@@ -115,6 +122,9 @@ func advance_dialogue():
 		_char_in_node_index = 0
 		_current_node_index += 1
 		if _current_node_index >= _current_line.nodes.size():
-			_action_end_paused = true
-			_dialogue_time = -1
-			return
+			end_dialogue_line()
+
+
+func end_dialogue_line():
+	_action_end_paused = true
+	_dialogue_time = -1

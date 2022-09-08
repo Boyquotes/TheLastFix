@@ -9,17 +9,38 @@
         },
         {
             "fileName": "02.tmx",
-            "height": 192,
+            "height": 144,
             "width": 256,
             "x": 256,
-            "y": -48
+            "y": -16
         },
         {
             "fileName": "03.tmx",
-            "height": 208,
-            "width": 240,
+            "height": 144,
+            "width": 256,
             "x": 512,
-            "y": -168
+            "y": -80
+        },
+        {
+            "fileName": "04.tmx",
+            "height": 144,
+            "width": 400,
+            "x": 768,
+            "y": -80
+        },
+        {
+            "fileName": "05.tmx",
+            "height": 144,
+            "width": 256,
+            "x": 1168,
+            "y": -80
+        },
+        {
+            "fileName": "02a.tmx",
+            "height": 144,
+            "width": 256,
+            "x": 256,
+            "y": -160
         }
     ],
     "onlyShowAdjacentMaps": false,

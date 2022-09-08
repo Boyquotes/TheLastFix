@@ -19,6 +19,7 @@ func set_level(level):
 func _on_ScreenArea_body_entered(body):
 	if body is Player:
 		_level.set_active_screen(self)
+		body.position += body.get_velocity().normalized() * 5
 	elif body is Grapnel and body.active and not active:
 		body.retract()
 

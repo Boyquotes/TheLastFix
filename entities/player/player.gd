@@ -242,3 +242,7 @@ func _on_Grapnel_hit():
 
 func _on_Grapnel_retract():
 	_pulling = false
+
+
+func get_velocity():
+	return _velocity

@@ -90,9 +90,10 @@ func parse_node(parser: XMLParser):
 				_current_sequence.actions.append(speaker)
 
 		while parser.read() == OK:
-			if parser.get_node_type() == XMLParser.NODE_ELEMENT_END and parser.read() == OK:
+			if parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
 				break
 
+			
 			parse_node(parser)
 
 

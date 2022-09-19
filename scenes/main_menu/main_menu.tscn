@@ -281,10 +281,10 @@ tracks/5/keys = {
 
 [node name="MainMenu" instance=ExtResource( 10 )]
 script = ExtResource( 2 )
+zoom_center = Vector2( 50, -20 )
 
 [node name="Camera" parent="." index="0"]
 position = Vector2( 128, -72 )
-current = false
 
 [node name="Demo" type="Node2D" parent="." index="1"]
 
@@ -350,6 +350,7 @@ visible = false
 position = Vector2( 2, 3 )
 z_index = 2
 texture = ExtResource( 13 )
+vframes = 2
 
 [node name="Road" type="Sprite" parent="Demo" index="2"]
 position = Vector2( 136, -8 )

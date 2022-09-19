@@ -512,6 +512,6 @@ position = Vector2( 1296, -152 )
 
 [node name="FireHydrant" parent="05" index="2" instance=ExtResource( 16 )]
 position = Vector2( 23, 24 )
-z_index = -1
+z_index = -2
 
 [connection signal="body_entered" from="04/DeathArea" to="." method="_on_DeathArea_body_entered"]

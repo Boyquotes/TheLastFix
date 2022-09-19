@@ -79,6 +79,7 @@ func load_level(level: Resource):
 func load_gui(gui: Resource):
 	_current_gui = gui.instance()
 	_hud.add_child(_current_gui)
+	return _current_gui
 
 
 func unload_gui():

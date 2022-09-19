@@ -173,6 +173,8 @@ func _physics_process(delta):
 	_velocity += _jumping()
 	if control_enabled:
 		_velocity += _grappling(delta)
+	else:
+		_looking = Vector2.RIGHT
 	
 	_velocity = move_and_slide(_velocity, Vector2.UP).limit_length(_terminal_velocity)
 	

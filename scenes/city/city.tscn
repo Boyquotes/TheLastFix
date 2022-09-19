@@ -12,7 +12,7 @@
 [ext_resource path="res://scenes/city/car_rollup.png" type="Texture" id=10]
 [ext_resource path="res://scenes/city/player_rollup.png" type="Texture" id=11]
 [ext_resource path="res://scenes/city/car_light.png" type="Texture" id=12]
-[ext_resource path="res://entities/player/light.png" type="Texture" id=13]
+[ext_resource path="res://entities/player/player_light.tscn" type="PackedScene" id=13]
 [ext_resource path="res://tiled/05.tmx" type="PackedScene" id=14]
 [ext_resource path="res://tiled/02a.tmx" type="PackedScene" id=15]
 [ext_resource path="res://entities/fixable/fire_hydrant/fire_hydrant.tscn" type="PackedScene" id=16]
@@ -219,36 +219,24 @@ tracks/14/keys = {
 "values": [ Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ) ]
 }
 tracks/15/type = "value"
-tracks/15/path = NodePath("01/Car/PlayerPuppet/Light:energy")
+tracks/15/path = NodePath("Camera:position")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
 tracks/15/enabled = true
 tracks/15/keys = {
-"times": PoolRealArray( 0, 9.4, 9.5, 9.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0.3, 0.8, 0.9, 1.0 ]
-}
-tracks/16/type = "value"
-tracks/16/path = NodePath("Camera:position")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/keys = {
 "times": PoolRealArray( 0, 4.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( -112, -72 ), Vector2( 128, -72 ) ]
 }
-tracks/17/type = "method"
-tracks/17/path = NodePath("01/Car/CarPlayer")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/keys = {
+tracks/16/type = "method"
+tracks/16/path = NodePath("01/Car/CarPlayer")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
 "times": PoolRealArray( 0, 6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
@@ -259,31 +247,43 @@ tracks/17/keys = {
 "method": "stop"
 } ]
 }
-tracks/18/type = "value"
-tracks/18/path = NodePath("Camera:drag_margin_h_enabled")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/keys = {
+tracks/17/type = "value"
+tracks/17/path = NodePath("Camera:drag_margin_h_enabled")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
 "times": PoolRealArray( 0, 6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
 }
-tracks/19/type = "method"
-tracks/19/path = NodePath(".")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/keys = {
+tracks/18/type = "method"
+tracks/18/path = NodePath(".")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
 "times": PoolRealArray( 14 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "cam_follow_player"
 } ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("01/Car/PlayerPuppet/PlayerLight:energy")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 9.4, 9.5, 9.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0.3, 0.8, 0.9, 1.0 ]
 }
 
 [sub_resource type="SegmentShape2D" id=2]
@@ -437,11 +437,11 @@ shape = SubResource( 8 )
 
 [node name="Car" type="Sprite" parent="01" index="3"]
 position = Vector2( -450, 18 )
-z_index = -2
+z_index = -3
 texture = ExtResource( 10 )
 hframes = 8
 vframes = 2
-frame = 12
+frame = 11
 
 [node name="PlayerPuppet" type="Sprite" parent="01/Car" index="0"]
 position = Vector2( 5, 6 )
@@ -450,14 +450,8 @@ texture = ExtResource( 11 )
 hframes = 16
 frame = 1
 
-[node name="Light" type="Light2D" parent="01/Car/PlayerPuppet" index="0"]
-texture = ExtResource( 13 )
-texture_scale = 0.2
+[node name="PlayerLight" parent="01/Car/PlayerPuppet" index="0" instance=ExtResource( 13 )]
 energy = 0.3
-range_z_min = -98
-range_z_max = -2
-range_layer_min = -100
-shadow_enabled = true
 
 [node name="CollisionBody" type="StaticBody2D" parent="01/Car" index="1"]
 position = Vector2( 0, 1 )
@@ -517,7 +511,7 @@ shape = SubResource( 3 )
 position = Vector2( 1296, -152 )
 
 [node name="FireHydrant" parent="05" index="2" instance=ExtResource( 16 )]
-position = Vector2( 23, 2 )
+position = Vector2( 23, 24 )
 z_index = -1
 
 [connection signal="body_entered" from="04/DeathArea" to="." method="_on_DeathArea_body_entered"]

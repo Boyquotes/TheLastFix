@@ -2,8 +2,11 @@ extends KinematicBody2D
 
 class_name Player
 
+signal reached_target
+
 
 export var control_enabled = true
+export var grapnel_enabled = true
 export var air_frame = -1 setget _set_air_frame
 
 const _gravity = 12
@@ -24,6 +27,9 @@ var _holding_wall = false
 var _crouching = false
 var _was_airborne = false
 var _flipped = false
+
+var _target_pos = null
+const _autowalk_snap_prox = 1
 
 var _grapnel_origins = {}
 
@@ -192,7 +198,7 @@ func _falling():
 
 func _grappling(_delta):
 	if Input.is_action_just_pressed("grapple") or Input.is_action_just_released("grapple"):
-		if Input.is_action_pressed("grapple"):
+		if Input.is_action_pressed("grapple") and grapnel_enabled:
 			if not _crouching:
 				_grapnel.shoot(_looking)
 		elif _grapnel.active:
@@ -228,6 +234,8 @@ func _physics_process(delta):
 	_velocity += _jumping()
 	if control_enabled:
 		_velocity += _grappling(delta)
+	elif _target_pos != null:
+		_velocity.x += _autowalk(delta)
 	else:
 		_looking = Vector2.RIGHT
 	
@@ -307,3 +315,39 @@ func _on_Sprite_frame_changed():
 		if _flipped and int(angle) % 180 != 90:
 			angle = 180 - angle
 		_grapnel.hold_angle(angle)
+
+
+func go_to(position: Vector2):
+	_target_pos = position
+	_looking = Vector2.ZERO
+
+
+func _autowalk(delta):
+	var _walkdir = 0
+	if abs(position.x - _target_pos.x) < _autowalk_snap_prox:
+		_flipped = false
+		if _animation_player.current_animation == "walk":
+			play_idle()
+		
+		var velocity = (_target_pos.x - position.x) / delta - _velocity.x
+		if is_on_floor() and velocity + _velocity.x == 0:
+			emit_signal("reached_target")
+			_target_pos = null
+
+		return velocity
+
+	if air_frame < 0:
+		play_animation("walk")
+
+	if position.x < _target_pos.x:
+		_walkdir = 1
+		_flipped = false
+	elif position.x > _target_pos.x:
+		_walkdir = -1
+		_flipped = true
+	
+	return lerp((_walk_speed * _walkdir) * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(_velocity.x) / 100) - min(_friction, abs(_velocity.x)) * sign(_velocity.x)
+
+
+func _on_Player_visibility_changed():
+	_grapnel.visible = visible

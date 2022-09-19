@@ -11,8 +11,8 @@
 [ext_resource path="res://scenes/test/bg3.png" type="Texture" id=9]
 [ext_resource path="res://scenes/level.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/city/car_light.png" type="Texture" id=11]
-[ext_resource path="res://entities/player/light.png" type="Texture" id=12]
 [ext_resource path="res://scenes/main_menu/phone.png" type="Texture" id=13]
+[ext_resource path="res://entities/player/player_light.tscn" type="PackedScene" id=14]
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
@@ -284,6 +284,7 @@ script = ExtResource( 2 )
 
 [node name="Camera" parent="." index="0"]
 position = Vector2( 128, -72 )
+current = false
 
 [node name="Demo" type="Node2D" parent="." index="1"]
 
@@ -340,15 +341,9 @@ texture_scale = 0.25
 range_z_min = -99
 range_layer_min = -100
 
-[node name="PlayerLight" type="Light2D" parent="Demo/Car" index="2"]
+[node name="PlayerLight" parent="Demo/Car" index="2" instance=ExtResource( 14 )]
 position = Vector2( 4.264, 4 )
-texture = ExtResource( 12 )
-texture_scale = 0.2
 energy = 0.3
-range_z_min = -98
-range_z_max = -2
-range_layer_min = -100
-shadow_enabled = true
 
 [node name="Phone" type="Sprite" parent="Demo/Car" index="3"]
 visible = false

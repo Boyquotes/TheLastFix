@@ -6,7 +6,7 @@ const _text_speed = 0.5
 
 var _page_prog = -1
 var _page_speed = 0
-const _page_max_speed = 0.5
+const _page_max_speed = 0.8
 const _page_friction = 0.04
 
 onready var _label = $Label
@@ -39,5 +39,5 @@ func _process(delta):
 
 	_page.rect_position.y = 22 - _page_prog * (22 + _page.rect_size.y)
 	if _page_prog >= 1:
-		game.unload_gui()
-		game.load_level(load("res://scenes/city/city.tscn"))
+		Game.unload_gui()
+		Game.load_level(load("res://scenes/city/city.tscn"))

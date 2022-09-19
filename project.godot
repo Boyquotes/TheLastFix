@@ -47,7 +47,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Main",
 "language": "GDScript",
-"path": "res://scenes/main/main.gd"
+"path": "res://main.gd"
 }, {
 "base": "Level",
 "class": "PlayableLevel",
@@ -81,8 +81,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Plumber Game"
-run/main_scene="res://scenes/main/main.tscn"
+run/main_scene="res://scenes/main_menu/main_menu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Game="*res://main.tscn"
 
 [display]
 

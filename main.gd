@@ -16,8 +16,7 @@ onready var _speaker_label = $HUD/DialogueBox/SpeakerLabel
 onready var _dialogue_label = $HUD/DialogueBox/Dialogue
 
 var _current_level = null
-var _current_level_instance = null
-var _current_gui_instance = null
+var _current_gui = null
 
 
 var dialogue = Dialogue.new()
@@ -33,7 +32,17 @@ const _dialogue_speed = 0.025
 
 func _ready():
 	dialogue.parse()
-	load_level(load("res://scenes/main_menu/main_menu.tscn"))
+	var root = get_tree().root
+	_current_level = root.get_child(root.get_child_count() - 1)
+	root.call_deferred("remove_child", _current_level)
+	if _current_level is Level:
+		_level_container.call_deferred("add_child", _current_level)
+	elif _current_level is GUIScene:
+		_hud.call_deferred("add_child", _current_level)
+		_current_gui = _current_level
+		_current_level = null
+
+	_camera.set_deferred("current", true)
 
 
 func _process(delta):
@@ -60,28 +69,21 @@ func _process(delta):
 
 func load_level(level: Resource):
 	if _current_level != null:
-		_level_container.remove_child(_current_level_instance)
-		_current_level_instance.call_deferred("free")
+		_level_container.remove_child(_current_level)
+		_current_level.call_deferred("free")
 
-	_current_level = level
-	_current_level_instance = _current_level.instance()
-	_current_level_instance.set_game(self)
-	_level_container.add_child(_current_level_instance)
-
-
-func reload_current_level():
-	load_level(_current_level)
+	_current_level = level.instance()
+	_level_container.add_child(_current_level)
 
 
 func load_gui(gui: Resource):
-	_current_gui_instance = gui.instance()
-	_current_gui_instance.set_game(self)
-	_hud.add_child(_current_gui_instance)
+	_current_gui = gui.instance()
+	_hud.add_child(_current_gui)
 
 
 func unload_gui():
-	_hud.remove_child(_current_gui_instance)
-	_current_gui_instance = null
+	_hud.remove_child(_current_gui)
+	_current_gui = null
 
 
 func get_camera() -> Camera2D:

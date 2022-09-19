@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scenes/main/main.gd" type="Script" id=1]
+[ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/main_menu/phone.png" type="Texture" id=2]
 [ext_resource path="res://dialogue/alone.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://dialogue/alonebold.ttf" type="DynamicFontData" id=4]
@@ -33,7 +33,6 @@ usage = 0
 render_target_v_flip = true
 
 [node name="Camera" type="Camera2D" parent="."]
-current = true
 
 [node name="LevelView" type="Sprite" parent="."]
 texture = SubResource( 1 )

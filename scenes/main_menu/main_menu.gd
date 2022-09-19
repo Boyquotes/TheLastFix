@@ -19,8 +19,8 @@ func _process(delta):
 		$CutscenePlayer.play("start")
 		$GUI/Start.visible = false
 		_started_cutscene = true
-		game.connect("dialogue_ended", $CutscenePlayer, "play", ["end"])
+		Game.connect("dialogue_ended", $CutscenePlayer, "play", ["end"])
 
 
 func load_first_level():
-	game.load_gui(load("res://scenes/page_intro/page_intro.tscn"))
+	Game.load_gui(load("res://scenes/page_intro/page_intro.tscn"))

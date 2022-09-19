@@ -4,6 +4,7 @@ class_name Player
 
 
 export var control_enabled = true
+export var air_frame = -1 setget _set_air_frame
 
 const _gravity = 12
 const _friction = 10
@@ -24,27 +25,86 @@ var _crouching = false
 var _was_airborne = false
 var _flipped = false
 
+var _grapnel_origins = {}
+
 onready var _animation_player = $AnimationPlayer
 onready var _sprite = $Sprite
 onready var _hook_origin = $HookOrigin
 
 
 func _ready():
-	pass
+	load_grapnel_origins()
 
 
-func play_animation(name: String, show_hook = true, hook_angle = 0):
+func load_grapnel_origins():
+	var origins_image = preload("res://entities/player/player_grapnel_origins.png")
+	origins_image.lock()
+	for x in range(origins_image.get_width() / 18):
+		for y in range(origins_image.get_height() / 18):
+			var total_pixels = 0
+			var total_pos = Vector2.ZERO
+			var angle = 0
+
+			for sub_x in range(18):
+				for sub_y in range(18):
+					var color = origins_image.get_pixel(x * 18 + sub_x, y * 18 + sub_y)
+					var found = true
+					match color:
+						Color.white:
+							angle = 0
+						Color.red:
+							angle = 90
+						Color.green:
+							angle = 45
+						Color.blue:
+							angle = -45
+						Color.magenta:
+							angle = -90
+						_:
+							found = false
+					if found:
+						total_pixels += 1
+						total_pos += Vector2(sub_x, sub_y)
+
+			if total_pixels > 0:
+				var avg_pos = total_pos / total_pixels - Vector2(8.5, 9.5)
+				_grapnel_origins[Vector2(x, y)] = Vector3(avg_pos.x, avg_pos.y, angle)
+			else:
+				_grapnel_origins[Vector2(x, y)] = null
+
+	origins_image.unlock()
+
+
+func update_air_frame():
+	var dir_index = 0
+	if _looking.y < 0:
+		dir_index = 4 if _looking.x == 0 else 5
+	elif _looking.y > 0:
+		dir_index = 7 if _looking.x == 0 else 6
+	else:
+		dir_index = 3
+
+	_sprite.frame_coords = Vector2(air_frame, dir_index)
+
+
+func _set_air_frame(frame: int):
+	air_frame = frame
+	if frame >= 0:
+		update_air_frame()
+
+
+func play_animation(name: String):
 	_animation_player.playback_active = true
 	_animation_player.play(name)
-	if _grapnel != null:
-		set_grapnel_angle(hook_angle, show_hook)
 
 
 func play_idle():
+	air_frame = -1
 	if _looking.y == 0:
 		play_animation("idle")
 	elif _looking.y < 0:
 		play_animation("look_up")
+		_animation_player.seek(0.1)
 	elif _looking.y > 0:
 		if _pulling:
 			play_animation("idle")
@@ -52,15 +112,8 @@ func play_idle():
 			play_animation("crouch")
 
 
-func set_grapnel_angle(angle: int, visible: bool = true):
-	if _flipped and angle % 180 != 90:
-		angle = 180 - angle
-	_grapnel.hold_angle(angle)
-	_grapnel.visible = visible
-
-
 func _walking():
-	var prev_look_vertical = _looking.y
+	var prev_looking = _looking
 	_looking.y = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
 	_crouching = is_on_floor() and _looking.y > 0 and not _grapnel.active
 	var _walkdir = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -69,32 +122,34 @@ func _walking():
 		_animation_player.playback_active = _walkdir != 0
 
 	if _walkdir == 0:
-		if is_on_floor():
+		if air_frame < 0:
 			if _animation_player.current_animation == "walk" or _animation_player.current_animation == "walk_point_up":
 				play_idle()
 		_looking.x = (-1 if _flipped else 1) if _looking.y == 0 else 0
 	else:
-		if is_on_floor():
+		if air_frame < 0:
 			if _crouching:
-				play_animation("crawl", false)
+				play_animation("crawl")
 			elif _looking.y < 0:
-				play_animation("walk_point_up", true, 45)
+				play_animation("walk_point_up")
 			else:
 				play_animation("walk")
 		_flipped = _walkdir < 0
 		_looking.x = _walkdir
 
-	if is_on_floor():
-		if _crouching != (prev_look_vertical > 0) and not _grapnel.active:
+	if air_frame < 0:
+		if _crouching != (prev_looking.y > 0) and not _grapnel.active:
 			if _crouching:
 				play_animation("crouch")
 				_animation_player.queue("crawl")
 				return -_velocity.x
 			play_animation("get_up")
-		if _looking.y < 0 and prev_look_vertical >= 0:
+		if _looking.y < 0 and prev_looking.y >= 0:
 			play_animation("look_up")
-		elif _looking.y >= 0 and prev_look_vertical < 0:
+		elif _looking.y >= 0 and prev_looking.y < 0:
 			play_idle()
+	elif _looking != prev_looking:
+		update_air_frame()
 
 	return lerp((speed * _walkdir) * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(_velocity.x) / 100) - min(_friction, abs(_velocity.x)) * sign(_velocity.x)
 
@@ -154,7 +209,7 @@ func _grappling(_delta):
 			):
 			_animation_player.stop()
 			_holding_wall = true
-			_sprite.frame_coords = Vector2(0, 7)
+			_sprite.frame_coords = Vector2(0, 12)
 			_flipped = _grapnel.hit_angle == 0
 		return pull
 	else:
@@ -186,7 +241,7 @@ func _physics_process(delta):
 	
 	if _pulling and not (is_on_floor() and _grapnel.hit_angle == -90):
 		_animation_player.stop()
-		_sprite.frame_coords.y = 6
+		_sprite.frame_coords.y = 11
 		var angle = -(_grapnel.position - position).angle() * 180.0 / PI
 		if angle > 90.0:
 			angle = 180 - angle
@@ -195,28 +250,19 @@ func _physics_process(delta):
 
 		if angle > 80:
 			_sprite.frame_coords.x = 0
-			_hook_origin.position = Vector2(2.5, -9)
-			set_grapnel_angle(90)
 		elif angle > 10:
 			_sprite.frame_coords.x = 1
-			_hook_origin.position = Vector2(6, -6)
-			set_grapnel_angle(45)
 		elif angle > -10:
 			_sprite.frame_coords.x = 2
-			_hook_origin.position = Vector2(7, -2.5)
-			set_grapnel_angle(0)
 		elif angle > -80:
 			_sprite.frame_coords.x = 3
-			_hook_origin.position = Vector2(7, 3)
-			set_grapnel_angle(-45)
 		else:
 			_sprite.frame_coords.x = 4
-			_hook_origin.position = Vector2(4.5, 7)
-			set_grapnel_angle(-90)
 	elif is_on_floor():
 		_jump_time = -1
 		if _was_airborne:
 			if _looking.y > 0 and not _grapnel.active:
+				air_frame = -1
 				play_animation("crouch")
 				_velocity.x = 0
 			else:
@@ -248,3 +294,16 @@ func _on_Grapnel_retract():
 
 func get_velocity():
 	return _velocity
+
+
+func _on_Sprite_frame_changed():
+	var _origin_pos = _grapnel_origins[_sprite.frame_coords]
+	if _origin_pos == null:
+		_grapnel.visible = false
+	else:
+		_grapnel.visible = visible
+		_hook_origin.position = Vector2(_origin_pos.x, _origin_pos.y)
+		var angle = _origin_pos.z
+		if _flipped and int(angle) % 180 != 90:
+			angle = 180 - angle
+		_grapnel.hold_angle(angle)

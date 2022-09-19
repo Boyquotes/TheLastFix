@@ -7,7 +7,12 @@ var _stood_on_car = false
 
 
 func _ready():
+	followed_node = null
 	_cutscene_player.play("intro")
+
+
+func cam_follow_player():
+	followed_node = _player
 
 
 func _physics_process(_delta):

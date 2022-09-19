@@ -7,8 +7,11 @@ onready var _grapnel = $Grapnel
 
 var _active_screen: Screen
 
+var followed_node = null
+
 
 func _ready():
+	followed_node = _player
 	_player.set_grapnel(_grapnel)
 	
 	for node in get_children():
@@ -17,7 +20,8 @@ func _ready():
 
 
 func _process(_delta):
-	camera.position = _player.position
+	if followed_node != null:
+		camera.position = followed_node.position
 
 
 func set_active_screen(screen: Screen):

@@ -38,6 +38,6 @@ func _process(delta):
 			_page_speed = 0
 
 	_page.rect_position.y = 22 - _page_prog * (22 + _page.rect_size.y)
-	if _page_prog >= 1:
+	if _page_prog >= 1.1:
 		Game.unload_gui()
 		Game.load_level(load("res://scenes/city/city.tscn"))

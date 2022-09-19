@@ -7,6 +7,7 @@ var _player: Player
 
 onready var _player_puppet = $PlayerPuppet
 onready var _fix_animation = $FixAnimation
+onready var _prompt_hover = $PromptHoverAnimation
 
 export var fixed = false
 export var return_to_player_after = true
@@ -15,17 +16,23 @@ signal started_fixing
 signal finished_fixing
 
 
+func _ready():
+	_prompt_hover.play("hover")
+
+
 func _on_FixArea_body_entered(body):
 	if body is Player and not fixed:
 		_player = body
 		body.grapnel_enabled = false
 		_ready_to_fix = true
+		_fix_animation.play("prompt_open")
 
 
 func _on_FixArea_body_exited(body):
 	if body is Player and not fixed:
 		body.grapnel_enabled = true
 		_ready_to_fix = false
+		_fix_animation.play("prompt_close")
 
 
 func _process(_delta):
@@ -34,19 +41,24 @@ func _process(_delta):
 		_player.grapnel_enabled = true
 		_player.go_to($FixingPosition.global_position)
 		_player.connect("reached_target", self, "start_fix")
+		_fix_animation.play("prompt_use")
 
 
 func start_fix():
+	_prompt_hover.stop()
 	_player.disconnect("reached_target", self, "start_fix")
 	_player.visible = false
 	_player_puppet.global_position = _player.global_position
 	_player_puppet.visible = true
 	
 	emit_signal("started_fixing")
-	_fix_animation.play("fix")
+	_fix_animation.queue("fix")
 
 
 func _on_FixAnimation_animation_finished(_anim_name):
+	if _anim_name != "fix":
+		return
+
 	fixed = true
 	_ready_to_fix = false
 	var popup = Game.load_gui(preload("res://scenes/page_popup/page_popup.tscn"))

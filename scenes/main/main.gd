@@ -9,6 +9,7 @@ signal dialogue_ended
 onready var _camera = $Camera
 onready var _level_container = $LevelContainer
 onready var _level_view = $LevelView
+onready var _hud = $HUD
 onready var _dialogue_box = $HUD/DialogueBox
 onready var _speaker_picture = $HUD/DialogueBox/SpeakerPicture
 onready var _speaker_label = $HUD/DialogueBox/SpeakerLabel
@@ -16,6 +17,9 @@ onready var _dialogue_label = $HUD/DialogueBox/Dialogue
 
 var _current_level = null
 var _current_level_instance = null
+var _current_gui_instance = null
+
+
 var dialogue = Dialogue.new()
 
 var _current_node_index = 0
@@ -67,6 +71,17 @@ func load_level(level: Resource):
 
 func reload_current_level():
 	load_level(_current_level)
+
+
+func load_gui(gui: Resource):
+	_current_gui_instance = gui.instance()
+	_current_gui_instance.set_game(self)
+	_hud.add_child(_current_gui_instance)
+
+
+func unload_gui():
+	_hud.remove_child(_current_gui_instance)
+	_current_gui_instance = null
 
 
 func get_camera() -> Camera2D:

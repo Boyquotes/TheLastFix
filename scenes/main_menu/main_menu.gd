@@ -23,4 +23,4 @@ func _process(delta):
 
 
 func load_first_level():
-	game.load_level(load("res://scenes/city/city.tscn"))
+	game.load_gui(load("res://scenes/page_intro/page_intro.tscn"))

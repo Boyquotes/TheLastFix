@@ -15,7 +15,7 @@
 [ext_resource path="res://entities/player/light.png" type="Texture" id=13]
 [ext_resource path="res://tiled/05.tmx" type="PackedScene" id=14]
 [ext_resource path="res://tiled/02a.tmx" type="PackedScene" id=15]
-[ext_resource path="res://entities/npcs/fire_hydrant/fire_hydrant.tscn" type="PackedScene" id=16]
+[ext_resource path="res://entities/fixable/fire_hydrant/fire_hydrant.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Animation" id=4]
 length = 0.001

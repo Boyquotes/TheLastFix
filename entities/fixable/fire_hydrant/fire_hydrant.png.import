@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fire_hydrant.png-f9435e3f1c89eee14d93f75b36591ba7.stex"
+path="res://.import/fire_hydrant.png-3c22b3a42a93c25514f1c1c7bc7c02ab.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/npcs/fire_hydrant/fire_hydrant.png"
-dest_files=[ "res://.import/fire_hydrant.png-f9435e3f1c89eee14d93f75b36591ba7.stex" ]
+source_file="res://entities/fixable/fire_hydrant/fire_hydrant.png"
+dest_files=[ "res://.import/fire_hydrant.png-3c22b3a42a93c25514f1c1c7bc7c02ab.stex" ]
 
 [params]
 

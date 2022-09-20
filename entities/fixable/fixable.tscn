@@ -6,7 +6,7 @@
 
 [sub_resource type="Animation" id=3]
 resource_name = "prompt_close"
-length = 0.3
+length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Prompt:frame")
 tracks/0/interp = 1
@@ -14,15 +14,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 2, 3, 0 ]
+"values": [ 3, 0 ]
 }
 
 [sub_resource type="Animation" id=2]
 resource_name = "prompt_open"
-length = 0.3
+length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Prompt:frame")
 tracks/0/interp = 1
@@ -30,10 +30,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 3, 2, 1 ]
+"values": [ 1, 2 ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -94,7 +94,7 @@ anims/prompt_use = SubResource( 4 )
 [node name="Prompt" type="Sprite" parent="."]
 z_index = 200
 texture = ExtResource( 3 )
-offset = Vector2( 0, 1.37637 )
+offset = Vector2( 0, -2 )
 hframes = 4
 
 [node name="PromptHoverAnimation" type="AnimationPlayer" parent="."]

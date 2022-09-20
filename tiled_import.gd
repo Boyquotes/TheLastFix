@@ -2,6 +2,7 @@ extends Node
 
 const Screen = preload("res://scenes/screen/screen.tscn")
 const CameraArea = preload("res://scenes/screen/camera_area.tscn")
+const UtilityPole = preload("res://entities/utility_pole/utility_pole.tscn")
 
 
 func post_import(scene: Node2D):
@@ -44,9 +45,31 @@ func post_import(scene: Node2D):
 
 						camera_area.set_owner(screen)
 						collision.set_owner(screen)
+					"upole":
+						var pole = UtilityPole.instance()
+						pole.position = object.position - size / 2
+						
+						pole.right_end = connect_pole(object, "right_connect", object_layer)
+						pole.left_end = connect_pole(object, "left_connect", object_layer)
+						print(pole.left_end)
+						
+						screen.add_child(pole)
+						pole.set_owner(screen)
+					_:
+						print("UNKNOWN TILED OBJECT: ", object)
 
 	screen.get_node("ScreenArea/CollisionArea").shape.extents = size / 2
 	return screen
+
+
+func connect_pole(object: Node2D, tag: String, object_layer: Node2D):
+	if not object.has_meta(tag):
+		return Vector2.ZERO
+
+	var end = object_layer.get_node(object.get_meta(tag))
+	if end is Sprite:  # Connects to pole
+		return end.position - object.position + Vector2(35 if tag == "left_connect" else 1, -84)
+	return end.position - object.position
 
 
 func add_occlusion(tileset: TileSet):

@@ -55,8 +55,8 @@ func start_fix():
 	_fix_animation.queue("fix")
 
 
-func _on_FixAnimation_animation_finished(_anim_name):
-	if _anim_name != "fix":
+func _on_FixAnimation_animation_finished(anim_name):
+	if anim_name != "fix":
 		return
 
 	fixed = true

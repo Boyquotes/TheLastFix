@@ -24,7 +24,7 @@ func _process(delta):
 	if not enabled:
 		return
 
-	var dir = Input.get_action_strength("look_up") - Input.get_action_strength("look_down")
+	var dir = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
 	if dir != 0:
 		_speed += dir * 5 * delta
 		if abs(_speed) > _max_speed:

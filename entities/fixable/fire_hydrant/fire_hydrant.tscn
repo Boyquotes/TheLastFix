@@ -145,4 +145,3 @@ process_material = SubResource( 3 )
 
 [node name="Prompt" parent="." index="7"]
 position = Vector2( -19, -24 )
-offset = Vector2( 0, -2 )

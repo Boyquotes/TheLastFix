@@ -27,6 +27,7 @@ func _process(_delta):
 func set_active_screen(screen: Screen):
 	if _active_screen != null:
 		_active_screen.active = false
+		_active_screen.disable_blockers()
 
 	_active_screen = screen
 	screen.active = true
@@ -39,3 +40,19 @@ func set_active_screen(screen: Screen):
 	camera.limit_top = limit.position.y
 	camera.limit_right = limit.end.x
 	camera.limit_bottom = limit.end.y
+	
+	# Find spawnpoint closest to player
+	var min_dist = INF
+	var closest_spawn = null
+	for spawn in screen.spawnpoints:
+		var dist = (screen.global_position + spawn).distance_to(_player.global_position)
+		if dist < min_dist:
+			min_dist = dist
+			closest_spawn = screen.global_position + spawn
+
+	if closest_spawn != null:
+		_player.spawnpoint = closest_spawn
+
+
+func fall_from_screen():
+	_player.die()

@@ -14,5 +14,26 @@ collision_layer = 0
 [node name="CollisionArea" type="CollisionShape2D" parent="ScreenArea"]
 shape = SubResource( 1 )
 
+[node name="Blockers" type="StaticBody2D" parent="."]
+position = Vector2( -128, -128 )
+collision_layer = 4
+collision_mask = 0
+
+[node name="Left" type="CollisionShape2D" parent="Blockers"]
+disabled = true
+
+[node name="Right" type="CollisionShape2D" parent="Blockers"]
+disabled = true
+
+[node name="Top" type="CollisionShape2D" parent="Blockers"]
+disabled = true
+
+[node name="DeathArea" type="Area2D" parent="."]
+position = Vector2( -128, -128 )
+
+[node name="Bottom" type="CollisionShape2D" parent="DeathArea"]
+disabled = true
+
 [connection signal="body_entered" from="ScreenArea" to="." method="_on_ScreenArea_body_entered"]
 [connection signal="body_exited" from="ScreenArea" to="." method="_on_ScreenArea_body_exited"]
+[connection signal="body_entered" from="DeathArea" to="." method="on_enter_death_area"]

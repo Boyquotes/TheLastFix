@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="50" height="18" tilewidth="8" tileheight="8" infinite="0" nextlayerid="5" nextobjectid="8">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="50" height="18" tilewidth="8" tileheight="8" infinite="0" nextlayerid="5" nextobjectid="10">
  <tileset firstgid="1" source="bricks.tsx"/>
  <tileset firstgid="3" source="Tiles-1.tsx"/>
  <tileset firstgid="18" source="Tiles-2.tsx"/>
@@ -68,6 +68,12 @@
    <properties>
     <property name="type" value="camera_limits"/>
    </properties>
+  </object>
+  <object id="9" name=" " x="352" y="64">
+   <properties>
+    <property name="type" value="spawn"/>
+   </properties>
+   <point/>
   </object>
  </objectgroup>
 </map>

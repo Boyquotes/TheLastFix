@@ -8,6 +8,7 @@ signal reached_target
 export var control_enabled = true
 export var grapnel_enabled = true
 export var air_frame = -1 setget _set_air_frame
+export var spawnpoint: Vector2
 
 const _gravity = 12
 const _friction = 10
@@ -352,3 +353,9 @@ func _autowalk(delta):
 
 func _on_Player_visibility_changed():
 	_grapnel.visible = visible
+
+
+func die():
+	global_position = spawnpoint
+	play_idle()
+	_grapnel.retract()

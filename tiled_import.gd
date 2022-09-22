@@ -8,6 +8,7 @@ const UtilityPole = preload("res://entities/utility_pole/utility_pole.tscn")
 func post_import(scene: Node2D):
 	var screen = Screen.instance()
 	var size = null
+	var spawnpoints = []
 
 	for node in scene.get_children():
 		if node is TileMap:
@@ -33,7 +34,7 @@ func post_import(scene: Node2D):
 			for object in object_layer.get_children():
 				match object.get_meta("type"):
 					"spawn":
-						screen.spawnpoint = object.position - size / 2
+						spawnpoints.append(object.position - size / 2)
 					"camera_area":
 						var limits_body: StaticBody2D = object_layer.get_node(object.get_meta("limits"))
 						var collision: CollisionPolygon2D = object.get_child(0)
@@ -64,8 +65,27 @@ func post_import(scene: Node2D):
 						print("UNKNOWN TILED OBJECT: ", object)
 
 	screen.get_node("ScreenArea/CollisionArea").shape.extents = size / 2
+	
+	screen.get_node("Blockers").position = -size / 2
+	screen.get_node("Blockers/Left").shape = make_segment_shape(Vector2.ZERO, Vector2(0, size.y))
+	screen.get_node("Blockers/Right").shape = make_segment_shape(Vector2(size.x, 0), size)
+	screen.get_node("Blockers/Top").shape = make_segment_shape(Vector2.ZERO, Vector2(size.x, 0))
+	
+	screen.get_node("DeathArea").position = -size / 2
+	screen.get_node("DeathArea/Bottom").shape = make_segment_shape(Vector2(0, size.y), size)
+	
+	if not spawnpoints.empty():
+		screen.spawnpoints = PoolVector2Array(spawnpoints)
+	
 	return screen
 
+
+func make_segment_shape(a: Vector2, b: Vector2):
+	var segment = SegmentShape2D.new()
+	segment.a = a
+	segment.b = b
+	return segment
+	
 
 func connect_pole(object: Node2D, tag: String, object_layer: Node2D):
 	if not object.has_meta(tag):

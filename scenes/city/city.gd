@@ -22,9 +22,3 @@ func _physics_process(_delta):
 	elif _stood_on_car:
 		_car.frame = 12
 		_stood_on_car = false
-
-
-func _on_death(body):
-	if body is Player:
-		body.position = _active_screen.spawnpoint + _active_screen.position
-		_grapnel.retract()

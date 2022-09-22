@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "06.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -13,56 +13,64 @@
             "scale": 7.8666,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": -497.54658937787616,
-                "y": 63.24206137340147
+                "x": -497.5465893778761,
+                "y": 63.178501512724694
             }
         },
         "01.tmx": {
-            "scale": 4.85,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 36.49484536082474,
-                "y": 151.64948453608247
+                "x": 171.33333333333331,
+                "y": -10.666666666666657
             }
         },
         "02.tmx": {
-            "scale": 12.8489,
-            "selectedLayer": 0,
+            "scale": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 127.94869599732272,
-                "y": 71.95168458000296
+                "x": 580.5,
+                "y": -11.5
             }
         },
         "02a.tmx": {
-            "scale": 3.2625,
-            "selectedLayer": 0,
+            "scale": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 128.12260536398466,
-                "y": 72.183908045977
+                "x": 580.5,
+                "y": 132.5
             }
         },
         "03.tmx": {
-            "scale": 4.2132,
-            "selectedLayer": 0,
+            "scale": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 127.93126364758379,
-                "y": 72.03550745276749
+                "x": 324.5,
+                "y": 52.5
             }
         },
         "04.tmx": {
-            "scale": 7.62,
-            "selectedLayer": 0,
+            "scale": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 689.6325459317585,
-                "y": 109.38320209973753
+                "x": 68.5,
+                "y": 52.5
             }
         },
         "05.tmx": {
-            "scale": 5.1505,
-            "selectedLayer": 0,
+            "scale": 4,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 232.01630909620425,
-                "y": 98.72827880788272
+                "x": -329.75,
+                "y": 54.25
+            }
+        },
+        "06.tmx": {
+            "scale": 3,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": -495.66666666666663,
+                "y": 185
             }
         },
         "Tiles-1.tsx": {
@@ -81,7 +89,7 @@
     "last.imagePath": "/Users/yoash/Desktop/Aseprite/Plumb",
     "last.worldFilePath": "/Users/yoash/PlumberGame/tiled",
     "loadedWorlds": [
-        "/Users/yoash/PlumberGame/tiled/city.world"
+        "C:/Users/alon1/GodotGames/PlumberGame/tiled/city.world"
     ],
     "map.height": 18,
     "map.lastUsedFormat": "tmx",
@@ -95,10 +103,11 @@
         "03.tmx",
         "04.tmx",
         "05.tmx",
-        "Tiles-2.tsx"
+        "Tiles-2.tsx",
+        "06.tmx"
     ],
     "project": "project.tiled-project",
-    "property.type": "object",
+    "property.type": "string",
     "recentFiles": [
         "01.tmx",
         "02.tmx",
@@ -107,6 +116,8 @@
         "04.tmx",
         "05.tmx",
         "Tiles-2.tsx",
+        "06.tmx",
+        "0.6.tmx",
         "bricks.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",

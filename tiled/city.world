@@ -41,6 +41,13 @@
             "width": 256,
             "x": 256,
             "y": -160
+        },
+        {
+            "fileName": "06.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 1424,
+            "y": -192
         }
     ],
     "onlyShowAdjacentMaps": false,

@@ -133,7 +133,8 @@ func _walking():
 				play_idle()
 		_looking.x = (-1 if _flipped else 1) if _looking.y == 0 else 0
 	else:
-		if air_frame < 0:
+		if air_frame < 0 or air_frame > 2:
+			air_frame = -1
 			if _crouching:
 				play_animation("crawl")
 			elif _looking.y < 0:

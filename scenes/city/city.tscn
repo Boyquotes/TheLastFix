@@ -476,6 +476,8 @@ position = Vector2( 968, -152 )
 
 [node name="05" parent="." index="11" instance=ExtResource( 14 )]
 position = Vector2( 1296, -152 )
+block_left = true
+block_right = true
 
 [node name="FireHydrant" parent="05" index="3" instance=ExtResource( 16 )]
 position = Vector2( 23, 24 )
@@ -483,3 +485,5 @@ z_index = -2
 
 [node name="06" parent="." index="12" instance=ExtResource( 18 )]
 position = Vector2( 1552, -208 )
+
+[connection signal="finished_fixing" from="05/FireHydrant" to="." method="_on_FireHydrant_finished_fixing"]

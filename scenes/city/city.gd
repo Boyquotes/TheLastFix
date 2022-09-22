@@ -22,3 +22,7 @@ func _physics_process(_delta):
 	elif _stood_on_car:
 		_car.frame = 12
 		_stood_on_car = false
+
+
+func _on_FireHydrant_finished_fixing():
+	$"05".block_right = false

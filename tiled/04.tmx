@@ -51,7 +51,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" name=" " x="16" y="48">
+  <object id="1" name=" " x="16" y="56">
    <properties>
     <property name="type" value="spawn"/>
    </properties>
@@ -64,12 +64,12 @@
    </properties>
    <polygon points="0,0 0,48 64,48 64,144 216,144 216,0"/>
   </object>
-  <object id="7" x="144" y="0" width="256" height="144">
+  <object id="7" x="143.818" y="0.181818" width="256" height="144">
    <properties>
     <property name="type" value="camera_limits"/>
    </properties>
   </object>
-  <object id="9" name=" " x="352" y="64">
+  <object id="9" name=" " x="352" y="72">
    <properties>
     <property name="type" value="spawn"/>
    </properties>

@@ -50,19 +50,22 @@
             }
         },
         "04.tmx": {
-            "scale": 2,
-            "selectedLayer": 1,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 5.5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 199.75,
-                "y": 72.25
+                "x": 706.0909090909091,
+                "y": 65.54545454545455
             }
         },
         "05.tmx": {
-            "scale": 2,
+            "scale": 5.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 128.25,
-                "y": 72.25
+                "x": -47,
+                "y": 65.54545454545455
             }
         },
         "06.tmx": {

@@ -18,6 +18,7 @@ const _jump_speed = 180
 const _walljump_speed = 120
 const _terminal_velocity = 250
 const _grapple_hold_dist = 5
+const _feet_offset = 7
 
 var _velocity = Vector2.ZERO
 var _looking = Vector2.RIGHT
@@ -356,6 +357,10 @@ func _on_Player_visibility_changed():
 
 
 func die():
-	global_position = spawnpoint
+	stand_on(spawnpoint)
 	play_idle()
 	_grapnel.retract()
+
+
+func stand_on(place: Vector2):
+	position = place + Vector2(0, -_feet_offset)

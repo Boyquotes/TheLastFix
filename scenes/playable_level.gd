@@ -5,6 +5,8 @@ class_name PlayableLevel
 onready var _player = $Player
 onready var _grapnel = $Grapnel
 
+export var start_at_screen = ""
+
 var _active_screen: Screen
 
 var followed_node = null
@@ -17,6 +19,15 @@ func _ready():
 	for node in get_children():
 		if node is Screen:
 			node.set_level(self)
+
+	if not start_at_screen.empty():
+		set_active_screen(get_node(start_at_screen))
+		_player.stand_on(_active_screen.global_position + (
+			_active_screen.spawnpoints[0] if not _active_screen.spawnpoints.empty() else Vector2.ZERO
+		))
+		_player.control_enabled = true
+		_player.visible = true
+		_player.play_idle()
 
 
 func _process(_delta):

@@ -7,8 +7,11 @@ var _stood_on_car = false
 
 
 func _ready():
-	followed_node = null
-	_cutscene_player.play("intro")
+	if start_at_screen.empty():
+		followed_node = null
+		_cutscene_player.play("intro")
+	else:
+		camera.drag_margin_h_enabled = true
 
 
 func cam_follow_player():

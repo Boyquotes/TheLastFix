@@ -357,7 +357,7 @@ position = Vector2( 136, -8 )
 z_index = -2
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 272, 16 )
+region_rect = Rect2( 0, 0, 270, 16 )
 
 [node name="RoadAnimation" type="AnimationPlayer" parent="Demo" index="3"]
 root_node = NodePath("../..")

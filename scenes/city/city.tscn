@@ -490,7 +490,6 @@ range_layer_min = -100
 anims/ride = SubResource( 9 )
 
 [node name="02" parent="." index="7" instance=ExtResource( 3 )]
-physics_interpolation_mode = 1
 position = Vector2( 384, -88 )
 
 [node name="02a" parent="." index="8" instance=ExtResource( 15 )]
@@ -502,7 +501,7 @@ position = Vector2( 640, -152 )
 [node name="04" parent="." index="10" instance=ExtResource( 9 )]
 position = Vector2( 968, -152 )
 
-[node name="DeathArea" type="Area2D" parent="04" index="2"]
+[node name="DeathArea" type="Area2D" parent="04" index="4"]
 position = Vector2( -24, 101 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="04/DeathArea" index="0"]
@@ -511,7 +510,7 @@ shape = SubResource( 3 )
 [node name="05" parent="." index="11" instance=ExtResource( 14 )]
 position = Vector2( 1296, -152 )
 
-[node name="FireHydrant" parent="05" index="2" instance=ExtResource( 16 )]
+[node name="FireHydrant" parent="05" index="3" instance=ExtResource( 16 )]
 position = Vector2( 23, 24 )
 z_index = -2
 

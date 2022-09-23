@@ -37,7 +37,9 @@ var _grapnel_origins = {}
 
 onready var _animation_player = $AnimationPlayer
 onready var _sprite = $Sprite
+onready var _collision = $Collision
 onready var _hook_origin = $HookOrigin
+onready var _light = $PlayerLight
 
 
 func _ready():
@@ -104,6 +106,8 @@ func _set_air_frame(frame: int):
 func play_animation(name: String):
 	_animation_player.playback_active = true
 	_animation_player.play(name)
+	if name != "crouch" and name != "crawl" and name != "get_up":
+		_light.position.y = 0
 
 
 func play_idle():
@@ -123,7 +127,13 @@ func play_idle():
 func _walking():
 	var prev_looking = _looking
 	_looking.y = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
-	_crouching = is_on_floor() and _looking.y > 0 and not _grapnel.active
+	
+	if _crouching and test_move(transform, Vector2(0, -9)):  # Make sure the player doesn't uncrouch if he can't
+		_crouching = true
+		_looking.y = 1
+	else:
+		_crouching = is_on_floor() and _looking.y > 0 and not _grapnel.active
+	
 	var _walkdir = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	if _animation_player.current_animation == "crawl":
 		_animation_player.playback_active = _walkdir != 0
@@ -229,13 +239,6 @@ func _grappling(_delta):
 
 
 func _physics_process(delta):
-	#var space_state = get_world_2d().direct_space_state
-	#var ray = space_state.intersect_ray(position + Vector2(0, _feet_offset), position + Vector2(0, _feet_offset + 5), [self], 2)
-	#if not ray.empty() and ray.normal != Vector2.UP:
-		#move_and_collide(Vector2.DOWN * 10)
-		#print("SNAP")
-
-
 	var prev_velocity = _velocity
 	var prev_flipped = _flipped
 
@@ -255,8 +258,12 @@ func _physics_process(delta):
 	
 	if _flipped != prev_flipped:
 		scale.x = -1
+
+	_collision.shape.extents.y = 3.0 if _crouching else 7.5
+	_collision.position.y = 4.0 if _crouching else -0.5
 	
-	if _holding_wall:
+	if _holding_wall or _crouching:
+		_was_airborne = not is_on_floor()
 		return
 	
 	if _pulling and not (is_on_floor() and _grapnel.hit_angle == -90):

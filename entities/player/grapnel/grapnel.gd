@@ -65,7 +65,7 @@ func hold_angle(value: int):
 
 func shoot(direction: Vector2):
 	if not _hitbox_area.get_overlapping_bodies().empty():
-		return
+		position = _player.position
 
 	_velocity = direction
 	_sprite.frame = 1 if _velocity.x != 0 and _velocity.y != 0 else 0

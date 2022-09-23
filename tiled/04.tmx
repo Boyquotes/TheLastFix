@@ -64,7 +64,7 @@
    </properties>
    <polygon points="0,0 0,48 64,48 64,144 216,144 216,0"/>
   </object>
-  <object id="7" x="143.818" y="0.181818" width="256" height="144">
+  <object id="7" x="144" y="0" width="256" height="144">
    <properties>
     <property name="type" value="camera_limits"/>
    </properties>

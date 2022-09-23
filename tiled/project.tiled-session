@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "02.tmx",
+    "activeFile": "06.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -29,8 +29,8 @@
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 649.6666666666666,
-                "y": 3
+                "x": 128.33333333333331,
+                "y": 72.33333333333334
             }
         },
         "02a.tmx": {
@@ -53,27 +53,27 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 5.5,
+            "scale": 3,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 706.0909090909091,
-                "y": 65.54545454545455
+                "x": 463.8333333333333,
+                "y": 73.16666666666667
             }
         },
         "05.tmx": {
             "scale": 5.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": -47,
-                "y": 65.54545454545455
+                "x": 127.9090909090909,
+                "y": 71.90909090909092
             }
         },
         "06.tmx": {
-            "scale": 2,
-            "selectedLayer": 2,
+            "scale": 5.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 128.25,
-                "y": 127.75
+                "x": 50.27272727272727,
+                "y": 177.54545454545456
             }
         },
         "Tiles-1.tsx": {
@@ -113,13 +113,13 @@
     "property.type": "string",
     "recentFiles": [
         "01.tmx",
-        "06.tmx",
-        "Tiles-2.tsx",
-        "05.tmx",
-        "04.tmx",
-        "03.tmx",
-        "02a.tmx",
         "02.tmx",
+        "02a.tmx",
+        "03.tmx",
+        "04.tmx",
+        "05.tmx",
+        "Tiles-2.tsx",
+        "06.tmx",
         "0.6.tmx",
         "bricks.tsx"
     ],

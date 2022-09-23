@@ -28,6 +28,9 @@
 </data>
  </layer>
  <layer id="2" name="Back Tiles" width="32" height="18">
+  <properties>
+   <property name="z-index" type="int" value="-20"/>
+  </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

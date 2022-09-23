@@ -12,7 +12,7 @@ export var spawnpoint: Vector2
 
 const _gravity = 12
 const _friction = 10
-const _crawl_speed = 40
+const _crawl_speed = 20
 const _walk_speed = 100
 const _jump_speed = 180
 const _walljump_speed = 120
@@ -125,7 +125,6 @@ func _walking():
 	_looking.y = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
 	_crouching = is_on_floor() and _looking.y > 0 and not _grapnel.active
 	var _walkdir = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	var speed = _crawl_speed if _crouching else _walk_speed 
 	if _animation_player.current_animation == "crawl":
 		_animation_player.playback_active = _walkdir != 0
 
@@ -160,7 +159,9 @@ func _walking():
 	elif _looking != prev_looking:
 		update_air_frame()
 
-	return lerp((speed * _walkdir) * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(_velocity.x) / 100) - min(_friction, abs(_velocity.x)) * sign(_velocity.x)
+	if _crouching:
+		return _crawl_speed * _walkdir - _velocity.x
+	return lerp(_walk_speed * _walkdir * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(_velocity.x) / 100) - min(_friction, abs(_velocity.x)) * sign(_velocity.x)
 
 
 func _jumping():
@@ -176,7 +177,7 @@ func _jumping():
 			return Vector2((-_walljump_speed if _flipped else _walljump_speed), -_jump_speed)
 		if is_on_floor():
 			_jump_time = 0
-			return Vector2(0, -_jump_speed)
+			return Vector2(0, -_jump_speed - _velocity.y)
 
 	if Input.is_action_just_released("jump") and _velocity.y < 0 and _jump_time >= 0:
 		var pushdown = 0.6 * (_jump_speed - 0.7 * _jump_time * _gravity)
@@ -228,11 +229,19 @@ func _grappling(_delta):
 
 
 func _physics_process(delta):
+	#var space_state = get_world_2d().direct_space_state
+	#var ray = space_state.intersect_ray(position + Vector2(0, _feet_offset), position + Vector2(0, _feet_offset + 5), [self], 2)
+	#if not ray.empty() and ray.normal != Vector2.UP:
+		#move_and_collide(Vector2.DOWN * 10)
+		#print("SNAP")
+
+
 	var prev_velocity = _velocity
 	var prev_flipped = _flipped
 
 	if not _holding_wall and control_enabled:
 		_velocity.x += _walking()
+
 	_velocity.y += _falling()
 	_velocity += _jumping()
 	if control_enabled:
@@ -242,7 +251,7 @@ func _physics_process(delta):
 	else:
 		_looking = Vector2.RIGHT
 	
-	_velocity = move_and_slide(_velocity, Vector2.UP).limit_length(_terminal_velocity)
+	_velocity = move_and_slide(_velocity, Vector2.UP, true).limit_length(_terminal_velocity)
 	
 	if _flipped != prev_flipped:
 		scale.x = -1

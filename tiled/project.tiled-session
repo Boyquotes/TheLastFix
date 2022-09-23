@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "06.tmx",
+    "activeFile": "04.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -21,66 +21,66 @@
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 129,
-                "y": 71
+                "x": 128,
+                "y": 60
             }
         },
         "02.tmx": {
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 128.33333333333331,
-                "y": 72.33333333333334
+                "x": 127.99999999999997,
+                "y": 72
             }
         },
         "02a.tmx": {
             "scale": 3,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 476.8333333333333,
-                "y": 153.16666666666666
+                "x": 128,
+                "y": 72
             }
         },
         "03.tmx": {
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 128.25,
-                "y": 72.25
+                "x": 128,
+                "y": 72
             }
         },
         "04.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 3,
+            "scale": 14.957,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": -392.16666666666663,
-                "y": 73.16666666666667
+                "x": 106.63903189142206,
+                "y": 26.54275590024737
             }
         },
         "05.tmx": {
-            "scale": 3,
+            "scale": 3.3697,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": -769.1666666666666,
-                "y": 73.16666666666667
+                "x": 86.06107368608482,
+                "y": 109.95044069204974
             }
         },
         "06.tmx": {
-            "scale": 5.5,
-            "selectedLayer": 1,
+            "scale": 8.11,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 50.27272727272727,
-                "y": 177.54545454545456
+                "x": 23.304562268803952,
+                "y": 229.53144266337858
             }
         },
         "Tiles-1.tsx": {
             "scaleInDock": 7.8834
         },
         "Tiles-2.tsx": {
-            "scaleInDock": 3.3451,
+            "scaleInDock": 3.3736,
             "scaleInEditor": 5.48
         },
         "bricks.tsx": {
@@ -116,10 +116,10 @@
         "02.tmx",
         "02a.tmx",
         "03.tmx",
-        "04.tmx",
-        "05.tmx",
-        "Tiles-2.tsx",
         "06.tmx",
+        "Tiles-2.tsx",
+        "05.tmx",
+        "04.tmx",
         "0.6.tmx",
         "bricks.tsx"
     ],

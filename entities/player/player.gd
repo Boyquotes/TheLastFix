@@ -18,11 +18,13 @@ const _jump_speed = 180
 const _walljump_speed = 120
 const _terminal_velocity = 250
 const _grapple_hold_dist = 5
+const _max_coyote_time = 0.1
 const _feet_offset = 7
 
 var _velocity = Vector2.ZERO
 var _looking = Vector2.RIGHT
 var _jump_time = -1
+var _coyote_time = 0.0
 var _grapnel = null
 var _pulling = false
 var _holding_wall = false
@@ -185,8 +187,9 @@ func _jumping():
 			_grapnel.retract()
 			_pulling = false
 			return Vector2((-_walljump_speed if _flipped else _walljump_speed), -_jump_speed)
-		if is_on_floor():
+		if _coyote_time < _max_coyote_time:
 			_jump_time = 0
+			_coyote_time = _max_coyote_time
 			return Vector2(0, -_jump_speed - _velocity.y)
 
 	if Input.is_action_just_released("jump") and _velocity.y < 0 and _jump_time >= 0:
@@ -201,6 +204,7 @@ func _falling():
 	var gravity_strength = 1.0
 	if is_on_floor():
 		return 1
+
 	if _jump_time >= 0:
 		gravity_strength = 0.8
 		_jump_time += 1
@@ -255,6 +259,11 @@ func _physics_process(delta):
 		_looking = Vector2.RIGHT
 	
 	_velocity = move_and_slide(_velocity, Vector2.UP, true).limit_length(_terminal_velocity)
+
+	if is_on_floor():
+		_coyote_time = 0.0
+	elif _coyote_time < _max_coyote_time:
+		_coyote_time += delta
 	
 	if _flipped != prev_flipped:
 		scale.x = -1

@@ -44,10 +44,10 @@
         },
         {
             "fileName": "maps/06.tmx",
-            "height": 256,
+            "height": 320,
             "width": 256,
             "x": 1424,
-            "y": -192
+            "y": -256
         }
     ],
     "onlyShowAdjacentMaps": false,

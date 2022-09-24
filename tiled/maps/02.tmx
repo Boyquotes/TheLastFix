@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="8" tileheight="8" infinite="0" nextlayerid="4" nextobjectid="3">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="8" tileheight="8" infinite="0" nextlayerid="4" nextobjectid="4">
  <tileset firstgid="1" source="../tilesets/bricks.tsx"/>
  <tileset firstgid="3" source="../tilesets/Tiles-1.tsx"/>
  <tileset firstgid="18" source="../tilesets/Tiles-2.tsx"/>
@@ -52,11 +52,6 @@
 </data>
  </layer>
  <objectgroup id="3" name="Object Layer 1">
-  <object id="1" x="48" y="128">
-   <properties>
-    <property name="type" propertytype="CustomType" value="spawn"/>
-   </properties>
-   <point/>
-  </object>
+  <object id="3" template="../templates/spawnpoint.tx" x="48" y="128"/>
  </objectgroup>
 </map>

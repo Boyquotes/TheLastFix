@@ -1,13 +1,8 @@
 {
-    "Map/SizeTest": {
-        "height": 4300,
-        "width": 2
-    },
-    "activeFile": "04.tmx",
+    "activeFile": "02.tmx",
     "expandedProjectPaths": [
         "."
     ],
-    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "0.6.tmx": {
             "scale": 7.8666,
@@ -18,115 +13,103 @@
             }
         },
         "01.tmx": {
-            "scale": 0.5,
+            "scale": 4.0453,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 129,
-                "y": 71
+                "x": 184.65873977208116,
+                "y": 78.4861444145057
             }
         },
         "02.tmx": {
-            "scale": 1.5,
+            "scale": 8.3108,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 128.33333333333331,
-                "y": 72.33333333333334
+                "x": 289.50281561341865,
+                "y": 64.31390479857534
             }
         },
         "02a.tmx": {
-            "scale": 3,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                3
+            ],
+            "scale": 4.3581,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 127.83333333333334,
-                "y": 72.16666666666667
+                "x": 172.09334342947614,
+                "y": 316.99593859709506
             }
         },
         "03.tmx": {
-            "scale": 2,
+            "scale": 4.3937,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 128.25,
-                "y": 72.25
+                "x": 175.9337232856135,
+                "y": 97.98120035505383
             }
         },
         "04.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 3,
-            "selectedLayer": 2,
+            "scale": 4.27,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 701.8333333333333,
-                "y": -3.5
+                "x": 157.84543325526934,
+                "y": 77.8688524590164
             }
         },
         "05.tmx": {
-            "scale": 3.3697,
+            "scale": 3.36,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 127.75618007537766,
-                "y": 72.26162566400572
+                "x": 168.75000000000003,
+                "y": 79.61309523809524
             }
         },
         "06.tmx": {
-            "scale": 3,
-            "selectedLayer": 1,
+            "scale": 8.11,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": -410.16666666666663,
-                "y": 108.5
+                "x": 127.49691738594329,
+                "y": 112.1454993834772
             }
+        },
+        "Street Objects.tsx": {
+            "scaleInDock": 3.0577,
+            "scaleInEditor": 4.05
         },
         "Tiles-1.tsx": {
             "scaleInDock": 7.8834
         },
         "Tiles-2.tsx": {
             "scaleInDock": 3.3736,
-            "scaleInEditor": 5.48
+            "scaleInEditor": 1
         },
         "bricks.tsx": {
             "scaleInDock": 8,
             "scaleInEditor": 16
         }
     },
-    "last.externalTilesetPath": "/Users/yoash/PlumberGame/tiled",
-    "last.imagePath": "/Users/yoash/Desktop/Aseprite/Plumb",
-    "last.worldFilePath": "/Users/yoash/PlumberGame/tiled",
-    "loadedWorlds": [
-        "C:/Users/alon1/GodotGames/PlumberGame/tiled/city.world"
-    ],
-    "map.height": 18,
-    "map.lastUsedFormat": "tmx",
-    "map.tileHeight": 8,
-    "map.tileWidth": 8,
-    "map.width": 32,
     "openFiles": [
         "01.tmx",
         "02.tmx",
         "02a.tmx",
         "03.tmx",
         "04.tmx",
-        "05.tmx",
-        "Tiles-2.tsx",
-        "06.tmx"
+        "05.tmx"
     ],
     "project": "project.tiled-project",
-    "property.type": "string",
     "recentFiles": [
-        "01.tmx",
-        "02.tmx",
         "02a.tmx",
-        "03.tmx",
-        "06.tmx",
-        "Tiles-2.tsx",
-        "05.tmx",
+        "02.tmx",
         "04.tmx",
+        "05.tmx",
+        "03.tmx",
+        "01.tmx",
+        "06.tmx",
+        "Street Objects.tsx",
+        "Tiles-2.tsx",
         "0.6.tmx",
         "bricks.tsx"
-    ],
-    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
-    "tileset.lastUsedFormat": "tsx",
-    "tileset.tileSize": {
-        "height": 8,
-        "width": 8
-    }
+    ]
 }

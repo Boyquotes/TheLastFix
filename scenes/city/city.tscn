@@ -339,7 +339,7 @@ script = ExtResource( 5 )
 fade_level = 0.0
 zoom_level = 0.5
 zoom_center = Vector2( -240, -40 )
-start_at_screen = ""
+start_at_screen = "06"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 

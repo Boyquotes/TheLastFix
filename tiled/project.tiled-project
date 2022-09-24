@@ -9,7 +9,7 @@
     "propertyTypes": [
         {
             "id": 2,
-            "name": "CustomType",
+            "name": "ObjectType",
             "storageType": "string",
             "type": "enum",
             "values": [
@@ -17,6 +17,16 @@
                 "camera_area",
                 "camera_limits",
                 "upole"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 5,
+            "name": "LayerType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "NonGrapnel"
             ],
             "valuesAsFlags": false
         }

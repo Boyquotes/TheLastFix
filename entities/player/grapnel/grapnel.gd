@@ -105,8 +105,15 @@ func _physics_process(delta):
 	if not active:
 		return
 
+	var space_state = get_world_2d().direct_space_state
+
 	var collision = move_and_collide(_velocity * _shoot_speed * delta)
 	if collision != null:
+		# If the tile hit belongs to the non_grapnel layer, retract the grapnel
+		if not space_state.intersect_point(collision.position - collision.normal, 1, [self], 8).empty():
+			retract()
+			return
+
 		_particles.visible = true
 		_particles.emitting = true
 		_particles.restart()
@@ -122,7 +129,6 @@ func _physics_process(delta):
 	var origin_pos = _origin.global_position + 2 * Vector2.LEFT.rotated(-_held_angle / 180.0 * PI)
 	_joints[-1] = _player.position if _origin_stuck_frames >= 0 else origin_pos
 	
-	var space_state = get_world_2d().direct_space_state
 	if not space_state.intersect_point(origin_pos, 1, [self], 2).empty():
 		if _origin_stuck_frames < 0:
 			_joints[-1] = _prev_player_pos

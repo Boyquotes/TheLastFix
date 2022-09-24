@@ -27,9 +27,14 @@ func post_import(scene: Node2D):
 			scene.remove_child(node)
 			screen.add_child(node)
 			node.set_owner(screen)
-			add_occlusion(node.tile_set)
 			if node.has_meta("z-index"):
 				node.z_index = node.get_meta("z-index")
+
+			match node.get_meta("type") if node.has_meta("type") else "":
+				"NonGrapnel":
+					node.collision_layer = 8
+				_:
+					add_occlusion(node.tile_set)
 			
 		elif node is Node2D:  # Object layer
 			var object_layer = node

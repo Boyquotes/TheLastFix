@@ -353,7 +353,7 @@ texture = ExtResource( 13 )
 vframes = 2
 
 [node name="Road" type="Sprite" parent="Demo" index="2"]
-position = Vector2( 136, -8 )
+position = Vector2( 135, -8 )
 z_index = -2
 texture = ExtResource( 1 )
 region_enabled = true

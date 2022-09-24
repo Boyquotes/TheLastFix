@@ -11,6 +11,7 @@ onready var _prompt_hover = $PromptHoverAnimation
 
 export var fixed = false
 export var return_to_player_after = true
+export var fixable_index: int
 
 signal started_fixing
 signal finished_fixing
@@ -62,6 +63,7 @@ func _on_FixAnimation_animation_finished(anim_name):
 	fixed = true
 	_ready_to_fix = false
 	var popup = Game.load_gui(preload("res://scenes/page_popup/page_popup.tscn"))
+	popup.already_crossed = fixable_index - 1
 	popup.connect("close_page", self, "post_fix")
 
 

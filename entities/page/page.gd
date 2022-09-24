@@ -2,6 +2,7 @@ extends Sprite
 
 signal reached_min
 signal reached_max
+signal finished_crossing
 
 
 export var prog = 0 setget _set_prog
@@ -13,6 +14,26 @@ var _speed = 0
 const _max_speed = 0.8
 const _friction = 0.04
 const height = 196
+
+var _items = []
+
+onready var _crossout_player = $CrossoutPlayer
+
+
+func _ready():
+	for i in range(1, 11):
+		if not has_node(str(i)):
+			break
+		_items.append(get_node(str(i)))
+
+
+func set_crossed(count: int):
+	for i in range(count):
+		_items[i].frame = _items[i].v_frames
+
+
+func cross_out(index: int):
+	_crossout_player.play(str(index))
 
 
 func _set_prog(_prog):
@@ -43,3 +64,7 @@ func _process(delta):
 		_speed = 0
 
 	_set_prog(prog)
+
+
+func _on_CrossoutPlayer_animation_finished(_anim_name):
+	emit_signal("finished_crossing")

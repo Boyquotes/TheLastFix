@@ -107,6 +107,7 @@ orbit_velocity_random = 0.0
 
 [node name="Fire Hydrant" instance=ExtResource( 3 )]
 script = ExtResource( 1 )
+fixable_index = 1
 
 [node name="Collision" parent="FixArea" index="0"]
 position = Vector2( 0, -20.5 )

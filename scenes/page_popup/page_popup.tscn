@@ -6,6 +6,7 @@
 
 [node name="PagePopup" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+already_crossed = 0
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]
 anchor_right = 1.0
@@ -17,3 +18,5 @@ position = Vector2( 61, 20 )
 min_prog = -0.2
 max_prog = 0.4
 enabled = false
+
+[connection signal="finished_crossing" from="Page" to="." method="_on_Page_finished_crossing"]

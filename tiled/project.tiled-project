@@ -7,5 +7,18 @@
         "."
     ],
     "propertyTypes": [
+        {
+            "id": 2,
+            "name": "CustomType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "spawn",
+                "camera_area",
+                "camera_limits",
+                "upole"
+            ],
+            "valuesAsFlags": false
+        }
     ]
 }

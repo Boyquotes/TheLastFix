@@ -2,12 +2,12 @@
 
 importer="vnen.tiled_tileset_importer"
 type="TileSet"
-path="res://.import/Street Objects.tsx-de4ddfe0dbb5147836d68b1dd1907a13.res"
+path="res://.import/Street Objects.tsx-84a88e17b3a3cdb2d57630ad23644541.res"
 
 [deps]
 
-source_file="res://tiled/Street Objects.tsx"
-dest_files=[ "res://.import/Street Objects.tsx-de4ddfe0dbb5147836d68b1dd1907a13.res" ]
+source_file="res://tiled/tilesets/Street Objects.tsx"
+dest_files=[ "res://.import/Street Objects.tsx-84a88e17b3a3cdb2d57630ad23644541.res" ]
 
 [params]
 

@@ -1,49 +1,49 @@
 {
     "maps": [
         {
-            "fileName": "01.tmx",
+            "fileName": "maps/01.tmx",
             "height": 144,
             "width": 256,
             "x": 0,
             "y": 0
         },
         {
-            "fileName": "02.tmx",
+            "fileName": "maps/02.tmx",
             "height": 144,
             "width": 256,
             "x": 256,
             "y": -16
         },
         {
-            "fileName": "03.tmx",
+            "fileName": "maps/03.tmx",
             "height": 144,
             "width": 256,
             "x": 512,
             "y": -80
         },
         {
-            "fileName": "04.tmx",
+            "fileName": "maps/04.tmx",
             "height": 144,
             "width": 400,
             "x": 768,
             "y": -80
         },
         {
-            "fileName": "05.tmx",
+            "fileName": "maps/05.tmx",
             "height": 144,
             "width": 256,
             "x": 1168,
             "y": -80
         },
         {
-            "fileName": "02a.tmx",
+            "fileName": "maps/02a.tmx",
             "height": 144,
             "width": 256,
             "x": 256,
             "y": -160
         },
         {
-            "fileName": "06.tmx",
+            "fileName": "maps/06.tmx",
             "height": 256,
             "width": 256,
             "x": 1424,

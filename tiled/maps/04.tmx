@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="50" height="18" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="10">
- <tileset firstgid="1" source="bricks.tsx"/>
- <tileset firstgid="3" source="Tiles-1.tsx"/>
- <tileset firstgid="18" source="Tiles-2.tsx"/>
- <tileset firstgid="68" source="Street Objects.tsx"/>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="50" height="18" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="13">
+ <tileset firstgid="1" source="../tilesets/bricks.tsx"/>
+ <tileset firstgid="3" source="../tilesets/Tiles-1.tsx"/>
+ <tileset firstgid="18" source="../tilesets/Tiles-2.tsx"/>
+ <tileset firstgid="68" source="../tilesets/Street Objects.tsx"/>
  <layer id="1" name="Tile Layer 1" width="50" height="18">
   <data encoding="csv">
 0,0,0,0,0,0,0,55,56,56,56,54,35,35,35,35,35,47,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,45,35,35,35,35,35,35,35,35,35,35,35,35,
@@ -37,9 +37,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,80,0,77,0,0,0,0,0,0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,40,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,0,0,0,78,0,0,40,79,79,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,50,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,40,0,0,0,0,40,0,0,0,0,0,0,0,0,50,0,0,0,78,0,0,50,79,79,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,40,0,0,0,0,40,0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,50,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,0,50,0,0,0,0,50,0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,0,50,0,0,0,0,50,0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,0,0,68,0,0,0,0,50,0,0,0,0,50,0,0,0,0,0,0,0,0,50,0,0,0,0,0,0,0,0,0,0,0,
@@ -52,29 +52,19 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="1" name=" " x="16" y="56">
-   <properties>
-    <property name="type" value="spawn"/>
-   </properties>
-   <point/>
-  </object>
   <object id="3" x="184" y="0">
    <properties>
     <property name="limits" type="object" value="7"/>
-    <property name="type" value="camera_area"/>
+    <property name="type" propertytype="CustomType" value="camera_area"/>
    </properties>
    <polygon points="0,0 0,48 64,48 64,144 216,144 216,0"/>
   </object>
   <object id="7" x="144" y="0" width="256" height="144">
    <properties>
-    <property name="type" value="camera_limits"/>
+    <property name="type" propertytype="CustomType" value="camera_limits"/>
    </properties>
   </object>
-  <object id="9" name=" " x="352" y="72">
-   <properties>
-    <property name="type" value="spawn"/>
-   </properties>
-   <point/>
-  </object>
+  <object id="10" template="../templates/spawnpoint.tx" x="352" y="72"/>
+  <object id="11" template="../templates/spawnpoint.tx" x="16" y="56"/>
  </objectgroup>
 </map>

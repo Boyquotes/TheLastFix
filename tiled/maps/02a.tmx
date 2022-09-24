@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="8" tileheight="8" infinite="0" nextlayerid="5" nextobjectid="3">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="8" tileheight="8" infinite="0" nextlayerid="7" nextobjectid="3">
+ <editorsettings>
+  <export target="02a_test.tscn" format="Godot"/>
+ </editorsettings>
  <properties>
   <property name="z-index" type="int" value="-20"/>
  </properties>
- <tileset firstgid="1" source="bricks.tsx"/>
- <tileset firstgid="3" source="Tiles-2.tsx"/>
- <tileset firstgid="53" source="Street Objects.tsx"/>
+ <tileset firstgid="1" source="../tilesets/bricks.tsx"/>
+ <tileset firstgid="3" source="../tilesets/Tiles-2.tsx"/>
+ <tileset firstgid="53" source="../tilesets/Street Objects.tsx"/>
  <layer id="1" name="Tile Layer 1" width="32" height="18">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,15,
@@ -56,7 +59,7 @@
  <objectgroup id="3" name="Object Layer 1">
   <object id="1" x="56" y="136">
    <properties>
-    <property name="type" value="spawn"/>
+    <property name="type" propertytype="CustomType" value="spawn"/>
    </properties>
    <point/>
   </object>

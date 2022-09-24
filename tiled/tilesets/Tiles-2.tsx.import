@@ -2,12 +2,12 @@
 
 importer="vnen.tiled_tileset_importer"
 type="TileSet"
-path="res://.import/bricks.tsx-d712082f889b841ee3ccdb04c5bedb2f.res"
+path="res://.import/Tiles-2.tsx-07e6eda253cc81c0047d2c066ece5272.res"
 
 [deps]
 
-source_file="res://tiled/bricks.tsx"
-dest_files=[ "res://.import/bricks.tsx-d712082f889b841ee3ccdb04c5bedb2f.res" ]
+source_file="res://tiled/tilesets/Tiles-2.tsx"
+dest_files=[ "res://.import/Tiles-2.tsx-07e6eda253cc81c0047d2c066ece5272.res" ]
 
 [params]
 

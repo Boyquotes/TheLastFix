@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="40" tilewidth="8" tileheight="8" infinite="0" nextlayerid="4" nextobjectid="4">
- <tileset firstgid="1" source="Tiles-2.tsx"/>
- <tileset firstgid="51" source="bricks.tsx"/>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="40" tilewidth="8" tileheight="8" infinite="0" nextlayerid="4" nextobjectid="6">
+ <tileset firstgid="1" source="../tilesets/Tiles-2.tsx"/>
+ <tileset firstgid="51" source="../tilesets/bricks.tsx"/>
  <layer id="1" name="Tile Layer 1" width="32" height="40">
   <data encoding="csv">
 52,52,52,52,52,52,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,13,13,13,13,13,13,13,13,13,
@@ -47,22 +47,17 @@
 </data>
  </layer>
  <objectgroup id="3" name="Object Layer 1">
-  <object id="1" x="64" y="272">
-   <properties>
-    <property name="type" value="spawn"/>
-   </properties>
-   <point/>
-  </object>
+  <object id="1" template="../templates/spawnpoint.tx" x="64" y="272"/>
   <object id="2" x="176" y="184">
    <properties>
     <property name="limits" type="object" value="3"/>
-    <property name="type" value="camera_area"/>
+    <property name="type" propertytype="CustomType" value="camera_area"/>
    </properties>
    <polygon points="0,0 0,-72 80,-72 80,-184 -136,-184 -136,0"/>
   </object>
   <object id="3" x="0" y="0" width="256" height="184">
    <properties>
-    <property name="type" value="camera_limits"/>
+    <property name="type" propertytype="CustomType" value="camera_limits"/>
    </properties>
   </object>
  </objectgroup>

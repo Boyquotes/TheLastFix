@@ -19,6 +19,8 @@ func post_import(scene: Node2D):
 						size.x = tile.x
 					if tile.y > size.y:
 						size.y = tile.y
+					
+					
 				size = (Vector2(1, 1) + size) * 8
 			
 			node.position -= size / 2
@@ -51,6 +53,8 @@ func post_import(scene: Node2D):
 
 						camera_area.set_owner(screen)
 						collision.set_owner(screen)
+					"camera_limits":
+						pass
 					"upole":
 						var pole = UtilityPole.instance()
 						pole.position = object.position - size / 2

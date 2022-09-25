@@ -184,7 +184,7 @@ func _jumping():
 		if _holding_wall:
 			_jump_time = 0
 			_holding_wall = false
-			_grapnel.retract()
+			_grapnel.retract_immediately()
 			_pulling = false
 			return Vector2((-_walljump_speed if _flipped else _walljump_speed), -_jump_speed)
 		if _coyote_time < _max_coyote_time:
@@ -335,9 +335,9 @@ func get_velocity():
 func _on_Sprite_frame_changed():
 	var _origin_pos = _grapnel_origins[_sprite.frame_coords]
 	if _origin_pos == null:
-		_grapnel.visible = false
+		_grapnel.hook_visible = false
 	else:
-		_grapnel.visible = visible
+		_grapnel.hook_visible = visible
 		_hook_origin.position = Vector2(_origin_pos.x, _origin_pos.y)
 		var angle = _origin_pos.z
 		if _flipped and int(angle) % 180 != 90:
@@ -378,7 +378,7 @@ func _autowalk(delta):
 
 
 func _on_Player_visibility_changed():
-	_grapnel.visible = visible
+	_grapnel.hook_visible = visible
 
 
 func die():

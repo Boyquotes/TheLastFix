@@ -184,7 +184,7 @@ tracks/11/keys = {
 } ]
 }
 tracks/12/type = "value"
-tracks/12/path = NodePath("Grapnel:visible")
+tracks/12/path = NodePath("Grapnel:hook_visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
@@ -339,7 +339,7 @@ script = ExtResource( 5 )
 fade_level = 0.0
 zoom_level = 0.5
 zoom_center = Vector2( -240, -40 )
-start_at_screen = "06"
+start_at_screen = ""
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 
@@ -385,8 +385,8 @@ drag_margin_h_enabled = false
 smoothing_speed = 3.0
 
 [node name="Grapnel" parent="." index="2"]
-visible = false
 position = Vector2( -132, -113 )
+hook_visible = false
 
 [node name="Player" parent="." index="3"]
 visible = false

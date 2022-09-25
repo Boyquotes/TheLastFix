@@ -32,6 +32,7 @@ onready var _hitbox_area = $HitboxArea
 export var active = false
 export var stuck = false
 export var hit_angle = 0
+export var hook_visible = true setget _set_hook_visible
 
 var chain_texture = preload("res://entities/player/grapnel/chain.png")
 var chain_1 = null
@@ -46,6 +47,12 @@ func _ready():
 	chain_2 = AtlasTexture.new()
 	chain_2.atlas = chain_texture
 	chain_2.region = Rect2(3, 0, 3, 3)
+
+
+func _set_hook_visible(value: bool):
+	hook_visible = value
+	if _sprite != null:
+		_sprite.visible = value
 
 
 func hold_angle(value: int):
@@ -136,24 +143,25 @@ func _physics_process(delta):
 				_joints.resize(0)
 				active = false
 				update()
+				return
+
 		_remove_joints(space_state)
-		return
+	else:
+		var collision = move_and_collide(_velocity * _shoot_speed * delta)
+		if collision != null:
+			# If the tile hit belongs to the non_grapnel layer, retract the grapnel
+			if not space_state.intersect_point(collision.position - collision.normal, 1, [self], 8).empty():
+				retract()
+				return
 
-	var collision = move_and_collide(_velocity * _shoot_speed * delta)
-	if collision != null:
-		# If the tile hit belongs to the non_grapnel layer, retract the grapnel
-		if not space_state.intersect_point(collision.position - collision.normal, 1, [self], 8).empty():
-			retract()
-			return
-
-		_particles.emitting = true
-		_particles.restart()
-		hit_angle = -round((-collision.normal).angle() * 180 / PI)
-		stuck = true
-		emit_signal("hit")
-		_collision.disabled = true
-		position += _velocity * 2
-		_velocity = Vector2.ZERO
+			_particles.emitting = true
+			_particles.restart()
+			hit_angle = -round((-collision.normal).angle() * 180 / PI)
+			stuck = true
+			emit_signal("hit")
+			_collision.disabled = true
+			position += _velocity * 2
+			_velocity = Vector2.ZERO
 	
 	if not space_state.intersect_point(origin_pos, 1, [self], 2).empty():
 		if _origin_stuck_frames < 0:
@@ -281,7 +289,7 @@ func _process(_delta):
 
 
 func _draw():
-	if not active:
+	if not active or not hook_visible:
 		return
 
 	var prev_joint = _joints[0]

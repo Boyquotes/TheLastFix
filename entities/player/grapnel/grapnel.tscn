@@ -38,6 +38,7 @@ one_shot = true
 explosiveness = 1.0
 fixed_fps = 24
 visibility_rect = Rect2( -256, -144, 512, 288 )
+local_coords = false
 process_material = SubResource( 2 )
 
 [node name="HitboxArea" type="Area2D" parent="."]

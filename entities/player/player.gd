@@ -384,7 +384,7 @@ func _on_Player_visibility_changed():
 func die():
 	stand_on(spawnpoint)
 	play_idle()
-	_grapnel.retract()
+	_grapnel.retract_immediately()
 
 
 func stand_on(place: Vector2):

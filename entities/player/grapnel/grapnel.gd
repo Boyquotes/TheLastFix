@@ -12,6 +12,7 @@ const _grapple_suck_dist = 5
 
 var _held_angle = 0
 export var angle = 0
+var _retracting = false
 var _velocity = Vector2.ZERO
 var _origin = null
 var _player = null
@@ -66,30 +67,45 @@ func hold_angle(value: int):
 func shoot(direction: Vector2):
 	if not _hitbox_area.get_overlapping_bodies().empty():
 		position = _player.position
+	else:
+		position = _origin.global_position
 
 	_velocity = direction
 	_sprite.frame = 1 if _velocity.x != 0 and _velocity.y != 0 else 0
 	rotation = -_velocity.angle_to(Vector2.RIGHT if _sprite.frame != 1 else Vector2(1, -1))
 	_particles.rotation = _velocity.angle() - rotation + PI
 	_collision.disabled = false
+	_joints.resize(0)
 	_joints.push_back(position)
 	_joints.push_back(position)
 	_prev_joints = _joints
 	_pushoff = Vector2.ZERO
 
 	active = true
+	_retracting = false
 	visible = true
 
 
 func retract():
-	active = false
-	_particles.visible = false
+	_retracting = true
 	_collision.set_deferred("disabled", true)
-	hold_angle(_held_angle)
-	_joints.resize(0)
 	update()
 	stuck = false
 	emit_signal("retract")
+
+
+func retract_immediately():
+	if not _retracting:
+		emit_signal("retract")
+		_retracting = false
+
+	active = false
+	stuck = false
+	_collision.set_deferred("disabled", true)
+	_joints.resize(0)
+	_particles.emitting = false
+	update()
+	
 
 
 func get_pull(origin: Vector2, velocity: Vector2):
@@ -106,6 +122,22 @@ func _physics_process(delta):
 		return
 
 	var space_state = get_world_2d().direct_space_state
+	
+	_joints[0] = position
+	var origin_pos = _origin.global_position + 2 * Vector2.LEFT.rotated(-_held_angle / 180.0 * PI)
+	_joints[-1] = _player.position if _origin_stuck_frames >= 0 else origin_pos
+
+	if _retracting:
+		position += (_joints[1] - position).limit_length(40) / 4
+		if position.distance_to(_joints[1]) < 10:
+			_joints.remove(1)
+			if _joints.size() <= 1:
+				_retracting = false
+				_joints.resize(0)
+				active = false
+				update()
+		_remove_joints(space_state)
+		return
 
 	var collision = move_and_collide(_velocity * _shoot_speed * delta)
 	if collision != null:
@@ -114,7 +146,6 @@ func _physics_process(delta):
 			retract()
 			return
 
-		_particles.visible = true
 		_particles.emitting = true
 		_particles.restart()
 		hit_angle = -round((-collision.normal).angle() * 180 / PI)
@@ -123,11 +154,6 @@ func _physics_process(delta):
 		_collision.disabled = true
 		position += _velocity * 2
 		_velocity = Vector2.ZERO
-
-	_joints[0] = position
-	
-	var origin_pos = _origin.global_position + 2 * Vector2.LEFT.rotated(-_held_angle / 180.0 * PI)
-	_joints[-1] = _player.position if _origin_stuck_frames >= 0 else origin_pos
 	
 	if not space_state.intersect_point(origin_pos, 1, [self], 2).empty():
 		if _origin_stuck_frames < 0:

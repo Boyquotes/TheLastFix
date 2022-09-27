@@ -80,6 +80,7 @@ func shoot(direction: Vector2):
 	_velocity = direction
 	_sprite.frame = 1 if _velocity.x != 0 and _velocity.y != 0 else 0
 	rotation = -_velocity.angle_to(Vector2.RIGHT if _sprite.frame != 1 else Vector2(1, -1))
+	_hitbox_area.position = direction.rotated(-rotation) * 8
 	_particles.rotation = _velocity.angle() - rotation + PI
 	_collision.disabled = false
 	_joints.resize(0)
@@ -112,7 +113,7 @@ func retract_immediately():
 	_joints.resize(0)
 	_particles.emitting = false
 	update()
-	
+	_hitbox_area.position = Vector2.ZERO
 
 
 func get_pull(origin: Vector2, velocity: Vector2) -> Vector2:
@@ -139,10 +140,7 @@ func _physics_process(delta):
 		if position.distance_to(_joints[1]) < 10:
 			_joints.remove(1)
 			if _joints.size() <= 1:
-				_retracting = false
-				_joints.resize(0)
-				active = false
-				update()
+				retract_immediately()
 				return
 
 		_remove_joints(space_state)
@@ -150,9 +148,10 @@ func _physics_process(delta):
 		var collision = move_and_collide(_velocity * _shoot_speed * delta)
 		if collision != null:
 			# If the tile hit belongs to the non_grapnel layer, retract the grapnel
-			if not space_state.intersect_point(collision.position - collision.normal, 1, [self], 8).empty():
-				retract()
-				return
+			for body in _hitbox_area.get_overlapping_bodies():
+				if body is TileMap and body.collision_layer & 8 != 0:
+					retract()
+					return
 
 			_particles.emitting = true
 			_particles.restart()

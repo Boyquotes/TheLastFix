@@ -22,18 +22,11 @@
             "y": -80
         },
         {
-            "fileName": "maps/04.tmx",
-            "height": 144,
-            "width": 400,
-            "x": 768,
-            "y": -80
-        },
-        {
             "fileName": "maps/05.tmx",
             "height": 144,
             "width": 256,
-            "x": 1168,
-            "y": -80
+            "x": 1328,
+            "y": -168
         },
         {
             "fileName": "maps/02a.tmx",
@@ -46,8 +39,15 @@
             "fileName": "maps/06.tmx",
             "height": 320,
             "width": 256,
-            "x": 1424,
-            "y": -256
+            "x": 1584,
+            "y": -344
+        },
+        {
+            "fileName": "maps/04.tmx",
+            "height": 200,
+            "width": 560,
+            "x": 768,
+            "y": -168
         }
     ],
     "onlyShowAdjacentMaps": false,

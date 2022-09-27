@@ -118,6 +118,15 @@ func retract_immediately():
 
 func get_pull(origin: Vector2, velocity: Vector2) -> Vector2:
 	var dist = _joints[-2] - origin
+	
+	# In rare cases the player may be directed towards a joint created purely due to the grapnel
+	# origin's visual positioning. In such a case, to prevent this causing the player to get stuck
+	# on a wall, the direction of the pull is altered to direct them immediately to the next joint.
+	if _joints.size() > 2:
+		var space_state = get_world_2d().direct_space_state
+		if space_state.intersect_ray(origin, _joints[-3], [self], 2).empty():
+			dist = _joints[-3] - origin
+	
 	var pull = dist.normalized() * _pull_speed + _pushoff * 45
 	_pushoff = Vector2.ZERO
 	if dist.length() < _grapple_suck_dist:

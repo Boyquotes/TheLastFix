@@ -341,6 +341,12 @@ func _physics_process(delta):
 				play_animation("fall")
 
 	_was_airborne = not is_on_floor()
+	
+	for i in range(get_slide_count()):
+		var collider = get_slide_collision(i).collider
+		if collider is TileMap and collider.collision_layer & 16 != 0:
+			die()
+			break
 
 
 func set_grapnel(node):

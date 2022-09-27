@@ -19,7 +19,7 @@ func _physics_process(_delta):
 
 	if _active and not _was_active:
 		_level.add_cam_limits(limits)
-	elif _was_active and not _active and _screen.active:
+	elif _was_active and not _active:
 		_level.remove_cam_limits(limits)
 
 

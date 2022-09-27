@@ -20,7 +20,6 @@ func post_import(scene: Node2D):
 					if tile.y > size.y:
 						size.y = tile.y
 					
-					
 				size = (Vector2(1, 1) + size) * 8
 			
 			node.position -= size / 2
@@ -33,6 +32,8 @@ func post_import(scene: Node2D):
 			match node.get_meta("type") if node.has_meta("type") else "":
 				"NonGrapnel":
 					node.collision_layer = 8
+				"Killer":
+					node.collision_layer = 16
 				_:
 					add_occlusion(node.tile_set)
 			

@@ -34,7 +34,6 @@ func _on_ScreenArea_body_entered(body):
 	if body is Player and not active:
 		_level.set_active_screen(self)
 		body._velocity += body.get_velocity().normalized() * 50
-		flush_blockers()
 	elif body is Grapnel and body.active and not active:
 		body.retract()
 

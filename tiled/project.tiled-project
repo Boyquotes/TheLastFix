@@ -8,6 +8,17 @@
     ],
     "propertyTypes": [
         {
+            "id": 5,
+            "name": "LayerType",
+            "storageType": "string",
+            "type": "enum",
+            "values": [
+                "NonGrapnel",
+                "Killer"
+            ],
+            "valuesAsFlags": false
+        },
+        {
             "id": 2,
             "name": "ObjectType",
             "storageType": "string",
@@ -17,16 +28,6 @@
                 "camera_area",
                 "camera_limits",
                 "upole"
-            ],
-            "valuesAsFlags": false
-        },
-        {
-            "id": 5,
-            "name": "LayerType",
-            "storageType": "string",
-            "type": "enum",
-            "values": [
-                "NonGrapnel"
             ],
             "valuesAsFlags": false
         }

@@ -16,7 +16,8 @@ const _crawl_speed = 20
 const _walk_speed = 100
 const _jump_speed = 180
 const _walljump_speed = 120
-const _terminal_velocity = 250
+const _max_velocity = 200
+const _terminal_velocity = 200
 const _grapple_hold_dist = 5
 const _max_coyote_time = 0.1
 const _feet_offset = 7
@@ -218,7 +219,9 @@ func _falling():
 		_jump_time += 1
 	if _pulling:
 		gravity_strength *= 0.6
-		
+
+	if _gravity * gravity_strength + _velocity.y > _terminal_velocity:
+		return _terminal_velocity - _velocity.y
 	return _gravity * gravity_strength
 
 
@@ -284,7 +287,7 @@ func _physics_process(delta):
 	else:
 		_looking = Vector2.RIGHT
 	
-	_velocity = move_and_slide(_velocity, Vector2.UP, true).limit_length(_terminal_velocity)
+	_velocity = move_and_slide(_velocity, Vector2.UP, true).limit_length(_max_velocity)
 
 	if is_on_floor():
 		_coyote_time = 0.0

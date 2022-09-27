@@ -7,8 +7,9 @@ onready var _grapnel = $Grapnel
 
 export var start_at_screen = ""
 
+var _cam_limits = []
+var _active_screens = []
 var _active_screen: Screen
-var _cam_limits = [Rect2(Vector2.ZERO, Vector2.ZERO)]
 
 var followed_node = null
 
@@ -36,19 +37,9 @@ func _process(_delta):
 		camera.position = followed_node.position
 
 
-func set_active_screen(screen: Screen):
-	if _active_screen != null:
-		_active_screen.active = false
-		_active_screen.disable_blockers()
-
-	_active_screen = screen
-	screen.active = true
-	_grapnel.retract()
-
-	var limits = screen.get_extents()
-	set_cam_limits(limits)
-	_cam_limits[0] = limits
+func switch_to_screen(screen: Screen):
 	print("Switched to screen ", screen.name)
+	_active_screen = screen
 	
 	# Find spawnpoint closest to player
 	var min_dist = INF
@@ -61,6 +52,29 @@ func set_active_screen(screen: Screen):
 
 	if closest_spawn != null:
 		_player.spawnpoint = closest_spawn
+
+
+func set_active_screen(screen: Screen):
+	screen.active = true
+	_grapnel.retract()
+
+	add_cam_limits(screen.get_extents())
+	_active_screens.append(screen)
+	switch_to_screen(screen)
+
+
+func set_inactive_screen(screen: Screen):
+	screen.active = false
+	
+	remove_cam_limits(screen.get_extents())
+	
+	var index = _active_screens.find(screen)
+	_active_screens.remove(index)
+	if index == _active_screens.size():
+		if index == 0:
+			print("ERROR: No active screens available (player left playable area)")
+		else:
+			switch_to_screen(_active_screens[-1])
 
 
 func fall_from_screen():
@@ -85,4 +99,7 @@ func remove_cam_limits(limits: Rect2):
 	var index = _cam_limits.find(limits)
 	_cam_limits.remove(index)
 	if index == _cam_limits.size():
-		set_cam_limits(_cam_limits[-1])
+		if index == 0:
+			print("ERROR: No camera limits available (player left playable area)")
+		else:
+			set_cam_limits(_cam_limits[-1])

@@ -7,6 +7,7 @@
 
 [node name="Level" instance=ExtResource( 7 )]
 script = ExtResource( 2 )
+start_at_screen = ""
 
 [node name="Grapnel" parent="." index="1" instance=ExtResource( 3 )]
 z_index = -1

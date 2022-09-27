@@ -31,16 +31,19 @@ func set_level(level):
 
 
 func _on_ScreenArea_body_entered(body):
-	if body is Player:
+	if body is Player and not active:
 		_level.set_active_screen(self)
-		body.position += body.get_velocity().normalized() * 5
+		body._velocity += body.get_velocity().normalized() * 50
 		flush_blockers()
 	elif body is Grapnel and body.active and not active:
 		body.retract()
 
 
 func _on_ScreenArea_body_exited(body):
-	if body is Grapnel and body.active and not body.stuck:
+	if body is Player and active:
+		_level.set_inactive_screen(self)
+		disable_blockers()
+	elif body is Grapnel and body.active and not body.stuck:
 		body.retract()
 
 

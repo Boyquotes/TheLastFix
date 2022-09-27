@@ -6,7 +6,7 @@ class_name Grapnel
 signal hit()
 signal retract()
 
-const _shoot_speed = 300
+const _shoot_speed = 250
 const _pull_speed = 30
 const _grapple_suck_dist = 5
 
@@ -80,9 +80,9 @@ func shoot(direction: Vector2):
 	_velocity = direction
 	_sprite.frame = 1 if _velocity.x != 0 and _velocity.y != 0 else 0
 	rotation = -_velocity.angle_to(Vector2.RIGHT if _sprite.frame != 1 else Vector2(1, -1))
-	_hitbox_area.position = direction.rotated(-rotation) * 8
+	_hitbox_area.position = direction.rotated(-rotation) * 4
 	_particles.rotation = _velocity.angle() - rotation + PI
-	_collision.disabled = false
+	_collision.set_deferred("disabled", false)
 	_joints.resize(0)
 	_joints.push_back(position)
 	_joints.push_back(position)

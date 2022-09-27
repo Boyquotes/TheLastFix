@@ -115,7 +115,7 @@ func retract_immediately():
 	
 
 
-func get_pull(origin: Vector2, velocity: Vector2):
+func get_pull(origin: Vector2, velocity: Vector2) -> Vector2:
 	var dist = _joints[-2] - origin
 	var pull = dist.normalized() * _pull_speed + _pushoff * 45
 	_pushoff = Vector2.ZERO

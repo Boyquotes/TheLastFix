@@ -35,6 +35,8 @@ var _flipped = false
 var _target_pos = null
 const _autowalk_snap_prox = 1
 
+var _collision_extents = PoolVector2Array()
+
 var _grapnel_origins = {}
 
 onready var _animation_player = $AnimationPlayer
@@ -46,6 +48,12 @@ onready var _light = $PlayerLight
 
 func _ready():
 	load_grapnel_origins()
+	var width = _collision.shape.extents.x
+	var height = _collision.shape.extents.y
+	_collision_extents.append(_collision.position + Vector2(width, height))
+	_collision_extents.append(_collision.position + Vector2(width, -height))
+	_collision_extents.append(_collision.position + Vector2(-width, -height))
+	_collision_extents.append(_collision.position + Vector2(-width, height))
 
 
 func load_grapnel_origins():
@@ -226,15 +234,33 @@ func _grappling(_delta):
 
 	if _pulling:
 		var pull = _grapnel.get_pull(position, _velocity)
+		
+		if _holding_wall:
+			return pull
+
 		if (
 			_grapnel.position.distance_to(position) < _grapple_hold_dist
-			and
-			not _holding_wall and (_grapnel.hit_angle == 0 or _grapnel.hit_angle == 180)
+			and (_grapnel.hit_angle == 0 or _grapnel.hit_angle == 180)
 			):
 			_animation_player.stop()
 			_holding_wall = true
 			_sprite.frame_coords = Vector2(0, 12)
 			_flipped = _grapnel.hit_angle == 0
+			return pull
+		
+		# Prevent the player getting stuck on ledges
+		var angle = int(-pull.normalized().angle() * 180 / PI)
+		if angle < 0:
+			angle += 360
+		
+		angle = int(round(angle / 90.0))
+		var space_state = get_world_2d().direct_space_state
+		var offset = Vector2.RIGHT.rotated(-angle * PI / 2)
+		var intersect_1 = space_state.intersect_point(_collision_extents[angle % 4] + offset + position, 1, [self], 2)
+		var intersect_2 = space_state.intersect_point(_collision_extents[(angle + 1) % 4] + offset + position, 1, [self], 2)
+		if intersect_1.empty() != intersect_2.empty():
+			pull += offset.rotated(PI / 2 * (-1 if intersect_2.empty() else 1)) * 15
+		
 		return pull
 	else:
 		_holding_wall = false

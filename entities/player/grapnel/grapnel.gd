@@ -38,6 +38,8 @@ var chain_texture = preload("res://entities/player/grapnel/chain.png")
 var chain_1 = null
 var chain_2 = null
 
+var physics_query: Physics2DShapeQueryParameters
+
 
 func _ready():
 	chain_1 = AtlasTexture.new()
@@ -47,6 +49,10 @@ func _ready():
 	chain_2 = AtlasTexture.new()
 	chain_2.atlas = chain_texture
 	chain_2.region = Rect2(3, 0, 3, 3)
+	
+	physics_query = Physics2DShapeQueryParameters.new()
+	physics_query.set_shape(_collision.shape)
+	physics_query.collision_layer = 2
 
 
 func _set_hook_visible(value: bool):
@@ -72,8 +78,14 @@ func hold_angle(value: int):
 
 
 func shoot(direction: Vector2):
-	if not _hitbox_area.get_overlapping_bodies().empty():
-		position = _player.position
+	physics_query.transform = transform
+	physics_query.transform.origin = _origin.global_position - direction * 1.5
+
+	var space_state = get_world_2d().direct_space_state
+	var intersects = space_state.intersect_shape(physics_query)
+	
+	if not intersects.empty():
+		position = _player.position - direction * 1.5
 	else:
 		position = _origin.global_position
 
@@ -98,6 +110,7 @@ func retract():
 	_retracting = true
 	_collision.set_deferred("disabled", true)
 	update()
+	_hitbox_area.position = Vector2.ZERO
 	stuck = false
 	emit_signal("retract")
 
@@ -145,8 +158,12 @@ func _physics_process(delta):
 	_joints[-1] = _player.position if _origin_stuck_frames >= 0 else origin_pos
 
 	if _retracting:
-		position += (_joints[1] - position).limit_length(40) / 4
+		if _joints.size() <= 2:
+			position += (_joints[1] - position).limit_length(40) / 5
+		else:
+			position += (_joints[1] - position).normalized() * 8
 		if position.distance_to(_joints[1]) < 10:
+			position = _joints[1]
 			_joints.remove(1)
 			if _joints.size() <= 1:
 				retract_immediately()

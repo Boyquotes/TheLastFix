@@ -72,7 +72,6 @@ func set_inactive_screen(screen: Screen):
 	
 	var index = _active_screens.find(screen)
 	_active_screens.remove(index)
-	print(index, ' ', _active_screens.size(), ' ', _active_screens)
 	if index == _active_screens.size():
 		if index == 0:
 			print("ERROR: No active screens available (player left playable area)")

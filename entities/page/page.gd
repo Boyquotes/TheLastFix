@@ -29,7 +29,7 @@ func _ready():
 
 func set_crossed(count: int):
 	for i in range(count):
-		_items[i].frame = _items[i].v_frames
+		_items[i].frame = _items[i].vframes - 1
 
 
 func cross_out(index: int):

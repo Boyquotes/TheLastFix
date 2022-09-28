@@ -34,6 +34,7 @@ var _was_airborne = false
 var _flipped = false
 
 var _target_pos = null
+var _target_flipped = false
 const _autowalk_snap_prox = 1
 
 var _collision_extents = PoolVector2Array()
@@ -380,15 +381,16 @@ func _on_Sprite_frame_changed():
 		_grapnel.hold_angle(angle)
 
 
-func go_to(position: Vector2):
+func go_to(position: Vector2, flipped = false):
 	_target_pos = position
+	_target_flipped = flipped
 	_looking = Vector2.ZERO
 
 
 func _autowalk(delta):
 	var _walkdir = 0
 	if abs(position.x - _target_pos.x) < _autowalk_snap_prox:
-		_flipped = false
+		_flipped = _target_flipped
 		if _animation_player.current_animation == "walk":
 			play_idle()
 		

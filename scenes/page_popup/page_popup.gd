@@ -9,11 +9,12 @@ var _dir = 1
 
 onready var _page = $Page
 
-export var already_crossed = 0
+var already_crossed = 0
 
 
-func _ready():
-	_page.set_crossed(already_crossed)
+func set_crossed(count: int):
+	already_crossed = count
+	_page.set_crossed(count)
 
 
 func _process(delta):

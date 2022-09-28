@@ -40,7 +40,7 @@ func _process(_delta):
 	if _ready_to_fix and Input.is_action_just_pressed("interact"):
 		_player.control_enabled = false
 		_player.grapnel_enabled = true
-		_player.go_to($FixingPosition.global_position)
+		_player.go_to($FixingPosition.global_position, $FixingPosition.position.x > 0)
 		_player.connect("reached_target", self, "start_fix")
 		_fix_animation.play("prompt_use")
 
@@ -63,7 +63,7 @@ func _on_FixAnimation_animation_finished(anim_name):
 	fixed = true
 	_ready_to_fix = false
 	var popup = Game.load_gui(preload("res://scenes/page_popup/page_popup.tscn"))
-	popup.already_crossed = fixable_index - 1
+	popup.set_crossed(fixable_index - 1)
 	popup.connect("close_page", self, "post_fix")
 
 

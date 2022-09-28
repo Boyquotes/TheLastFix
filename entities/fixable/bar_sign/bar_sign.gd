@@ -6,14 +6,8 @@ onready var _light = $Light
 onready var _animation_player = $AnimationPlayer
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	_animation_player.play("flicker")
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 
 func _on_Sprite_frame_changed():

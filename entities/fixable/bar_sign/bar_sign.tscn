@@ -1,12 +1,60 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://entities/fixable/fixable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/fixable/bar_sign/sign.png" type="Texture" id=2]
 [ext_resource path="res://entities/fixable/bar_sign/light.png" type="Texture" id=3]
 [ext_resource path="res://entities/fixable/bar_sign/bar_sign.gd" type="Script" id=4]
+[ext_resource path="res://entities/fixable/bar_sign/fix.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 45, 10 )
+extents = Vector2( 50, 10 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "fix"
+length = 9.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerPuppet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6, 0.8, 0.9, 1, 1.1, 1.3, 1.5, 1.6, 1.9, 2.9, 3.2, 3.4, 3.5, 3.7, 3.8, 4, 4.2, 4.4, 4.6, 4.8, 5.3, 5.4, 5.7, 6.2, 6.7, 6.9, 7, 7.1, 8.6, 8.75, 8.9, 9.1, 9.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 2, 3, 2, 3, 2, 4, 5, 4, 5, 6, 7, 8, 7, 8, 7, 8, 7, 8, 9, 4, 10, 4, 6, 11, 12, 4, 13, 14, 15, 16, 17 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "fixed" ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fixed"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "flicker"
@@ -28,19 +76,31 @@ tracks/0/keys = {
 
 [node name="Bar Sign" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
+fixable_index = 2
 
 [node name="Collision" parent="FixArea" index="0"]
-position = Vector2( 14, -8 )
+position = Vector2( 19, -8 )
 shape = SubResource( 2 )
 
 [node name="FixingPosition" parent="." index="1"]
-position = Vector2( 34, 14 )
+position = Vector2( 30, 14 )
+
+[node name="PlayerPuppet" parent="." index="2"]
+position = Vector2( 30, 7 )
+z_index = 8
+texture = ExtResource( 5 )
+hframes = 18
+
+[node name="FixAnimation" parent="." index="3"]
+anims/fix = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="." index="4"]
 texture = ExtResource( 2 )
 hframes = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+anims/fixed = SubResource( 4 )
 anims/flicker = SubResource( 1 )
 
 [node name="Light" type="Light2D" parent="." index="6"]

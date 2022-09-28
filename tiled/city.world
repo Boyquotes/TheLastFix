@@ -48,6 +48,27 @@
             "width": 560,
             "x": 768,
             "y": -168
+        },
+        {
+            "fileName": "maps/07.tmx",
+            "height": 320,
+            "width": 256,
+            "x": 1841,
+            "y": -320
+        },
+        {
+            "fileName": "maps/08.tmx",
+            "height": 144,
+            "width": 256,
+            "x": 2097,
+            "y": -144
+        },
+        {
+            "fileName": "maps/09.tmx",
+            "height": 144,
+            "width": 256,
+            "x": 2353,
+            "y": -232
         }
     ],
     "onlyShowAdjacentMaps": false,

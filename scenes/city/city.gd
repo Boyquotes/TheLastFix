@@ -5,6 +5,9 @@ onready var _car = $"01/Car"
 onready var _car_stand = $"01/Car/CarStandArea"
 var _stood_on_car = false
 
+onready var _bar_screen = $"09"
+onready var _bar_door_shadow = $"09/Bar/DoorShadow"
+
 
 func _ready():
 	if start_at_screen.empty():
@@ -25,6 +28,12 @@ func _physics_process(_delta):
 	elif _stood_on_car:
 		_car.frame = 12
 		_stood_on_car = false
+
+
+func _process(_delta):
+	if _bar_screen.active:
+		_bar_door_shadow.visible = _player.position.x > _bar_door_shadow.global_position.x
+		_bar_door_shadow.global_scale.x = (_player.position.x - _bar_door_shadow.global_position.x) / 20
 
 
 func _on_FireHydrant_finished_fixing():

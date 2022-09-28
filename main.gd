@@ -146,3 +146,9 @@ func advance_dialogue():
 func end_dialogue_line():
 	_action_end_paused = true
 	_dialogue_time = -1
+
+
+func get_player():
+	if _current_level is PlayableLevel:
+		return _current_level.get_player()
+	return null

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scenes/playable_level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tiled/maps/01.tmx" type="PackedScene" id=2]
@@ -21,8 +21,7 @@
 [ext_resource path="res://tiled/maps/07.tmx" type="PackedScene" id=19]
 [ext_resource path="res://tiled/maps/08.tmx" type="PackedScene" id=20]
 [ext_resource path="res://tiled/maps/09.tmx" type="PackedScene" id=21]
-[ext_resource path="res://entities/fixable/bar_sign/bar.png" type="Texture" id=22]
-[ext_resource path="res://entities/fixable/bar_sign/door_shadow.png" type="Texture" id=23]
+[ext_resource path="res://scenes/city/bar/bar.tscn" type="PackedScene" id=22]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -344,6 +343,7 @@ script = ExtResource( 5 )
 fade_level = 0.0
 zoom_level = 0.5
 zoom_center = Vector2( -240, -40 )
+start_at_screen = "09"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 
@@ -500,16 +500,8 @@ position = Vector2( 2480, -304 )
 block_left = true
 block_right = true
 
-[node name="Bar" type="Sprite" parent="09" index="4"]
+[node name="Bar" parent="09" index="4" instance=ExtResource( 22 )]
 position = Vector2( -27, 19 )
 z_index = -10
-texture = ExtResource( 22 )
-
-[node name="DoorShadow" type="Light2D" parent="09/Bar" index="0"]
-position = Vector2( -42, 23 )
-scale = Vector2( 0.928573, 1.03704 )
-texture = ExtResource( 23 )
-offset = Vector2( -7, 0 )
-mode = 2
 
 [connection signal="finished_fixing" from="05/FireHydrant" to="." method="_on_FireHydrant_finished_fixing"]

@@ -105,3 +105,8 @@ func remove_cam_limits(limits: Rect2):
 			print("ERROR: No camera limits available (player left playable area)")
 		else:
 			set_cam_limits(_cam_limits[-1])
+
+
+func get_player() -> Player:
+	return _player
+

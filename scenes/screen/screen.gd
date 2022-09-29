@@ -21,6 +21,16 @@ export var block_right = false setget _set_block_right
 export var block_top = true setget _set_block_top
 export var kill_bottom = true setget _set_kill_bottom
 
+var _extents: Rect2
+
+const pushoff_h = 10
+const pushoff_v = 20
+
+
+func _ready():
+	var size = _collision_area.shape.extents
+	_extents = Rect2(position - size, size * 2)
+
 
 func set_level(level):
 	_level = level
@@ -33,7 +43,18 @@ func set_level(level):
 func _on_ScreenArea_body_entered(body):
 	if body is Player and not active:
 		_level.set_active_screen(self)
-		body._velocity += body.get_velocity().normalized() * 50
+		
+		# Push the player into the screen
+		if body.position.x < _extents.position.x:
+			body.position.x += pushoff_h
+		elif body.position.x > _extents.end.x:
+			body.position.x -= pushoff_h
+		
+		if body.position.y < _extents.position.y:
+			body.position.y += pushoff_v
+		elif body.position.y > _extents.end.y:
+			body.position.y -= pushoff_v
+
 	elif body is Grapnel and body.active and not active:
 		body.retract()
 

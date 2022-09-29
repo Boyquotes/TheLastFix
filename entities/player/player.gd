@@ -364,10 +364,6 @@ func _on_Grapnel_retract():
 	_pulling = false
 
 
-func get_velocity():
-	return _velocity
-
-
 func _on_Sprite_frame_changed():
 	var _origin_pos = _grapnel_origins[_sprite.frame_coords]
 	if _origin_pos == null:

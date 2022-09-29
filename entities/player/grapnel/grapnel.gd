@@ -52,7 +52,7 @@ func _ready():
 	
 	physics_query = Physics2DShapeQueryParameters.new()
 	physics_query.set_shape(_collision.shape)
-	physics_query.collision_layer = 2
+	physics_query.collision_layer = 2 | 8
 
 
 func _set_hook_visible(value: bool):
@@ -173,8 +173,13 @@ func _physics_process(delta):
 	else:
 		var collision = move_and_collide(_velocity * _shoot_speed * delta)
 		if collision != null:
+			var new_pos = position - collision.normal * 2
 			# If the tile hit belongs to the non_grapnel layer, retract the grapnel
-			for body in _hitbox_area.get_overlapping_bodies():
+			physics_query.transform = transform
+			physics_query.transform.origin = new_pos
+			var intersects = space_state.intersect_shape(physics_query)
+			for coll in intersects:
+				var body = coll.collider
 				if body is TileMap and body.collision_layer & 8 != 0:
 					retract()
 					return
@@ -185,7 +190,7 @@ func _physics_process(delta):
 			stuck = true
 			emit_signal("hit")
 			_collision.disabled = true
-			position += _velocity * 2
+			position = new_pos
 			_velocity = Vector2.ZERO
 	
 	if not space_state.intersect_point(origin_pos, 1, [self], 2).empty():

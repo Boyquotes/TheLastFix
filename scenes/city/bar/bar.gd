@@ -11,3 +11,7 @@ func _process(delta):
 			_player = Game.get_player()
 		_door_shadow.visible = _player.position.x > _door_shadow.global_position.x
 		_door_shadow.global_scale.x = (_player.position.x - _door_shadow.global_position.x) / 20
+
+
+func _on_Bar_Sign_finished_fixing():
+	_screen.block_right = false

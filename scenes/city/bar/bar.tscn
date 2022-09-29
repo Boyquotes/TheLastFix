@@ -30,3 +30,5 @@ position = Vector2( -32, -15 )
 position = Vector2( 1, 3 )
 shape = SubResource( 1 )
 one_way_collision = true
+
+[connection signal="finished_fixing" from="Bar Sign" to="." method="_on_Bar_Sign_finished_fixing"]

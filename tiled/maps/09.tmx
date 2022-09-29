@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="8" tileheight="8" infinite="0" nextlayerid="4" nextobjectid="2">
+ <properties>
+  <property name="z-index" type="int" value="-20"/>
+ </properties>
  <tileset firstgid="1" source="../tilesets/Tiles-2.tsx"/>
  <tileset firstgid="51" source="../tilesets/Street Objects.tsx"/>
  <layer id="1" name="Tile Layer 1" width="32" height="18">
@@ -28,6 +31,9 @@
   <object id="1" template="../templates/spawnpoint.tx" x="24" y="128"/>
  </objectgroup>
  <layer id="3" name="Back Tiles" width="32" height="18">
+  <properties>
+   <property name="z-index" type="int" value="-20"/>
+  </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scenes/playable_level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tiled/maps/01.tmx" type="PackedScene" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://scenes/city/bar/bar.tscn" type="PackedScene" id=22]
 [ext_resource path="res://tiled/tilesets/Overgrowth.tsx" type="TileSet" id=23]
 [ext_resource path="res://tiled/maps/10.tmx" type="PackedScene" id=24]
+[ext_resource path="res://tiled/maps/11.tmx" type="PackedScene" id=25]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -525,5 +526,8 @@ z_index = -10
 
 [node name="10" parent="." index="17" instance=ExtResource( 24 )]
 position = Vector2( 2768, -304 )
+
+[node name="11" parent="." index="18" instance=ExtResource( 25 )]
+position = Vector2( 3128, -360 )
 
 [connection signal="finished_fixing" from="05/FireHydrant" to="." method="_on_FireHydrant_finished_fixing"]

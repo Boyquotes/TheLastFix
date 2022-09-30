@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/screen/screen.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 128, 72 )
+extents = Vector2( 160, 72 )
 
 [node name="Screen" type="Node2D"]
 script = ExtResource( 1 )
@@ -29,8 +29,9 @@ disabled = true
 position = Vector2( 0, -15 )
 disabled = true
 
-[node name="DeathArea" type="Area2D" parent="."]
+[node name="DeathArea" type="StaticBody2D" parent="."]
 position = Vector2( -128, -128 )
+collision_layer = 16
 
 [node name="Bottom" type="CollisionShape2D" parent="DeathArea"]
 position = Vector2( 0, 6 )
@@ -38,4 +39,3 @@ disabled = true
 
 [connection signal="body_entered" from="ScreenArea" to="." method="_on_ScreenArea_body_entered"]
 [connection signal="body_exited" from="ScreenArea" to="." method="_on_ScreenArea_body_exited"]
-[connection signal="body_entered" from="DeathArea" to="." method="on_enter_death_area"]

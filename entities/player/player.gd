@@ -5,6 +5,8 @@ class_name Player
 signal reached_target
 
 
+export var player_visible = true setget _set_player_visible
+export var frozen = false
 export var control_enabled = true
 export var grapnel_enabled = true
 export var air_frame = -1 setget _set_air_frame
@@ -21,7 +23,9 @@ const _terminal_velocity = 200
 const _grapple_hold_dist = 5
 const _max_coyote_time = 0.1
 const _feet_offset = 7
+const _autowalk_snap_prox = 1
 
+var _prev_velocity = Vector2.ZERO
 var _velocity = Vector2.ZERO
 var _looking = Vector2.RIGHT
 var _jump_time = -1
@@ -35,7 +39,6 @@ var _flipped = false
 
 var _target_pos = null
 var _target_flipped = false
-const _autowalk_snap_prox = 1
 
 var _collision_extents = PoolVector2Array()
 
@@ -46,6 +49,8 @@ onready var _sprite = $Sprite
 onready var _collision = $Collision
 onready var _hook_origin = $HookOrigin
 onready var _light = $PlayerLight
+onready var _death_particles = $DeathParticles
+onready var _spawn_particles = $SpawnParticles
 
 
 func _ready():
@@ -273,7 +278,10 @@ func _grappling(_delta):
 
 
 func _physics_process(delta):
-	var prev_velocity = _velocity
+	if frozen:
+		return
+
+	_prev_velocity = _velocity
 	var prev_flipped = _flipped
 
 	if not _holding_wall and control_enabled:
@@ -338,15 +346,15 @@ func _physics_process(delta):
 			play_animation("jump")
 		elif _velocity.y > 0:
 			_jump_time = -1
-			if prev_velocity.y <= 0:
+			if _prev_velocity.y <= 0:
 				play_animation("fall")
 
 	_was_airborne = not is_on_floor()
 	
-	for i in range(get_slide_count()):
-		var collider = get_slide_collision(i).collider
-		if collider is TileMap and collider.collision_layer & 16 != 0:
-			die()
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider.collision_layer & 16 != 0:
+			die(-collision.normal)
 			break
 
 
@@ -414,11 +422,26 @@ func _on_Player_visibility_changed():
 	_grapnel.hook_visible = visible
 
 
-func die():
-	stand_on(spawnpoint)
-	play_idle()
+func die(direction: Vector2):
+	var collision = move_and_collide(direction * 25, true, true, true)
+	_death_particles.position = Vector2.ZERO if collision == null else collision.position - position
+	_death_particles.process_material.direction = -Vector3(direction.x, direction.y, 0)
+	_death_particles.process_material.initial_velocity = max(_prev_velocity.length() / 2, 80)
+	_velocity = Vector2.ZERO
+	
 	_grapnel.retract_immediately()
+	play_animation("death")
+
+
+func respawn():
+	stand_on(spawnpoint)
 
 
 func stand_on(place: Vector2):
 	position = place + Vector2(0, -_feet_offset)
+
+
+func _set_player_visible(value: bool):
+	player_visible = value
+	_sprite.visible = value
+	_grapnel.hook_visible = value

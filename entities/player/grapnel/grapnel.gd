@@ -27,7 +27,6 @@ var _prev_origin_pos = Vector2.ZERO
 onready var _sprite = $Sprite
 onready var _collision = $Collision
 onready var _particles = $Particles
-onready var _hitbox_area = $HitboxArea
 
 export var active = false
 export var stuck = false
@@ -92,7 +91,6 @@ func shoot(direction: Vector2):
 	_velocity = direction
 	_sprite.frame = 1 if _velocity.x != 0 and _velocity.y != 0 else 0
 	rotation = -_velocity.angle_to(Vector2.RIGHT if _sprite.frame != 1 else Vector2(1, -1))
-	_hitbox_area.position = direction.rotated(-rotation) * 4
 	_particles.rotation = _velocity.angle() - rotation + PI
 	_collision.set_deferred("disabled", false)
 	_joints.resize(0)
@@ -110,7 +108,6 @@ func retract():
 	_retracting = true
 	_collision.set_deferred("disabled", true)
 	update()
-	_hitbox_area.position = Vector2.ZERO
 	stuck = false
 	emit_signal("retract")
 
@@ -126,7 +123,6 @@ func retract_immediately():
 	_joints.resize(0)
 	_particles.emitting = false
 	update()
-	_hitbox_area.position = Vector2.ZERO
 
 
 func get_pull(origin: Vector2, velocity: Vector2) -> Vector2:
@@ -176,13 +172,24 @@ func _physics_process(delta):
 			var new_pos = position - collision.normal * 2
 			# If the tile hit belongs to the non_grapnel layer, retract the grapnel
 			physics_query.transform = transform
-			physics_query.transform.origin = new_pos
-			var intersects = space_state.intersect_shape(physics_query)
-			for coll in intersects:
-				var body = coll.collider
-				if body is TileMap and body.collision_layer & 8 != 0:
-					retract()
-					return
+			
+			while true:
+				physics_query.transform.origin = new_pos
+				var intersects = space_state.intersect_shape(physics_query)
+				var intersects_terrain = false
+				for coll in intersects:
+					var body = coll.collider
+					if body.collision_layer & 8 != 0:
+						retract()
+						return
+					if body.collision_layer & 2 != 0:
+						intersects_terrain = true
+				
+				if intersects_terrain:
+					break
+					
+				new_pos += _velocity
+				
 
 			_particles.emitting = true
 			_particles.restart()

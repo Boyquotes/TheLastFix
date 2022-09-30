@@ -79,10 +79,6 @@ func set_inactive_screen(screen: Screen):
 			switch_to_screen(_active_screens[-1])
 
 
-func fall_from_screen():
-	_player.die()
-
-
 func set_cam_limits(limits: Rect2):
 	var edge_1 = limits.position
 	var edge_2 = limits.end

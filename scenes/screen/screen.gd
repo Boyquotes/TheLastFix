@@ -95,11 +95,6 @@ func _set_kill_bottom(value: bool):
 		flush_blockers()
 
 
-func on_enter_death_area(body):
-	if body is Player:
-		_level.fall_from_screen()
-
-
 func flush_blockers():
 	_left_blocker.set_deferred("disabled", not block_left)
 	_right_blocker.set_deferred("disabled", not block_right)

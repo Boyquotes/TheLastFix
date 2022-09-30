@@ -66,14 +66,14 @@ func _ready():
 func load_grapnel_origins():
 	var origins_image = preload("res://entities/player/player_grapnel_origins.png")
 	origins_image.lock()
-	for x in range(origins_image.get_width() / 18):
-		for y in range(origins_image.get_height() / 18):
+	for x in origins_image.get_width() / 18:
+		for y in origins_image.get_height() / 18:
 			var total_pixels = 0
 			var total_pos = Vector2.ZERO
 			var angle = 0
 
-			for sub_x in range(18):
-				for sub_y in range(18):
+			for sub_x in 18:
+				for sub_y in 18:
 					var color = origins_image.get_pixel(x * 18 + sub_x, y * 18 + sub_y)
 					var found = true
 					match color:
@@ -135,7 +135,7 @@ func play_idle():
 		play_animation("look_up")
 		_animation_player.seek(0.1)
 	elif _looking.y > 0:
-		if _pulling:
+		if _grapnel.active:
 			play_animation("idle")
 		else:
 			play_animation("crouch")

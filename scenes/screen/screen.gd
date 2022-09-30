@@ -13,7 +13,7 @@ onready var _bottom_killer: CollisionShape2D = $DeathArea/Bottom
 
 var _level = null
 
-export var active = false
+export var active = false setget _set_active
 export var spawnpoints: PoolVector2Array
 
 export var block_left = false setget _set_block_left
@@ -107,3 +107,8 @@ func disable_blockers():
 	_right_blocker.set_deferred("disabled", true)
 	_top_blocker.set_deferred("disabled", true)
 	_bottom_killer.set_deferred("disabled", true)
+
+
+func _set_active(value: bool):
+	active = value
+	_screen_area.set_deferred("monitorable", value)

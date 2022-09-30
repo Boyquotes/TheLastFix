@@ -5,7 +5,7 @@ onready var _screen = $".."
 onready var _door_shadow = $DoorShadow
 
 
-func _process(delta):
+func _process(_delta):
 	if _screen.active:
 		if _player == null:
 			_player = Game.get_player()

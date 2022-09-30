@@ -167,13 +167,19 @@ func _physics_process(delta):
 
 		_remove_joints(space_state)
 	else:
+		var intersect = space_state.intersect_point(position, 1, [self], 32, false, true)
+		if intersect.empty():
+			retract()
+			return
+		
 		var collision = move_and_collide(_velocity * _shoot_speed * delta)
+		
 		if collision != null:
 			var new_pos = position - collision.normal * 2
 			# If the tile hit belongs to the non_grapnel layer, retract the grapnel
 			physics_query.transform = transform
 			
-			for i in 2:
+			for _i in 2:
 				physics_query.transform.origin = new_pos
 				var intersects = space_state.intersect_shape(physics_query)
 				var intersects_terrain = false
@@ -190,7 +196,6 @@ func _physics_process(delta):
 					
 				new_pos += _velocity
 				
-
 			_particles.emitting = true
 			_particles.restart()
 			hit_angle = -round((-collision.normal).angle() * 180 / PI)
@@ -255,7 +260,7 @@ func _make_joints(index: int, space_state: Physics2DDirectSpaceState):
 	
 
 	var opposite_ray = null
-	for _i in range(20):
+	for _i in 20:
 		var result = space_state.intersect_ray(middle_origin, middle_target, [self], 2)
 		#print(middle_origin, middle_target)
 		if result.empty():

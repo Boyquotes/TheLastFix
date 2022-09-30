@@ -90,6 +90,13 @@
             "width": 256,
             "x": 3329,
             "y": -192
+        },
+        {
+            "fileName": "maps/13.tmx",
+            "height": 320,
+            "width": 256,
+            "x": 3585,
+            "y": -376
         }
     ],
     "onlyShowAdjacentMaps": false,

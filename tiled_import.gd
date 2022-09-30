@@ -14,6 +14,7 @@ func post_import(scene: Node2D):
 		if node is TileMap:
 			if size == null:
 				size = Vector2.ZERO
+				node.get_used_rect()
 				for tile in node.get_used_cells():
 					if tile.x > size.x:
 						size.x = tile.x
@@ -35,7 +36,7 @@ func post_import(scene: Node2D):
 				"Killer":
 					node.collision_layer = 16
 				_:
-					add_occlusion(node.tile_set)
+					add_occlusion(node)
 			
 		elif node is Node2D:  # Object layer
 			var object_layer = node
@@ -107,8 +108,15 @@ func connect_pole(object: Node2D, tag: String, object_layer: Node2D):
 	return end.position - object.position
 
 
-func add_occlusion(tileset: TileSet):
-	for id in tileset.get_tiles_ids():
+func add_occlusion(tilemap: TileMap):
+	var tileset = tilemap.tile_set
+	var occluded_tiles = []
+	for v in tilemap.get_used_cells():
+		var id = tilemap.get_cellv(v)
+		if id in occluded_tiles:
+			continue
+		occluded_tiles.append(id)
+
 		var occluder = OccluderPolygon2D.new()
 		var shape = tileset.tile_get_shape(id, 0)
 		if shape is RectangleShape2D:

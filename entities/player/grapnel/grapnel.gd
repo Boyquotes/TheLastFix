@@ -173,7 +173,7 @@ func _physics_process(delta):
 			# If the tile hit belongs to the non_grapnel layer, retract the grapnel
 			physics_query.transform = transform
 			
-			while true:
+			for i in 2:
 				physics_query.transform.origin = new_pos
 				var intersects = space_state.intersect_shape(physics_query)
 				var intersects_terrain = false

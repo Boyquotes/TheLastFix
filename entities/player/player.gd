@@ -309,7 +309,7 @@ func _physics_process(delta):
 	_collision.shape.extents.y = 3.0 if _crouching else 7.5
 	_collision.position.y = 4.0 if _crouching else -0.5
 	
-	if _holding_wall or _crouching:
+	if _holding_wall:
 		_was_airborne = not is_on_floor()
 		return
 	
@@ -334,7 +334,7 @@ func _physics_process(delta):
 			_sprite.frame_coords.x = 4
 	elif is_on_floor():
 		_jump_time = -1
-		if _was_airborne:
+		if _was_airborne and not _crouching:
 			if _looking.y > 0 and not _grapnel.active:
 				air_frame = -1
 				play_animation("crouch")
@@ -348,6 +348,7 @@ func _physics_process(delta):
 			_jump_time = -1
 			if _prev_velocity.y <= 0:
 				play_animation("fall")
+				_crouching = false
 
 	_was_airborne = not is_on_floor()
 	

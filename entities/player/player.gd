@@ -436,6 +436,9 @@ func die(direction: Vector2):
 
 func respawn():
 	stand_on(spawnpoint)
+	if _flipped:
+		scale.x = -1
+	_flipped = false
 
 
 func stand_on(place: Vector2):

@@ -42,7 +42,9 @@ func _process(_delta):
 		_player.control_enabled = false
 		_player.grapnel_enabled = true
 		_player.go_to($FixingPosition.global_position, $FixingPosition.position.x > 0)
-		_player.connect("reached_target", self, "start_fix")
+		var error = _player.connect("reached_target", self, "start_fix")
+		if error != OK:
+			print("Error connecting reached_target: ", error)
 		_fix_animation.play("prompt_use")
 
 

@@ -209,7 +209,7 @@ func _physics_process(delta):
 		if _origin_stuck_frames < 0:
 			_joints[-1] = _prev_player_pos
 			_make_joints(_joints.size() - 1, space_state)
-			_prev_joints[-1] = _prev_player_pos
+			_prev_joints = _joints
 		_joints[-1] = _player.position
 		_origin_stuck_frames = 0
 	elif _origin_stuck_frames >= 0:

@@ -11,6 +11,7 @@ export var control_enabled = true
 export var grapnel_enabled = true
 export var air_frame = -1 setget _set_air_frame
 export var spawnpoint: Vector2
+export var snap_to_floor = false
 
 const _gravity = 12
 const _friction = 10
@@ -127,8 +128,13 @@ func play_animation(name: String):
 		_light.position.y = 0
 
 
-func play_idle():
-	air_frame = -1
+func play_idle(reset_air_frame = true):
+	if reset_air_frame:
+		air_frame = -1
+	elif air_frame >= 0:
+		update_air_frame()
+		return
+
 	if _looking.y == 0:
 		play_animation("idle")
 	elif _looking.y < 0:
@@ -239,7 +245,6 @@ func _grappling(_delta):
 		elif _grapnel.active:
 			_grapnel.retract()
 			_pulling = false
-			play_idle()
 
 	if _pulling:
 		var pull = _grapnel.get_pull(position, _velocity)
@@ -296,7 +301,14 @@ func _physics_process(delta):
 	else:
 		_looking = Vector2.RIGHT
 	
-	_velocity = move_and_slide(_velocity, Vector2.UP, true).limit_length(_max_velocity)
+	if snap_to_floor:
+		_velocity = move_and_slide_with_snap(
+			_velocity,
+			Vector2.DOWN * 4 if not _pulling and _jump_time < 0 else Vector2.ZERO,
+			Vector2.UP,
+			true).limit_length(_max_velocity)
+	else:
+		_velocity = move_and_slide(_velocity, Vector2.UP, true).limit_length(_max_velocity)
 
 	if is_on_floor():
 		_coyote_time = 0.0

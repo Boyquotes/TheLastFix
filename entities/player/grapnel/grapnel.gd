@@ -108,8 +108,10 @@ func retract():
 	_retracting = true
 	_collision.set_deferred("disabled", true)
 	update()
-	stuck = false
 	emit_signal("retract")
+	if stuck:
+		_player.play_idle(false)
+	stuck = false
 
 
 func retract_immediately():

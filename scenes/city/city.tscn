@@ -543,5 +543,6 @@ block_left = true
 block_right = true
 
 [node name="Building" parent="13" index="4" instance=ExtResource( 28 )]
+position = Vector2( 0, 8 )
 
 [connection signal="finished_fixing" from="05/FireHydrant" to="." method="_on_FireHydrant_finished_fixing"]

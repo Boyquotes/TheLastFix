@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/playable_level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tiled/maps/01.tmx" type="PackedScene" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://tiled/maps/11.tmx" type="PackedScene" id=25]
 [ext_resource path="res://tiled/maps/12.tmx" type="PackedScene" id=26]
 [ext_resource path="res://tiled/maps/13.tmx" type="PackedScene" id=27]
+[ext_resource path="res://scenes/city/building/building.tscn" type="PackedScene" id=28]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -352,6 +353,7 @@ script = ExtResource( 5 )
 fade_level = 0.0
 zoom_level = 0.5
 zoom_center = Vector2( -240, -40 )
+start_at_screen = "13"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 
@@ -539,5 +541,7 @@ position = Vector2( 3456, -200 )
 position = Vector2( 3712, -360 )
 block_left = true
 block_right = true
+
+[node name="Building" parent="13" index="4" instance=ExtResource( 28 )]
 
 [connection signal="finished_fixing" from="05/FireHydrant" to="." method="_on_FireHydrant_finished_fixing"]

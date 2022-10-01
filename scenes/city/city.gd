@@ -29,3 +29,4 @@ func _physics_process(_delta):
 
 func _on_FireHydrant_finished_fixing():
 	$"05".block_right = false
+

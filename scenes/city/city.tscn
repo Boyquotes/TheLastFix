@@ -353,7 +353,6 @@ script = ExtResource( 5 )
 fade_level = 0.0
 zoom_level = 0.5
 zoom_center = Vector2( -240, -40 )
-start_at_screen = "13"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 
@@ -529,16 +528,16 @@ position = Vector2( -27, 19 )
 z_index = -10
 
 [node name="10" parent="." index="17" instance=ExtResource( 24 )]
-position = Vector2( 2768, -304 )
+position = Vector2( 2764, -304 )
 
 [node name="11" parent="." index="18" instance=ExtResource( 25 )]
-position = Vector2( 3128, -360 )
+position = Vector2( 3124, -360 )
 
 [node name="12" parent="." index="19" instance=ExtResource( 26 )]
-position = Vector2( 3456, -200 )
+position = Vector2( 3444, -196 )
 
 [node name="13" parent="." index="20" instance=ExtResource( 27 )]
-position = Vector2( 3712, -360 )
+position = Vector2( 3700, -356 )
 block_left = true
 block_right = true
 

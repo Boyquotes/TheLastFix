@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
-[ext_resource path="res://scenes/main_menu/phone.png" type="Texture" id=2]
 [ext_resource path="res://dialogue/alone.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://dialogue/alonebold.ttf" type="DynamicFontData" id=4]
 
@@ -52,7 +51,6 @@ color = Color( 0, 0, 0, 1 )
 [node name="SpeakerPicture" type="TextureRect" parent="HUD/DialogueBox"]
 margin_left = 6.0
 margin_top = 1.0
-texture = ExtResource( 2 )
 stretch_mode = 4
 
 [node name="SpeakerLabel" type="Label" parent="HUD/DialogueBox"]

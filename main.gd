@@ -95,18 +95,19 @@ func get_view() -> Sprite:
 	return _level_view
 
 
-func set_dialogue_speaker(speaker: String):
+func set_dialogue_speaker(speaker: String, picture: String):
 	_speaker_label.text = speaker
-	var picture = null
-	match speaker:
-		"Boss":
-			picture = load("res://dialogue/phone.png")
+	var image = null
+	match picture:
+		"boss":
+			image = load("res://dialogue/phone.png")
+		"frankie":
+			image = load("res://dialogue/frankie.png")
+		_:
+			print("Error: Unknown picture ", picture)
+			return
 	
-	if picture == null:
-		print("Error: Unknown speaker ", speaker)
-		return
-	
-	_speaker_picture.texture = picture
+	_speaker_picture.texture = image
 
 
 func play_dialogue_sequence(id: String):
@@ -126,7 +127,7 @@ func execute_action(action):
 	else:
 		_current_line = null
 		if action is Dialogue.SpeakerAction:
-			set_dialogue_speaker(action.name)
+			set_dialogue_speaker(action.name, action.picture)
 			execute_action(dialogue.next_action())
 
 

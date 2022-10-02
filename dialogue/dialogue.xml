@@ -8,3 +8,11 @@
 	<l>Did you hear me?!</l>
 	<l>Get your ass back here before I--</l>
 </seq>
+
+<seq id="meet_frankie">
+	<speaker pic="frankie">Client</speaker>
+	<l>'Bout time you showed up.</l>
+	<l>Our fridge hasn't worked for the past two days. Damn thing's busted.</l>
+	<l>We're up at apartment 6C. My buddy Tony will be waiting for you up there.</l>
+	<l>I'd advise you not to pay him any mind, he's drunk as a skunk and even less coherent.</l>
+</seq>

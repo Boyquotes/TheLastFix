@@ -26,9 +26,10 @@ class LineAction:
 
 class SpeakerAction:
 	var name = ""
+	var picture = ""
 	
 	func _to_string():
-		return "<set speaker to " + name + ">"
+		return "<set speaker to " + name + " with pic " + picture + ">"
 
 
 class DialogueSequence:
@@ -57,8 +58,9 @@ func parse():
 	if error:
 		print("Error opening dialogue file: ", error)
 
-	parser.read()
-	parse_node(parser)
+	while parser.read() == OK:
+		parse_node(parser)
+
 	_current_sequence = null
 	_current_line = null
 
@@ -77,7 +79,12 @@ func parse_node(parser: XMLParser):
 		match parser.get_node_name():
 			'seq':
 				_current_sequence = DialogueSequence.new()
-				sequences[parser.get_attribute_value(0)] = _current_sequence
+				var id = ""
+				for i in parser.get_attribute_count():
+					if parser.get_attribute_name(i) == "id":
+						id = parser.get_attribute_value(i)
+
+				sequences[id] = _current_sequence
 			'l':
 				_current_line = LineAction.new()
 				_current_sequence.actions.append(_current_line)
@@ -87,12 +94,16 @@ func parse_node(parser: XMLParser):
 
 				var speaker = SpeakerAction.new()
 				speaker.name = parser.get_node_data()
+				speaker.picture = speaker.name.to_lower()
+				for i in parser.get_attribute_count():
+					if parser.get_attribute_name(i) == "pic":
+						speaker.picture = parser.get_attribute_value(i)
+
 				_current_sequence.actions.append(speaker)
 
 		while parser.read() == OK:
 			if parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
 				break
-
 			
 			parse_node(parser)
 

@@ -119,12 +119,15 @@ func retract_immediately():
 		emit_signal("retract")
 		_retracting = false
 
-	active = false
-	stuck = false
 	_collision.set_deferred("disabled", true)
 	_joints.resize(0)
 	_particles.emitting = false
 	update()
+	
+	if stuck:
+		_player.play_idle(false)
+	active = false
+	stuck = false
 
 
 func get_pull(origin: Vector2, velocity: Vector2) -> Vector2:

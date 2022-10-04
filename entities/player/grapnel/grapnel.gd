@@ -128,6 +128,8 @@ func retract_immediately():
 		_player.play_idle(false)
 	active = false
 	stuck = false
+	
+	hold_angle(_held_angle)
 
 
 func get_pull(origin: Vector2, velocity: Vector2) -> Vector2:
@@ -160,7 +162,8 @@ func _physics_process(delta):
 
 	if _retracting:
 		if _joints.size() <= 2:
-			position += (_joints[1] - position).limit_length(40) / 5
+			var dist = _joints[1] - position
+			position += dist.normalized() * max(min(dist.length(), 8), 4)
 		else:
 			position += (_joints[1] - position).normalized() * 8
 		if position.distance_to(_joints[1]) < 10:
@@ -233,6 +236,8 @@ func _physics_process(delta):
 	
 	_prev_player_pos = _player.position
 	_prev_origin_pos = origin_pos
+	
+	update()
 
 
 func round_to_tile(point: Vector2):

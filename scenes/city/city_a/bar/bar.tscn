@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/city/bar/door_shadow.png" type="Texture" id=1]
-[ext_resource path="res://scenes/city/bar/bar.png" type="Texture" id=2]
-[ext_resource path="res://scenes/city/bar/bar.gd" type="Script" id=3]
+[ext_resource path="res://scenes/city/city_a/bar/door_shadow.png" type="Texture" id=1]
+[ext_resource path="res://scenes/city/city_a/bar/bar.png" type="Texture" id=2]
+[ext_resource path="res://scenes/city/city_a/bar/bar.gd" type="Script" id=3]
 [ext_resource path="res://entities/fixable/bar_sign/bar_sign.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]

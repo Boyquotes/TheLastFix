@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/interior_shadow.png-71a2cb5a8d719c883f2c0137b7cad9a4.stex"
+path="res://.import/building_shadow.png-b25269e91ace78baf4dbb52d8524d58b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/city/building/interior_shadow.png"
-dest_files=[ "res://.import/interior_shadow.png-71a2cb5a8d719c883f2c0137b7cad9a4.stex" ]
+source_file="res://scenes/city/city_a/building/building_shadow.png"
+dest_files=[ "res://.import/building_shadow.png-b25269e91ace78baf4dbb52d8524d58b.stex" ]
 
 [params]
 

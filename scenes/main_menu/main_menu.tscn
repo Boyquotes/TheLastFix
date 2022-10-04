@@ -10,7 +10,7 @@
 [ext_resource path="res://scenes/test/bg2.png" type="Texture" id=8]
 [ext_resource path="res://scenes/test/bg3.png" type="Texture" id=9]
 [ext_resource path="res://scenes/level.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/city/car_light.png" type="Texture" id=11]
+[ext_resource path="res://scenes/city/city_a/car_light.png" type="Texture" id=11]
 [ext_resource path="res://scenes/main_menu/phone.png" type="Texture" id=13]
 [ext_resource path="res://entities/player/player_light.tscn" type="PackedScene" id=14]
 

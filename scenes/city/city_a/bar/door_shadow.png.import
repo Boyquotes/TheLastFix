@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/frankie.png-c5543df491b9875048e14e4f68db8d5e.stex"
+path="res://.import/door_shadow.png-c0158a7b36d6e364bc8a067e6e57e056.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/city/building/frankie.png"
-dest_files=[ "res://.import/frankie.png-c5543df491b9875048e14e4f68db8d5e.stex" ]
+source_file="res://scenes/city/city_a/bar/door_shadow.png"
+dest_files=[ "res://.import/door_shadow.png-c0158a7b36d6e364bc8a067e6e57e056.stex" ]
 
 [params]
 

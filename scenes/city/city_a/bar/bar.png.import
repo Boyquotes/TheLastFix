@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/car_light.png-e6561d98dfead5a826fe9c543ebf0343.stex"
+path="res://.import/bar.png-731afbcf383d39afeb74f4f345f609eb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/city/car_light.png"
-dest_files=[ "res://.import/car_light.png-e6561d98dfead5a826fe9c543ebf0343.stex" ]
+source_file="res://scenes/city/city_a/bar/bar.png"
+dest_files=[ "res://.import/bar.png-731afbcf383d39afeb74f4f345f609eb.stex" ]
 
 [params]
 

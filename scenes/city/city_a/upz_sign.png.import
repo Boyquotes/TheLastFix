@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bar.png-6ba5a317a381852850f706db4656d3cf.stex"
+path="res://.import/upz_sign.png-2314033aa2e705d7fa4347ccf7ab1c0e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/city/bar/bar.png"
-dest_files=[ "res://.import/bar.png-6ba5a317a381852850f706db4656d3cf.stex" ]
+source_file="res://scenes/city/city_a/upz_sign.png"
+dest_files=[ "res://.import/upz_sign.png-2314033aa2e705d7fa4347ccf7ab1c0e.stex" ]
 
 [params]
 

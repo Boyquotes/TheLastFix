@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/car_rollup.png-117ec021a37d11a71d9630f07985657d.stex"
+path="res://.import/facade.png-7224fdd8c828d9e6fda2a6a34d8f13c4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/city/car_rollup.png"
-dest_files=[ "res://.import/car_rollup.png-117ec021a37d11a71d9630f07985657d.stex" ]
+source_file="res://scenes/city/city_a/building/facade.png"
+dest_files=[ "res://.import/facade.png-7224fdd8c828d9e6fda2a6a34d8f13c4.stex" ]
 
 [params]
 

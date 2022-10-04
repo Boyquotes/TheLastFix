@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hallway.png-d1ba066d5423371baddbc170800cabb9.stex"
+path="res://.import/building_mask.png-84ccc5bbd4350bc766760f94ca41004b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/city/building/hallway.png"
-dest_files=[ "res://.import/hallway.png-d1ba066d5423371baddbc170800cabb9.stex" ]
+source_file="res://scenes/city/city_a/building/building_mask.png"
+dest_files=[ "res://.import/building_mask.png-84ccc5bbd4350bc766760f94ca41004b.stex" ]
 
 [params]
 

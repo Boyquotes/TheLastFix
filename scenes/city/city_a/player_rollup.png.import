@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/exterior.png-f569c9522ea8d67cc37d787fd46498b5.stex"
+path="res://.import/player_rollup.png-b6e186a472a685bc05bbedcccb2f6087.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/city/building/exterior.png"
-dest_files=[ "res://.import/exterior.png-f569c9522ea8d67cc37d787fd46498b5.stex" ]
+source_file="res://scenes/city/city_a/player_rollup.png"
+dest_files=[ "res://.import/player_rollup.png-b6e186a472a685bc05bbedcccb2f6087.stex" ]
 
 [params]
 

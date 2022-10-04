@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/city/building/exterior.png" type="Texture" id=1]
 [ext_resource path="res://scenes/city/building/building.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/city/building/cat.png" type="Texture" id=7]
 [ext_resource path="res://scenes/city/building/facade.png" type="Texture" id=8]
 [ext_resource path="res://scenes/city/building/building_shadow.png" type="Texture" id=9]
+[ext_resource path="res://scenes/city/building/building_mask.png" type="Texture" id=10]
 
 [sub_resource type="Animation" id=7]
 resource_name = "wag"
@@ -30,13 +31,12 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 49.5, 2 )
 
-[sub_resource type="SegmentShape2D" id=3]
-a = Vector2( -65, -174 )
-b = Vector2( -65, 144 )
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 4.5, 177 )
 
 [sub_resource type="SegmentShape2D" id=17]
 a = Vector2( -65, -174 )
-b = Vector2( -193, -174 )
+b = Vector2( -194, -174 )
 
 [sub_resource type="OccluderPolygon2D" id=6]
 polygon = PoolVector2Array( -65, -174, -65, 180, 65, 180, 65, -174 )
@@ -141,7 +141,7 @@ position = Vector2( 0, 136 )
 enabled = false
 
 [node name="Floor_2" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, 96 )
+position = Vector2( -1, 96 )
 scale = Vector2( -1, 1 )
 enabled = false
 
@@ -150,7 +150,7 @@ position = Vector2( 0, 56 )
 enabled = false
 
 [node name="Floor_4" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, 16 )
+position = Vector2( -1, 16 )
 scale = Vector2( -1, 1 )
 enabled = false
 
@@ -159,7 +159,7 @@ position = Vector2( 0, -24 )
 enabled = false
 
 [node name="Floor_6" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, -64 )
+position = Vector2( -1, -64 )
 scale = Vector2( -1, 1 )
 enabled = false
 
@@ -168,7 +168,7 @@ position = Vector2( 0, -104 )
 enabled = false
 
 [node name="Floor_8" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, -144 )
+position = Vector2( -1, -144 )
 scale = Vector2( -1, 1 )
 enabled = false
 
@@ -201,12 +201,12 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="Collision_1" type="CollisionShape2D" parent="Interior/Walls"]
-position = Vector2( 1, 0 )
-shape = SubResource( 3 )
+position = Vector2( -69.5, 3 )
+shape = SubResource( 18 )
 
 [node name="Collision_2" type="CollisionShape2D" parent="Interior/Walls"]
-position = Vector2( 129, 0 )
-shape = SubResource( 3 )
+position = Vector2( 69, 3 )
+shape = SubResource( 18 )
 
 [node name="Collision_3" type="CollisionShape2D" parent="Interior/Walls"]
 position = Vector2( 129, 0 )
@@ -222,10 +222,18 @@ anims/enter = SubResource( 4 )
 anims/exit = SubResource( 5 )
 
 [node name="Shadow" type="Light2D" parent="."]
-position = Vector2( -70, 97 )
+position = Vector2( -66, 160 )
 texture = ExtResource( 9 )
 offset = Vector2( -10, 0 )
 mode = 2
+
+[node name="Mask" type="Light2D" parent="."]
+position = Vector2( 2, -1 )
+enabled = false
+texture = ExtResource( 10 )
+mode = 3
+range_z_min = -2
+range_z_max = 0
 
 [connection signal="body_entered" from="Interior/InteriorArea" to="." method="_on_InteriorArea_body_entered"]
 [connection signal="body_exited" from="Interior/InteriorArea" to="." method="_on_InteriorArea_body_exited"]

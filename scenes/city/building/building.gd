@@ -8,6 +8,7 @@ onready var _occluder = $Interior/Walls/Occluder
 onready var _floor_shadow = $Interior/GroundFloor/FloorShadow
 onready var _exterior = $Exterior
 onready var _shadow = $Shadow
+onready var _mask = $Mask
 
 var _player: Player
 
@@ -31,6 +32,7 @@ func _on_InteriorArea_body_entered(body):
 		_floor_shadow.range_item_cull_mask = 1
 		_animation_player.play("enter")
 		_exterior.z_index = 20
+		_mask.enabled = true
 
 
 func _on_InteriorArea_body_exited(body):
@@ -44,6 +46,7 @@ func _on_InteriorArea_body_exited(body):
 		_floor_shadow.range_item_cull_mask = 0
 		_animation_player.play("exit")
 		_exterior.z_index = -10
+		_mask.enabled = false
 
 
 func _process(_delta):

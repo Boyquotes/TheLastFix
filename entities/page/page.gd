@@ -1,14 +1,14 @@
-extends Sprite
+extends Node2D
 
 signal reached_min
 signal reached_max
 signal finished_crossing
 
 
-export var prog = 0 setget _set_prog
+export var prog = 0.0 setget _set_prog
 export var min_prog = 0.0
 export var max_prog = 1.0
-export var enabled = true
+export var enabled = true setget _set_enabled
 
 var _speed = 0
 const _max_speed = 0.8
@@ -17,14 +17,17 @@ const height = 196
 
 var _items = []
 
-onready var _crossout_player = $CrossoutPlayer
+onready var _page = $Page
+onready var _animation_player = $AnimationPlayer
+onready var _up_arrow = $UpArrow
+onready var _down_arrow = $DownArrow
 
 
 func _ready():
 	for i in range(1, 11):
-		if not has_node(str(i)):
+		if not _page.has_node(str(i)):
 			break
-		_items.append(get_node(str(i)))
+		_items.append(_page.get_node(str(i)))
 
 
 func set_crossed(count: int):
@@ -33,12 +36,18 @@ func set_crossed(count: int):
 
 
 func cross_out(index: int):
-	_crossout_player.play(str(index))
+	_animation_player.play(str(index))
+
+
+func _set_enabled(value: bool):
+	enabled = value
+	if value:
+		_animation_player.play("arrows")
 
 
 func _set_prog(_prog):
 	prog = _prog
-	position.y = -prog * height
+	_page.position.y = -prog * height
 
 
 func _process(delta):
@@ -59,6 +68,9 @@ func _process(delta):
 		prog = max_prog
 		emit_signal("reached_max")
 
+	_up_arrow.visible = prog > min_prog
+	_down_arrow.visible = prog < max_prog
+
 	_speed -= sign(_speed) * _friction
 	if abs(_speed) < _friction:
 		_speed = 0
@@ -66,5 +78,5 @@ func _process(delta):
 	_set_prog(prog)
 
 
-func _on_CrossoutPlayer_animation_finished(_anim_name):
+func _on_AnimationPlayer_animation_finished(anim_name):
 	emit_signal("finished_crossing")

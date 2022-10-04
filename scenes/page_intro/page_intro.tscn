@@ -25,7 +25,6 @@ align = 1
 percent_visible = 0.0
 
 [node name="Page" parent="." index="1" instance=ExtResource( 5 )]
-position = Vector2( 61, 144 )
 min_prog = -0.125
 max_prog = 1.05
 enabled = false

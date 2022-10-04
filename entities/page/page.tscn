@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://entities/page/page.gd" type="Script" id=1]
 [ext_resource path="res://entities/page/fix_list.png" type="Texture" id=2]
 [ext_resource path="res://entities/page/items/1.png" type="Texture" id=3]
 [ext_resource path="res://entities/page/items/2.png" type="Texture" id=4]
+[ext_resource path="res://entities/page/items/3.png" type="Texture" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "1"
@@ -52,6 +53,11 @@ vframes = 4
 [node name="2" type="Sprite" parent="."]
 position = Vector2( 42, 46 )
 texture = ExtResource( 4 )
+vframes = 4
+
+[node name="3" type="Sprite" parent="."]
+position = Vector2( 48, 60 )
+texture = ExtResource( 5 )
 vframes = 4
 
 [node name="CrossoutPlayer" type="AnimationPlayer" parent="."]

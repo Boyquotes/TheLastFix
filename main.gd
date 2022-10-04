@@ -63,7 +63,7 @@ func _process(delta):
 				_current_line = null
 				emit_signal("dialogue_ended")
 		elif _current_line.nodes.size() == 1 and _current_line.nodes[0] is Dialogue.TextNode:
-			_dialogue_label.text = _current_line.nodes[0].content
+			_dialogue_label.percent_visible = 1
 			end_dialogue_line()
 
 
@@ -119,7 +119,8 @@ func play_dialogue_sequence(id: String):
 func execute_action(action):
 	_action_end_paused = false
 	if action is Dialogue.LineAction:
-		_dialogue_label.text = ""
+		_dialogue_label.visible_characters = 0
+		_dialogue_label.text = action.nodes[0].content
 		_current_line = action
 		_current_node_index = 0
 		_char_in_node_index = 0
@@ -134,7 +135,7 @@ func execute_action(action):
 func advance_dialogue():
 	var node = _current_line.nodes[_current_node_index]
 	if node is Dialogue.TextNode:
-		_dialogue_label.text += node.content[_char_in_node_index]
+		_dialogue_label.visible_characters += 1
 
 	_char_in_node_index += 1
 	if _char_in_node_index >= node.length:

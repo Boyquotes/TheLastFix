@@ -399,6 +399,7 @@ func _on_Sprite_frame_changed():
 
 
 func go_to(position: Vector2, flipped = false):
+	control_enabled = false
 	_target_pos = position
 	_target_flipped = flipped
 	_looking = Vector2.ZERO

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scenes/city/building/exterior.png" type="Texture" id=1]
 [ext_resource path="res://scenes/city/building/building.gd" type="Script" id=2]
@@ -9,7 +9,8 @@
 [ext_resource path="res://scenes/city/building/cat.png" type="Texture" id=7]
 [ext_resource path="res://scenes/city/building/facade.png" type="Texture" id=8]
 [ext_resource path="res://scenes/city/building/building_shadow.png" type="Texture" id=9]
-[ext_resource path="res://scenes/city/building/building_mask.png" type="Texture" id=10]
+[ext_resource path="res://scenes/city/building/frankie.png" type="Texture" id=10]
+[ext_resource path="res://scenes/city/building/building_mask.png" type="Texture" id=11]
 
 [sub_resource type="Animation" id=7]
 resource_name = "wag"
@@ -27,6 +28,46 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 17, 41 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 10 )
+region = Rect2( 17, 0, 17, 41 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 10 )
+region = Rect2( 34, 0, 17, 41 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 10 )
+region = Rect2( 51, 0, 17, 41 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 10 )
+region = Rect2( 68, 0, 17, 41 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 10 )
+region = Rect2( 85, 0, 17, 41 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 10 )
+region = Rect2( 102, 0, 17, 41 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 10 )
+region = Rect2( 119, 0, 17, 41 )
+
+[sub_resource type="SpriteFrames" id=27]
+animations = [ {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
+"loop": true,
+"name": "default",
+"speed": 3.33
+} ]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 49.5, 2 )
@@ -120,6 +161,14 @@ frame = 1
 
 [node name="CatAnimation" type="AnimationPlayer" parent="Facade"]
 anims/wag = SubResource( 7 )
+
+[node name="Frankie" type="AnimatedSprite" parent="Facade"]
+modulate = Color( 0.843137, 0.843137, 0.843137, 1 )
+position = Vector2( -65, 117 )
+z_index = 5
+frames = SubResource( 27 )
+frame = 7
+playing = true
 
 [node name="Interior" type="Node2D" parent="."]
 position = Vector2( 3, 19 )
@@ -230,7 +279,7 @@ mode = 2
 [node name="Mask" type="Light2D" parent="."]
 position = Vector2( 2, -1 )
 enabled = false
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 mode = 3
 range_z_min = -2
 range_z_max = 0

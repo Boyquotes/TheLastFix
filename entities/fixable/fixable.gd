@@ -39,7 +39,6 @@ func _on_FixArea_body_exited(body):
 func _process(_delta):
 	if _ready_to_fix and Input.is_action_just_pressed("interact"):
 		_ready_to_fix = false
-		_player.control_enabled = false
 		_player.grapnel_enabled = true
 		_player.go_to($FixingPosition.global_position, $FixingPosition.position.x > 0)
 		var error = _player.connect("reached_target", self, "start_fix")

@@ -354,6 +354,7 @@ script = ExtResource( 5 )
 fade_level = 0.0
 zoom_level = 0.5
 zoom_center = Vector2( -240, -40 )
+start_at_screen = "13"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 
@@ -543,11 +544,11 @@ position = Vector2( 3128, -360 )
 position = Vector2( 3456, -200 )
 
 [node name="13" parent="." index="20" instance=ExtResource( 27 )]
-position = Vector2( 3712, -360 )
+position = Vector2( 3712, -412 )
 block_left = true
 block_right = true
 
 [node name="Building" parent="13" index="4" instance=ExtResource( 28 )]
-position = Vector2( 0, 8 )
+position = Vector2( 0, -3 )
 
 [connection signal="finished_fixing" from="05/FireHydrant" to="." method="_on_FireHydrant_finished_fixing"]

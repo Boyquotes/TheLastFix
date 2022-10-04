@@ -15,7 +15,7 @@ var _floors = []
 
 
 func _ready():
-	for i in range(1, 8):
+	for i in range(1, 9):
 		_floors.append(get_node("Interior/Floors/Floor_" + str(i)))
 	$Facade/CatAnimation.play("wag")
 

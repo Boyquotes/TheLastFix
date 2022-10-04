@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/city/building/exterior.png" type="Texture" id=1]
 [ext_resource path="res://scenes/city/building/building.gd" type="Script" id=2]
@@ -31,11 +31,15 @@ tracks/0/keys = {
 extents = Vector2( 49.5, 2 )
 
 [sub_resource type="SegmentShape2D" id=3]
-a = Vector2( -65, -144 )
+a = Vector2( -65, -174 )
 b = Vector2( -65, 144 )
 
+[sub_resource type="SegmentShape2D" id=17]
+a = Vector2( -65, -174 )
+b = Vector2( -193, -174 )
+
 [sub_resource type="OccluderPolygon2D" id=6]
-polygon = PoolVector2Array( -65, -144, -65, 144, 65, 144, 65, -144 )
+polygon = PoolVector2Array( -65, -174, -65, 180, 65, 180, 65, -174 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "enter"
@@ -97,70 +101,79 @@ tracks/1/keys = {
 script = ExtResource( 2 )
 
 [node name="Exterior" type="Sprite" parent="."]
-position = Vector2( 1, 0 )
 z_index = -10
 texture = ExtResource( 1 )
 
 [node name="Facade" type="Node2D" parent="."]
-position = Vector2( 3, 0 )
+position = Vector2( 4, 62 )
 z_index = -10
 
 [node name="Sprite" type="Sprite" parent="Facade"]
+position = Vector2( -1, -40 )
 texture = ExtResource( 8 )
 
 [node name="Cat" type="Sprite" parent="Facade"]
-position = Vector2( -24, 32 )
+position = Vector2( -25, 40 )
 texture = ExtResource( 7 )
 hframes = 8
-frame = 6
+frame = 1
 
 [node name="CatAnimation" type="AnimationPlayer" parent="Facade"]
 anims/wag = SubResource( 7 )
 
 [node name="Interior" type="Node2D" parent="."]
-position = Vector2( 3, -8 )
+position = Vector2( 3, 19 )
 z_index = -15
 
 [node name="Background" type="Sprite" parent="Interior"]
+position = Vector2( 0, -1 )
 texture = ExtResource( 3 )
 
 [node name="Floors" type="Node2D" parent="Interior"]
+position = Vector2( 0, 2 )
 
 [node name="Sprite" type="Sprite" parent="Interior/Floors"]
+position = Vector2( 0, -1 )
 texture = ExtResource( 4 )
 
 [node name="Floor_1" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, 102 )
+position = Vector2( 0, 136 )
 enabled = false
 
 [node name="Floor_2" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, 62 )
+position = Vector2( 0, 96 )
 scale = Vector2( -1, 1 )
 enabled = false
 
 [node name="Floor_3" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, 22 )
+position = Vector2( 0, 56 )
 enabled = false
 
 [node name="Floor_4" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, -18 )
+position = Vector2( 0, 16 )
 scale = Vector2( -1, 1 )
 enabled = false
 
 [node name="Floor_5" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, -58 )
+position = Vector2( 0, -24 )
 enabled = false
 
 [node name="Floor_6" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, -98 )
+position = Vector2( 0, -64 )
 scale = Vector2( -1, 1 )
 enabled = false
 
 [node name="Floor_7" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, -138 )
+position = Vector2( 0, -104 )
+enabled = false
+
+[node name="Floor_8" parent="Interior/Floors" instance=ExtResource( 5 )]
+position = Vector2( 0, -144 )
+scale = Vector2( -1, 1 )
 enabled = false
 
 [node name="GroundFloor" type="StaticBody2D" parent="Interior"]
+position = Vector2( 0, 36 )
 collision_layer = 2
 
 [node name="Stairs_0" type="CollisionPolygon2D" parent="Interior/GroundFloor"]
@@ -181,7 +194,7 @@ range_item_cull_mask = 0
 collision_layer = 0
 
 [node name="Collision" type="CollisionPolygon2D" parent="Interior/InteriorArea"]
-polygon = PoolVector2Array( -52, 65, -52, 145, 64, 144, 64, -144, -64, -144, -64, 65 )
+polygon = PoolVector2Array( -52, 101, -52, 180, 64, 180, 64, -174, -64, -174, -64, 101 )
 
 [node name="Walls" type="StaticBody2D" parent="Interior"]
 collision_layer = 0
@@ -194,6 +207,10 @@ shape = SubResource( 3 )
 [node name="Collision_2" type="CollisionShape2D" parent="Interior/Walls"]
 position = Vector2( 129, 0 )
 shape = SubResource( 3 )
+
+[node name="Collision_3" type="CollisionShape2D" parent="Interior/Walls"]
+position = Vector2( 129, 0 )
+shape = SubResource( 17 )
 
 [node name="Occluder" type="LightOccluder2D" parent="Interior/Walls"]
 light_mask = 0

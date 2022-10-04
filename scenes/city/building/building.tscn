@@ -109,6 +109,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 0, 15 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Exterior:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 20 ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "exit"
@@ -167,7 +179,7 @@ modulate = Color( 0.843137, 0.843137, 0.843137, 1 )
 position = Vector2( -65, 117 )
 z_index = 5
 frames = SubResource( 27 )
-frame = 7
+frame = 3
 playing = true
 
 [node name="Interior" type="Node2D" parent="."]
@@ -183,6 +195,7 @@ position = Vector2( 0, 2 )
 
 [node name="Sprite" type="Sprite" parent="Interior/Floors"]
 position = Vector2( 0, -1 )
+z_index = -5
 texture = ExtResource( 4 )
 
 [node name="Floor_1" parent="Interior/Floors" instance=ExtResource( 5 )]

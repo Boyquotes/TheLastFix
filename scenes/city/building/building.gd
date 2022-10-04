@@ -31,7 +31,6 @@ func _on_InteriorArea_body_entered(body):
 		_occluder.light_mask = 1
 		_floor_shadow.range_item_cull_mask = 1
 		_animation_player.play("enter")
-		_exterior.z_index = 20
 		_mask.enabled = true
 
 

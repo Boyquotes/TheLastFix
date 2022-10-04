@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/playable_level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tiled/maps/01.tmx" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://tiled/maps/12.tmx" type="PackedScene" id=26]
 [ext_resource path="res://tiled/maps/13.tmx" type="PackedScene" id=27]
 [ext_resource path="res://scenes/city/building/building.tscn" type="PackedScene" id=28]
+[ext_resource path="res://scenes/city/upz_sign.png" type="Texture" id=29]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -481,6 +482,11 @@ anims/ride = SubResource( 9 )
 [node name="02" parent="." index="8" instance=ExtResource( 3 )]
 position = Vector2( 384, -88 )
 block_top = false
+
+[node name="UpzSign" type="Sprite" parent="02" index="5"]
+position = Vector2( -76, 13 )
+z_index = -20
+texture = ExtResource( 29 )
 
 [node name="02a" parent="." index="9" instance=ExtResource( 15 )]
 position = Vector2( 384, -232 )

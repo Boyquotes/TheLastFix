@@ -179,7 +179,6 @@ modulate = Color( 0.843137, 0.843137, 0.843137, 1 )
 position = Vector2( -65, 117 )
 z_index = 5
 frames = SubResource( 27 )
-frame = 3
 playing = true
 
 [node name="Interior" type="Node2D" parent="."]

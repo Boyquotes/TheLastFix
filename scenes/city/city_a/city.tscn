@@ -442,7 +442,6 @@ tracks/2/keys = {
 
 [node name="City" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
-zoom_center = Vector2( -190, -40 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 
@@ -493,7 +492,6 @@ hook_visible = false
 [node name="Player" parent="." index="3"]
 visible = false
 position = Vector2( -49, -39 )
-control_enabled = false
 
 [node name="FillIn" type="TileMap" parent="." index="4"]
 tile_set = ExtResource( 17 )

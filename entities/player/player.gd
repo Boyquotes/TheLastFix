@@ -37,6 +37,7 @@ var _holding_wall = false
 var _crouching = false
 var _was_airborne = false
 var _flipped = false
+var _stuck_crouching = false
 
 var _target_pos = null
 var _target_flipped = false
@@ -152,9 +153,14 @@ func _walking():
 	_looking.y = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
 	
 	if _crouching and test_move(transform, Vector2(0, -9)):  # Make sure the player doesn't uncrouch if he can't
+		_stuck_crouching = true
 		_crouching = true
 		_looking.y = 1
 	else:
+		if _stuck_crouching and _velocity.y > 0:
+			play_animation("fall")
+			_set_air_frame(1)
+		_stuck_crouching = false
 		_crouching = is_on_floor() and _looking.y > 0 and not _grapnel.active
 	
 	var _walkdir = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -358,7 +364,7 @@ func _physics_process(delta):
 			play_animation("jump")
 		elif _velocity.y > 0:
 			_jump_time = -1
-			if _prev_velocity.y <= 0:
+			if _prev_velocity.y <= 0 and not _stuck_crouching:
 				play_animation("fall")
 				_crouching = false
 

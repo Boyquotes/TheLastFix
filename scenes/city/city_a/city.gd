@@ -35,6 +35,7 @@ func _on_FireHydrant_finished_fixing():
 func _on_FrankieTalkArea_body_entered(body):
 	if body is Player and not _spoke_to_frankie:
 		_spoke_to_frankie = true
+		_grapnel.retract()
 		_player.go_to($"13/Building/FrankieTalkPos".global_position)
 		var error = _player.connect("reached_target", self, "meet_frankie")
 		if error != OK:

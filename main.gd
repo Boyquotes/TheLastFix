@@ -3,6 +3,7 @@ extends Node2D
 class_name Main
 
 
+signal dialogue_paused
 signal dialogue_ended
 
 
@@ -61,6 +62,7 @@ func _process(delta):
 				_dialogue_box.visible = false
 				_action_end_paused = false
 				_current_line = null
+				emit_signal("dialogue_paused")
 				emit_signal("dialogue_ended")
 		elif _current_line.nodes.size() == 1 and _current_line.nodes[0] is Dialogue.TextNode:
 			_dialogue_label.percent_visible = 1
@@ -116,6 +118,11 @@ func play_dialogue_sequence(id: String):
 	_dialogue_box.visible = true
 
 
+func continue_dialogue():
+	_dialogue_box.visible = true
+	execute_action(dialogue.next_action())
+
+
 func execute_action(action):
 	_action_end_paused = false
 	if action is Dialogue.LineAction:
@@ -130,6 +137,12 @@ func execute_action(action):
 		if action is Dialogue.SpeakerAction:
 			set_dialogue_speaker(action.name, action.picture)
 			execute_action(dialogue.next_action())
+		elif action is Dialogue.PauseAction:
+			emit_signal("dialogue_paused")
+			_dialogue_box.visible = false
+			_action_end_paused = false
+			_current_line = null
+			
 
 
 func advance_dialogue():

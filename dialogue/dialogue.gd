@@ -2,6 +2,9 @@ extends Object
 
 class_name Dialogue
 
+
+var _last_speaker_name = ""
+
 class TextNode:
 	var content = "" setget _set_content
 	var length = 0
@@ -27,10 +30,13 @@ class LineAction:
 class SpeakerAction:
 	var name = ""
 	var picture = ""
-	
+
 	func _to_string():
 		return "<set speaker to " + name + " with pic " + picture + ">"
 
+
+class PauseAction:
+	pass
 
 class DialogueSequence:
 	var actions = Array()
@@ -94,12 +100,23 @@ func parse_node(parser: XMLParser):
 
 				var speaker = SpeakerAction.new()
 				speaker.name = parser.get_node_data()
+				_last_speaker_name = speaker.name
 				speaker.picture = speaker.name.to_lower()
 				for i in parser.get_attribute_count():
 					if parser.get_attribute_name(i) == "pic":
 						speaker.picture = parser.get_attribute_value(i)
 
 				_current_sequence.actions.append(speaker)
+			'face':
+				var speaker = SpeakerAction.new()
+				speaker.name = _last_speaker_name
+				for i in parser.get_attribute_count():
+					if parser.get_attribute_name(i) == "pic":
+						speaker.picture = parser.get_attribute_value(i)
+				
+				_current_sequence.actions.append(speaker)
+			'pause':
+				_current_sequence.actions.append(PauseAction.new())
 
 		while parser.read() == OK:
 			if parser.get_node_type() == XMLParser.NODE_ELEMENT_END:

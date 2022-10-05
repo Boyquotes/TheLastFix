@@ -17,14 +17,24 @@ func play_dialogue_sequence(id: String):
 	if _cutscene_player.playback_active:
 		_cutscene_player.playback_active = false
 		_paused_for_dialogue = true
-		var error = Game.connect("dialogue_ended", self, "continue_after_dialogue")
+		var error = Game.connect("dialogue_paused", self, "on_dialogue_paused")
 		if error != 0:
-			print("Error connecting dialogue_ended: ", error)
+			print("Error connecting dialogue_paused: ", error)
 
 
-func continue_after_dialogue():
+func continue_dialogue():
+	if _cutscene_player.playback_active:
+		Game.continue_dialogue()
+		_cutscene_player.playback_active = false
+		_paused_for_dialogue = true
+		var error = Game.connect("dialogue_paused", self, "on_dialogue_paused")
+		if error != 0:
+			print("Error connecting dialogue_paused: ", error)
+
+
+func on_dialogue_paused():
 	if _paused_for_dialogue:
-		Game.disconnect("dialogue_ended", self, "continue_after_dialogue")
+		Game.disconnect("dialogue_paused", self, "on_dialogue_paused")
 		_cutscene_player.playback_active = true
 		_paused_for_dialogue = false
 

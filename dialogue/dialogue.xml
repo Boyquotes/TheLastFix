@@ -14,6 +14,48 @@
 	<l>'Bout time you showed up.</l>
 	<l>Our fridge hasn't worked for the past two days. Damn thing reeks of rotten mozzarella.</l>
 	<!-- בסדררר מוצרלה -->
-	<l>We're up at apartment 6-A. My buddy Tony will be waiting for you up there.</l>
+	<l>We're up at apartment 6-A. My partner Tony will be waiting for you up there.</l>
 	<l>I'd advise you not to pay him any mind, he's drunk as a skunk and even less coherent.</l>
+</seq>
+
+<seq id="drunk_tony_0">
+    <speaker pic="tony_muy_tired">Tony</speaker>
+    <l>Sheryl? Is that you?</l>
+    <face pic="tony_wistful">
+    <l>Oh. Just the repairman.</l>
+    <l>C'mere, fix the thing already.</l>
+</seq>
+
+<seq id="drunk_tony_1">
+    <speaker pic="tony_wistful">Tony</speaker>
+    <l>Nice night out, isn't it?</l>
+    <pause>
+
+    <l>You can see all the stars 'n' shit.</l>
+    <pause>
+
+    <face pic="tony_smile">
+    <l>You, uh, prefer fixing stuff at daytime or nighttime?</l>
+    <pause>
+
+    <face pic="tony_annoyed">
+    <l>Hey, I'm talkin' to you, grease monkey!</l>
+    <pause>
+
+    <face pic="tony_angry">
+    <l>Don't ignore me!</l>
+    <l>What, you think you're better than me?!</l>
+</seq>
+
+<seq id="drunk_tony_2">
+    <speaker pic="tony_furious">Tony</speaker>
+    <l>I asked a fucking question, grease monkey.</l>
+    <face pic="tony_angry">
+    <l>You're not... you're not better than me!</l>
+    <face pic="tony_annoyed">
+    <l>You're just a...</l>
+    <face pic="tony_tired">
+    <l>...stupid...</l>
+    <face pic="tony_muy_tired">
+    <l>...little...</l>
 </seq>

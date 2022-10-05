@@ -106,8 +106,11 @@ func set_dialogue_speaker(speaker: String, picture: String):
 		"frankie":
 			image = load("res://dialogue/frankie.png")
 		_:
-			print("Error: Unknown picture ", picture)
-			return
+			if picture.begins_with("tony_"):
+				image = load("res://dialogue/drunk_tony/" + picture.substr(5) + ".png")
+			else:
+				print("Error: Unknown picture ", picture)
+				return
 	
 	_speaker_picture.texture = image
 

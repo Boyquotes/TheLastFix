@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://scenes/playable_level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tiled/maps/01.tmx" type="PackedScene" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://tiled/maps/13.tmx" type="PackedScene" id=27]
 [ext_resource path="res://scenes/city/city_a/building/building.tscn" type="PackedScene" id=28]
 [ext_resource path="res://scenes/city/city_a/upz_sign.png" type="Texture" id=29]
+[ext_resource path="res://entities/prompt/prompt.tscn" type="PackedScene" id=30]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 25, 2 )
@@ -84,6 +85,12 @@ b = Vector2( 0, 84 )
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 15, 32 )
 
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 9, 17.5 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 9, 15 )
+
 [sub_resource type="Animation" id=13]
 resource_name = "intro"
 length = 14.0
@@ -133,7 +140,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( -240, -40 ) ]
+"values": [ Vector2( -190, -40 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("01/Car:position")
@@ -362,7 +369,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 3635, -170 ) ]
+"values": [ Vector2( 3679, -219 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath(".")
@@ -391,10 +398,51 @@ tracks/3/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="Animation" id=17]
+resource_name = "open_door"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:fade_level")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:zoom_level")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 2 ),
+"transitions": PoolRealArray( 1e+06, 1.8025, 1 ),
+"update": 0,
+"values": [ 1.0, 1.0, 0.3 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 2.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "load_next_level"
+} ]
+}
+
 [node name="City" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
-fade_level = 0.0
-zoom_center = Vector2( 3635, -170 )
+zoom_center = Vector2( -190, -40 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 
@@ -445,6 +493,7 @@ hook_visible = false
 [node name="Player" parent="." index="3"]
 visible = false
 position = Vector2( -49, -39 )
+control_enabled = false
 
 [node name="FillIn" type="TileMap" parent="." index="4"]
 tile_set = ExtResource( 17 )
@@ -598,9 +647,26 @@ shape = SubResource( 12 )
 [node name="FrankieTalkPos" type="Position2D" parent="13/Building" index="7"]
 position = Vector2( -78, 199 )
 
+[node name="6APrompt" parent="13/Building" index="8" instance=ExtResource( 30 )]
+position = Vector2( -13, -20 )
+
+[node name="Collision" type="CollisionShape2D" parent="13/Building/6APrompt" index="3"]
+position = Vector2( 16, -2.5 )
+shape = SubResource( 15 )
+
+[node name="PenthousePrompt" parent="13/Building" index="9" instance=ExtResource( 30 )]
+position = Vector2( 20, -140 )
+
+[node name="Collision" type="CollisionShape2D" parent="13/Building/PenthousePrompt" index="3"]
+position = Vector2( -17, 0 )
+shape = SubResource( 16 )
+
 [node name="CutscenePlayer" parent="." index="20"]
 anims/intro = SubResource( 13 )
 anims/meet_frankie = SubResource( 14 )
+anims/open_door = SubResource( 17 )
 
 [connection signal="finished_fixing" from="05/FireHydrant" to="." method="_on_FireHydrant_finished_fixing"]
 [connection signal="body_entered" from="13/Building/FrankieTalkArea" to="." method="_on_FrankieTalkArea_body_entered"]
+[connection signal="used" from="13/Building/6APrompt" to="." method="_on_6APrompt_used"]
+[connection signal="used" from="13/Building/PenthousePrompt" to="." method="_on_PenthousePrompt_used"]

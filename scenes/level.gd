@@ -48,5 +48,5 @@ func _set_zoom_level(level: float):
 
 func _set_zoom_center(center: Vector2):
 	if camera != null:
-		zoom_center = center - camera.position
+		zoom_center = center - camera.get_camera_position()
 		Game.get_camera().offset = (1 - zoom_level) * zoom_center

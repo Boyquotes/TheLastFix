@@ -5,9 +5,6 @@
 [ext_resource path="res://entities/fixable/fixable.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/fixable/fire_hydrant/fix.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 41, 20.5 )
-
 [sub_resource type="Animation" id=5]
 resource_name = "fix"
 length = 6.25
@@ -50,6 +47,9 @@ tracks/2/keys = {
 "method": "play"
 } ]
 }
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 41, 20.5 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "fadeout"
@@ -109,21 +109,24 @@ orbit_velocity_random = 0.0
 script = ExtResource( 1 )
 fixable_index = 1
 
-[node name="Collision" parent="FixArea" index="0"]
-position = Vector2( 0, -20.5 )
-shape = SubResource( 4 )
-
-[node name="FixingPosition" parent="." index="1"]
+[node name="FixingPosition" parent="." index="0"]
 position = Vector2( -13, 0 )
 
-[node name="PlayerPuppet" parent="." index="2"]
+[node name="PlayerPuppet" parent="." index="1"]
 position = Vector2( -13, -8 )
 texture = ExtResource( 4 )
 offset = Vector2( 0, -3 )
 hframes = 19
 
-[node name="FixAnimation" parent="." index="3"]
+[node name="FixAnimation" parent="." index="2"]
 anims/fix = SubResource( 5 )
+
+[node name="Prompt" parent="." index="3"]
+position = Vector2( -19, -24 )
+
+[node name="Collision" type="CollisionShape2D" parent="Prompt" index="3"]
+position = Vector2( 19, 3.5 )
+shape = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="." index="4"]
 position = Vector2( 0, -22 )
@@ -143,6 +146,3 @@ amount = 40
 lifetime = 1.3
 fixed_fps = 10
 process_material = SubResource( 3 )
-
-[node name="Prompt" parent="." index="7"]
-position = Vector2( -19, -24 )

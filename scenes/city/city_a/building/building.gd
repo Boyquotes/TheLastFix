@@ -53,4 +53,3 @@ func _process(_delta):
 		_player = Game.get_player()
 	_shadow.visible = _player.position.x > _shadow.global_position.x
 	_shadow.global_scale.x = (_player.position.x - _shadow.global_position.x) / 10
-

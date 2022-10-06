@@ -40,9 +40,9 @@ render_target_v_flip = true
 texture = SubResource( 1 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
-pause_mode = 1
 
 [node name="DialogueBox" type="Control" parent="HUD"]
+pause_mode = 1
 visible = false
 margin_right = 256.0
 margin_bottom = 32.0

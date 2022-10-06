@@ -32,7 +32,6 @@ func _ready():
 
 func _process(_delta):
 	if _current_gui == null and pausable and Input.is_action_just_pressed("escape"):
-		get_tree().paused = true
 		load_gui(preload("res://scenes/pause/pause.tscn"))
 
 

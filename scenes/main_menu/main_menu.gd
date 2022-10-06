@@ -20,7 +20,7 @@ func _process(delta):
 		_cutscene_player.play("start")
 		$GUI/Start.visible = false
 		_started_cutscene = true
-		#Game.pausable = true
+		Game.pausable = true
 
 
 func load_first_level():

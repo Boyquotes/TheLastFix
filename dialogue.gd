@@ -115,3 +115,10 @@ func advance():
 func end_line():
 	_action_end_paused = true
 	_dialogue_time = -1
+
+
+func clear():
+	visible = false
+	_action_end_paused = false
+	_current_line = null
+	_dialogue_time = -1

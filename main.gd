@@ -100,4 +100,5 @@ func load_game():
 	_current_level.start_at_screen = save_data['screen']
 	_current_level.start_at_spawn = str2var("Vector2" + save_data['spawn'])
 	_level_container.add_child(_current_level)
+	Game.pausable = true
 	return true

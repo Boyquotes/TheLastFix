@@ -16,7 +16,10 @@ func _ready():
 func _process(delta):
 	$Demo/ParallaxBackground.scroll_base_offset.x -= delta * 40
 	
-	if Input.is_action_pressed("interact") and not _started_cutscene:
+	if _started_cutscene:
+		return
+
+	if Input.is_action_pressed("interact") or (Input.is_action_just_pressed("load_tmp") and not Game.load_game()):
 		_cutscene_player.play("start")
 		$GUI/Start.visible = false
 		_started_cutscene = true

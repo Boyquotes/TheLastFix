@@ -8,6 +8,7 @@ var _fade_speed = 10
 
 var _buttons = []
 var _select_index = 0
+var _quitting = false
 
 onready var _arrow = $Arrow
 
@@ -29,8 +30,12 @@ func _process(delta):
 		prog -= delta * _fade_speed
 		if prog <= 0:
 			prog = 0
+			if _quitting:
+				Game.load_level(preload("res://scenes/main_menu/main_menu.tscn"))
+				Game.get_dialogue().clear()
 			get_tree().paused = false
 			Game.unload_gui()
+			
 
 	modulate = Color(1, 1, 1, prog)
 	
@@ -49,5 +54,5 @@ func _process(delta):
 					dir = -1
 				1:
 					Game.save_game()
-					Game.load_game()
+					_quitting = true
 					dir = -1

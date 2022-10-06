@@ -10,31 +10,35 @@ onready var camera: Camera2D = $Camera
 onready var _cutscene_player = $CutscenePlayer
 
 var _paused_for_dialogue = false
+var _dialogue: Dialogue
+
+func _ready():
+	_dialogue = Game.get_dialogue()
 
 
 func play_dialogue_sequence(id: String):
-	Game.play_dialogue_sequence(id)
+	_dialogue.play_sequence(id)
 	if _cutscene_player.playback_active:
 		_cutscene_player.playback_active = false
 		_paused_for_dialogue = true
-		var error = Game.connect("dialogue_paused", self, "on_dialogue_paused")
+		var error = _dialogue.connect("paused", self, "on_dialogue_paused")
 		if error != 0:
 			print("Error connecting dialogue_paused: ", error)
 
 
 func continue_dialogue():
 	if _cutscene_player.playback_active:
-		Game.continue_dialogue()
+		_dialogue.continue_dialogue()
 		_cutscene_player.playback_active = false
 		_paused_for_dialogue = true
-		var error = Game.connect("dialogue_paused", self, "on_dialogue_paused")
+		var error = _dialogue.connect("paused", self, "on_dialogue_paused")
 		if error != 0:
 			print("Error connecting dialogue_paused: ", error)
 
 
 func on_dialogue_paused():
 	if _paused_for_dialogue:
-		Game.disconnect("dialogue_paused", self, "on_dialogue_paused")
+		_dialogue.disconnect("paused", self, "on_dialogue_paused")
 		_cutscene_player.playback_active = true
 		_paused_for_dialogue = false
 

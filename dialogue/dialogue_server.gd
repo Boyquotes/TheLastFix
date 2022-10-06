@@ -1,6 +1,6 @@
 extends Object
 
-class_name Dialogue
+class_name DialogueServer
 
 
 var _last_speaker_name = ""

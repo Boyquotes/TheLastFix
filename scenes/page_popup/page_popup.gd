@@ -31,7 +31,7 @@ func _process(delta):
 		if _dir > 0:
 			_page.prog = _prog * _prog * (3 - 2 * _prog) - (1 - _page.min_prog)  # Smoothstep
 	elif _page.enabled:
-		if Input.is_action_just_pressed("interact"):
+		if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("escape"):
 			emit_signal("close_page")
 			_page.enabled = false
 			_dir = -2

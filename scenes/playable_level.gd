@@ -6,15 +6,13 @@ onready var _player = $Player
 onready var _grapnel = $Grapnel
 
 export var start_at_screen = ""
-export var skip_first_cutscene = false
+export var end_cutscenes = false setget _set_end_cutscenes
 
 var _cam_limits = []
 var _active_screens = []
 var _active_screen: Screen
 
 var followed_node = null
-
-var _finished_screen_cutscenes = false
 
 
 func _ready():
@@ -26,12 +24,20 @@ func _ready():
 			node.set_level(self)
 
 	if not start_at_screen.empty():
-		call_deferred("begin_at_screen", start_at_screen, skip_first_cutscene)
+		call_deferred("begin_at_screen", start_at_screen)
 
 
-func begin_at_screen(name: String, end_cutscenes = false, spawnpoint = Vector2.ZERO):
+func _set_end_cutscenes(value: bool):
+	end_cutscenes = value
+	if _active_screen != null:
+		_active_screen._cutscenes_played = true
+
+
+func begin_at_screen(name: String, spawnpoint = Vector2.ZERO):
 	camera.smoothing_enabled = false
-	get_node(start_at_screen).load_as_first(_player, spawnpoint, end_cutscenes)
+	var screen = get_node(start_at_screen)
+	screen._cutscenes_played = end_cutscenes
+	screen.load_as_first(_player, spawnpoint, end_cutscenes)
 	extra_screen_load(name)
 	
 	for _i in 3:
@@ -54,6 +60,7 @@ func switch_to_screen(screen: Screen):
 	_active_screen = screen
 	screen.flush_blockers()
 	screen.active = true
+	end_cutscenes = screen._cutscenes_played
 	
 	# Find spawnpoint closest to player
 	var min_dist = INF
@@ -124,5 +131,5 @@ func get_save_data():
 		'level': get_tree().current_scene.filename,
 		'screen': _active_screen.name,
 		'spawn': _player.spawnpoint,
-		'end_cutscenes': _finished_screen_cutscenes
+		'end_cutscenes': end_cutscenes
 	}

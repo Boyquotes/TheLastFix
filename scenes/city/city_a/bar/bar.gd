@@ -14,4 +14,5 @@ func _process(_delta):
 
 
 func _on_Bar_Sign_finished_fixing():
+	_screen._level.end_cutscenes = true
 	_screen.block_right = false

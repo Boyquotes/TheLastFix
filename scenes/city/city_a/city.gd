@@ -44,6 +44,7 @@ func _physics_process(_delta):
 
 
 func _on_FireHydrant_finished_fixing():
+	_set_end_cutscenes(true)
 	$"05".block_right = false
 
 

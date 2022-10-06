@@ -347,6 +347,18 @@ tracks/19/keys = {
 "update": 1,
 "values": [ 0.3, 0.8, 0.9, 1.0 ]
 }
+tracks/20/type = "value"
+tracks/20/path = NodePath(".:end_cutscenes")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 14 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=14]
 resource_name = "meet_frankie"
@@ -401,6 +413,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:end_cutscenes")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=17]
 resource_name = "open_door"
@@ -449,8 +473,7 @@ script = ExtResource( 5 )
 fade_level = 0.0
 zoom_level = 0.5
 zoom_center = Vector2( -240, -40 )
-start_at_screen = "01"
-skip_first_cutscene = true
+end_cutscenes = false
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 

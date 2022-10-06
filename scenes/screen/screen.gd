@@ -22,6 +22,7 @@ export var block_top = true setget _set_block_top
 export var kill_bottom = true setget _set_kill_bottom
 
 var _extents: Rect2
+var _cutscenes_played = false
 
 const pushoff_h = 10
 const pushoff_v = 20

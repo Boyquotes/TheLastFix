@@ -111,4 +111,18 @@ func disable_blockers():
 
 func _set_active(value: bool):
 	active = value
-	_screen_area.set_deferred("monitorable", value)
+	if _screen_area != null:
+		_screen_area.set_deferred("monitorable", value)
+
+
+func load_as_first(player, spawnpoint: Vector2, _end_cutscenes: bool):
+	_level.set_active_screen(self)
+	if spawnpoint == Vector2.ZERO:
+		spawnpoint = global_position + (
+			spawnpoints[0] if not spawnpoints.empty() else Vector2.ZERO
+		)
+	player.spawnpoint = spawnpoint
+	player.stand_on(spawnpoint)
+	player.control_enabled = true
+	player.visible = true
+	player.play_idle()

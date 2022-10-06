@@ -14,7 +14,6 @@ func post_import(scene: Node2D):
 		if node is TileMap:
 			if size == null:
 				size = Vector2.ZERO
-				node.get_used_rect()
 				for tile in node.get_used_cells():
 					if tile.x > size.x:
 						size.x = tile.x

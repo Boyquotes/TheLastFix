@@ -6,12 +6,15 @@ onready var _player = $Player
 onready var _grapnel = $Grapnel
 
 export var start_at_screen = ""
+export var skip_first_cutscene = false
 
 var _cam_limits = []
 var _active_screens = []
 var _active_screen: Screen
 
 var followed_node = null
+
+var _finished_screen_cutscenes = false
 
 
 func _ready():
@@ -23,13 +26,22 @@ func _ready():
 			node.set_level(self)
 
 	if not start_at_screen.empty():
-		set_active_screen(get_node(start_at_screen))
-		_player.stand_on(_active_screen.global_position + (
-			_active_screen.spawnpoints[0] if not _active_screen.spawnpoints.empty() else Vector2.ZERO
-		))
-		_player.control_enabled = true
-		_player.visible = true
-		_player.play_idle()
+		call_deferred("begin_at_screen", start_at_screen, skip_first_cutscene)
+
+
+func begin_at_screen(name: String, end_cutscenes = false, spawnpoint = Vector2.ZERO):
+	camera.smoothing_enabled = false
+	get_node(start_at_screen).load_as_first(_player, spawnpoint, end_cutscenes)
+	extra_screen_load(name)
+	
+	for _i in 3:
+		yield(get_tree(), "idle_frame")
+
+	camera.smoothing_enabled = true
+
+
+func extra_screen_load(_name: String):
+	pass
 
 
 func _process(_delta):
@@ -106,3 +118,11 @@ func remove_cam_limits(limits: Rect2):
 func get_player() -> Player:
 	return _player
 
+
+func get_save_data():
+	return {
+		'level': get_tree().current_scene.filename,
+		'screen': _active_screen.name,
+		'spawn': _player.spawnpoint,
+		'end_cutscenes': _finished_screen_cutscenes
+	}

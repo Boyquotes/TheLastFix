@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="18" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="5">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="40" height="18" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="8">
  <tileset firstgid="1" source="../tilesets/bricks.tsx"/>
  <tileset firstgid="3" source="../tilesets/Overgrowth.tsx"/>
  <tileset firstgid="28" source="../tilesets/Spikes.tsx"/>
@@ -78,7 +78,6 @@
 </data>
  </layer>
  <objectgroup id="4" name="Object Layer 1">
-  <object id="1" template="../templates/spawnpoint.tx" x="32" y="128"/>
   <object id="2" x="136" y="8">
    <properties>
     <property name="limits" type="object" value="3"/>
@@ -91,7 +90,8 @@
     <property name="type" propertytype="ObjectType" value="camera_limits"/>
    </properties>
   </object>
-  <object id="4" template="../templates/spawnpoint.tx" x="288" y="72"/>
+  <object id="6" template="../templates/spawnpoint.tx" x="288" y="72"/>
+  <object id="7" template="../templates/spawnpoint.tx" x="32" y="128"/>
  </objectgroup>
  <layer id="5" name="Back Tiles" width="40" height="18">
   <properties>

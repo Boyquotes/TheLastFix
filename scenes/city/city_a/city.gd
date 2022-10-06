@@ -11,8 +11,23 @@ func _ready():
 	if start_at_screen.empty():
 		followed_node = null
 		_cutscene_player.play("intro")
-	else:
+
+
+func extra_screen_load(name: String):
+	var screen_num = int(name.substr(0, 2))
+	if screen_num > 1:
+		_car.position = Vector2(-83, 18)
+		_car.frame_coords = Vector2(4, 1)
+		_car.get_node("PlayerPuppet").visible = false
+		_car.get_node("Light").enabled = false
+		cam_follow_player()
 		camera.drag_margin_h_enabled = true
+
+	if screen_num > 5:
+		$"05".finish()
+
+	if screen_num > 9:
+		$"09".finish()
 
 
 func cam_follow_player():

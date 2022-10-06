@@ -7,7 +7,7 @@ export var zoom_level = 1.0 setget _set_zoom_level
 export var zoom_center = Vector2.ZERO setget _set_zoom_center
 
 onready var camera: Camera2D = $Camera
-onready var _cutscene_player = $CutscenePlayer
+onready var _cutscene_player: AnimationPlayer = $CutscenePlayer
 
 var _paused_for_dialogue = false
 var _dialogue: Dialogue
@@ -64,3 +64,7 @@ func _set_zoom_center(center: Vector2):
 	if camera != null:
 		zoom_center = center - camera.get_camera_position()
 		Game.get_camera().offset = (1 - zoom_level) * zoom_center
+
+
+func get_save_data():
+	return {}

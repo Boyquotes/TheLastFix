@@ -470,9 +470,8 @@ tracks/2/keys = {
 
 [node name="City" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
-fade_level = 0.0
-zoom_level = 0.5
 zoom_center = Vector2( -240, -40 )
+start_at_spawn = Vector2( 0, 0 )
 end_cutscenes = false
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]

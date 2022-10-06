@@ -1,5 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/playable_level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/city/city_b/city.gd" type="Script" id=2]
 
 [node name="City" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+start_at_spawn = Vector2( 0, 0 )
+end_cutscenes = false

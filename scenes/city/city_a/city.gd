@@ -13,8 +13,8 @@ func _ready():
 		_cutscene_player.play("intro")
 
 
-func extra_screen_load(name: String):
-	var screen_num = int(name.substr(0, 2))
+func extra_screen_load():
+	var screen_num = int(start_at_screen.substr(0, 2))
 	if screen_num > 1:
 		_car.position = Vector2(-83, 18)
 		_car.frame_coords = Vector2(4, 1)

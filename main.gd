@@ -8,8 +8,11 @@ onready var _level_container = $LevelContainer
 onready var _level_view = $LevelView
 onready var _hud = $HUD
 
+const save_path = "user://save.json"
+
 
 var _current_level = null
+var _last_loaded_level: Resource
 var _current_gui = null
 onready var _dialogue = $HUD/DialogueBox
 
@@ -35,13 +38,15 @@ func _process(_delta):
 		load_gui(preload("res://scenes/pause/pause.tscn"))
 
 
-func load_level(level: Resource):
+func load_level(level: Resource, start = true):
+	_last_loaded_level = level
 	if _current_level != null:
 		_level_container.remove_child(_current_level)
 		_current_level.call_deferred("free")
 
 	_current_level = level.instance()
-	_level_container.add_child(_current_level)
+	if start:
+		_level_container.add_child(_current_level)
 
 
 func load_gui(gui: Resource):
@@ -71,3 +76,28 @@ func get_player():
 
 func get_dialogue() -> Dialogue:
 	return _dialogue
+
+
+func save_game():
+	var save_file = File.new()
+	save_file.open(save_path, File.WRITE)
+	save_file.store_string(to_json(_current_level.get_save_data()))
+	save_file.close()
+
+
+func load_game():
+	var save_file = File.new()
+	save_file.open(save_path, File.READ)
+	var save_data: Dictionary = parse_json(save_file.get_as_text())
+	save_file.close()
+	
+	if save_data.empty():
+		return false
+
+	var level_path = save_data['level']
+	load_level(load(level_path), false)
+	_current_level.end_cutscenes = save_data['end_cutscenes']
+	_current_level.start_at_screen = save_data['screen']
+	_current_level.start_at_spawn = str2var("Vector2" + save_data['spawn'])
+	_level_container.add_child(_current_level)
+	return true

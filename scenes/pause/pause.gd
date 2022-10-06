@@ -48,4 +48,6 @@ func _process(delta):
 				0:
 					dir = -1
 				1:
-					pass
+					Game.save_game()
+					Game.load_game()
+					dir = -1

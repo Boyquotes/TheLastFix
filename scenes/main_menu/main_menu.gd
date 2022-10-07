@@ -10,7 +10,6 @@ func _ready():
 	$Demo/HeadAnimation.play("ride")
 	$Demo/CarSwayAnimation.play("sway")
 	$Demo/Car.play("default")
-	$GUI/Start.play("default")
 
 
 func _process(delta):
@@ -19,11 +18,12 @@ func _process(delta):
 	if _started_cutscene:
 		return
 
-	if Input.is_action_just_pressed("interact") or (Input.is_action_just_pressed("load_tmp") and not try_game_load()):
-		_cutscene_player.play("start")
-		$GUI/Start.visible = false
-		_started_cutscene = true
-		Game.pausable = true
+
+func start_new_game():
+	_cutscene_player.play("start")
+	$GUI/Menu.visible = false
+	_started_cutscene = true
+	Game.pausable = true
 
 
 func try_game_load():
@@ -47,3 +47,15 @@ func load_game(save: Dictionary):
 
 func load_first_level():
 	Game.load_gui(load("res://scenes/page_intro/page_intro.tscn"))
+
+
+func _on_Menu_option_pressed(index):
+	$GUI/Menu.enabled = false
+	match index:
+		0:
+			if not try_game_load():
+				start_new_game()
+		1:
+			start_new_game()
+		2:
+			get_tree().quit()

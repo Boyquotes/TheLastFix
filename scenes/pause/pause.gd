@@ -6,19 +6,15 @@ var dir = 1
 
 var _fade_speed = 10
 
-var _buttons = []
-var _select_index = 0
 var _quitting = false
 
-onready var _arrow = $Arrow
+onready var menu = $Box/Menu
 
 
 func _ready():
 	get_tree().paused = true
 	Game.fade_enabled = false
 	modulate = Color(1, 1, 1, 0)
-	_buttons = $Menu/Buttons.get_children()
-	$ArrowAnimation.play("point")
 
 
 func _process(delta):
@@ -45,19 +41,16 @@ func _process(delta):
 	if Input.is_action_just_pressed("escape"):
 		dir = -1
 
-	if dir >= 0:
-		var _select_dir = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
-		_select_index = int(max(min(_select_index + _select_dir, _buttons.size() - 1), 0))
-		var _button = _buttons[_select_index]
-		_arrow.position = (_button.rect_global_position + Vector2(_button.rect_size.x + 7, _button.rect_size.y / 2 + 1)).round()
-		
-		if Input.is_action_just_pressed("interact"):
-			match _select_index:
-				0:
-					dir = -1
-				1:
-					Game.save_game()
-					Game.fade_enabled = true
-					Game.fade_out(1.0 / _fade_speed)
-					_quitting = true
-					dir = -1
+	menu.enabled = dir >= 0
+
+
+func _on_Menu_option_pressed(index):
+	match index:
+		0:
+			dir = -1
+		1:
+			Game.save_game()
+			Game.fade_enabled = true
+			Game.fade_out(1.0 / _fade_speed)
+			_quitting = true
+			dir = -1

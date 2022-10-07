@@ -5,14 +5,15 @@
 [ext_resource path="res://scenes/main_menu/car.png" type="Texture" id=3]
 [ext_resource path="res://scenes/main_menu/head.png" type="Texture" id=4]
 [ext_resource path="res://scenes/main_menu/title.png" type="Texture" id=5]
-[ext_resource path="res://scenes/main_menu/start.png" type="Texture" id=6]
 [ext_resource path="res://scenes/test/bg1.png" type="Texture" id=7]
 [ext_resource path="res://scenes/test/bg2.png" type="Texture" id=8]
 [ext_resource path="res://scenes/test/bg3.png" type="Texture" id=9]
 [ext_resource path="res://scenes/level.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/city/city_a/car_light.png" type="Texture" id=11]
+[ext_resource path="res://dialogue/alonebold.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://scenes/main_menu/phone.png" type="Texture" id=13]
 [ext_resource path="res://entities/player/player_light.tscn" type="PackedScene" id=14]
+[ext_resource path="res://entities/menu/menu.tscn" type="PackedScene" id=15]
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
@@ -131,21 +132,14 @@ tracks/0/keys = {
 "values": [ Vector2( 53, -39 ), Vector2( 48, -39 ), Vector2( 56, -39 ), Vector2( 53, -39 ), Vector2( 53, -39 ) ]
 }
 
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 104, 8 )
+[sub_resource type="DynamicFont" id=30]
+size = 8
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 12 )
 
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 8, 104, 8 )
-
-[sub_resource type="SpriteFrames" id=25]
-animations = [ {
-"frames": [ SubResource( 19 ), SubResource( 20 ) ],
-"loop": true,
-"name": "default",
-"speed": 2.5
-} ]
+[sub_resource type="Theme" id=31]
+default_font = SubResource( 30 )
 
 [sub_resource type="Animation" id=29]
 resource_name = "start"
@@ -195,7 +189,7 @@ tracks/2/keys = {
 "values": [ Vector2( 50, -20 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("GUI/Title:position")
+tracks/3/path = NodePath("Title:position")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -204,7 +198,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 1.5 ),
 "transitions": PoolRealArray( 1.51572, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -2 ), Vector2( 0, -76 ) ]
+"values": [ Vector2( 128, -104 ), Vector2( 128, -178 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Demo/Car/Phone:visible")
@@ -275,7 +269,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 360, 1024 )
 
 [node name="Car" type="AnimatedSprite" parent="Demo" index="1"]
-position = Vector2( 51, -39 )
+position = Vector2( 53, -39 )
 z_index = -2
 frames = SubResource( 21 )
 
@@ -323,16 +317,35 @@ anims/ride = SubResource( 23 )
 root_node = NodePath("../..")
 anims/sway = SubResource( 24 )
 
-[node name="GUI" type="Node2D" parent="." index="2"]
-position = Vector2( 128, -102 )
-
-[node name="Title" type="Sprite" parent="GUI" index="0"]
-position = Vector2( 0, -2 )
+[node name="Title" type="Sprite" parent="." index="2"]
+position = Vector2( 128, -104 )
 texture = ExtResource( 5 )
 
-[node name="Start" type="AnimatedSprite" parent="GUI" index="1"]
-position = Vector2( 0, 44 )
-frames = SubResource( 25 )
+[node name="GUI" type="Control" parent="." index="3"]
+margin_top = -144.0
+margin_right = 256.0
 
-[node name="CutscenePlayer" parent="." index="3"]
+[node name="Menu" parent="GUI" index="0" instance=ExtResource( 15 )]
+anchor_left = 0.05
+anchor_top = 0.35
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
+theme = SubResource( 31 )
+
+[node name="Continue" type="Label" parent="GUI/Menu" index="2"]
+text = "Continue"
+
+[node name="NewGame" type="Label" parent="GUI/Menu" index="3"]
+margin_top = 12.0
+text = "New Game"
+
+[node name="Exit" type="Label" parent="GUI/Menu" index="4"]
+margin_top = 24.0
+text = "Exit"
+
+[node name="CutscenePlayer" parent="." index="4"]
 anims/start = SubResource( 29 )
+
+[connection signal="option_pressed" from="GUI/Menu" to="." method="_on_Menu_option_pressed"]

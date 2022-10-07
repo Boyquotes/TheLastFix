@@ -169,11 +169,14 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 6, 9.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 6, 8.5, 9.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [ "boss_fire" ],
 "method": "play_dialogue_sequence"
+}, {
+"args": [ 1.0 ],
+"method": "fade_out"
 }, {
 "args": [  ],
 "method": "load_first_level"
@@ -226,18 +229,6 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 2, 1, 2 ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath(".:fade_level")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 8.5, 9.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 1.0, 0.0 ]
 }
 
 [node name="MainMenu" instance=ExtResource( 10 )]

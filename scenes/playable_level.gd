@@ -64,7 +64,7 @@ func _process(_delta):
 
 
 func switch_to_screen(screen: Screen):
-	print("Switched to screen ", screen.name)
+	#print("Switched to screen ", screen.name)
 	_active_screen = screen
 	screen.flush_blockers()
 	screen.active = true
@@ -99,11 +99,8 @@ func set_inactive_screen(screen: Screen):
 	
 	var index = _active_screens.find(screen)
 	_active_screens.remove(index)
-	if index == _active_screens.size():
-		if index == 0:
-			print("ERROR: No active screens available (player left playable area)")
-		else:
-			switch_to_screen(_active_screens[-1])
+	if index == _active_screens.size() and index != 0:
+		switch_to_screen(_active_screens[-1])
 
 
 func set_cam_limits(limits: Rect2):
@@ -123,11 +120,8 @@ func add_cam_limits(limits: Rect2):
 func remove_cam_limits(limits: Rect2):
 	var index = _cam_limits.find(limits)
 	_cam_limits.remove(index)
-	if index == _cam_limits.size():
-		if index == 0:
-			print("ERROR: No camera limits available (player left playable area)")
-		else:
-			set_cam_limits(_cam_limits[-1])
+	if index == _cam_limits.size() and index != 0:
+		set_cam_limits(_cam_limits[-1])
 
 
 func get_player() -> Player:

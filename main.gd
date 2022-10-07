@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Main
 
+signal fade_finished
+
 
 onready var _camera = $Camera
 onready var _level_container = $LevelContainer
@@ -18,6 +20,10 @@ onready var _dialogue = $HUD/DialogueBox
 
 export var pausable = true
 
+var fade_level = 1
+var fade_speed = 0
+var fade_enabled = true
+
 
 func _ready():
 	var root = get_tree().root
@@ -33,10 +39,31 @@ func _ready():
 	_camera.set_deferred("current", true)
 
 
-func _process(_delta):
+func _process(delta):
 	if _current_gui == null and pausable and Input.is_action_just_pressed("escape"):
 		load_gui(preload("res://scenes/pause/pause.tscn"))
 
+	if fade_enabled and fade_speed != 0:
+		fade_level += fade_speed * delta
+		if fade_speed > 0 and fade_level >= 1:
+			fade_level = 1
+			fade_speed = 0
+			emit_signal("fade_finished")
+		elif fade_speed < 0 and fade_level <= 0:
+			fade_level = 0
+			fade_speed = 0
+			emit_signal("fade_finished")
+		
+		_level_view.modulate = Color(fade_level, fade_level, fade_level)
+
+
+func fade_in(time: float):
+	fade_speed = max((1 - fade_level) / time, 0.001)
+
+
+func fade_out(time: float):
+	fade_speed = -max(fade_level / time, 0.001)
+	
 
 func load_level(level: Resource, start = true):
 	_last_loaded_level = level
@@ -85,20 +112,22 @@ func save_game():
 	save_file.close()
 
 
-func load_game():
+func get_save():
 	var save_file = File.new()
+	if not save_file.file_exists(save_path):
+		return null
+
 	save_file.open(save_path, File.READ)
 	var save_data: Dictionary = parse_json(save_file.get_as_text())
 	save_file.close()
-	
-	if save_data.empty():
-		return false
+	return save_data
 
-	var level_path = save_data['level']
+
+func load_save(save: Dictionary):
+	var level_path = save['level']
 	load_level(load(level_path), false)
-	_current_level.end_cutscenes = save_data['end_cutscenes']
-	_current_level.start_at_screen = save_data['screen']
-	_current_level.start_at_spawn = str2var("Vector2" + save_data['spawn'])
+	_current_level.end_cutscenes = save['end_cutscenes']
+	_current_level.start_at_screen = save['screen']
+	_current_level.start_at_spawn = str2var("Vector2" + save['spawn'])
 	_level_container.add_child(_current_level)
 	Game.pausable = true
-	return true

@@ -5,5 +5,3 @@
 
 [node name="City" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-start_at_spawn = Vector2( 0, 0 )
-end_cutscenes = false

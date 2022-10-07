@@ -15,6 +15,7 @@ onready var _arrow = $Arrow
 
 func _ready():
 	get_tree().paused = true
+	Game.fade_enabled = false
 	modulate = Color(1, 1, 1, 0)
 	_buttons = $Menu/Buttons.get_children()
 	$ArrowAnimation.play("point")
@@ -31,8 +32,10 @@ func _process(delta):
 		if prog <= 0:
 			prog = 0
 			if _quitting:
+				Game.fade_in(1.0 / _fade_speed)
 				Game.load_level(preload("res://scenes/main_menu/main_menu.tscn"))
 				Game.get_dialogue().clear()
+			Game.fade_enabled = true
 			get_tree().paused = false
 			Game.unload_gui()
 			
@@ -54,5 +57,7 @@ func _process(delta):
 					dir = -1
 				1:
 					Game.save_game()
+					Game.fade_enabled = true
+					Game.fade_out(1.0 / _fade_speed)
 					_quitting = true
 					dir = -1

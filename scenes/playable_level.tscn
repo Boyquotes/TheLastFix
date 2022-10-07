@@ -8,6 +8,8 @@
 [node name="Level" instance=ExtResource( 7 )]
 script = ExtResource( 2 )
 start_at_screen = ""
+start_at_spawn = Vector2( 0, 0 )
+end_cutscenes = false
 
 [node name="Grapnel" parent="." index="1" instance=ExtResource( 3 )]
 z_index = -1

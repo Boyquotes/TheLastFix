@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scenes/playable_level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tiled/maps/01.tmx" type="PackedScene" id=2]
@@ -34,6 +34,7 @@
 [ext_resource path="res://scenes/city/city_a/09.gd" type="Script" id=32]
 [ext_resource path="res://scenes/city/city_a/13.gd" type="Script" id=33]
 [ext_resource path="res://scenes/city/city_a/01.gd" type="Script" id=34]
+[ext_resource path="res://scenes/city/city_a/city_sign.png" type="Texture" id=35]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 25, 2 )
@@ -575,6 +576,11 @@ range_layer_min = -100
 
 [node name="CarPlayer" type="AnimationPlayer" parent="01/Car" index="4"]
 anims/ride = SubResource( 9 )
+
+[node name="CitySign" type="Sprite" parent="01" index="5"]
+position = Vector2( 26, -15 )
+z_index = -10
+texture = ExtResource( 35 )
 
 [node name="02" parent="." index="7" instance=ExtResource( 3 )]
 position = Vector2( 384, -88 )

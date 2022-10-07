@@ -351,7 +351,7 @@ func _draw():
 		var target = joint - prev_joint
 
 		draw_set_transform(
-			(prev_joint - position - Vector2(1.5, 1.5).rotated(target.angle())).rotated(-rotation),
+			(prev_joint - position - Vector2(1.5, 1.5).rotated(target.angle())).round().rotated(-rotation),
 			target.angle() - rotation,
 			Vector2(1, 1)
 		)

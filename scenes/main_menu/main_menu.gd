@@ -10,6 +10,11 @@ func _ready():
 	$Demo/HeadAnimation.play("ride")
 	$Demo/CarSwayAnimation.play("sway")
 	$Demo/Car.play("default")
+	
+	if not Game.save_file_exists():
+		$GUI/Menu.margin_top = -12
+		$GUI/Menu/Continue.visible = false
+		$GUI/Menu/NewGame.text = "Start"
 
 
 func _process(delta):
@@ -28,7 +33,7 @@ func start_new_game():
 
 func try_game_load():
 	var save = Game.get_save()
-	if save == null or save.empty():
+	if save.empty():
 		return false
 
 	Game.fade_out(0.3)

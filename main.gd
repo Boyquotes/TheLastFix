@@ -112,10 +112,16 @@ func save_game():
 	save_file.close()
 
 
-func get_save():
+func save_file_exists() -> bool:
+	var file = File.new()
+	return file.file_exists(save_path)
+
+
+func get_save() -> Dictionary:
 	var save_file = File.new()
+	
 	if not save_file.file_exists(save_path):
-		return null
+		return {}
 
 	save_file.open(save_path, File.READ)
 	var save_data: Dictionary = parse_json(save_file.get_as_text())

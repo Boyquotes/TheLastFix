@@ -3,9 +3,9 @@ extends Level
 var _started_cutscene = false
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	Game.pausable = false
+	Game.set_zoom(1)
 	$Demo/RoadAnimation.play("ride")
 	$Demo/HeadAnimation.play("ride")
 	$Demo/CarSwayAnimation.play("sway")
@@ -25,7 +25,7 @@ func _process(delta):
 
 
 func start_new_game():
-	_cutscene_player.play("start")
+	$CutsceneAnimator.play("start")
 	$GUI/Menu.visible = false
 	_started_cutscene = true
 	Game.pausable = true

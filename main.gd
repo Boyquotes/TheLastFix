@@ -20,9 +20,15 @@ onready var _dialogue = $HUD/DialogueBox
 
 export var pausable = true
 
-var fade_level = 1
-var fade_speed = 0
+var fade_level = 1.0
+var fade_speed = 0.0
 var fade_enabled = true
+var zoom_enabled = true
+
+var zoom_center = Vector2.ZERO
+var zoom_level = 0.0
+var zoom_target = 0.0
+var zoom_speed = 0.0
 
 
 func _ready():
@@ -56,6 +62,19 @@ func _process(delta):
 		
 		_level_view.modulate = Color(fade_level, fade_level, fade_level)
 
+	if zoom_enabled and zoom_speed != 0:
+		zoom_level += zoom_speed * delta
+		if zoom_speed > 0 and zoom_level >= 1:
+			zoom_level = 1
+			zoom_speed = 0
+		elif zoom_speed < 0 and zoom_level <= 0:
+			zoom_level = 0
+			zoom_speed = 0
+		
+		var strength = smoothstep(0, 1, zoom_level) * (1 - zoom_target)
+		_camera.zoom = Vector2(1, 1) * (1 - strength)
+		_camera.offset = strength * zoom_center
+
 
 func fade_in(time: float):
 	fade_speed = max((1 - fade_level) / time, 0.001)
@@ -63,7 +82,29 @@ func fade_in(time: float):
 
 func fade_out(time: float):
 	fade_speed = -max(fade_level / time, 0.001)
-	
+
+
+func zoom_in(time: float, level: float, center: Vector2 = Vector2(-1, -1)):
+	zoom_target = level
+	if center != Vector2(-1, -1):
+		zoom_center = center - _current_level.camera.get_camera_position()
+	zoom_speed = 1 / time
+
+
+func set_zoom(level: float, center: Vector2 = Vector2(-1, -1)):
+	if center != Vector2(-1, -1):
+		zoom_center = center - _current_level.camera.get_camera_position()
+
+	_camera.zoom = Vector2(1, 1) * level
+	_camera.offset = (1 - level) * zoom_center
+	zoom_target = level
+	zoom_speed = 0
+	zoom_level = (0 if level == 1 else 1)
+
+
+func zoom_out(time: float):
+	zoom_speed = -1 / time
+
 
 func load_level(level: Resource, start = true):
 	_last_loaded_level = level
@@ -85,10 +126,6 @@ func load_gui(gui: Resource):
 func unload_gui():
 	_hud.remove_child(_current_gui)
 	_current_gui = null
-
-
-func get_camera() -> Camera2D:
-	return _camera
 
 
 func get_view() -> Sprite:

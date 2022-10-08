@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "AnimationPlayer",
+"class": "Animator",
+"language": "GDScript",
+"path": "res://entities/animator/animator.gd"
+}, {
 "base": "Area2D",
 "class": "CameraArea",
 "language": "GDScript",
@@ -75,6 +80,7 @@ _global_script_classes=[ {
 "path": "res://entities/utility_pole/utility_pole.gd"
 } ]
 _global_script_class_icons={
+"Animator": "",
 "CameraArea": "",
 "Dialogue": "",
 "DialogueServer": "",

@@ -14,6 +14,7 @@ onready var menu = $Box/Menu
 func _ready():
 	get_tree().paused = true
 	Game.fade_enabled = false
+	Game.zoom_enabled = false
 	modulate = Color(1, 1, 1, 0)
 
 
@@ -32,6 +33,7 @@ func _process(delta):
 				Game.load_level(preload("res://scenes/main_menu/main_menu.tscn"))
 				Game.get_dialogue().clear()
 			Game.fade_enabled = true
+			Game.zoom_enabled = true
 			get_tree().paused = false
 			Game.unload_gui()
 			

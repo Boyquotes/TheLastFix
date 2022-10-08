@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://scenes/playable_level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tiled/maps/city_intro.tmx" type="PackedScene" id=2]
@@ -29,144 +29,108 @@
 [ext_resource path="res://tiled/maps/scale.tmx" type="PackedScene" id=27]
 [ext_resource path="res://scenes/city/city_a/building/building.tscn" type="PackedScene" id=28]
 [ext_resource path="res://scenes/city/city_a/upz_sign.png" type="Texture" id=29]
-[ext_resource path="res://entities/prompt/prompt.tscn" type="PackedScene" id=30]
 [ext_resource path="res://scenes/city/city_a/city_intro.gd" type="Script" id=31]
 [ext_resource path="res://scenes/city/city_a/fire_hydrant.gd" type="Script" id=32]
 [ext_resource path="res://scenes/city/city_a/building.gd" type="Script" id=33]
 [ext_resource path="res://scenes/city/city_a/bar.gd" type="Script" id=34]
 [ext_resource path="res://scenes/city/city_a/city_sign.png" type="Texture" id=35]
 [ext_resource path="res://tiled/maps/building.tmx" type="PackedScene" id=36]
+[ext_resource path="res://entities/animator/animator.gd" type="Script" id=37]
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=18]
 resource_name = "intro"
 length = 14.0
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:zoom_level")
+tracks/0/path = NodePath("Screens/city_intro/Car:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 13.3, 14 ),
-"transitions": PoolRealArray( 1e-05, 2, 2 ),
-"update": 0,
-"values": [ 0.5, 0.5, 1.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Player:control_enabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 14 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:zoom_center")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( -240, -40 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Screens/city_intro/Car:position")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0, 7.1 ),
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ Vector2( -450, 18 ), Vector2( -83, 18 ) ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("Screens/city_intro/Car:frame_coords")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/1/type = "value"
+tracks/1/path = NodePath("Screens/city_intro/Car:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 6, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7, 7.1, 7.2, 7.4, 7.7, 8, 9.4, 9.5, 9.6, 9.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 2, 1 ), Vector2( 3, 1 ), Vector2( 4, 1 ) ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("Screens/city_intro/Car/PlayerPuppet:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
+tracks/2/type = "value"
+tracks/2/path = NodePath("Screens/city_intro/Car/PlayerPuppet:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 6, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7, 7.1, 7.2, 7.4, 7.7, 8, 9.4, 9.5, 9.6, 9.9, 10, 10.1, 10.5, 10.6, 10.9, 11, 11.3, 11.5, 11.7, 11.9, 12.1, 12.3, 12.6, 12.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 12, 13, 12, 11, 14, 15 ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("Screens/city_intro/Car/PlayerPuppet:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
+tracks/3/type = "value"
+tracks/3/path = NodePath("Screens/city_intro/Car/PlayerPuppet:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0, 9.9, 10, 10.1, 10.5, 10.6, 12.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 5, 6 ), Vector2( 6, 13 ), Vector2( 7, 15 ), Vector2( 6, 15 ), Vector2( 4, 15 ), Vector2( 3, 15 ), Vector2( 7, 15 ) ]
 }
-tracks/7/type = "value"
-tracks/7/path = NodePath("Player:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
+tracks/4/type = "value"
+tracks/4/path = NodePath("Player:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
 "times": PoolRealArray( 0, 12.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Vector2( -49, -39 ), Vector2( 49, -39 ) ]
 }
-tracks/8/type = "value"
-tracks/8/path = NodePath("Player:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
+tracks/5/type = "value"
+tracks/5/path = NodePath("Player:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
 "times": PoolRealArray( 0, 12.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
 }
-tracks/9/type = "value"
-tracks/9/path = NodePath("Screens/city_intro/Car/PlayerPuppet:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
+tracks/6/type = "value"
+tracks/6/path = NodePath("Screens/city_intro/Car/PlayerPuppet:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
 "times": PoolRealArray( 0, 12.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
-tracks/10/type = "method"
-tracks/10/path = NodePath("Player")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
+tracks/7/type = "method"
+tracks/7/path = NodePath("Player")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
 "times": PoolRealArray( 12.8 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -174,61 +138,61 @@ tracks/10/keys = {
 "method": "play_idle"
 } ]
 }
-tracks/11/type = "value"
-tracks/11/path = NodePath("Grapnel:hook_visible")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
+tracks/8/type = "value"
+tracks/8/path = NodePath("Grapnel:hook_visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
 }
-tracks/12/type = "value"
-tracks/12/path = NodePath("Screens/city_intro/Car/Light:enabled")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
+tracks/9/type = "value"
+tracks/9/path = NodePath("Screens/city_intro/Car/Light:enabled")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
 "times": PoolRealArray( 0, 8.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
-tracks/13/type = "value"
-tracks/13/path = NodePath("Screens/city_intro/Car/Light:position")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
+tracks/10/type = "value"
+tracks/10/path = NodePath("Screens/city_intro/Car/Light:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
 "times": PoolRealArray( 6, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7, 7.1, 7.2, 7.4, 7.7, 8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ) ]
 }
-tracks/14/type = "value"
-tracks/14/path = NodePath("Camera:position")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/keys = {
+tracks/11/type = "value"
+tracks/11/path = NodePath("Camera:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
 "times": PoolRealArray( 0, 4.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( -112, -72 ), Vector2( 128, -72 ) ]
 }
-tracks/15/type = "method"
-tracks/15/path = NodePath("Screens/city_intro/Car/CarPlayer")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
+tracks/12/type = "method"
+tracks/12/path = NodePath("Screens/city_intro/Car/CarPlayer")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
 "times": PoolRealArray( 0, 6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
@@ -239,20 +203,58 @@ tracks/15/keys = {
 "method": "stop"
 } ]
 }
-tracks/16/type = "value"
-tracks/16/path = NodePath("Camera:drag_margin_h_enabled")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/keys = {
+tracks/13/type = "value"
+tracks/13/path = NodePath("Camera:drag_margin_h_enabled")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
 "times": PoolRealArray( 0, 6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
 }
+tracks/14/type = "method"
+tracks/14/path = NodePath(".")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 14 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "cam_follow_player"
+} ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Screens/city_intro/Car/PlayerPuppet/PlayerLight:energy")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 9.4, 9.5, 9.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0.3, 0.8, 0.9, 1.0 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath(".:end_cutscenes")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
 tracks/17/type = "method"
-tracks/17/path = NodePath(".")
+tracks/17/path = NodePath("CutsceneAnimator")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/imported = false
@@ -265,131 +267,40 @@ tracks/17/keys = {
 "method": "fade_in"
 }, {
 "args": [  ],
-"method": "cam_follow_player"
+"method": "mark_end_cutscene"
 } ]
 }
-tracks/18/type = "value"
-tracks/18/path = NodePath("Screens/city_intro/Car/PlayerPuppet/PlayerLight:energy")
+tracks/18/type = "method"
+tracks/18/path = NodePath("CutsceneAnimator")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/imported = false
 tracks/18/enabled = true
 tracks/18/keys = {
-"times": PoolRealArray( 0, 9.4, 9.5, 9.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0.3, 0.8, 0.9, 1.0 ]
+"times": PoolRealArray( 0, 13.3, 14 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ 0.5, Vector2( -240, -40 ) ],
+"method": "set_zoom"
+}, {
+"args": [ 0.7 ],
+"method": "zoom_out"
+}, {
+"args": [ true ],
+"method": "set_player_movement"
+} ]
 }
 tracks/19/type = "value"
-tracks/19/path = NodePath(".:end_cutscenes")
+tracks/19/path = NodePath("Player:control_enabled")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/imported = false
 tracks/19/enabled = true
 tracks/19/keys = {
-"times": PoolRealArray( 14 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=14]
-resource_name = "meet_frankie"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:zoom_level")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1.4, 2, 3, 3.5, 4 ),
-"transitions": PoolRealArray( 1e+06, 2, 0.5, 1e+06, 1.68179, 0.615572, 1 ),
-"update": 0,
-"values": [ 1.0, 1.0, 0.688, 0.5, 0.5, 0.724888, 1.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:zoom_center")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( 4000, -210 ) ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 2.5 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "meet_frankie" ],
-"method": "play_dialogue_sequence"
-} ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Player:control_enabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 4 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath(".:end_cutscenes")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 4 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=17]
-resource_name = "open_door"
-length = 2.2
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:zoom_level")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 2 ),
-"transitions": PoolRealArray( 1e+06, 1.8025, 1 ),
-"update": 0,
-"values": [ 1.0, 1.0, 0.3 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 2.2 ),
+"times": PoolRealArray( 0, 14 ),
 "transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [ 2.0 ],
-"method": "fade_out"
-}, {
-"args": [  ],
-"method": "load_next_level"
-} ]
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -443,15 +354,6 @@ tracks/2/keys = {
 a = Vector2( 0, 43 )
 b = Vector2( 0, 84 )
 
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 15, 32 )
-
-[sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 9, 17.5 )
-
-[sub_resource type="RectangleShape2D" id=16]
-extents = Vector2( 9, 15 )
-
 [node name="City" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
 
@@ -504,6 +406,7 @@ hook_visible = false
 [node name="Player" parent="." index="3"]
 visible = false
 position = Vector2( -49, -39 )
+control_enabled = false
 
 [node name="FillIn" type="TileMap" parent="." index="4"]
 tile_set = ExtResource( 17 )
@@ -518,10 +421,9 @@ collision_layer = 8
 format = 1
 tile_data = PoolIntArray( -3538486, 18, 0, -3538485, 14, 0, -3538481, 20, 0, -3538480, 4, 0, -3538478, 2, 0, -3538476, 14, 0, -3473010, 1, 0, -3473005, 21, 0, -3472949, 21, 0, -3472947, 18, 0, -3472946, 21, 0, -3472944, 17, 0, -3472942, 1, 0, -3472940, 0, 0, -3472939, 4, 0, -3472938, 16, 0, -3407473, 4, 0, -3407471, 2, 0, -3407470, 0, 0, -3407468, 21, 0, -3407412, 5, 0, -3407411, 2, 0, -3407405, 19, 0, -3407403, 5, 0, -3407397, 15, 0, -3342104, 3, 0, -3342103, 5, 0, -3342100, 6, 0, -3341936, 8, 0, -3341933, 4, 0, -3341932, 22, 0, -3341877, 11, 0, -3341874, 3, 0, -3341867, 6, 0, -3341864, 7, 0, -3341863, 16, 0, -3341861, 16, 0, -3341860, 20, 0, -3341859, 13, 0, -3341854, 16, 0, -3276566, 8, 0, -3276564, 19, 0, -3276395, 20, 0, -3276341, 9, 0, -3276338, 10, 0, -3276330, 1, 0, -3276329, 5, 0, -3276327, 17, 0, -3276323, 4, 0, -3276322, 22, 0, -3276321, 13, 0, -3276319, 6, 0, -3211030, 9, 0, -3211029, 20, 0, -3210860, 24, 0, -3210805, 24, 0, -3210804, 2, 0, -3210795, 22, 0, -3210792, 4, 0, -3210788, 4, 0, -3210784, 20, 0, -3145494, 15, 0, -3145492, 14, 0, -3145267, 24, 0, -3145266, 0, 0, -3145260, 21, 0, -3145259, 4, 0, -3145255, 5, 0, -3145253, 10, 0, -3145252, 12, 0, -3145247, 1, 0, -3145246, 21, 0, -3145245, 6, 0, -3079957, 7, 0, -3079955, 19, 0, -3079730, 12, 0, -3079727, 16, 0, -3079718, 24, 0, -3079715, 15, 0, -3079714, 12, 0, -3079713, 12, 0, -3079712, 1, 0, -3014421, 21, 0, -3014420, 4, 0, -3014419, 14, 0, -3014193, 2, 0, -3014192, 10, 0, -3014188, 16, 0, -3014187, 2, 0, -3014182, 18, 0, -3014180, 16, 0, -3014179, 11, 0, -2948884, 0, 0, -2948883, 16, 0, -2948660, 10, 0, -2948657, 18, 0, -2948656, 16, 0, -2948653, 13, 0, -2948650, 6, 0, -2948649, 20, 0, -2948648, 11, 0, -2948645, 24, 0, -2883349, 19, 0, -2883347, 1, 0, -2883123, 2, 0, -2883122, 6, 0, -2883119, 6, 0, -2883117, 4, 0, -2883111, 15, 0, -2883110, 23, 0, -2883109, 2, 0, -2883108, 17, 0, -2817812, 22, 0, -2817582, 1, 0, -2817572, 24, 0, -2752275, 20, 0, -2752045, 2, 0, -2752035, 4, 0, -2293343, 3, 0, -2293338, 4, 0, -2293333, 1, 0, -2293331, 4, 0, -2293328, 16, 0, -2293322, 8, 0, -2293321, 4, 0, -2293318, 7, 0, -2227807, 4, 0, -2227802, 1, 0, -2227796, 3, 0, -2227793, 14, 0, -2227787, 19, 0, -2227785, 23, 0, -2227782, 14, 0, -2162273, 3, 0, -2162272, 4, 0, -2162270, 1, 0, -2162265, 7, 0, -2162261, 1, 0, -2162257, 11, 0, -2162256, 15, 0, -2162255, 0, 0, -2162251, 14, 0, -2162249, 21, 0, -2162248, 20, 0, -2162246, 23, 0, -2096738, 1, 0, -2096733, 3, 0, -2096728, 17, 0, -2096726, 8, 0, -2096724, 2, 0, -2096722, 13, 0, -2096718, 24, 0, -2096717, 19, 0, -2096716, 23, 0, -2096711, 3, 0, -2031204, 11, 0, -2031203, 8, 0, -2031191, 16, 0, -2031190, 18, 0, -2031188, 7, 0, -2031186, 8, 0, -2031179, 19, 0, -2031178, 18, 0, -2031175, 13, 0, -1965666, 10, 0, -1965656, 14, 0, -1965651, 4, 0, -1965642, 5, 0, -1965641, 8, 0, -1965639, 4, 0, -1900130, 5, 0, -1900120, 5, 0, -1900107, 13, 0, -1900104, 16, 0, -1769138, 11, 0, -1703601, 18, 0, -1638065, 17, 0, -1638064, 18, 0, -1572528, 22, 0, -1506991, 13, 0, -1441455, 24, 0, -1375918, 19, 0, -1310383, 10, 0, -1244848, 11, 0, -1244847, 2, 0, -1244845, 22, 0, -1179311, 7, 0, -1179309, 10, 0 )
 
-[node name="CutscenePlayer" parent="." index="6"]
-anims/intro = SubResource( 13 )
-anims/meet_frankie = SubResource( 14 )
-anims/open_door = SubResource( 17 )
+[node name="CutsceneAnimator" type="AnimationPlayer" parent="." index="6"]
+anims/intro = SubResource( 18 )
+script = ExtResource( 37 )
 
 [node name="city_intro" parent="Screens" index="0" instance=ExtResource( 2 )]
 position = Vector2( 128, -72 )
@@ -534,14 +436,14 @@ z_index = -10
 texture = ExtResource( 10 )
 hframes = 8
 vframes = 2
-frame = 11
+frame = 12
 
 [node name="PlayerPuppet" type="Sprite" parent="Screens/city_intro/Car" index="0"]
 position = Vector2( 5, 6 )
 z_index = 1
 texture = ExtResource( 11 )
 hframes = 16
-frame = 1
+frame = 15
 
 [node name="PlayerLight" parent="Screens/city_intro/Car/PlayerPuppet" index="0" instance=ExtResource( 13 )]
 energy = 0.3
@@ -663,32 +565,4 @@ block_right = true
 [node name="Building" parent="Screens/building" index="5" instance=ExtResource( 28 )]
 position = Vector2( 34, -3 )
 
-[node name="FrankieTalkArea" type="Area2D" parent="Screens/building/Building" index="6"]
-position = Vector2( -73, 189 )
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Screens/building/Building/FrankieTalkArea" index="0"]
-position = Vector2( 5, -22 )
-shape = SubResource( 12 )
-
-[node name="FrankieTalkPos" type="Position2D" parent="Screens/building/Building" index="7"]
-position = Vector2( -78, 199 )
-
-[node name="6APrompt" parent="Screens/building/Building" index="8" instance=ExtResource( 30 )]
-position = Vector2( -13, -20 )
-
-[node name="Collision" type="CollisionShape2D" parent="Screens/building/Building/6APrompt" index="3"]
-position = Vector2( 16, -2.5 )
-shape = SubResource( 15 )
-
-[node name="PenthousePrompt" parent="Screens/building/Building" index="9" instance=ExtResource( 30 )]
-position = Vector2( 20, -140 )
-
-[node name="Collision" type="CollisionShape2D" parent="Screens/building/Building/PenthousePrompt" index="3"]
-position = Vector2( -17, 0 )
-shape = SubResource( 16 )
-
 [connection signal="finished_fixing" from="Screens/fire_hydrant/FireHydrant" to="Screens/fire_hydrant" method="_on_FireHydrant_finished_fixing"]
-[connection signal="body_entered" from="Screens/building/Building/FrankieTalkArea" to="Screens/building" method="_on_FrankieTalkArea_body_entered"]
-[connection signal="used" from="Screens/building/Building/6APrompt" to="Screens/building" method="_on_6APrompt_used"]
-[connection signal="used" from="Screens/building/Building/PenthousePrompt" to="Screens/building" method="_on_PenthousePrompt_used"]

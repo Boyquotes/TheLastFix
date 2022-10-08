@@ -14,5 +14,3 @@ smoothing_enabled = true
 smoothing_speed = 4.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
-
-[node name="CutscenePlayer" type="AnimationPlayer" parent="."]

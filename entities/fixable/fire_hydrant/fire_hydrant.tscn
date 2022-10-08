@@ -5,7 +5,7 @@
 [ext_resource path="res://entities/fixable/fixable.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/fixable/fire_hydrant/fix.png" type="Texture" id=4]
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 resource_name = "fix"
 length = 6.25
 step = 0.05
@@ -118,8 +118,8 @@ texture = ExtResource( 4 )
 offset = Vector2( 0, -3 )
 hframes = 19
 
-[node name="FixAnimation" parent="." index="2"]
-anims/fix = SubResource( 5 )
+[node name="FixAnimator" parent="." index="2"]
+anims/fix = SubResource( 7 )
 
 [node name="Prompt" parent="." index="3"]
 position = Vector2( -19, -24 )

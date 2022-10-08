@@ -6,7 +6,7 @@ var _ready_to_fix = false
 var _player: Player
 
 onready var _player_puppet = $PlayerPuppet
-onready var _fix_animation = $FixAnimation
+onready var _fix_animator = $FixAnimator
 
 export var fixed = false
 export var return_to_player_after = true
@@ -31,7 +31,7 @@ func start_fix():
 	_player_puppet.visible = true
 	
 	emit_signal("started_fixing")
-	_fix_animation.queue("fix")
+	_fix_animator.queue("fix")
 
 
 func _on_FixAnimation_animation_finished(anim_name):

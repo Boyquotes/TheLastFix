@@ -15,10 +15,11 @@ func _physics_process(_delta):
 
 
 func load_as_first(player, _spawnpoint: Vector2, end_cutscenes: bool):
-	_level._cutscene_player.play("intro")
+	var _cutscene_animator = $"../../CutsceneAnimator"
+	_cutscene_animator.play("intro")
 	_level.followed_node = null
 	if end_cutscenes:
-		_level._cutscene_player.seek(_level._cutscene_player.current_animation_length)
+		_cutscene_animator.seek(_cutscene_animator.current_animation_length)
 		player.play_idle()
 		_level.cam_follow_player()
 		_level.camera.drag_margin_h_enabled = true

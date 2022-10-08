@@ -244,11 +244,10 @@ func _falling():
 
 
 func _grappling(_delta):
-	if Input.is_action_just_pressed("grapple") or Input.is_action_just_released("grapple"):
-		if Input.is_action_pressed("grapple") and grapnel_enabled:
-			if not _crouching:
-				_grapnel.shoot(_looking)
-		elif _grapnel.active:
+	if Input.is_action_just_pressed("grapple") and grapnel_enabled:
+		if not _crouching:
+			_grapnel.shoot(_looking)
+	elif not Input.is_action_pressed("grapple") and _grapnel.active and not _grapnel._retracting:
 			_grapnel.retract()
 			_pulling = false
 
@@ -375,6 +374,8 @@ func _physics_process(delta):
 		if collision.collider.collision_layer & 16 != 0:
 			die(-collision.normal)
 			break
+
+	_grapnel.update_pos()
 
 
 func set_grapnel(node):

@@ -236,8 +236,6 @@ func _physics_process(delta):
 	
 	_prev_player_pos = _player.position
 	_prev_origin_pos = origin_pos
-	
-	update()
 
 
 func round_to_tile(point: Vector2):
@@ -337,6 +335,11 @@ func _process(_delta):
 	if active:
 		update()
 	else:
+		update_pos()
+
+
+func update_pos():
+	if not active:
 		position = _origin.global_position
 
 
@@ -344,7 +347,7 @@ func _draw():
 	if not active or not hook_visible:
 		return
 
-	var prev_joint = _joints[0]
+	var prev_joint = position
 	var even = false
 	for i in range(1, _joints.size()):
 		var joint = _joints[i]

@@ -23,11 +23,11 @@ func extra_screen_load():
 		cam_follow_player()
 		camera.drag_margin_h_enabled = true
 
-	if screen_num > 5:
-		$"05".finish()
+	if screen_num > 6:
+		$"06".finish()
 
-	if screen_num > 9:
-		$"09".finish()
+	if screen_num > 10:
+		$"10".finish()
 
 
 func cam_follow_player():
@@ -45,14 +45,14 @@ func _physics_process(_delta):
 
 func _on_FireHydrant_finished_fixing():
 	_set_end_cutscenes(true)
-	$"05".block_right = false
+	$"06".block_right = false
 
 
 func _on_FrankieTalkArea_body_entered(body):
 	if body is Player and not _spoke_to_frankie:
 		_spoke_to_frankie = true
 		_grapnel.retract()
-		_player.go_to($"13/Building/FrankieTalkPos".global_position)
+		_player.go_to($"14/Building/FrankieTalkPos".global_position)
 		var error = _player.connect("reached_target", self, "meet_frankie")
 		if error != OK:
 			print("Error connecting reached_target: ", error)
@@ -64,11 +64,11 @@ func meet_frankie():
 
 
 func _on_6APrompt_used():
-	open_apartment($"13/Building/6APrompt/Collision", true, "res://scenes/city/city_b/city.tscn")
+	open_apartment($"14/Building/6APrompt/Collision", true, "res://scenes/city/city_b/city.tscn")
 
 
 func _on_PenthousePrompt_used():
-	open_apartment($"13/Building/PenthousePrompt/Collision", false, "")
+	open_apartment($"14/Building/PenthousePrompt/Collision", false, "")
 
 
 func open_apartment(collision: CollisionShape2D, flipped: bool, next_level: String):

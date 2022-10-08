@@ -2,12 +2,12 @@
 
 importer="vnen.tiled_importer"
 type="PackedScene"
-path="res://.import/10.tmx-07a3948da544edbcd8f8871ede70c3ce.scn"
+path="res://.import/easter_egg.tmx-25388b4ed8bc6c247e063802b30a3be5.scn"
 
 [deps]
 
-source_file="res://tiled/maps/10.tmx"
-dest_files=[ "res://.import/10.tmx-07a3948da544edbcd8f8871ede70c3ce.scn" ]
+source_file="res://tiled/maps/easter_egg.tmx"
+dest_files=[ "res://.import/easter_egg.tmx-25388b4ed8bc6c247e063802b30a3be5.scn" ]
 
 [params]
 

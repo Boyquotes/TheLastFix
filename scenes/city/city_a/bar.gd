@@ -14,3 +14,4 @@ func finish():
 	$"Bar/Bar Sign/Prompt"._used = true
 	$"Bar/Bar Sign/Prompt".visible = false
 	_set_block_right(false)
+	_cutscenes_played = true

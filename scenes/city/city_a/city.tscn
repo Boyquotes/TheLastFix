@@ -1,101 +1,41 @@
 [gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://scenes/playable_level.tscn" type="PackedScene" id=1]
-[ext_resource path="res://tiled/maps/01.tmx" type="PackedScene" id=2]
-[ext_resource path="res://tiled/maps/02.tmx" type="PackedScene" id=3]
-[ext_resource path="res://tiled/maps/03.tmx" type="PackedScene" id=4]
+[ext_resource path="res://tiled/maps/city_intro.tmx" type="PackedScene" id=2]
+[ext_resource path="res://tiled/maps/up_z.tmx" type="PackedScene" id=3]
+[ext_resource path="res://tiled/maps/diagonal.tmx" type="PackedScene" id=4]
 [ext_resource path="res://scenes/city/city_a/city.gd" type="Script" id=5]
 [ext_resource path="res://scenes/test/bg2.png" type="Texture" id=6]
 [ext_resource path="res://scenes/test/bg1.png" type="Texture" id=7]
 [ext_resource path="res://scenes/test/bg3.png" type="Texture" id=8]
-[ext_resource path="res://tiled/maps/04.tmx" type="PackedScene" id=9]
+[ext_resource path="res://tiled/maps/navigate.tmx" type="PackedScene" id=9]
 [ext_resource path="res://scenes/city/city_a/car_rollup.png" type="Texture" id=10]
 [ext_resource path="res://scenes/city/city_a/player_rollup.png" type="Texture" id=11]
 [ext_resource path="res://scenes/city/city_a/car_light.png" type="Texture" id=12]
 [ext_resource path="res://entities/player/player_light.tscn" type="PackedScene" id=13]
-[ext_resource path="res://tiled/maps/05.tmx" type="PackedScene" id=14]
-[ext_resource path="res://tiled/maps/02a.tmx" type="PackedScene" id=15]
+[ext_resource path="res://tiled/maps/swings.tmx" type="PackedScene" id=14]
+[ext_resource path="res://tiled/maps/easter_egg.tmx" type="PackedScene" id=15]
 [ext_resource path="res://entities/fixable/fire_hydrant/fire_hydrant.tscn" type="PackedScene" id=16]
 [ext_resource path="res://tiled/tilesets/Tiles-2.tsx" type="TileSet" id=17]
-[ext_resource path="res://tiled/maps/06.tmx" type="PackedScene" id=18]
-[ext_resource path="res://tiled/maps/07.tmx" type="PackedScene" id=19]
-[ext_resource path="res://tiled/maps/08.tmx" type="PackedScene" id=20]
-[ext_resource path="res://tiled/maps/09.tmx" type="PackedScene" id=21]
+[ext_resource path="res://tiled/maps/fire_hydrant.tmx" type="PackedScene" id=18]
+[ext_resource path="res://tiled/maps/vines_intro.tmx" type="PackedScene" id=19]
+[ext_resource path="res://tiled/maps/spikes_intro.tmx" type="PackedScene" id=20]
+[ext_resource path="res://tiled/maps/icicle.tmx" type="PackedScene" id=21]
 [ext_resource path="res://scenes/city/city_a/bar/bar.tscn" type="PackedScene" id=22]
 [ext_resource path="res://tiled/tilesets/Overgrowth.tsx" type="TileSet" id=23]
-[ext_resource path="res://tiled/maps/10.tmx" type="PackedScene" id=24]
-[ext_resource path="res://tiled/maps/11.tmx" type="PackedScene" id=25]
-[ext_resource path="res://tiled/maps/12.tmx" type="PackedScene" id=26]
-[ext_resource path="res://tiled/maps/13.tmx" type="PackedScene" id=27]
+[ext_resource path="res://tiled/maps/bar.tmx" type="PackedScene" id=24]
+[ext_resource path="res://tiled/maps/spike_swing_1.tmx" type="PackedScene" id=25]
+[ext_resource path="res://tiled/maps/spike_swing_2.tmx" type="PackedScene" id=26]
+[ext_resource path="res://tiled/maps/scale.tmx" type="PackedScene" id=27]
 [ext_resource path="res://scenes/city/city_a/building/building.tscn" type="PackedScene" id=28]
 [ext_resource path="res://scenes/city/city_a/upz_sign.png" type="Texture" id=29]
 [ext_resource path="res://entities/prompt/prompt.tscn" type="PackedScene" id=30]
-[ext_resource path="res://scenes/city/city_a/06.gd" type="Script" id=31]
-[ext_resource path="res://scenes/city/city_a/10.gd" type="Script" id=32]
-[ext_resource path="res://scenes/city/city_a/14.gd" type="Script" id=33]
-[ext_resource path="res://scenes/city/city_a/01.gd" type="Script" id=34]
+[ext_resource path="res://scenes/city/city_a/city_intro.gd" type="Script" id=31]
+[ext_resource path="res://scenes/city/city_a/fire_hydrant.gd" type="Script" id=32]
+[ext_resource path="res://scenes/city/city_a/building.gd" type="Script" id=33]
+[ext_resource path="res://scenes/city/city_a/bar.gd" type="Script" id=34]
 [ext_resource path="res://scenes/city/city_a/city_sign.png" type="Texture" id=35]
-[ext_resource path="res://tiled/maps/14.tmx" type="PackedScene" id=36]
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 25, 2 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 25, 0.5 )
-
-[sub_resource type="Animation" id=9]
-resource_name = "ride"
-length = 0.8
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 2, 0 ), Vector2( 3, 0 ), Vector2( 4, 0 ), Vector2( 5, 0 ), Vector2( 6, 0 ), Vector2( 7, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("PlayerPuppet:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 0, 1, 0, 1, 0, 1 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Light:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ) ]
-}
-
-[sub_resource type="SegmentShape2D" id=11]
-a = Vector2( 0, 43 )
-b = Vector2( 0, 84 )
-
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 15, 32 )
-
-[sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 9, 17.5 )
-
-[sub_resource type="RectangleShape2D" id=16]
-extents = Vector2( 9, 15 )
+[ext_resource path="res://tiled/maps/building.tmx" type="PackedScene" id=36]
 
 [sub_resource type="Animation" id=13]
 resource_name = "intro"
@@ -137,7 +77,7 @@ tracks/2/keys = {
 "values": [ Vector2( -240, -40 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("01/Car:position")
+tracks/3/path = NodePath("Screens/city_intro/Car:position")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -149,7 +89,7 @@ tracks/3/keys = {
 "values": [ Vector2( -450, 18 ), Vector2( -83, 18 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("01/Car:frame_coords")
+tracks/4/path = NodePath("Screens/city_intro/Car:frame_coords")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -161,7 +101,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 2, 1 ), Vector2( 3, 1 ), Vector2( 4, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("01/Car/PlayerPuppet:frame")
+tracks/5/path = NodePath("Screens/city_intro/Car/PlayerPuppet:frame")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -173,7 +113,7 @@ tracks/5/keys = {
 "values": [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 12, 13, 12, 11, 14, 15 ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("01/Car/PlayerPuppet:position")
+tracks/6/path = NodePath("Screens/city_intro/Car/PlayerPuppet:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -209,7 +149,7 @@ tracks/8/keys = {
 "values": [ false, true ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("01/Car/PlayerPuppet:visible")
+tracks/9/path = NodePath("Screens/city_intro/Car/PlayerPuppet:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -247,7 +187,7 @@ tracks/11/keys = {
 "values": [ false ]
 }
 tracks/12/type = "value"
-tracks/12/path = NodePath("01/Car/Light:enabled")
+tracks/12/path = NodePath("Screens/city_intro/Car/Light:enabled")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/imported = false
@@ -259,7 +199,7 @@ tracks/12/keys = {
 "values": [ true, false ]
 }
 tracks/13/type = "value"
-tracks/13/path = NodePath("01/Car/Light:position")
+tracks/13/path = NodePath("Screens/city_intro/Car/Light:position")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/imported = false
@@ -283,7 +223,7 @@ tracks/14/keys = {
 "values": [ Vector2( -112, -72 ), Vector2( 128, -72 ) ]
 }
 tracks/15/type = "method"
-tracks/15/path = NodePath("01/Car/CarPlayer")
+tracks/15/path = NodePath("Screens/city_intro/Car/CarPlayer")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/imported = false
@@ -329,7 +269,7 @@ tracks/17/keys = {
 } ]
 }
 tracks/18/type = "value"
-tracks/18/path = NodePath("01/Car/PlayerPuppet/PlayerLight:energy")
+tracks/18/path = NodePath("Screens/city_intro/Car/PlayerPuppet/PlayerLight:energy")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/imported = false
@@ -452,6 +392,66 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 25, 2 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 25, 0.5 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "ride"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 2, 0 ), Vector2( 3, 0 ), Vector2( 4, 0 ), Vector2( 5, 0 ), Vector2( 6, 0 ), Vector2( 7, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayerPuppet:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 0, 1, 0, 1, 0, 1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ), Vector2( 24, 10 ), Vector2( 24, 11 ) ]
+}
+
+[sub_resource type="SegmentShape2D" id=11]
+a = Vector2( 0, 43 )
+b = Vector2( 0, 84 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 15, 32 )
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 9, 17.5 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 9, 15 )
+
 [node name="City" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
 
@@ -518,12 +518,17 @@ collision_layer = 8
 format = 1
 tile_data = PoolIntArray( -3538486, 18, 0, -3538485, 14, 0, -3538481, 20, 0, -3538480, 4, 0, -3538478, 2, 0, -3538476, 14, 0, -3473010, 1, 0, -3473005, 21, 0, -3472949, 21, 0, -3472947, 18, 0, -3472946, 21, 0, -3472944, 17, 0, -3472942, 1, 0, -3472940, 0, 0, -3472939, 4, 0, -3472938, 16, 0, -3407473, 4, 0, -3407471, 2, 0, -3407470, 0, 0, -3407468, 21, 0, -3407412, 5, 0, -3407411, 2, 0, -3407405, 19, 0, -3407403, 5, 0, -3407397, 15, 0, -3342104, 3, 0, -3342103, 5, 0, -3342100, 6, 0, -3341936, 8, 0, -3341933, 4, 0, -3341932, 22, 0, -3341877, 11, 0, -3341874, 3, 0, -3341867, 6, 0, -3341864, 7, 0, -3341863, 16, 0, -3341861, 16, 0, -3341860, 20, 0, -3341859, 13, 0, -3341854, 16, 0, -3276566, 8, 0, -3276564, 19, 0, -3276395, 20, 0, -3276341, 9, 0, -3276338, 10, 0, -3276330, 1, 0, -3276329, 5, 0, -3276327, 17, 0, -3276323, 4, 0, -3276322, 22, 0, -3276321, 13, 0, -3276319, 6, 0, -3211030, 9, 0, -3211029, 20, 0, -3210860, 24, 0, -3210805, 24, 0, -3210804, 2, 0, -3210795, 22, 0, -3210792, 4, 0, -3210788, 4, 0, -3210784, 20, 0, -3145494, 15, 0, -3145492, 14, 0, -3145267, 24, 0, -3145266, 0, 0, -3145260, 21, 0, -3145259, 4, 0, -3145255, 5, 0, -3145253, 10, 0, -3145252, 12, 0, -3145247, 1, 0, -3145246, 21, 0, -3145245, 6, 0, -3079957, 7, 0, -3079955, 19, 0, -3079730, 12, 0, -3079727, 16, 0, -3079718, 24, 0, -3079715, 15, 0, -3079714, 12, 0, -3079713, 12, 0, -3079712, 1, 0, -3014421, 21, 0, -3014420, 4, 0, -3014419, 14, 0, -3014193, 2, 0, -3014192, 10, 0, -3014188, 16, 0, -3014187, 2, 0, -3014182, 18, 0, -3014180, 16, 0, -3014179, 11, 0, -2948884, 0, 0, -2948883, 16, 0, -2948660, 10, 0, -2948657, 18, 0, -2948656, 16, 0, -2948653, 13, 0, -2948650, 6, 0, -2948649, 20, 0, -2948648, 11, 0, -2948645, 24, 0, -2883349, 19, 0, -2883347, 1, 0, -2883123, 2, 0, -2883122, 6, 0, -2883119, 6, 0, -2883117, 4, 0, -2883111, 15, 0, -2883110, 23, 0, -2883109, 2, 0, -2883108, 17, 0, -2817812, 22, 0, -2817582, 1, 0, -2817572, 24, 0, -2752275, 20, 0, -2752045, 2, 0, -2752035, 4, 0, -2293343, 3, 0, -2293338, 4, 0, -2293333, 1, 0, -2293331, 4, 0, -2293328, 16, 0, -2293322, 8, 0, -2293321, 4, 0, -2293318, 7, 0, -2227807, 4, 0, -2227802, 1, 0, -2227796, 3, 0, -2227793, 14, 0, -2227787, 19, 0, -2227785, 23, 0, -2227782, 14, 0, -2162273, 3, 0, -2162272, 4, 0, -2162270, 1, 0, -2162265, 7, 0, -2162261, 1, 0, -2162257, 11, 0, -2162256, 15, 0, -2162255, 0, 0, -2162251, 14, 0, -2162249, 21, 0, -2162248, 20, 0, -2162246, 23, 0, -2096738, 1, 0, -2096733, 3, 0, -2096728, 17, 0, -2096726, 8, 0, -2096724, 2, 0, -2096722, 13, 0, -2096718, 24, 0, -2096717, 19, 0, -2096716, 23, 0, -2096711, 3, 0, -2031204, 11, 0, -2031203, 8, 0, -2031191, 16, 0, -2031190, 18, 0, -2031188, 7, 0, -2031186, 8, 0, -2031179, 19, 0, -2031178, 18, 0, -2031175, 13, 0, -1965666, 10, 0, -1965656, 14, 0, -1965651, 4, 0, -1965642, 5, 0, -1965641, 8, 0, -1965639, 4, 0, -1900130, 5, 0, -1900120, 5, 0, -1900107, 13, 0, -1900104, 16, 0, -1769138, 11, 0, -1703601, 18, 0, -1638065, 17, 0, -1638064, 18, 0, -1572528, 22, 0, -1506991, 13, 0, -1441455, 24, 0, -1375918, 19, 0, -1310383, 10, 0, -1244848, 11, 0, -1244847, 2, 0, -1244845, 22, 0, -1179311, 7, 0, -1179309, 10, 0 )
 
-[node name="01" parent="." index="6" instance=ExtResource( 2 )]
+[node name="CutscenePlayer" parent="." index="6"]
+anims/intro = SubResource( 13 )
+anims/meet_frankie = SubResource( 14 )
+anims/open_door = SubResource( 17 )
+
+[node name="city_intro" parent="Screens" index="0" instance=ExtResource( 2 )]
 position = Vector2( 128, -72 )
-script = ExtResource( 34 )
+script = ExtResource( 31 )
 block_left = true
 
-[node name="Car" type="Sprite" parent="01" index="2"]
+[node name="Car" type="Sprite" parent="Screens/city_intro" index="2"]
 position = Vector2( -450, 18 )
 z_index = -10
 texture = ExtResource( 10 )
@@ -531,41 +536,41 @@ hframes = 8
 vframes = 2
 frame = 11
 
-[node name="PlayerPuppet" type="Sprite" parent="01/Car" index="0"]
+[node name="PlayerPuppet" type="Sprite" parent="Screens/city_intro/Car" index="0"]
 position = Vector2( 5, 6 )
 z_index = 1
 texture = ExtResource( 11 )
 hframes = 16
 frame = 1
 
-[node name="PlayerLight" parent="01/Car/PlayerPuppet" index="0" instance=ExtResource( 13 )]
+[node name="PlayerLight" parent="Screens/city_intro/Car/PlayerPuppet" index="0" instance=ExtResource( 13 )]
 energy = 0.3
 
-[node name="CollisionBody" type="StaticBody2D" parent="01/Car" index="1"]
+[node name="CollisionBody" type="StaticBody2D" parent="Screens/city_intro/Car" index="1"]
 position = Vector2( 0, 1 )
 collision_layer = 4
 
-[node name="PlankCollision" type="CollisionShape2D" parent="01/Car/CollisionBody" index="0"]
+[node name="PlankCollision" type="CollisionShape2D" parent="Screens/city_intro/Car/CollisionBody" index="0"]
 position = Vector2( -1, -7 )
 shape = SubResource( 5 )
 one_way_collision = true
 
-[node name="ToiletCollision" type="CollisionPolygon2D" parent="01/Car/CollisionBody" index="1"]
+[node name="ToiletCollision" type="CollisionPolygon2D" parent="Screens/city_intro/Car/CollisionBody" index="1"]
 position = Vector2( 0, -1 )
 polygon = PoolVector2Array( 0, -8, 0, -17, -8, -17, -8, -22, -14, -22, -14, -8 )
 
-[node name="CarStandArea" type="Area2D" parent="01/Car" index="2"]
+[node name="CarStandArea" type="Area2D" parent="Screens/city_intro/Car" index="2"]
 collision_layer = 0
 
-[node name="PlankCollision" type="CollisionShape2D" parent="01/Car/CarStandArea" index="0"]
+[node name="PlankCollision" type="CollisionShape2D" parent="Screens/city_intro/Car/CarStandArea" index="0"]
 position = Vector2( -1, -8 )
 shape = SubResource( 6 )
 
-[node name="ToiletCollision" type="CollisionPolygon2D" parent="01/Car/CarStandArea" index="1"]
+[node name="ToiletCollision" type="CollisionPolygon2D" parent="Screens/city_intro/Car/CarStandArea" index="1"]
 position = Vector2( 0, -1 )
 polygon = PoolVector2Array( 0, -8, 0, -17, -8, -17, -8, -22, -14, -22, -14, -8 )
 
-[node name="Light" type="Light2D" parent="01/Car" index="3"]
+[node name="Light" type="Light2D" parent="Screens/city_intro/Car" index="3"]
 position = Vector2( 24, 11 )
 texture = ExtResource( 12 )
 offset = Vector2( 133, 0 )
@@ -573,122 +578,117 @@ texture_scale = 0.25
 range_z_max = -1
 range_layer_min = -100
 
-[node name="CarPlayer" type="AnimationPlayer" parent="01/Car" index="4"]
+[node name="CarPlayer" type="AnimationPlayer" parent="Screens/city_intro/Car" index="4"]
 anims/ride = SubResource( 9 )
 
-[node name="CitySign" type="Sprite" parent="01" index="5"]
+[node name="CitySign" type="Sprite" parent="Screens/city_intro" index="5"]
 position = Vector2( 26, -15 )
 z_index = -10
 texture = ExtResource( 35 )
 
-[node name="02" parent="." index="7" instance=ExtResource( 3 )]
+[node name="up_z" parent="Screens" index="1" instance=ExtResource( 3 )]
 position = Vector2( 384, -88 )
 block_top = false
 
-[node name="UpzSign" type="Sprite" parent="02" index="5"]
+[node name="UpzSign" type="Sprite" parent="Screens/up_z" index="5"]
 position = Vector2( -76, 13 )
 z_index = -20
 texture = ExtResource( 29 )
 
-[node name="02a" parent="." index="8" instance=ExtResource( 15 )]
+[node name="easter_egg" parent="Screens" index="2" instance=ExtResource( 15 )]
 position = Vector2( 384, -232 )
 block_left = true
 kill_bottom = false
 
-[node name="03" parent="." index="9" instance=ExtResource( 4 )]
+[node name="diagonal" parent="Screens" index="3" instance=ExtResource( 4 )]
 position = Vector2( 640, -152 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="03" index="3"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Screens/diagonal" index="3"]
 position = Vector2( 128, -156 )
 collision_layer = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="03/StaticBody2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Screens/diagonal/StaticBody2D" index="0"]
 shape = SubResource( 11 )
 
-[node name="04" parent="." index="10" instance=ExtResource( 9 )]
+[node name="navigate" parent="Screens" index="4" instance=ExtResource( 9 )]
 position = Vector2( 928, -216 )
 
-[node name="05" parent="." index="11" instance=ExtResource( 14 )]
+[node name="swings" parent="Screens" index="5" instance=ExtResource( 14 )]
 position = Vector2( 1368, -204 )
 
-[node name="06" parent="." index="12" instance=ExtResource( 18 )]
+[node name="fire_hydrant" parent="Screens" index="6" instance=ExtResource( 18 )]
 position = Vector2( 1776, -232 )
-script = ExtResource( 31 )
-block_left = true
-block_right = true
-
-[node name="FireHydrant" parent="06" index="5" instance=ExtResource( 16 )]
-position = Vector2( 23, 24 )
-z_index = -2
-
-[node name="07" parent="." index="13" instance=ExtResource( 19 )]
-position = Vector2( 2032, -320 )
-
-[node name="08" parent="." index="14" instance=ExtResource( 20 )]
-position = Vector2( 2288, -296 )
-
-[node name="09" parent="." index="15" instance=ExtResource( 21 )]
-position = Vector2( 2544, -208 )
-
-[node name="10" parent="." index="16" instance=ExtResource( 24 )]
-position = Vector2( 2800, -296 )
 script = ExtResource( 32 )
 block_left = true
 block_right = true
 
-[node name="Bar" parent="10" index="5" instance=ExtResource( 22 )]
+[node name="FireHydrant" parent="Screens/fire_hydrant" index="5" instance=ExtResource( 16 )]
+position = Vector2( 23, 24 )
+z_index = -2
+
+[node name="vines_intro" parent="Screens" index="7" instance=ExtResource( 19 )]
+position = Vector2( 2032, -320 )
+
+[node name="spikes_intro" parent="Screens" index="8" instance=ExtResource( 20 )]
+position = Vector2( 2288, -296 )
+
+[node name="icicle" parent="Screens" index="9" instance=ExtResource( 21 )]
+position = Vector2( 2544, -208 )
+
+[node name="bar" parent="Screens" index="10" instance=ExtResource( 24 )]
+position = Vector2( 2800, -296 )
+script = ExtResource( 34 )
+block_left = true
+block_right = true
+
+[node name="Bar" parent="Screens/bar" index="5" instance=ExtResource( 22 )]
 position = Vector2( -27, 19 )
 z_index = -10
 
-[node name="11" parent="." index="17" instance=ExtResource( 25 )]
+[node name="spike_swing_1" parent="Screens" index="11" instance=ExtResource( 25 )]
 position = Vector2( 3088, -296 )
 
-[node name="12" parent="." index="18" instance=ExtResource( 26 )]
+[node name="spike_swing_2" parent="Screens" index="12" instance=ExtResource( 26 )]
 position = Vector2( 3448, -352 )
 
-[node name="13" parent="." index="19" instance=ExtResource( 27 )]
+[node name="scale" parent="Screens" index="13" instance=ExtResource( 27 )]
 position = Vector2( 3776, -192 )
 
-[node name="14" parent="." index="20" instance=ExtResource( 36 )]
+[node name="building" parent="Screens" index="14" instance=ExtResource( 36 )]
 position = Vector2( 4032, -404 )
 script = ExtResource( 33 )
 block_left = true
 block_right = true
 
-[node name="Building" parent="14" index="5" instance=ExtResource( 28 )]
+[node name="Building" parent="Screens/building" index="5" instance=ExtResource( 28 )]
 position = Vector2( 34, -3 )
 
-[node name="FrankieTalkArea" type="Area2D" parent="14/Building" index="6"]
+[node name="FrankieTalkArea" type="Area2D" parent="Screens/building/Building" index="6"]
 position = Vector2( -73, 189 )
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="14/Building/FrankieTalkArea" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Screens/building/Building/FrankieTalkArea" index="0"]
 position = Vector2( 5, -22 )
 shape = SubResource( 12 )
 
-[node name="FrankieTalkPos" type="Position2D" parent="14/Building" index="7"]
+[node name="FrankieTalkPos" type="Position2D" parent="Screens/building/Building" index="7"]
 position = Vector2( -78, 199 )
 
-[node name="6APrompt" parent="14/Building" index="8" instance=ExtResource( 30 )]
+[node name="6APrompt" parent="Screens/building/Building" index="8" instance=ExtResource( 30 )]
 position = Vector2( -13, -20 )
 
-[node name="Collision" type="CollisionShape2D" parent="14/Building/6APrompt" index="3"]
+[node name="Collision" type="CollisionShape2D" parent="Screens/building/Building/6APrompt" index="3"]
 position = Vector2( 16, -2.5 )
 shape = SubResource( 15 )
 
-[node name="PenthousePrompt" parent="14/Building" index="9" instance=ExtResource( 30 )]
+[node name="PenthousePrompt" parent="Screens/building/Building" index="9" instance=ExtResource( 30 )]
 position = Vector2( 20, -140 )
 
-[node name="Collision" type="CollisionShape2D" parent="14/Building/PenthousePrompt" index="3"]
+[node name="Collision" type="CollisionShape2D" parent="Screens/building/Building/PenthousePrompt" index="3"]
 position = Vector2( -17, 0 )
 shape = SubResource( 16 )
 
-[node name="CutscenePlayer" parent="." index="21"]
-anims/intro = SubResource( 13 )
-anims/meet_frankie = SubResource( 14 )
-anims/open_door = SubResource( 17 )
-
-[connection signal="finished_fixing" from="06/FireHydrant" to="." method="_on_FireHydrant_finished_fixing"]
-[connection signal="body_entered" from="14/Building/FrankieTalkArea" to="." method="_on_FrankieTalkArea_body_entered"]
-[connection signal="used" from="14/Building/6APrompt" to="." method="_on_6APrompt_used"]
-[connection signal="used" from="14/Building/PenthousePrompt" to="." method="_on_PenthousePrompt_used"]
+[connection signal="finished_fixing" from="Screens/fire_hydrant/FireHydrant" to="Screens/fire_hydrant" method="_on_FireHydrant_finished_fixing"]
+[connection signal="body_entered" from="Screens/building/Building/FrankieTalkArea" to="Screens/building" method="_on_FrankieTalkArea_body_entered"]
+[connection signal="used" from="Screens/building/Building/6APrompt" to="Screens/building" method="_on_6APrompt_used"]
+[connection signal="used" from="Screens/building/Building/PenthousePrompt" to="Screens/building" method="_on_PenthousePrompt_used"]

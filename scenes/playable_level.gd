@@ -4,6 +4,7 @@ class_name PlayableLevel
 
 onready var _player = $Player
 onready var _grapnel = $Grapnel
+onready var _screens = $Screens
 
 export var start_at_screen = ""
 export var start_at_spawn = Vector2.ZERO
@@ -20,7 +21,7 @@ func _ready():
 	followed_node = _player
 	_player.set_grapnel(_grapnel)
 	
-	for node in get_children():
+	for node in _screens.get_children():
 		if node is Screen:
 			node.set_level(self)
 
@@ -28,10 +29,10 @@ func _ready():
 		return
 
 	camera.smoothing_enabled = false
-	var screen = get_node(start_at_screen)
+	var screen = _screens.get_node(start_at_screen)
 	screen._cutscenes_played = end_cutscenes
 	screen.load_as_first(_player, start_at_spawn, end_cutscenes)
-	call_deferred('extra_screen_load')
+	call_deferred("finish_prev_screens", screen)
 	
 	if followed_node != null:
 		camera.position = followed_node.position
@@ -54,8 +55,9 @@ func _set_end_cutscenes(value: bool):
 		_active_screen._cutscenes_played = true
 
 
-func extra_screen_load():
-	pass
+func finish_prev_screens(screen: Screen):
+	for i in screen.get_index() - 1:
+		_screens.get_child(i).finish()
 
 
 func _process(_delta):

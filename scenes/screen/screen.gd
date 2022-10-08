@@ -127,3 +127,7 @@ func load_as_first(player, spawnpoint: Vector2, _end_cutscenes: bool):
 	player.control_enabled = true
 	player.visible = true
 	player.play_idle()
+
+
+func finish():
+	pass

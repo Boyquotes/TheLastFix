@@ -15,3 +15,9 @@ func finish():
 	$FireHydrant/Prompt._used = true
 	$FireHydrant/Prompt.visible = false
 	_set_block_right(false)
+	_cutscenes_played = true
+
+
+func _on_FireHydrant_finished_fixing():
+	_level.end_cutscenes = true
+	_set_block_right(false)

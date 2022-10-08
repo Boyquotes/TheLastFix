@@ -2,12 +2,12 @@
 
 importer="vnen.tiled_importer"
 type="PackedScene"
-path="res://.import/01.tmx-ef3deb02b221c73be24a8187763d7c45.scn"
+path="res://.import/spike_swing_1.tmx-a92934cf87697006e12f52baa89b9bf7.scn"
 
 [deps]
 
-source_file="res://tiled/maps/01.tmx"
-dest_files=[ "res://.import/01.tmx-ef3deb02b221c73be24a8187763d7c45.scn" ]
+source_file="res://tiled/maps/spike_swing_1.tmx"
+dest_files=[ "res://.import/spike_swing_1.tmx-a92934cf87697006e12f52baa89b9bf7.scn" ]
 
 [params]
 

@@ -62,7 +62,6 @@ func _process(_delta):
 func _on_FrankieTalkArea_body_entered(body):
 	if body is Player and not spoke_to_frankie:
 		spoke_to_frankie = true
-		_player._grapnel.retract()
 		_player.go_to($FrankieTalkPos.global_position)
 		var error = _player.connect("reached_target", self, "meet_frankie")
 		if error != OK:

@@ -1,16 +1,9 @@
 extends PlayableLevel
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	Game.set_zoom(0.5625, Vector2(0, -2))
+	Game.fade_in(0.5)
+	_player.scale.x = -1
+	_player._flipped = true
+	_player.play_idle()

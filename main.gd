@@ -132,7 +132,7 @@ func get_view() -> Sprite:
 	return _level_view
 
 
-func get_player():
+func get_player() -> Player:
 	if _current_level is PlayableLevel:
 		return _current_level.get_player()
 	return null

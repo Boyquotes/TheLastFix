@@ -25,17 +25,16 @@ func _ready():
 		if node is Screen:
 			node.set_level(self)
 
-	if start_at_screen.empty():
-		return
-
 	camera.smoothing_enabled = false
-	var screen = _screens.get_node(start_at_screen)
-	screen._cutscenes_played = end_cutscenes
-	screen.load_as_first(_player, start_at_spawn, end_cutscenes)
-	call_deferred("finish_prev_screens", screen)
-	
-	if followed_node != null:
-		camera.position = followed_node.position
+
+	if not start_at_screen.empty():
+		var screen = _screens.get_node(start_at_screen)
+		screen._cutscenes_played = end_cutscenes
+		screen.load_as_first(_player, start_at_spawn, end_cutscenes)
+		call_deferred("finish_prev_screens", screen)
+		
+		if followed_node != null:
+			camera.position = followed_node.position
 	
 	var timer = Timer.new()
 	timer.wait_time = 0.3

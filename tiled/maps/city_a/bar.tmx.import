@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_importer"
+type="PackedScene"
+path="res://.import/bar.tmx-17366e01697a711c252395db42f7ff93.scn"
+
+[deps]
+
+source_file="res://tiled/maps/city_a/bar.tmx"
+dest_files=[ "res://.import/bar.tmx-17366e01697a711c252395db42f7ff93.scn" ]
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+uv_clip=true
+image_flags=3
+collision_layer=2
+embed_internal_images=false
+save_tiled_properties=false
+add_background=true
+post_import_script="res://tiled_import.gd"

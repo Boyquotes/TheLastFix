@@ -1,0 +1,22 @@
+[remap]
+
+importer="vnen.tiled_importer"
+type="PackedScene"
+path="res://.import/swings.tmx-8b3b50de735dffbf378f97d45ec54535.scn"
+
+[deps]
+
+source_file="res://tiled/maps/city_a/swings.tmx"
+dest_files=[ "res://.import/swings.tmx-8b3b50de735dffbf378f97d45ec54535.scn" ]
+
+[params]
+
+custom_properties=true
+tile_metadata=false
+uv_clip=true
+image_flags=3
+collision_layer=2
+embed_internal_images=false
+save_tiled_properties=false
+add_background=true
+post_import_script="res://tiled_import.gd"

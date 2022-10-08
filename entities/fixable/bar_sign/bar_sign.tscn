@@ -86,7 +86,6 @@ position = Vector2( 30, 7 )
 z_index = 8
 texture = ExtResource( 5 )
 hframes = 18
-frame = 8
 
 [node name="FixAnimator" parent="." index="2"]
 anims/fix = SubResource( 7 )

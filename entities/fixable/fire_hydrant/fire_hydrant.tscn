@@ -115,8 +115,9 @@ position = Vector2( -13, 0 )
 [node name="PlayerPuppet" parent="." index="1"]
 position = Vector2( -13, -8 )
 texture = ExtResource( 4 )
-offset = Vector2( 0, -3 )
+offset = Vector2( 2, -3 )
 hframes = 19
+frame = 18
 
 [node name="FixAnimator" parent="." index="2"]
 anims/fix = SubResource( 7 )

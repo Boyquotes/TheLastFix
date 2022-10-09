@@ -7,13 +7,19 @@ var _player: Player
 
 onready var _player_puppet = $PlayerPuppet
 onready var _fix_animator = $FixAnimator
+onready var _prompt = $Prompt
 
+export var enabled = true
 export var fixed = false
 export var return_to_player_after = true
 export var fixable_index: int
 
 signal started_fixing
 signal finished_fixing
+
+
+func _process(_delta):
+	_prompt.monitoring = enabled
 
 
 func _on_Prompt_used():

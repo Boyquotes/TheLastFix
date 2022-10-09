@@ -23,7 +23,7 @@ func play_dialogue_sequence(id: String):
 
 
 func continue_dialogue():
-	_dialogue.continue_dialogue()
+	_dialogue.resume()
 	playback_active = false
 	_paused_for_dialogue = true
 	var error = _dialogue.connect("paused", self, "on_dialogue_paused")

@@ -11,6 +11,8 @@ onready var _prompt = $Prompt
 
 export var enabled = true
 export var fixed = false
+export var zoom_before_animation = true
+export var zoom_offset = Vector2.ZERO
 export var return_to_player_after = true
 export var fixable_index: int
 
@@ -32,12 +34,30 @@ func _on_Prompt_used():
 
 func start_fix():
 	_player.disconnect("reached_target", self, "start_fix")
-	_player.visible = false
-	_player_puppet.global_position = _player.global_position
-	_player_puppet.visible = true
-	
 	emit_signal("started_fixing")
-	_fix_animator.queue("fix")
+
+	if zoom_before_animation:
+		Game.zoom_in(1, 0.5, (_player_puppet.global_position + global_position) / 2 + zoom_offset)
+		var error = Game.connect("zoom_finished", self, "on_zoom_finished")
+		if error != 0:
+			print("Error connecting zoom_finished: ", error)
+	else:
+		_player.visible = false
+		_player_puppet.global_position = _player.global_position
+		_player_puppet.visible = true
+		_fix_animator.play("fix")
+
+
+func on_zoom_finished():
+	if fixed:
+		Game.disconnect("zoom_finished", self, "on_zoom_finished")
+		if return_to_player_after:
+			_player.control_enabled = true
+	else:
+		_player.visible = false
+		_player_puppet.global_position = _player.global_position
+		_player_puppet.visible = true
+		_fix_animator.play("fix")
 
 
 func _on_FixAnimation_animation_finished(anim_name):
@@ -56,4 +76,8 @@ func post_fix():
 	if return_to_player_after:
 		_player_puppet.visible = false
 		_player.visible = true
-		_player.control_enabled = true
+		if not zoom_before_animation:
+			_player.control_enabled = true
+
+	if zoom_before_animation:
+		Game.zoom_out(0.6)

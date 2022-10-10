@@ -22,7 +22,7 @@ func _on_body_entered(body):
 
 
 func _on_body_exited(body):
-	if body is Player:
+	if body is Player and not _used:
 		body.grapnel_enabled = true
 		_prompt_animation.play("prompt_close")
 		_ready_to_use = false

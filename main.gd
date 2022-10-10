@@ -3,6 +3,7 @@ extends Node2D
 class_name Main
 
 signal fade_finished
+signal zoom_finished
 
 
 onready var _camera = $Camera
@@ -67,9 +68,11 @@ func _process(delta):
 		if zoom_speed > 0 and zoom_level >= 1:
 			zoom_level = 1
 			zoom_speed = 0
+			emit_signal("zoom_finished")
 		elif zoom_speed < 0 and zoom_level <= 0:
 			zoom_level = 0
 			zoom_speed = 0
+			emit_signal("zoom_finished")
 		
 		var strength = smoothstep(0, 1, zoom_level) * (1 - zoom_target)
 		_camera.zoom = Vector2(1, 1) * (1 - strength)

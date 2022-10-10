@@ -178,6 +178,7 @@ tracks/0/keys = {
 polygon = PoolVector2Array( 6, 12, 20, 12, 20, 3, 6, 3 )
 
 [node name="Fridge" instance=ExtResource( 1 )]
+zoom_before_animation = false
 fixable_index = 3
 
 [node name="FixingPosition" parent="." index="0"]

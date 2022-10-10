@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://entities/player/grapnel/grapnel.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/grapnel/grapnel.gd" type="Script" id=2]
+[ext_resource path="res://entities/player/light.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.5, 2.5 )
@@ -40,3 +41,12 @@ fixed_fps = 24
 visibility_rect = Rect2( -256, -144, 512, 288 )
 local_coords = false
 process_material = SubResource( 2 )
+
+[node name="Light" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+texture_scale = 0.1
+energy = 0.7
+range_z_min = -98
+range_z_max = -10
+range_layer_min = -100
+shadow_enabled = true

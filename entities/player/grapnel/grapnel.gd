@@ -137,7 +137,7 @@ func retract_immediately():
 
 
 func get_pull(origin: Vector2, velocity: Vector2) -> Vector2:
-	var dist = (_joints[-2] if _joints.size() < 2 else position) - origin
+	var dist = (_joints[-2] if _joints.size() >= 3 else position) - origin
 	
 	# In rare cases the player may be directed towards a joint created purely due to the grapnel
 	# origin's visual positioning. In such a case, to prevent this causing the player to get stuck

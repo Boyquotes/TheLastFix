@@ -103,6 +103,7 @@ z_index = -8
 enabled = false
 
 [node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 2
 
 [node name="Collision_1" type="CollisionShape2D" parent="Walls"]
 position = Vector2( -94.5, -1 )

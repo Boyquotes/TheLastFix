@@ -367,7 +367,7 @@ func _physics_process(delta):
 				play_animation("fall")
 				_crouching = false
 
-	_was_airborne = not is_on_floor()
+	_was_airborne = not is_on_floor() or _pulling
 	
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)

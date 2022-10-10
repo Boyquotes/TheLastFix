@@ -29,9 +29,9 @@
     <property name="limits" type="object" value="4"/>
     <property name="type" propertytype="ObjectType" value="camera_area"/>
    </properties>
-   <polygon points="8,0 -168,0 -168,72 8,72"/>
+   <polygon points="16,0 -176,0 -176,72 16,72"/>
   </object>
-  <object id="4" x="-16" y="0" width="288" height="144">
+  <object id="4" x="-24" y="0" width="304" height="144">
    <properties>
     <property name="type" propertytype="ObjectType" value="camera_limits"/>
    </properties>

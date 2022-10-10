@@ -11,6 +11,7 @@ script = ExtResource( 2 )
 
 [node name="Camera" parent="." index="0"]
 drag_margin_h_enabled = false
+smoothing_enabled = false
 
 [node name="Player" parent="." index="2"]
 position = Vector2( 80, 25 )

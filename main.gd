@@ -4,6 +4,7 @@ class_name Main
 
 signal fade_finished
 signal zoom_finished
+signal player_light_changed(energy)
 
 
 onready var _camera = $Camera
@@ -107,6 +108,10 @@ func set_zoom(level: float, center: Vector2 = Vector2(-1, -1)):
 
 func zoom_out(time: float):
 	zoom_speed = -1 / time
+
+
+func set_player_light(energy: float):
+	emit_signal("player_light_changed", energy)
 
 
 func load_level(level: Resource, start = true):

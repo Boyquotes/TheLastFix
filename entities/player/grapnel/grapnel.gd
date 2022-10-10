@@ -53,6 +53,12 @@ func _ready():
 	physics_query = Physics2DShapeQueryParameters.new()
 	physics_query.set_shape(_collision.shape)
 	physics_query.collision_layer = 2 | 8
+	
+	Game.connect("player_light_changed", self, "_set_player_light")
+
+
+func _set_player_light(energy: float):
+	$Light.energy = energy * 0.7
 
 
 func _set_hook_visible(value: bool):

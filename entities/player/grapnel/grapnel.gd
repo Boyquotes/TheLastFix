@@ -19,6 +19,7 @@ var _player = null
 var _prev_joints = PoolVector2Array()
 var _joints = PoolVector2Array()
 var _pushoff = Vector2.ZERO
+var _first_joint_offset = Vector2.ZERO
 
 var _origin_stuck_frames = -1
 var _prev_player_pos = Vector2.ZERO
@@ -91,6 +92,9 @@ func shoot(direction: Vector2):
 	_velocity = direction
 	_sprite.frame = 1 if _velocity.x != 0 and _velocity.y != 0 else 0
 	rotation = -_velocity.angle_to(Vector2.RIGHT if _sprite.frame != 1 else Vector2(1, -1))
+	
+	_first_joint_offset = Vector2(0, 3).rotated(rotation) if _sprite.frame == 1 else Vector2.ZERO
+	
 	_particles.rotation = _velocity.angle() - rotation + PI
 	_collision.set_deferred("disabled", false)
 	_joints.resize(0)
@@ -156,7 +160,7 @@ func _physics_process(delta):
 
 	var space_state = get_world_2d().direct_space_state
 	
-	_joints[0] = position
+	_joints[0] = position + _first_joint_offset
 	var origin_pos = _origin.global_position + 2 * Vector2.LEFT.rotated(-_held_angle / 180.0 * PI)
 	_joints[-1] = _player.position if _origin_stuck_frames >= 0 else origin_pos
 
@@ -283,11 +287,11 @@ func _make_joints(index: int, space_state: Physics2DDirectSpaceState):
 			# it typically means the binary search was TOO accurate,
 			# to the point where the normals can't be calculated. 
 			if opposite_ray_candidate.empty() and space_state.intersect_point(middle_target, 1, [self], 2).empty():
-				print("Stopping raycasting search (no opposite ray found) after ", _i, " iterations")
+				#print("Stopping raycasting search (no opposite ray found) after ", _i, " iterations")
 				break
 
 			if opposite_ray_candidate.normal.dot(result.normal) != 0 and opposite_ray_candidate.position.distance_to(result.position) < 1:
-				print("Stopping raycasting search (normals aren't perpendicular) after ", _i, " iterations")
+				#print("Stopping raycasting search (normals aren't perpendicular) after ", _i, " iterations")
 				break
 
 			obscured_origin_end = middle_origin
@@ -347,7 +351,7 @@ func _draw():
 	if not active or not hook_visible:
 		return
 
-	var prev_joint = position
+	var prev_joint = position + _first_joint_offset
 	var even = false
 	for i in range(1, _joints.size()):
 		var joint = _joints[i]

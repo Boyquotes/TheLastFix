@@ -86,9 +86,9 @@ func load_grapnel_origins():
 						Color.green:
 							angle = 45
 						Color.blue:
-							angle = -45
+							angle = 315
 						Color.magenta:
-							angle = -90
+							angle = 270
 						_:
 							found = false
 					if found:
@@ -130,7 +130,7 @@ func play_animation(name: String):
 
 
 func play_idle(reset_air_frame = true):
-	if reset_air_frame:
+	if reset_air_frame or is_on_floor():
 		air_frame = -1
 	elif air_frame >= 0:
 		update_air_frame()
@@ -367,7 +367,7 @@ func _physics_process(delta):
 				play_animation("fall")
 				_crouching = false
 
-	_was_airborne = not is_on_floor() or _pulling
+	_was_airborne = not is_on_floor()
 	
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
@@ -399,9 +399,9 @@ func _on_Sprite_frame_changed():
 	else:
 		_grapnel.hook_visible = visible
 		_hook_origin.position = Vector2(_origin_pos.x, _origin_pos.y)
-		var angle = _origin_pos.z
-		if _flipped and int(angle) % 180 != 90:
-			angle = 180 - angle
+		var angle = int(_origin_pos.z)
+		if _flipped and angle % 180 != 90:
+			angle = (540 - angle) % 360
 		_grapnel.hold_angle(angle)
 
 

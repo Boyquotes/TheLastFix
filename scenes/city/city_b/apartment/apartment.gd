@@ -4,7 +4,6 @@ var _tony_awake = false
 
 onready var _cutscene_animator = $CutsceneAnimator
 onready var cam_target = $CamTarget
-onready var _cam_start = $CamStart
 
 var _player: Player
 var _screen: Screen
@@ -15,8 +14,6 @@ func _ready():
 
 func _on_TonySeeArea_body_entered(body):
 	if body is Player and not _tony_awake:
-		Game._current_level.followed_node = null
-		Game._current_level.camera.position = Vector2(-20, 0)
 		body._grapnel.retract()
 		body.go_to($TonySeeArea/StopPos.global_position, true)
 		_tony_awake = true
@@ -25,6 +22,8 @@ func _on_TonySeeArea_body_entered(body):
 
 func cam_follow_player():
 	Game._current_level.followed_node = Game.get_player()
+	Game._current_level.camera.drag_margin_h_enabled = true
+	Game._current_level.camera.smoothing_enabled = true
 
 
 func _process(_delta):
@@ -32,6 +31,4 @@ func _process(_delta):
 		if _player == null:
 			_player = Game.get_player()
 		
-		var pos = _player.position
-		pos.x += (pos.x - _cam_start.global_position.x) * 0.5
-		cam_target.global_position = pos
+		cam_target.global_position = _player.position + Vector2(-50, 0)

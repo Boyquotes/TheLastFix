@@ -11,4 +11,5 @@ func load_as_first(player, _spawnpoint: Vector2, _end_cutscenes: bool):
 	player.play_idle()
 	
 	_level.followed_node = $Apartment.cam_target
-	
+	_level.camera.drag_margin_h_enabled = false
+

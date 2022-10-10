@@ -11,7 +11,7 @@ onready var _right_blocker: CollisionShape2D = $Blockers/Right
 onready var _top_blocker: CollisionShape2D = $Blockers/Top
 onready var _bottom_killer: CollisionShape2D = $DeathArea/Bottom
 
-var _level = null
+var _level: Level
 
 export var active = false setget _set_active
 export var spawnpoints: PoolVector2Array

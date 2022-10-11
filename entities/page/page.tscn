@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://entities/page/page.gd" type="Script" id=1]
 [ext_resource path="res://entities/page/fix_list.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://entities/page/items/2.png" type="Texture" id=4]
 [ext_resource path="res://entities/page/items/3.png" type="Texture" id=5]
 [ext_resource path="res://entities/page/arrows.png" type="Texture" id=6]
+[ext_resource path="res://entities/random_sound/random_sound.gd" type="Script" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "1"
@@ -131,5 +132,8 @@ texture = ExtResource( 6 )
 hframes = 2
 
 [node name="PullupSound" type="AudioStreamPlayer" parent="."]
+script = ExtResource( 7 )
+path_start = "res://entities/page/sounds/pullup"
+count = 4
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

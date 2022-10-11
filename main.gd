@@ -34,6 +34,7 @@ var zoom_speed = 0.0
 
 
 func _ready():
+	randomize()
 	var root = get_tree().root
 	_current_level = root.get_child(root.get_child_count() - 1)
 	root.call_deferred("remove_child", _current_level)

@@ -31,10 +31,6 @@ func _ready():
 			break
 		_items.append(_page.get_node(str(i)))
 
-	var noise_id = 1 + randi() % 4
-	_pullup_sound.stream = load("res://entities/page/pullup_" + str(noise_id) + ".mp3")
-	_pullup_sound.stream.loop = false
-
 
 func set_crossed(count: int):
 	for i in count:

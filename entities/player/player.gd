@@ -45,8 +45,6 @@ var _target_flipped = false
 var _collision_extents = PoolVector2Array()
 
 var _grapnel_origins = {}
-var _footstep_players = []
-var _land_players = []
 
 onready var _animation_player = $AnimationPlayer
 onready var _sprite = $Sprite
@@ -55,7 +53,7 @@ onready var _hook_origin = $HookOrigin
 onready var _light = $PlayerLight
 onready var _death_particles = $DeathParticles
 onready var _spawn_particles = $SpawnParticles
-onready var _sound = $Sound
+onready var _land_sound = $Sound/Land
 
 
 func _ready():
@@ -66,13 +64,6 @@ func _ready():
 	_collision_extents.append(_collision.position + Vector2(width, -height))
 	_collision_extents.append(_collision.position + Vector2(-width, -height))
 	_collision_extents.append(_collision.position + Vector2(-width, height))
-	
-	for i in range(1, 7):
-		_footstep_players.append(_sound.get_node("Footstep" + str(i)))
-	
-	for i in range(1, 5):
-		_land_players.append(_sound.get_node("Land" + str(i)))
-	
 
 
 func load_grapnel_origins():
@@ -362,10 +353,8 @@ func _physics_process(delta):
 	elif is_on_floor():
 		_jump_time = -1
 		if _was_airborne and not _crouching:
-			var sound: AudioStreamPlayer = _land_players[randi() % 4]
-			sound.volume_db = (_prev_velocity.y / _terminal_velocity - 1.2) * 40
-			print(sound.volume_db)
-			sound.play()
+			_land_sound.volume_db = (_prev_velocity.y / _terminal_velocity - 1.2) * 40
+			_land_sound.play()
 			if _looking.y > 0 and not _grapnel.active:
 				air_frame = -1
 				play_animation("crouch")
@@ -485,7 +474,3 @@ func _set_player_visible(value: bool):
 	player_visible = value
 	_sprite.visible = value
 	_grapnel.hook_visible = value
-
-
-func play_footstep():
-	_footstep_players[randi() % 6].play()

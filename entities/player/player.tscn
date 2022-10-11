@@ -1,8 +1,14 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://entities/player/player.png" type="Texture" id=1]
 [ext_resource path="res://entities/player/player.gd" type="Script" id=2]
 [ext_resource path="res://entities/player/player_light.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/player/footstep1.mp3" type="AudioStream" id=4]
+[ext_resource path="res://entities/player/footstep5.mp3" type="AudioStream" id=5]
+[ext_resource path="res://entities/player/footstep6.mp3" type="AudioStream" id=6]
+[ext_resource path="res://entities/player/footstep2.mp3" type="AudioStream" id=7]
+[ext_resource path="res://entities/player/footstep3.mp3" type="AudioStream" id=8]
+[ext_resource path="res://entities/player/footstep4.mp3" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3, 7.5 )
@@ -378,6 +384,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 2, 1 ), Vector2( 3, 1 ), Vector2( 4, 1 ), Vector2( 5, 1 ) ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_footstep"
+}, {
+"args": [  ],
+"method": "play_footstep"
+} ]
+}
 
 [sub_resource type="Animation" id=12]
 resource_name = "walk_point_up"
@@ -491,6 +514,32 @@ explosiveness = 0.8
 fixed_fps = 10
 local_coords = false
 process_material = SubResource( 15 )
+
+[node name="Sound" type="Node2D" parent="."]
+
+[node name="Footstep1" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 4 )
+bus = "Footsteps"
+
+[node name="Footstep2" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 7 )
+bus = "Footsteps"
+
+[node name="Footstep3" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 8 )
+bus = "Footsteps"
+
+[node name="Footstep4" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 9 )
+bus = "Footsteps"
+
+[node name="Footstep5" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 5 )
+bus = "Footsteps"
+
+[node name="Footstep6" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 6 )
+bus = "Footsteps"
 
 [connection signal="visibility_changed" from="." to="." method="_on_Player_visibility_changed"]
 [connection signal="frame_changed" from="Sprite" to="." method="_on_Sprite_frame_changed"]

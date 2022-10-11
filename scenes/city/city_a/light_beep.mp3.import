@@ -11,5 +11,5 @@ dest_files=[ "res://.import/light_beep.mp3-f74a19fb289e00108b1146acc17d29be.mp3s
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

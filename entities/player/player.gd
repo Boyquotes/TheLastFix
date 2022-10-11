@@ -45,6 +45,7 @@ var _target_flipped = false
 var _collision_extents = PoolVector2Array()
 
 var _grapnel_origins = {}
+var _footstep_players = []
 
 onready var _animation_player = $AnimationPlayer
 onready var _sprite = $Sprite
@@ -53,6 +54,7 @@ onready var _hook_origin = $HookOrigin
 onready var _light = $PlayerLight
 onready var _death_particles = $DeathParticles
 onready var _spawn_particles = $SpawnParticles
+onready var _sound = $Sound
 
 
 func _ready():
@@ -63,6 +65,9 @@ func _ready():
 	_collision_extents.append(_collision.position + Vector2(width, -height))
 	_collision_extents.append(_collision.position + Vector2(-width, -height))
 	_collision_extents.append(_collision.position + Vector2(-width, height))
+	
+	for i in range(1, 7):
+		_footstep_players.append(_sound.get_node("Footstep" + str(i)))
 
 
 func load_grapnel_origins():
@@ -471,3 +476,10 @@ func _set_player_visible(value: bool):
 	player_visible = value
 	_sprite.visible = value
 	_grapnel.hook_visible = value
+
+
+func play_footstep():
+	var footstep: AudioStreamPlayer = _footstep_players[randi() % 6]
+	footstep.play()
+	
+	print("FOOTSTEP")

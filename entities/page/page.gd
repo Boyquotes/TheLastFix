@@ -11,6 +11,7 @@ export var max_prog = 1.0
 export var enabled = true setget _set_enabled
 
 var _speed = 0
+var _played_sound = false
 const _max_speed = 0.8
 const _friction = 0.04
 const height = 196
@@ -21,6 +22,7 @@ onready var _page = $Page
 onready var _animation_player = $AnimationPlayer
 onready var _up_arrow = $UpArrow
 onready var _down_arrow = $DownArrow
+onready var _pullup_sound = $PullupSound
 
 
 func _ready():
@@ -28,6 +30,10 @@ func _ready():
 		if not _page.has_node(str(i)):
 			break
 		_items.append(_page.get_node(str(i)))
+
+	var noise_id = 1 + randi() % 4
+	_pullup_sound.stream = load("res://entities/page/pullup_" + str(noise_id) + ".mp3")
+	_pullup_sound.stream.loop = false
 
 
 func set_crossed(count: int):
@@ -48,6 +54,10 @@ func _set_enabled(value: bool):
 func _set_prog(_prog):
 	prog = _prog
 	_page.position.y = -prog * height
+	
+	if prog >= -0.8 and not _played_sound:
+		_pullup_sound.play()
+		_played_sound = true
 
 
 func _process(delta):
@@ -61,6 +71,7 @@ func _process(delta):
 			_speed = sign(_speed) * _max_speed
 
 	prog += _speed * delta
+
 	if prog < min_prog:
 		prog = min_prog
 		emit_signal("reached_min")

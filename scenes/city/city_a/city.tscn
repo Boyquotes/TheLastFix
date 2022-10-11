@@ -356,8 +356,6 @@ b = Vector2( 0, 84 )
 
 [node name="City" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
-start_at_screen = "building"
-end_cutscenes = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 

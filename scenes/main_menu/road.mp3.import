@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/road.mp3-6563121728ca19c8f2120b93cd11da92.mp3str"
+
+[deps]
+
+source_file="res://scenes/main_menu/road.mp3"
+dest_files=[ "res://.import/road.mp3-6563121728ca19c8f2120b93cd11da92.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

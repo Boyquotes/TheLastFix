@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/car_open.mp3-b66e1e9e1f2c92653fdea1f19c7deeef.mp3str"
+
+[deps]
+
+source_file="res://scenes/city/city_a/car_open.mp3"
+dest_files=[ "res://.import/car_open.mp3-b66e1e9e1f2c92653fdea1f19c7deeef.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

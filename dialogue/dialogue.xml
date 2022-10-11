@@ -21,6 +21,8 @@
 <seq id="drunk_tony_0">
     <speaker pic="tony_muy_tired">Tony</speaker>
     <l>Sheryl? Is that you?</l>
+	<pause>
+
     <face pic="tony_wistful">
     <l>Oh. Just the repairman.</l>
     <l>C'mere, fix the thing already.</l>

@@ -4,12 +4,14 @@ var _tony_awake = false
 
 onready var _cutscene_animator = $CutsceneAnimator
 onready var cam_target = $CamTarget
+onready var _tony_player = $TonyPlayer
 
 var _player: Player
 var _screen: Screen
 
 func _ready():
 	_screen = $".."
+	_tony_player.play("sleep")
 
 
 func _on_TonySeeArea_body_entered(body):
@@ -20,14 +22,8 @@ func _on_TonySeeArea_body_entered(body):
 		_cutscene_animator.play("tony_wakeup")
 
 
-func cam_follow_player():
-	Game._current_level.followed_node = Game.get_player()
-	Game._current_level.camera.drag_margin_h_enabled = true
-	Game._current_level.camera.smoothing_enabled = true
-
-
 func _process(_delta):
-	if _screen.active and not _tony_awake:
+	if _screen.active:
 		if _player == null:
 			_player = Game.get_player()
 		

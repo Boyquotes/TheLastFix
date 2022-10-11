@@ -14,8 +14,6 @@ var _cam_limits = []
 var _active_screens = []
 var _active_screen: Screen
 
-var followed_node = null
-
 
 func _ready():
 	followed_node = _player
@@ -59,11 +57,6 @@ func _set_end_cutscenes(value: bool):
 func finish_prev_screens(screen: Screen):
 	for i in screen.get_index() - 1:
 		_screens.get_child(i).finish()
-
-
-func _process(_delta):
-	if followed_node != null:
-		camera.position = followed_node.position
 
 
 func switch_to_screen(screen: Screen):

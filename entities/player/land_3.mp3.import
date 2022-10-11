@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/land_3.mp3-6ec82695d215fe273161f5b95fddb06d.mp3str"
+
+[deps]
+
+source_file="res://entities/player/land_3.mp3"
+dest_files=[ "res://.import/land_3.mp3-6ec82695d215fe273161f5b95fddb06d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

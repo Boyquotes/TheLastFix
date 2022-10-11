@@ -46,6 +46,7 @@ var _collision_extents = PoolVector2Array()
 
 var _grapnel_origins = {}
 var _footstep_players = []
+var _land_players = []
 
 onready var _animation_player = $AnimationPlayer
 onready var _sprite = $Sprite
@@ -68,6 +69,10 @@ func _ready():
 	
 	for i in range(1, 7):
 		_footstep_players.append(_sound.get_node("Footstep" + str(i)))
+	
+	for i in range(1, 5):
+		_land_players.append(_sound.get_node("Land" + str(i)))
+	
 
 
 func load_grapnel_origins():
@@ -357,6 +362,10 @@ func _physics_process(delta):
 	elif is_on_floor():
 		_jump_time = -1
 		if _was_airborne and not _crouching:
+			var sound: AudioStreamPlayer = _land_players[randi() % 4]
+			sound.volume_db = (_prev_velocity.y / _terminal_velocity - 1.2) * 40
+			print(sound.volume_db)
+			sound.play()
 			if _looking.y > 0 and not _grapnel.active:
 				air_frame = -1
 				play_animation("crouch")
@@ -479,7 +488,4 @@ func _set_player_visible(value: bool):
 
 
 func play_footstep():
-	var footstep: AudioStreamPlayer = _footstep_players[randi() % 6]
-	footstep.play()
-	
-	print("FOOTSTEP")
+	_footstep_players[randi() % 6].play()

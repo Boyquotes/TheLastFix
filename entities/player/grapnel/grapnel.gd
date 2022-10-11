@@ -28,6 +28,7 @@ var _prev_origin_pos = Vector2.ZERO
 onready var _sprite = $Sprite
 onready var _collision = $Collision
 onready var _particles = $Particles
+onready var _light = $Light
 
 export var active = false
 export var stuck = false
@@ -58,13 +59,14 @@ func _ready():
 
 
 func _set_player_light(energy: float):
-	$Light.energy = energy * 0.7
+	_light.energy = energy * 0.7
 
 
 func _set_hook_visible(value: bool):
 	hook_visible = value
 	if _sprite != null:
 		_sprite.visible = value
+		_light.enabled = value
 
 
 func hold_angle(value: int):

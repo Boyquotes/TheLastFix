@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/crossout1.mp3-21770006f3d6a2c1a8c13b9bf57bb07e.mp3str"
+
+[deps]
+
+source_file="res://entities/page/sounds/crossout1.mp3"
+dest_files=[ "res://.import/crossout1.mp3-21770006f3d6a2c1a8c13b9bf57bb07e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

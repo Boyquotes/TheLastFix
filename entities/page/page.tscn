@@ -136,4 +136,9 @@ script = ExtResource( 7 )
 path_start = "res://entities/page/sounds/pullup"
 count = 4
 
+[node name="CrossoutSound" type="AudioStreamPlayer" parent="."]
+script = ExtResource( 7 )
+path_start = "res://entities/page/sounds/crossout"
+count = 4
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

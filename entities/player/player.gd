@@ -137,16 +137,22 @@ func play_idle(reset_air_frame = true):
 		update_air_frame()
 		return
 
-	if _looking.y == 0:
-		play_animation("idle")
-	elif _looking.y < 0:
-		play_animation("look_up")
-		_animation_player.seek(0.1)
-	elif _looking.y > 0:
-		if _grapnel.active:
+	if is_on_floor() or _velocity.y == 0:
+		if _looking.y == 0:
 			play_animation("idle")
+		elif _looking.y < 0:
+			play_animation("look_up")
+			_animation_player.seek(0.1)
+		elif _looking.y > 0:
+			if _grapnel.active:
+				play_animation("idle")
+			else:
+				play_animation("crouch")
+	else:
+		if _velocity.y > 0:
+			play_animation("fall")
 		else:
-			play_animation("crouch")
+			play_animation("jump")
 
 
 func _walking():

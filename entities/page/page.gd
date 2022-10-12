@@ -23,6 +23,7 @@ onready var _animation_player = $AnimationPlayer
 onready var _up_arrow = $UpArrow
 onready var _down_arrow = $DownArrow
 onready var _pullup_sound = $PullupSound
+onready var _crossout_sound = $CrossoutSound
 
 
 func _ready():
@@ -38,6 +39,7 @@ func set_crossed(count: int):
 
 
 func cross_out(index: int):
+	_crossout_sound.play()
 	_animation_player.play(str(index))
 
 

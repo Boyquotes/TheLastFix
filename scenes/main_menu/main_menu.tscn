@@ -238,17 +238,9 @@ tracks/5/keys = {
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": null
-}, {
-"end_offset": 0.0,
-"start_offset": 0.0,
 "stream": ExtResource( 19 )
-}, {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": null
 } ],
-"times": PoolRealArray( 0, 5.2, 5.3, 6.1, 6.3 )
+"times": PoolRealArray( 0, 5.2, 6.1 )
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("RoadSound:volume_db")

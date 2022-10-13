@@ -11,5 +11,5 @@ dest_files=[ "res://.import/cellphone_hangup.mp3-540d0db2e6b2387180250c8e4b24e81
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

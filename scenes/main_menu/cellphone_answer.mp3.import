@@ -11,5 +11,5 @@ dest_files=[ "res://.import/cellphone_answer.mp3-d419d3af9bc02053048a09916e9e5b3
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

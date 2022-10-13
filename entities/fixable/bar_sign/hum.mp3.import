@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hum.mp3-08672295a0436895a766cd2e71aaf306.mp3str"
+
+[deps]
+
+source_file="res://entities/fixable/bar_sign/hum.mp3"
+dest_files=[ "res://.import/hum.mp3-08672295a0436895a766cd2e71aaf306.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

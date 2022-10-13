@@ -522,5 +522,8 @@ script = ExtResource( 14 )
 path_start = "res://entities/player/sounds/land"
 count = 4
 
+[node name="Listener" type="Listener2D" parent="."]
+current = true
+
 [connection signal="visibility_changed" from="." to="." method="_on_Player_visibility_changed"]
 [connection signal="frame_changed" from="Sprite" to="." method="_on_Sprite_frame_changed"]

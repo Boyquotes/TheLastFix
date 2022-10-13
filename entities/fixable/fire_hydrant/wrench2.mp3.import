@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/wrench2.mp3-4a7ed00b41b202a5b775678b5a26a8ff.mp3str"
+
+[deps]
+
+source_file="res://entities/fixable/fire_hydrant/wrench2.mp3"
+dest_files=[ "res://.import/wrench2.mp3-4a7ed00b41b202a5b775678b5a26a8ff.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

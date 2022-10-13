@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/pullout_wrench.mp3-bb3ba371f39b9beaa98f420dbdf8791c.mp3str"
+
+[deps]
+
+source_file="res://entities/fixable/fire_hydrant/pullout_wrench.mp3"
+dest_files=[ "res://.import/pullout_wrench.mp3-bb3ba371f39b9beaa98f420dbdf8791c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

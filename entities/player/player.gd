@@ -155,6 +155,17 @@ func play_idle(reset_air_frame = true):
 			play_animation("jump")
 
 
+func play_walking():
+	var prev_anim = _animation_player.current_animation
+	var new_anim = "walk_point_up" if _looking.y < 0 else "walk"
+	if prev_anim == ("walk" if _looking.y < 0 else "walk_point_up"):
+		var time = _animation_player.current_animation_position
+		play_animation(new_anim)
+		_animation_player.seek(time, true)
+	else:
+		play_animation(new_anim)
+
+
 func _walking():
 	var prev_looking = _looking
 	_looking.y = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
@@ -184,10 +195,9 @@ func _walking():
 			air_frame = -1
 			if _crouching:
 				play_animation("crawl")
-			elif _looking.y < 0:
-				play_animation("walk_point_up")
 			else:
-				play_animation("walk")
+				play_walking()
+
 		_flipped = _walkdir < 0
 		_looking.x = _walkdir
 
@@ -198,10 +208,12 @@ func _walking():
 				_animation_player.queue("crawl")
 				return -_velocity.x
 			play_animation("get_up")
-		if _looking.y < 0 and prev_looking.y >= 0:
-			play_animation("look_up")
-		elif _looking.y >= 0 and prev_looking.y < 0:
-			play_idle()
+
+		if _walkdir == 0:
+			if _looking.y < 0 and prev_looking.y >= 0:
+				play_animation("look_up")
+			elif _looking.y >= 0 and prev_looking.y < 0:
+				play_idle()
 	elif _looking != prev_looking:
 		update_air_frame()
 

@@ -413,6 +413,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 2, 2 ), Vector2( 3, 2 ), Vector2( 4, 2 ), Vector2( 5, 2 ) ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sound/Footstep")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play"
+}, {
+"args": [  ],
+"method": "play"
+} ]
+}
 
 [sub_resource type="ParticlesMaterial" id=14]
 lifetime_randomness = 1.0

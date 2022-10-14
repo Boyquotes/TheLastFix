@@ -175,7 +175,7 @@ func _walking():
 		_crouching = true
 		_looking.y = 1
 	else:
-		if _stuck_crouching and _velocity.y > 0:
+		if _stuck_crouching and not is_on_floor():
 			play_animation("fall")
 			_set_air_frame(1)
 		_stuck_crouching = false

@@ -5,6 +5,12 @@ onready var _screen = $".."
 onready var _door_shadow = $DoorShadow
 
 
+func _ready():
+	$Window/Brooming.play("brooming")
+	$Window/Sleeping.play("sleeping")
+	$Window/Lonely.play("lonely")
+
+
 func _process(_delta):
 	if _screen.active:
 		if _player == null:

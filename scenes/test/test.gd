@@ -2,9 +2,8 @@ extends PlayableLevel
 
 
 func _ready():
-	zoom_center = _player.position + Vector2(0, 20)
-	zoom_level = 0.1
-	$StartAnimation.play("start")
+	Game.set_zoom(0.1, _player.position + Vector2(0, 20))
+	Game.zoom_out(1)
 
 
 func _on_DeathArea_body_entered(body):

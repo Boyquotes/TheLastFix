@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/head_scratch2.mp3-5f1c7ff688f7916935e09a528bc74d09.mp3str"
+
+[deps]
+
+source_file="res://entities/fixable/bar_sign/head_scratch2.mp3"
+dest_files=[ "res://.import/head_scratch2.mp3-5f1c7ff688f7916935e09a528bc74d09.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

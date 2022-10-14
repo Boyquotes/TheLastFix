@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://entities/fixable/fixable.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/fixable/bar_sign/sign.png" type="Texture" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://entities/fixable/bar_sign/bar_sign.gd" type="Script" id=4]
 [ext_resource path="res://entities/fixable/bar_sign/fix.png" type="Texture" id=5]
 [ext_resource path="res://entities/fixable/bar_sign/hum.mp3" type="AudioStream" id=6]
+[ext_resource path="res://entities/fixable/bar_sign/hit.mp3" type="AudioStream" id=7]
+[ext_resource path="res://entities/fixable/bar_sign/head_scratch1.mp3" type="AudioStream" id=8]
+[ext_resource path="res://entities/fixable/bar_sign/head_scratch2.mp3" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=7]
 resource_name = "fix"
@@ -36,6 +39,48 @@ tracks/1/keys = {
 "args": [ "fixed" ],
 "method": "play"
 } ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("PlayerSound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0427898,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 9 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.1,
+"stream": ExtResource( 8 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 9 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.1,
+"stream": ExtResource( 8 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 9 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.1,
+"stream": ExtResource( 8 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 7 )
+} ],
+"times": PoolRealArray( 3.05, 3.3, 3.5, 3.7, 3.9, 4.1, 4.3, 6.35 )
 }
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -89,7 +134,7 @@ z_index = 8
 texture = ExtResource( 5 )
 offset = Vector2( -1, -1 )
 hframes = 18
-frame = 1
+frame = 10
 
 [node name="FixAnimator" parent="." index="2"]
 anims/fix = SubResource( 7 )
@@ -104,6 +149,7 @@ shape = SubResource( 5 )
 [node name="Sprite" type="Sprite" parent="." index="4"]
 texture = ExtResource( 2 )
 hframes = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 anims/fixed = SubResource( 4 )
@@ -119,7 +165,11 @@ range_item_cull_mask = 2
 
 [node name="HumSound" type="AudioStreamPlayer2D" parent="." index="7"]
 stream = ExtResource( 6 )
+volume_db = 10.0
 autoplay = true
+max_distance = 200.0
+
+[node name="PlayerSound" type="AudioStreamPlayer2D" parent="." index="8"]
 max_distance = 200.0
 
 [connection signal="frame_changed" from="Sprite" to="." method="_on_Sprite_frame_changed"]

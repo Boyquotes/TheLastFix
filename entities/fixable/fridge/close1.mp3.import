@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/close1.mp3-0aa1b9ea92a8fed258b4513fb9fcf44f.mp3str"
+
+[deps]
+
+source_file="res://entities/fixable/fridge/close1.mp3"
+dest_files=[ "res://.import/close1.mp3-0aa1b9ea92a8fed258b4513fb9fcf44f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

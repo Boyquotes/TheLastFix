@@ -314,11 +314,10 @@ z_index = -5
 texture = ExtResource( 8 )
 hframes = 10
 vframes = 11
-frame = 21
+frame = 23
 
 [node name="TonyZeds" type="Particles2D" parent="Tony"]
 position = Vector2( 1, -7 )
-emitting = false
 amount = 3
 lifetime = 2.2
 explosiveness = 0.7

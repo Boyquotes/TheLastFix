@@ -11,5 +11,5 @@ dest_files=[ "res://.import/wrenching.mp3-a9b79923e1cd16b3ed05c3e30a7e9893.mp3st
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

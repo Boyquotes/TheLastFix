@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/move2.mp3-548158b8276bf48e58f40c225e83ae54.mp3str"
+
+[deps]
+
+source_file="res://entities/fixable/fridge/move2.mp3"
+dest_files=[ "res://.import/move2.mp3-548158b8276bf48e58f40c225e83ae54.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

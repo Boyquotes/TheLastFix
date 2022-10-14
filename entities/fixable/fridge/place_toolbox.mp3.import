@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/place_toolbox.mp3-2c48b60e9e33560d339bd978112c20c5.mp3str"
+
+[deps]
+
+source_file="res://entities/fixable/fridge/place_toolbox.mp3"
+dest_files=[ "res://.import/place_toolbox.mp3-2c48b60e9e33560d339bd978112c20c5.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

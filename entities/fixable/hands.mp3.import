@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hands.mp3-8797bd9dee46dc7d17a6677c1ec138b3.mp3str"
+
+[deps]
+
+source_file="res://entities/fixable/hands.mp3"
+dest_files=[ "res://.import/hands.mp3-8797bd9dee46dc7d17a6677c1ec138b3.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

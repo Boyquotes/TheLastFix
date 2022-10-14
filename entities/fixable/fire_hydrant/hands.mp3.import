@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hands.mp3-bce84694f05a63d0e4079708bee92d36.mp3str"
+
+[deps]
+
+source_file="res://entities/fixable/fire_hydrant/hands.mp3"
+dest_files=[ "res://.import/hands.mp3-bce84694f05a63d0e4079708bee92d36.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

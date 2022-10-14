@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scenes/city/city_b/apartment/background.png" type="Texture" id=1]
 [ext_resource path="res://scenes/city/city_b/apartment/kitchen.png" type="Texture" id=2]
@@ -57,52 +57,53 @@ tracks/1/keys = {
 "update": 1,
 "values": [ true ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath("TonyPlayer")
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tony/TonyZeds:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.1, 1.4, 1.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"values": [ {
-"args": [ false ],
-"method": "stop"
-}, {
-"args": [ "wakeup" ],
-"method": "play"
-}, {
-"args": [ false ],
-"method": "stop"
-}, {
-"args": [ "sitting_idle" ],
-"method": "play"
-} ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Tony/TonyZeds:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("Tony:frame_coords")
+tracks/3/type = "value"
+tracks/3/path = NodePath("Tony:frame_coords")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.6, 1.5, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 2, 2 ), Vector2( 3, 2 ) ]
+}
+tracks/4/type = "animation"
+tracks/4/path = NodePath("TonyPlayer")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.3, 0.4, 0.6, 1.5, 1.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 1, 2 ), Vector2( 0, 2 ), Vector2( 2, 2 ), Vector2( 3, 2 ) ]
+"clips": PoolStringArray( "wakeup", "[stop]", "sitting_idle" ),
+"times": PoolRealArray( 1.1, 1.4, 1.8 )
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("TonyPlayer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ false ],
+"method": "stop"
+} ]
 }
 
 [sub_resource type="ParticlesMaterial" id=8]
@@ -116,6 +117,47 @@ angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 14.45
+
+[sub_resource type="Animation" id=11]
+resource_name = "get_up"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tony:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 5 ), Vector2( 1, 5 ), Vector2( 2, 5 ), Vector2( 3, 5 ), Vector2( 4, 5 ), Vector2( 5, 5 ), Vector2( 6, 5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tony:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ -5, 20, -5 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("TonyPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "standing_idle" ],
+"method": "play"
+} ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "sitting_idle"
@@ -149,6 +191,35 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, 1 ), Vector2( 1, 1 ), Vector2( 2, 1 ), Vector2( 3, 1 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "standing_idle"
+length = 2.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tony:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.2, 1.4, 1.6, 1.7, 2.2, 2.4, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 2, 0 ), Vector2( 3, 0 ), Vector2( 4, 0 ), Vector2( 5, 0 ), Vector2( 6, 0 ), Vector2( 7, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tony:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.2, 1.6, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 2, 0 ), Vector2( 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -200,6 +271,7 @@ texture = ExtResource( 4 )
 [node name="Fridge" parent="." instance=ExtResource( 3 )]
 position = Vector2( -14, 18 )
 z_index = -8
+enabled = true
 
 [node name="Walls" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -241,11 +313,12 @@ position = Vector2( -73, 23 )
 z_index = -5
 texture = ExtResource( 8 )
 hframes = 10
-vframes = 6
-frame = 10
+vframes = 11
+frame = 21
 
 [node name="TonyZeds" type="Particles2D" parent="Tony"]
 position = Vector2( 1, -7 )
+emitting = false
 amount = 3
 lifetime = 2.2
 explosiveness = 0.7
@@ -253,8 +326,11 @@ process_material = SubResource( 8 )
 texture = ExtResource( 9 )
 
 [node name="TonyPlayer" type="AnimationPlayer" parent="."]
+anims/get_up = SubResource( 11 )
 anims/sitting_idle = SubResource( 10 )
 anims/sleep = SubResource( 7 )
+anims/standing_idle = SubResource( 12 )
 anims/wakeup = SubResource( 9 )
 
+[connection signal="tony_angered" from="Fridge" to="." method="_on_Fridge_tony_angered"]
 [connection signal="body_entered" from="TonySeeArea" to="." method="_on_TonySeeArea_body_entered"]

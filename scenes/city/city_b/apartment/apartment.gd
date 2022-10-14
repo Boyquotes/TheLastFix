@@ -28,3 +28,9 @@ func _process(_delta):
 			_player = Game.get_player()
 		
 		cam_target.global_position = _player.position + Vector2(-50, 0)
+
+
+func _on_Fridge_tony_angered(level: int):
+	match level:
+		0:
+			_tony_player.play("get_up")

@@ -36,7 +36,9 @@ class SpeakerAction:
 
 
 class PauseAction:
-	pass
+	func _to_string():
+		return "<pause>"
+
 
 class DialogueSequence:
 	var actions = Array()
@@ -82,7 +84,14 @@ func parse_node(parser: XMLParser):
 		node.content = data
 		_current_line.nodes.append(node)
 	else:
-		match parser.get_node_name():
+		var target_array = null
+		if _current_line != null:
+			target_array = _current_line.nodes
+		elif _current_sequence != null:
+			target_array = _current_sequence.actions
+
+		var node_name = parser.get_node_name()
+		match node_name:
 			'seq':
 				_current_sequence = DialogueSequence.new()
 				var id = ""
@@ -106,7 +115,7 @@ func parse_node(parser: XMLParser):
 					if parser.get_attribute_name(i) == "pic":
 						speaker.picture = parser.get_attribute_value(i)
 
-				_current_sequence.actions.append(speaker)
+				target_array.append(speaker)
 			'face':
 				var speaker = SpeakerAction.new()
 				speaker.name = _last_speaker_name
@@ -114,9 +123,9 @@ func parse_node(parser: XMLParser):
 					if parser.get_attribute_name(i) == "pic":
 						speaker.picture = parser.get_attribute_value(i)
 				
-				_current_sequence.actions.append(speaker)
+				target_array.append(speaker)
 			'pause':
-				_current_sequence.actions.append(PauseAction.new())
+				target_array.append(PauseAction.new())
 
 		while parser.read() == OK:
 			if parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
@@ -124,6 +133,8 @@ func parse_node(parser: XMLParser):
 			
 			parse_node(parser)
 
+		if node_name == 'l':
+			_current_line = null
 
 func load_sequence(id: String):
 	if not sequences.has(id):

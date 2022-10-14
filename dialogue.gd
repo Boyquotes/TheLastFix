@@ -35,6 +35,8 @@ func _process(delta):
 		if _action_end_paused:
 			var action = server.next_action()
 			if action != null:
+				if not (action is DialogueServer.LineAction):
+					_current_line = null
 				execute_action(action)
 			else:
 				visible = false
@@ -45,7 +47,6 @@ func _process(delta):
 		elif _current_line.nodes.size() == 1 and _current_line.nodes[0] is DialogueServer.TextNode:
 			_dialogue_label.percent_visible = 1
 			end_line()
-
 
 
 func set_speaker(speaker: String, picture: String):
@@ -73,44 +74,51 @@ func play_sequence(id: String):
 
 
 func resume():
-	visible = true
-	execute_action(server.next_action())
+	if _current_line != null:
+		_dialogue_time = 0.0
+	else:
+		visible = true
+		execute_action(server.next_action())
 
 
 func execute_action(action):
 	_action_end_paused = false
 	if action is DialogueServer.LineAction:
 		_dialogue_label.visible_characters = 0
-		_dialogue_label.text = action.nodes[0].content
+		_dialogue_label.text = ""
+		for node in action.nodes:
+			if node is DialogueServer.TextNode:
+				_dialogue_label.text += node.content
 		_current_line = action
 		_current_node_index = 0
 		_char_in_node_index = 0
 		_dialogue_time = 0
 	else:
-		_current_line = null
 		if action is DialogueServer.SpeakerAction:
 			set_speaker(action.name, action.picture)
 			execute_action(server.next_action())
 		elif action is DialogueServer.PauseAction:
 			emit_signal("paused")
-			visible = false
+			if _current_line == null:
+				visible = false
 			_action_end_paused = false
-			_current_line = null
-			
+			_dialogue_time = -1.0
 
 
 func advance():
 	var node = _current_line.nodes[_current_node_index]
 	if node is DialogueServer.TextNode:
 		_dialogue_label.visible_characters += 1
-
-	_char_in_node_index += 1
-	if _char_in_node_index >= node.length:
-		_char_in_node_index = 0
+		_char_in_node_index += 1
+		if _char_in_node_index >= node.length:
+			_char_in_node_index = 0
+			_current_node_index += 1
+	else:
+		execute_action(node)
 		_current_node_index += 1
-		if _current_node_index >= _current_line.nodes.size():
-			end_line()
 
+	if _current_node_index >= _current_line.nodes.size():
+		end_line()
 
 func end_line():
 	_action_end_paused = true

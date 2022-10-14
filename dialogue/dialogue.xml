@@ -46,7 +46,7 @@
 
     <face pic="tony_angry">
     <l>Don't ignore me!</l>
-    <l>What, you think you're better than me?!</l>
+    <l>What, you think you're... <pause>better than me?!</l>
 </seq>
 
 <seq id="drunk_tony_2">

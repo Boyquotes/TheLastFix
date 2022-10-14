@@ -34,3 +34,7 @@ func _on_Fridge_tony_angered(level: int):
 	match level:
 		0:
 			_tony_player.play("get_up")
+		1:
+			_tony_player.play("point")
+		2:
+			_tony_player.play("drink")

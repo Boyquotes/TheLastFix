@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/toolbox_search.mp3-f77130c0e92e54636a4d434f2ad81576.mp3str"
+
+[deps]
+
+source_file="res://entities/fixable/fridge/toolbox_search.mp3"
+dest_files=[ "res://.import/toolbox_search.mp3-f77130c0e92e54636a4d434f2ad81576.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

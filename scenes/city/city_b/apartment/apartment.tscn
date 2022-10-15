@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/city/city_b/apartment/background.png" type="Texture" id=1]
 [ext_resource path="res://scenes/city/city_b/apartment/kitchen.png" type="Texture" id=2]
@@ -189,6 +189,23 @@ tracks/2/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=17]
+resource_name = "gun_idle"
+length = 2.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tony:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.2, 1.4, 1.6, 1.7, 2.2, 2.4, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 10 ), Vector2( 1, 10 ), Vector2( 2, 10 ), Vector2( 3, 10 ), Vector2( 4, 10 ), Vector2( 5, 10 ), Vector2( 6, 10 ), Vector2( 7, 10 ) ]
+}
+
 [sub_resource type="Animation" id=15]
 resource_name = "point"
 length = 0.2
@@ -234,6 +251,22 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, 8 ), Vector2( 1, 8 ), Vector2( 2, 8 ), Vector2( 3, 8 ), Vector2( 4, 8 ), Vector2( 5, 8 ), Vector2( 6, 8 ), Vector2( 7, 8 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "pullout_gun"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tony:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 1, 9 ), Vector2( 2, 9 ), Vector2( 3, 9 ), Vector2( 4, 9 ), Vector2( 5, 9 ), Vector2( 6, 9 ) ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -390,6 +423,7 @@ z_index = -5
 texture = ExtResource( 8 )
 hframes = 11
 vframes = 12
+frame = 110
 
 [node name="TonyZeds" type="Particles2D" parent="Tony"]
 position = Vector2( 1, -7 )
@@ -402,12 +436,15 @@ texture = ExtResource( 9 )
 [node name="TonyPlayer" type="AnimationPlayer" parent="."]
 anims/drink = SubResource( 13 )
 anims/get_up = SubResource( 11 )
+anims/gun_idle = SubResource( 17 )
 anims/point = SubResource( 15 )
 anims/pointing_idle = SubResource( 14 )
+anims/pullout_gun = SubResource( 16 )
 anims/sitting_idle = SubResource( 10 )
 anims/sleep = SubResource( 7 )
 anims/standing_idle = SubResource( 12 )
 anims/wakeup = SubResource( 9 )
 
+[connection signal="finished_fixing" from="Fridge" to="." method="_on_Fridge_finished_fixing"]
 [connection signal="tony_angered" from="Fridge" to="." method="_on_Fridge_tony_angered"]
 [connection signal="body_entered" from="TonySeeArea" to="." method="_on_TonySeeArea_body_entered"]

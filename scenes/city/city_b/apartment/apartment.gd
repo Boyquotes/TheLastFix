@@ -38,3 +38,9 @@ func _on_Fridge_tony_angered(level: int):
 			_tony_player.play("point")
 		2:
 			_tony_player.play("drink")
+		3:
+			_tony_player.play("pullout_gun")
+
+
+func _on_Fridge_finished_fixing():
+	_tony_player.play("gun_idle")

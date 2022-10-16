@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/pocket_rummage.mp3-44dd026bf9f168764644d56196c3a672.mp3str"
+
+[deps]
+
+source_file="res://entities/player/sounds/pocket_rummage.mp3"
+dest_files=[ "res://.import/pocket_rummage.mp3-44dd026bf9f168764644d56196c3a672.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

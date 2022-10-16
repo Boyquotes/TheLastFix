@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://entities/fixable/fire_hydrant/fire_hydrant.gd" type="Script" id=1]
 [ext_resource path="res://entities/fixable/fire_hydrant/fire_hydrant.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://entities/fixable/fire_hydrant/wrenching.mp3" type="AudioStream" id=9]
 [ext_resource path="res://entities/fixable/fire_hydrant/water.mp3" type="AudioStream" id=10]
 [ext_resource path="res://entities/fixable/hands.mp3" type="AudioStream" id=11]
+[ext_resource path="res://entities/player/sounds/pocket_rummage.mp3" type="AudioStream" id=12]
 
 [sub_resource type="Animation" id=7]
 resource_name = "fix"
@@ -64,6 +65,10 @@ tracks/3/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
+"stream": ExtResource( 12 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
 "stream": ExtResource( 5 )
 }, {
 "end_offset": 0.0,
@@ -78,7 +83,7 @@ tracks/3/keys = {
 "start_offset": 0.0,
 "stream": ExtResource( 11 )
 } ],
-"times": PoolRealArray( 1.1, 2.05, 3.78, 4.6 )
+"times": PoolRealArray( 0.05, 1.1, 2.05, 3.78, 4.6 )
 }
 tracks/4/type = "audio"
 tracks/4/path = NodePath("SqueakSound")
@@ -217,7 +222,7 @@ fixed_fps = 10
 process_material = SubResource( 3 )
 
 [node name="PlayerSound" type="AudioStreamPlayer" parent="." index="7"]
-stream = ExtResource( 11 )
+stream = ExtResource( 5 )
 
 [node name="SqueakSound" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource( 8 )

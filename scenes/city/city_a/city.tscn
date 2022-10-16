@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://scenes/playable_level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tiled/maps/city_a/city_intro.tmx" type="PackedScene" id=2]
@@ -42,6 +42,7 @@
 [ext_resource path="res://scenes/main_menu/engine.mp3" type="AudioStream" id=40]
 [ext_resource path="res://scenes/main_menu/road.mp3" type="AudioStream" id=41]
 [ext_resource path="res://scenes/city/city_a/ignition.mp3" type="AudioStream" id=42]
+[ext_resource path="res://entities/player/sounds/pocket_rummage.mp3" type="AudioStream" id=43]
 
 [sub_resource type="Animation" id=18]
 resource_name = "intro"
@@ -393,10 +394,10 @@ tracks/25/loop_wrap = true
 tracks/25/imported = false
 tracks/25/enabled = true
 tracks/25/keys = {
-"times": PoolRealArray( 7.1, 9.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 7.1, 9.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 1.0, 0.3 ]
+"values": [ 1.0, 1.0, 0.3 ]
 }
 tracks/26/type = "audio"
 tracks/26/path = NodePath("Screens/city_intro/CarSound")
@@ -415,6 +416,23 @@ tracks/26/keys = {
 "stream": ExtResource( 42 )
 } ],
 "times": PoolRealArray( 0, 7.1 )
+}
+tracks/27/type = "method"
+tracks/27/path = NodePath("Screens/city_intro/RummageSound")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 11.1, 12.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play"
+}, {
+"args": [  ],
+"method": "stop"
+} ]
 }
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -550,12 +568,14 @@ z_index = -10
 texture = ExtResource( 10 )
 hframes = 8
 vframes = 2
+frame = 12
 
 [node name="PlayerPuppet" type="Sprite" parent="Screens/city_intro/Car" index="0"]
 position = Vector2( 5, 6 )
 z_index = 1
 texture = ExtResource( 11 )
 hframes = 16
+frame = 14
 
 [node name="PlayerLight" parent="Screens/city_intro/Car/PlayerPuppet" index="0" instance=ExtResource( 13 )]
 energy = 0.3
@@ -585,7 +605,7 @@ position = Vector2( 0, -1 )
 polygon = PoolVector2Array( 0, -8, 0, -17, -8, -17, -8, -22, -14, -22, -14, -8 )
 
 [node name="Light" type="Light2D" parent="Screens/city_intro/Car" index="3"]
-position = Vector2( 24, 10 )
+position = Vector2( 24, 11 )
 texture = ExtResource( 12 )
 offset = Vector2( 133, 0 )
 texture_scale = 0.25
@@ -606,11 +626,14 @@ stream = ExtResource( 30 )
 [node name="EngineSound" type="AudioStreamPlayer" parent="Screens/city_intro" index="7"]
 stream = ExtResource( 40 )
 volume_db = -30.0
-pitch_scale = 0.966667
+pitch_scale = 0.3
 
 [node name="CarSound" type="AudioStreamPlayer" parent="Screens/city_intro" index="8"]
 stream = ExtResource( 41 )
 volume_db = -20.0
+
+[node name="RummageSound" type="AudioStreamPlayer" parent="Screens/city_intro" index="9"]
+stream = ExtResource( 43 )
 
 [node name="up_z" parent="Screens" index="1" instance=ExtResource( 3 )]
 position = Vector2( 384, -88 )

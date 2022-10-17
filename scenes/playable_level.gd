@@ -55,7 +55,7 @@ func _set_end_cutscenes(value: bool):
 
 
 func finish_prev_screens(screen: Screen):
-	for i in screen.get_index() - 1:
+	for i in screen.get_index():
 		_screens.get_child(i).finish()
 
 

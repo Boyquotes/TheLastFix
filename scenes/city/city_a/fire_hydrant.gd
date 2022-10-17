@@ -14,6 +14,7 @@ func finish():
 	$FireHydrant/Sprite.frame_coords = Vector2(8, 1)
 	$FireHydrant/Prompt._used = true
 	$FireHydrant/Prompt.visible = false
+	$FireHydrant/WaterSound.autoplay = false
 	$FireHydrant/WaterSound.stop()
 	_set_block_right(false)
 	_cutscenes_played = true

@@ -54,6 +54,7 @@ onready var _light = $PlayerLight
 onready var _death_particles = $DeathParticles
 onready var _spawn_particles = $SpawnParticles
 onready var _land_sound = $Sound/Land
+onready var _death_sound = $Sound/Death
 
 
 func _ready():
@@ -472,6 +473,8 @@ func die(direction: Vector2):
 	_death_particles.process_material.direction = -Vector3(direction.x, direction.y, 0)
 	_death_particles.process_material.initial_velocity = max(_prev_velocity.length() / 2, 80)
 	_velocity = Vector2.ZERO
+	_death_sound.volume_db = (max(_prev_velocity.length(), 160) - _max_velocity) / 10
+	_death_sound.play()
 	
 	_grapnel.retract_immediately()
 	play_animation("death")

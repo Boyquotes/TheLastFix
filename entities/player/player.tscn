@@ -539,6 +539,11 @@ script = ExtResource( 14 )
 path_start = "res://entities/player/sounds/land"
 count = 4
 
+[node name="Death" type="AudioStreamPlayer" parent="Sound"]
+script = ExtResource( 14 )
+path_start = "res://entities/player/sounds/death"
+count = 5
+
 [node name="Listener" type="Listener2D" parent="."]
 current = true
 

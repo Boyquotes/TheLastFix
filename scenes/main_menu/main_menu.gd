@@ -37,14 +37,12 @@ func try_game_load():
 		return false
 
 	Game.fade_out(0.3)
-	var error = Game.connect("fade_finished", self, "load_game", [save])
-	if error != 0:
-		print("Error connecting fade_finished: ", error)
+	var error = Game.connect("fade_finished", self, "load_game", [save], CONNECT_ONESHOT)
+	assert(error == 0, "Error connecting fade_finished: " + str(error))
 	return true
 
 
 func load_game(save: Dictionary):
-	Game.disconnect("fade_finished", self, "load_game")
 	yield(get_tree(), "idle_frame")
 	Game.fade_in(0.3)
 	Game.load_save(save)

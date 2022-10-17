@@ -27,20 +27,17 @@ func _process(_delta):
 func _on_Prompt_used():
 	_player = Game.get_player()
 	_player.go_to($FixingPosition.global_position, $FixingPosition.position.x > 0)
-	var error = _player.connect("reached_target", self, "start_fix")
-	if error != OK:
-		print("Error connecting reached_target: ", error)
+	var error = _player.connect("reached_target", self, "start_fix", [], CONNECT_ONESHOT)
+	assert(error == 0, "Error connecting reached_target: " + str(error))
 
 
 func start_fix():
-	_player.disconnect("reached_target", self, "start_fix")
 	emit_signal("started_fixing")
 
 	if zoom_before_animation:
 		Game.zoom_in(1, 0.5, (_player_puppet.global_position + global_position) / 2 + zoom_offset)
 		var error = Game.connect("zoom_finished", self, "on_zoom_finished")
-		if error != 0:
-			print("Error connecting zoom_finished: ", error)
+		assert(error == 0, "Error connecting zoom_finished: " + str(error))
 	else:
 		_player.visible = false
 		_player_puppet.global_position = _player.global_position

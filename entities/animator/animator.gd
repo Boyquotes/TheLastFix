@@ -17,23 +17,20 @@ func play_dialogue_sequence(id: String):
 	_dialogue.play_sequence(id)
 	playback_active = false
 	_paused_for_dialogue = true
-	var error = _dialogue.connect("paused", self, "on_dialogue_paused")
-	if error != 0:
-		print("Error connecting dialogue_paused: ", error)
+	var error = _dialogue.connect("paused", self, "on_dialogue_paused", [], CONNECT_ONESHOT)
+	assert(error == 0, "Error connecting dialogue_paused: " + str(error))
 
 
 func continue_dialogue():
 	_dialogue.resume()
 	playback_active = false
 	_paused_for_dialogue = true
-	var error = _dialogue.connect("paused", self, "on_dialogue_paused")
-	if error != 0:
-		print("Error connecting dialogue_paused: ", error)
+	var error = _dialogue.connect("paused", self, "on_dialogue_paused", [], CONNECT_ONESHOT)
+	assert(error == 0, "Error connecting dialogue_paused: " + str(error))
 
 
 func on_dialogue_paused():
 	if _paused_for_dialogue:
-		_dialogue.disconnect("paused", self, "on_dialogue_paused")
 		playback_active = true
 		_paused_for_dialogue = false
 

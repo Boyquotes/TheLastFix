@@ -63,14 +63,8 @@ func _on_FrankieTalkArea_body_entered(body):
 	if body is Player and not spoke_to_frankie:
 		spoke_to_frankie = true
 		_player.go_to($FrankieTalkPos.global_position)
-		var error = _player.connect("reached_target", self, "meet_frankie")
-		if error != OK:
-			print("Error connecting reached_target: ", error)
-
-
-func meet_frankie():
-	_player.disconnect("reached_target", self, "meet_frankie")
-	_animator.play("meet_frankie")
+		var error = _player.connect("reached_target", _animator, "play", ["meet_frankie"], CONNECT_ONESHOT)
+		assert(error == 0, "Error connecting reached_target: " + str(error))
 
 
 func _on_6APrompt_used():
@@ -88,8 +82,7 @@ func open_apartment(collision: CollisionShape2D, flipped: bool, next_level: Stri
 	_player.go_to(pos, flipped)
 	_next_level_path = next_level
 	var error = _player.connect("reached_target", _animator, "play", ["open_door"])
-	if error != 0:
-		print("Error connecting reached_target: ", error)
+	assert(error == 0, "Error connecting reached_target: " + str(error))
 
 
 func load_next_level():

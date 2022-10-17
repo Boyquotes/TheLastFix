@@ -28,7 +28,9 @@ var fade_enabled = true
 var zoom_enabled = true
 
 var zoom_center = Vector2.ZERO
-var zoom_level = 0.0
+var prev_zoom_center = Vector2.ZERO
+var zoom_prog = 0.0
+var zoom_origin = 1.0
 var zoom_target = 0.0
 var zoom_speed = 0.0
 
@@ -66,19 +68,16 @@ func _process(delta):
 		_level_view.modulate = Color(fade_level, fade_level, fade_level)
 
 	if zoom_enabled and zoom_speed != 0:
-		zoom_level += zoom_speed * delta
-		if zoom_speed > 0 and zoom_level >= 1:
-			zoom_level = 1
-			zoom_speed = 0
-			emit_signal("zoom_finished")
-		elif zoom_speed < 0 and zoom_level <= 0:
-			zoom_level = 0
+		zoom_prog += zoom_speed * delta
+		if zoom_speed > 0 and zoom_prog >= 1:
+			zoom_prog = 1
 			zoom_speed = 0
 			emit_signal("zoom_finished")
 		
-		var strength = smoothstep(0, 1, zoom_level) * (1 - zoom_target)
-		_camera.zoom = Vector2(1, 1) * (1 - strength)
-		_camera.offset = strength * zoom_center
+		var level = smoothstep(0, 1, zoom_prog)
+		var strength = lerp(zoom_origin, zoom_target, level)
+		_camera.zoom = Vector2(strength, strength)
+		_camera.offset = lerp((1 - zoom_origin) * prev_zoom_center, (1 - zoom_target) * zoom_center, level)
 
 
 func fade_in(time: float):
@@ -90,13 +89,25 @@ func fade_out(time: float):
 
 
 func zoom_in(time: float, level: float, center: Vector2 = Vector2(-1, -1)):
+	zoom_origin = zoom_target
 	zoom_target = level
+	zoom_prog = 0
+	prev_zoom_center = zoom_center
 	if center != Vector2(-1, -1):
 		zoom_center = center - _current_level.camera.get_camera_position()
 	zoom_speed = 1 / time
 
 
+func zoom_out(time: float, level: float = 1.0):
+	zoom_origin = zoom_target
+	zoom_target = level
+	zoom_prog = 0
+	zoom_speed = 1 / time
+	prev_zoom_center = zoom_center
+
+
 func set_zoom(level: float, center: Vector2 = Vector2(-1, -1)):
+	prev_zoom_center = zoom_center
 	if center != Vector2(-1, -1):
 		zoom_center = center - _current_level.camera.get_camera_position()
 
@@ -104,11 +115,7 @@ func set_zoom(level: float, center: Vector2 = Vector2(-1, -1)):
 	_camera.offset = (1 - level) * zoom_center
 	zoom_target = level
 	zoom_speed = 0
-	zoom_level = (0 if level == 1 else 1)
-
-
-func zoom_out(time: float):
-	zoom_speed = -1 / time
+	zoom_prog = 0
 
 
 func set_player_light(energy: float):

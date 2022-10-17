@@ -31,7 +31,7 @@ var zoom_center = Vector2.ZERO
 var prev_zoom_center = Vector2.ZERO
 var zoom_prog = 0.0
 var zoom_origin = 1.0
-var zoom_target = 0.0
+var zoom_target = 1.0
 var zoom_speed = 0.0
 
 

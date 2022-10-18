@@ -224,6 +224,20 @@ tracks/9/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 0.5, 0.5 ), Vector2( 1, 1 ) ]
 }
+tracks/10/type = "method"
+tracks/10/path = NodePath("Sound/Respawn")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play"
+} ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "fall"
@@ -543,6 +557,11 @@ count = 4
 script = ExtResource( 14 )
 path_start = "res://entities/player/sounds/death"
 count = 5
+
+[node name="Respawn" type="AudioStreamPlayer" parent="Sound"]
+script = ExtResource( 14 )
+path_start = "res://entities/player/sounds/respawn"
+count = 4
 
 [node name="Listener" type="Listener2D" parent="."]
 current = true

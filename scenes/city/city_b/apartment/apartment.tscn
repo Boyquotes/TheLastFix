@@ -506,6 +506,5 @@ anims/sleep = SubResource( 7 )
 anims/standing_idle = SubResource( 12 )
 anims/wakeup = SubResource( 9 )
 
-[connection signal="finished_fixing" from="Fridge" to="." method="_on_Fridge_finished_fixing"]
 [connection signal="tony_angered" from="Fridge" to="." method="_on_Fridge_tony_angered"]
 [connection signal="body_entered" from="TonySeeArea" to="." method="_on_TonySeeArea_body_entered"]

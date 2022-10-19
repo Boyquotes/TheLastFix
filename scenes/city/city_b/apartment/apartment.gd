@@ -40,10 +40,5 @@ func _on_Fridge_tony_angered(level: int):
 			_tony_player.play("drink")
 		3:
 			_tony_player.play("pullout_gun")
-
-
-func _on_Fridge_finished_fixing():
-	_tony_player.play("gun_idle")
-	Game.zoom_in(1, 0.3, Vector2(-60, 18))
-	var error = Game.connect("zoom_finished", Game.get_dialogue(), "play_sequence", ["drunk_tony_2"], CONNECT_ONESHOT)
-	assert(error == 0, "Error connecting zoom_finished: " + str(error))
+		4:
+			_tony_player.play("gun_idle")

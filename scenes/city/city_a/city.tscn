@@ -5,9 +5,8 @@
 [ext_resource path="res://tiled/maps/city_a/up_z.tmx" type="PackedScene" id=3]
 [ext_resource path="res://tiled/maps/city_a/diagonal.tmx" type="PackedScene" id=4]
 [ext_resource path="res://scenes/city/city_a/city.gd" type="Script" id=5]
-[ext_resource path="res://scenes/test/bg2.png" type="Texture" id=6]
-[ext_resource path="res://scenes/test/bg1.png" type="Texture" id=7]
-[ext_resource path="res://scenes/test/bg3.png" type="Texture" id=8]
+[ext_resource path="res://scenes/city/city_a/bg2.png" type="Texture" id=6]
+[ext_resource path="res://scenes/city/city_a/bg0.png" type="Texture" id=7]
 [ext_resource path="res://tiled/maps/city_a/navigate.tmx" type="PackedScene" id=9]
 [ext_resource path="res://scenes/city/city_a/car_rollup.png" type="Texture" id=10]
 [ext_resource path="res://scenes/city/city_a/player_rollup.png" type="Texture" id=11]
@@ -43,6 +42,7 @@
 [ext_resource path="res://scenes/main_menu/road.mp3" type="AudioStream" id=41]
 [ext_resource path="res://scenes/city/city_a/ignition.mp3" type="AudioStream" id=42]
 [ext_resource path="res://entities/player/sounds/pocket_rummage.mp3" type="AudioStream" id=43]
+[ext_resource path="res://scenes/city/city_a/bg1.png" type="Texture" id=44]
 
 [sub_resource type="Animation" id=18]
 resource_name = "intro"
@@ -499,29 +499,26 @@ motion_mirroring = Vector2( 256, 144 )
 texture = ExtResource( 7 )
 centered = false
 
-[node name="Buildings1" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
+[node name="City" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
 z_index = -99
-motion_scale = Vector2( 0.4, 0.4 )
-motion_mirroring = Vector2( 56, 0 )
+motion_scale = Vector2( 0.05, 0.05 )
+motion_offset = Vector2( -133, 0 )
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Buildings1" index="0"]
-position = Vector2( 0, -975 )
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/City" index="0"]
+position = Vector2( 0, -120 )
+texture = ExtResource( 44 )
+centered = false
+
+[node name="Buildings" type="ParallaxLayer" parent="ParallaxBackground" index="2"]
+z_index = -97
+motion_scale = Vector2( 0.8, 0.8 )
+motion_offset = Vector2( 0, -400 )
+motion_mirroring = Vector2( 1000, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Buildings" index="0"]
+modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
 texture = ExtResource( 6 )
 centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 280, 1024 )
-
-[node name="Buildings2" type="ParallaxLayer" parent="ParallaxBackground" index="2"]
-z_index = -98
-motion_scale = Vector2( 0.8, 0.8 )
-motion_mirroring = Vector2( 120, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Buildings2" index="0"]
-position = Vector2( 0, -976 )
-texture = ExtResource( 8 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 360, 1024 )
 
 [node name="Camera" parent="." index="1"]
 position = Vector2( -112, -72 )

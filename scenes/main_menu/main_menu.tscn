@@ -6,9 +6,9 @@
 [ext_resource path="res://scenes/main_menu/head.png" type="Texture" id=4]
 [ext_resource path="res://scenes/main_menu/title.png" type="Texture" id=5]
 [ext_resource path="res://entities/animator/animator.gd" type="Script" id=6]
-[ext_resource path="res://scenes/test/bg1.png" type="Texture" id=7]
-[ext_resource path="res://scenes/test/bg2.png" type="Texture" id=8]
-[ext_resource path="res://scenes/test/bg3.png" type="Texture" id=9]
+[ext_resource path="res://scenes/city/city_a/bg0.png" type="Texture" id=7]
+[ext_resource path="res://scenes/city/city_a/bg2.png" type="Texture" id=8]
+[ext_resource path="res://scenes/city/city_a/bg1.png" type="Texture" id=9]
 [ext_resource path="res://scenes/level.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/city/city_a/car_light.png" type="Texture" id=11]
 [ext_resource path="res://dialogue/alonebold.ttf" type="DynamicFontData" id=12]
@@ -285,29 +285,25 @@ motion_mirroring = Vector2( 256, 144 )
 texture = ExtResource( 7 )
 centered = false
 
-[node name="Buildings1" type="ParallaxLayer" parent="Demo/ParallaxBackground" index="1"]
+[node name="City" type="ParallaxLayer" parent="Demo/ParallaxBackground" index="1"]
 z_index = -99
-motion_scale = Vector2( 0.4, 1 )
-motion_mirroring = Vector2( 56, 0 )
+motion_scale = Vector2( 0, 0 )
+motion_offset = Vector2( -133, -70 )
 
-[node name="Sprite" type="Sprite" parent="Demo/ParallaxBackground/Buildings1" index="0"]
-position = Vector2( 0, -975 )
-texture = ExtResource( 8 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 280, 1024 )
-
-[node name="Buildings2" type="ParallaxLayer" parent="Demo/ParallaxBackground" index="2"]
-z_index = -98
-motion_scale = Vector2( 0.8, 1 )
-motion_mirroring = Vector2( 120, 0 )
-
-[node name="Sprite" type="Sprite" parent="Demo/ParallaxBackground/Buildings2" index="0"]
-position = Vector2( 0, -976 )
+[node name="Sprite" type="Sprite" parent="Demo/ParallaxBackground/City" index="0"]
 texture = ExtResource( 9 )
 centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 360, 1024 )
+
+[node name="Buildings" type="ParallaxLayer" parent="Demo/ParallaxBackground" index="2"]
+z_index = -98
+motion_scale = Vector2( 0.8, 1 )
+motion_offset = Vector2( 0, -400 )
+motion_mirroring = Vector2( 1000, 0 )
+
+[node name="Sprite" type="Sprite" parent="Demo/ParallaxBackground/Buildings" index="0"]
+modulate = Color( 0.392157, 0.392157, 0.392157, 1 )
+texture = ExtResource( 8 )
+centered = false
 
 [node name="Car" type="AnimatedSprite" parent="Demo" index="1"]
 position = Vector2( 53, -39 )

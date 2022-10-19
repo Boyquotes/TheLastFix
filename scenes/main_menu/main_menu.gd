@@ -18,7 +18,7 @@ func _ready():
 
 
 func _process(delta):
-	$Demo/ParallaxBackground.scroll_base_offset.x -= delta * 40
+	$Demo/ParallaxBackground.scroll_base_offset.x -= delta * 60
 	
 	if _started_cutscene:
 		return

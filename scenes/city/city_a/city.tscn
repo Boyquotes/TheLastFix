@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://scenes/playable_level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tiled/maps/city_a/city_intro.tmx" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/city/city_a/city.gd" type="Script" id=5]
 [ext_resource path="res://scenes/city/city_a/bg2.png" type="Texture" id=6]
 [ext_resource path="res://scenes/city/city_a/bg0.png" type="Texture" id=7]
+[ext_resource path="res://scenes/city/city_a/car_brake.mp3" type="AudioStream" id=8]
 [ext_resource path="res://tiled/maps/city_a/navigate.tmx" type="PackedScene" id=9]
 [ext_resource path="res://scenes/city/city_a/car_rollup.png" type="Texture" id=10]
 [ext_resource path="res://scenes/city/city_a/player_rollup.png" type="Texture" id=11]
@@ -317,6 +318,10 @@ tracks/20/imported = false
 tracks/20/enabled = true
 tracks/20/keys = {
 "clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+}, {
 "end_offset": 1.0,
 "start_offset": 0.0,
 "stream": ExtResource( 30 )
@@ -333,7 +338,7 @@ tracks/20/keys = {
 "start_offset": 0.0,
 "stream": null
 } ],
-"times": PoolRealArray( 7.3, 9, 9.8, 10.2 )
+"times": PoolRealArray( 4.5, 7.3, 9, 9.8, 10.2 )
 }
 tracks/21/type = "method"
 tracks/21/path = NodePath("Screens/city_intro/CarSound")
@@ -565,14 +570,14 @@ z_index = -10
 texture = ExtResource( 10 )
 hframes = 8
 vframes = 2
-frame = 12
+frame = 8
 
 [node name="PlayerPuppet" type="Sprite" parent="Screens/city_intro/Car" index="0"]
 position = Vector2( 5, 6 )
 z_index = 1
 texture = ExtResource( 11 )
 hframes = 16
-frame = 14
+frame = 1
 
 [node name="PlayerLight" parent="Screens/city_intro/Car/PlayerPuppet" index="0" instance=ExtResource( 13 )]
 energy = 0.3
@@ -623,10 +628,9 @@ stream = ExtResource( 30 )
 [node name="EngineSound" type="AudioStreamPlayer" parent="Screens/city_intro" index="7"]
 stream = ExtResource( 40 )
 volume_db = -30.0
-pitch_scale = 0.3
 
 [node name="CarSound" type="AudioStreamPlayer" parent="Screens/city_intro" index="8"]
-stream = ExtResource( 41 )
+stream = ExtResource( 42 )
 volume_db = -20.0
 
 [node name="RummageSound" type="AudioStreamPlayer" parent="Screens/city_intro" index="9"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scenes/city/city_b/apartment/background.png" type="Texture" id=1]
 [ext_resource path="res://scenes/city/city_b/apartment/kitchen.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/city/city_b/apartment/tony.png" type="Texture" id=8]
 [ext_resource path="res://scenes/city/city_b/apartment/tony_z.png" type="Texture" id=9]
 [ext_resource path="res://scenes/city/city_b/apartment/bottle_shatter.png" type="Texture" id=10]
+[ext_resource path="res://scenes/city/city_b/apartment/bottle_break.mp3" type="AudioStream" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.5, 41 )
@@ -305,6 +306,20 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+tracks/4/type = "method"
+tracks/4/path = NodePath("Tony/GlassShatter")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play"
+} ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "sitting_idle"
@@ -475,6 +490,9 @@ position = Vector2( -2, 5 )
 z_index = 20
 texture = ExtResource( 10 )
 hframes = 7
+
+[node name="GlassShatter" type="AudioStreamPlayer" parent="Tony"]
+stream = ExtResource( 11 )
 
 [node name="TonyPlayer" type="AnimationPlayer" parent="."]
 anims/drink = SubResource( 13 )

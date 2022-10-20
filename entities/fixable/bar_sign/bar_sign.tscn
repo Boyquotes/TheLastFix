@@ -96,6 +96,18 @@ tracks/2/keys = {
 } ],
 "times": PoolRealArray( 0.1, 1.15, 3.05, 3.3, 3.5, 3.7, 3.9, 4.1, 4.3, 6.35, 8.1 )
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("HumSound:pause_mode")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 8.7 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 50, 10 )
@@ -186,4 +198,5 @@ max_distance = 200.0
 stream = ExtResource( 11 )
 max_distance = 200.0
 
+[connection signal="finished_fixing" from="." to="." method="on_finished_fixing"]
 [connection signal="frame_changed" from="Sprite" to="." method="_on_Sprite_frame_changed"]

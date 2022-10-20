@@ -17,6 +17,10 @@ func set_crossed(count: int):
 	_page.set_crossed(count)
 
 
+func _ready():
+	get_tree().paused = true
+
+
 func _process(delta):
 	if _dir != 0:
 		_prog += _speed * delta * _dir
@@ -32,6 +36,7 @@ func _process(delta):
 			_page.prog = _prog * _prog * (3 - 2 * _prog) - (1 - _page.min_prog)  # Smoothstep
 	elif _page.enabled:
 		if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("escape"):
+			get_tree().paused = false
 			emit_signal("close_page")
 			_page.enabled = false
 			_dir = -2

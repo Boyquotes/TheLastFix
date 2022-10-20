@@ -186,8 +186,6 @@ func _physics_process(delta):
 			if _joints.size() <= 1:
 				retract_immediately()
 				return
-
-		_remove_joints(space_state)
 	else:
 		var intersect = space_state.intersect_point(position, 1, [self], 32, false, true)
 		if intersect.empty():

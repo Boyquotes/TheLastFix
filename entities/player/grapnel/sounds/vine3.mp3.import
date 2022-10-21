@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/vine3.mp3-92dd13ac9cc213246baffa9219febb05.mp3str"
+
+[deps]
+
+source_file="res://entities/player/grapnel/sounds/vine3.mp3"
+dest_files=[ "res://.import/vine3.mp3-92dd13ac9cc213246baffa9219febb05.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

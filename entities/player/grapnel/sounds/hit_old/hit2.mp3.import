@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hit2.mp3-8e2cc1c3b97870f3ace26afa7b7a1370.mp3str"
+
+[deps]
+
+source_file="res://entities/player/grapnel/sounds/hit_old/hit2.mp3"
+dest_files=[ "res://.import/hit2.mp3-8e2cc1c3b97870f3ace26afa7b7a1370.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -29,6 +29,11 @@ onready var _sprite = $Sprite
 onready var _collision = $Collision
 onready var _particles = $Particles
 onready var _light = $Light
+onready var _shoot_sound = $ShootSound
+onready var _latch_sound = $LatchSound
+onready var _vine_sound = $VineSound
+onready var _hit_sound = $HitSound
+onready var _zip_sound = $ZipSound
 
 export var active = false
 export var stuck = false
@@ -56,8 +61,7 @@ func _ready():
 	physics_query.collision_layer = 2 | 8
 	
 	var error = Game.connect("player_light_changed", self, "_set_player_light")
-	if error != 0:
-		print("Error connecting player_light_changed: ", error)
+	assert(error == 0, "Error connecting player_light_changed: " + str(error))
 
 
 func _set_player_light(energy: float):
@@ -116,6 +120,7 @@ func shoot(direction: Vector2):
 	active = true
 	_retracting = false
 	visible = true
+	_shoot_sound.play()
 
 
 func retract():
@@ -165,6 +170,9 @@ func get_pull(origin: Vector2, velocity: Vector2) -> Vector2:
 
 
 func _physics_process(delta):
+	var zipping = active and not stuck
+	if _zip_sound.playing != zipping:
+		_zip_sound.playing = zipping
 	if not active:
 		return
 
@@ -198,6 +206,7 @@ func _physics_process(delta):
 			var new_pos = position - collision.normal * 2
 			# If the tile hit belongs to the non_grapnel layer, retract the grapnel
 			physics_query.transform = transform
+			_hit_sound.play()
 			
 			for _i in 2:
 				physics_query.transform.origin = new_pos
@@ -206,6 +215,7 @@ func _physics_process(delta):
 				for coll in intersects:
 					var body = coll.collider
 					if body.collision_layer & 8 != 0:
+						_vine_sound.play()
 						retract()
 						return
 					if body.collision_layer & 2 != 0:
@@ -215,7 +225,9 @@ func _physics_process(delta):
 					break
 					
 				new_pos += _velocity
-				
+			
+			
+			_latch_sound.play()
 			_particles.emitting = true
 			_particles.restart()
 			hit_angle = -round((-collision.normal).angle() * 180 / PI)

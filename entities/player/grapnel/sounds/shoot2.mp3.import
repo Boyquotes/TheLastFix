@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/shoot2.mp3-31c4022e73925793ec9798d15c417e47.mp3str"
+
+[deps]
+
+source_file="res://entities/player/grapnel/sounds/shoot2.mp3"
+dest_files=[ "res://.import/shoot2.mp3-31c4022e73925793ec9798d15c417e47.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

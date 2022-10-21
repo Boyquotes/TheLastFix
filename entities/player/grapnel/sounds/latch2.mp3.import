@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/latch2.mp3-8a54724ac8d66ddc4b056dff912b62d1.mp3str"
+
+[deps]
+
+source_file="res://entities/player/grapnel/sounds/latch2.mp3"
+dest_files=[ "res://.import/latch2.mp3-8a54724ac8d66ddc4b056dff912b62d1.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

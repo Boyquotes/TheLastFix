@@ -115,6 +115,7 @@ func shoot(direction: Vector2):
 	_joints.push_back(position)
 	_joints.push_back(position)
 	_prev_joints = _joints
+	_prev_player_pos = _player.position
 	_pushoff = Vector2.ZERO
 
 	active = true
@@ -225,7 +226,6 @@ func _physics_process(delta):
 					break
 					
 				new_pos += _velocity
-			
 			
 			_latch_sound.play()
 			_particles.emitting = true

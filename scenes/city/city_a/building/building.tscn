@@ -277,7 +277,7 @@ modulate = Color( 0.843137, 0.843137, 0.843137, 1 )
 position = Vector2( -65, 117 )
 z_index = 5
 frames = SubResource( 27 )
-frame = 7
+frame = 3
 playing = true
 
 [node name="Interior" type="Node2D" parent="."]
@@ -344,10 +344,11 @@ position = Vector2( 14.5, 142 )
 shape = SubResource( 2 )
 
 [node name="FloorShadow" type="Light2D" parent="Interior/GroundFloor"]
-position = Vector2( 0, 142.5 )
+position = Vector2( -1, -56 )
 texture = ExtResource( 6 )
 mode = 2
-range_item_cull_mask = 0
+range_z_max = -10
+range_layer_min = -100
 
 [node name="InteriorArea" type="Area2D" parent="Interior"]
 collision_layer = 0
@@ -385,6 +386,7 @@ shape = SubResource( 28 )
 
 [node name="PenthousePrompt" parent="Interior" instance=ExtResource( 12 )]
 position = Vector2( 17, -159 )
+monitoring = false
 
 [node name="Collision" type="CollisionShape2D" parent="Interior/PenthousePrompt"]
 position = Vector2( -17, 0 )

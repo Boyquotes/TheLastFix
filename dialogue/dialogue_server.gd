@@ -19,6 +19,7 @@ class TextNode:
 
 class LineAction:
 	var nodes = Array()
+	var wait_on_punctuation = true
 	
 	func _to_string():
 		var result = ""
@@ -103,6 +104,9 @@ func parse_node(parser: XMLParser):
 			'l':
 				_current_line = LineAction.new()
 				_current_sequence.actions.append(_current_line)
+				for i in parser.get_attribute_count():
+					if parser.get_attribute_name(i) == "punct":
+						_current_line.wait_on_punctuation = (parser.get_attribute_value(i) == "true")
 			'speaker':
 				if parser.read() != OK or parser.get_node_type() != XMLParser.NODE_TEXT:
 					return

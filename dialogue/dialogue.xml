@@ -5,7 +5,7 @@
 	<l>We're throwing money away by continuing to employ you.</l>
 	<l>Turn your van around and hand in your grapnel.</l>
 	<l>...</l>
-	<l>Did you hear me?!</l>
+	<l punct="false">Did you hear me?!</l>
 	<l>Get your ass back here before I--</l>
 </seq>
 
@@ -41,23 +41,23 @@
     <pause>
 
     <face pic="tony_annoyed">
-    <l>Hey, I'm talkin' to you, grease monkey!</l>
+    <l punct="false">Hey, I'm talkin' to you, grease monkey!</l>
     <pause>
 
     <face pic="tony_angry">
     <l>Don't ignore me!</l>
-    <l>What, you think you're... <pause>better than me?!</l>
+    <l punct="false">What, you think you're... <pause>better than me?!</l>
 </seq>
 
 <seq id="drunk_tony_2">
     <speaker pic="tony_furious">Tony</speaker>
     <l>I asked a fucking question, grease monkey.</l>
     <face pic="tony_angry">
-    <l>You're not... you're not better than me!</l>
+    <l punct="false">You're not... you're not better than me!</l>
     <face pic="tony_annoyed">
-    <l>You're just a...</l>
+    <l punct="false">You're just a...</l>
     <face pic="tony_tired">
-    <l>...stupid...</l>
+    <l punct="false">...stupid...</l>
     <face pic="tony_muy_tired">
-    <l>...little...</l>
+    <l punct="false">...little...</l>
 </seq>

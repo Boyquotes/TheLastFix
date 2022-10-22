@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/frankie_old.mp3-0da9a02a42d34b8ba64a9ffe4fb52fed.mp3str"
+
+[deps]
+
+source_file="res://dialogue/sound/frankie_old.mp3"
+dest_files=[ "res://.import/frankie_old.mp3-0da9a02a42d34b8ba64a9ffe4fb52fed.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

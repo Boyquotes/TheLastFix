@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/tony_1.mp3-2ade0448e4a3b9aff2bccf8169c6ae01.mp3str"
+
+[deps]
+
+source_file="res://dialogue/sound/tony_1.mp3"
+dest_files=[ "res://.import/tony_1.mp3-2ade0448e4a3b9aff2bccf8169c6ae01.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

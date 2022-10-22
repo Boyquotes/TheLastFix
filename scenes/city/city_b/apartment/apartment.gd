@@ -52,6 +52,7 @@ func _on_Fridge_tony_angered(level: int):
 			_cutscene_animator.play("enable_prompt")
 			$Tony/Barrier.collision_layer = 4
 			$Tony/Barrier.collision_mask = 1
+			$Tony/BackoutArea/Collision.disabled = false
 			_tony_player.play("gun_idle")
 
 
@@ -63,3 +64,8 @@ func _on_gun_grab():
 
 func end_of_demo():
 	Game.load_level(load("res://scenes/demo_end/demo_end.tscn"))
+
+
+func _on_BackoutArea_body_entered(body):
+	if body is Player:
+		_on_gun_grab()

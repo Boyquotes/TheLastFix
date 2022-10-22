@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/city/city_b/apartment/background.png" type="Texture" id=1]
 [ext_resource path="res://scenes/city/city_b/apartment/kitchen.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/city/city_b/apartment/tony_z.png" type="Texture" id=9]
 [ext_resource path="res://scenes/city/city_b/apartment/bottle_shatter.png" type="Texture" id=10]
 [ext_resource path="res://scenes/city/city_b/apartment/bottle_break.mp3" type="AudioStream" id=11]
+[ext_resource path="res://entities/prompt/prompt.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.5, 41 )
@@ -23,6 +24,33 @@ extents = Vector2( 109, 10 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 14, 37 )
+
+[sub_resource type="Animation" id=22]
+resource_name = "enable_prompt"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tony/Prompt:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tony/Prompt:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "tony_wakeup"
@@ -127,6 +155,13 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 14.45
 color_ramp = SubResource( 19 )
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 2.25, 37 )
+
+[sub_resource type="SegmentShape2D" id=21]
+a = Vector2( 7, -65 )
+b = Vector2( 7, 10 )
 
 [sub_resource type="Animation" id=13]
 resource_name = "drink"
@@ -471,6 +506,7 @@ shape = SubResource( 3 )
 position = Vector2( -1, 32 )
 
 [node name="CutsceneAnimator" type="AnimationPlayer" parent="."]
+anims/enable_prompt = SubResource( 22 )
 anims/tony_wakeup = SubResource( 4 )
 script = ExtResource( 6 )
 
@@ -503,6 +539,23 @@ hframes = 7
 pause_mode = 2
 stream = ExtResource( 11 )
 
+[node name="Prompt" parent="Tony" instance=ExtResource( 12 )]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 9, -9 )
+
+[node name="Collision" type="CollisionShape2D" parent="Tony/Prompt"]
+position = Vector2( 4.25, -19 )
+shape = SubResource( 20 )
+
+[node name="Barrier" type="StaticBody2D" parent="Tony"]
+position = Vector2( 1, 0 )
+collision_layer = 0
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape2D" parent="Tony/Barrier"]
+position = Vector2( 3, 0 )
+shape = SubResource( 21 )
+
 [node name="TonyPlayer" type="AnimationPlayer" parent="."]
 anims/drink = SubResource( 13 )
 anims/get_up = SubResource( 11 )
@@ -517,3 +570,4 @@ anims/wakeup = SubResource( 9 )
 
 [connection signal="tony_angered" from="Fridge" to="." method="_on_Fridge_tony_angered"]
 [connection signal="body_entered" from="TonySeeArea" to="." method="_on_TonySeeArea_body_entered"]
+[connection signal="used" from="Tony/Prompt" to="." method="_on_gun_grab"]

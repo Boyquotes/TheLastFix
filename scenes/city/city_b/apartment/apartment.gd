@@ -48,3 +48,18 @@ func _on_Fridge_tony_angered(level: int):
 			_player.control_enabled = true
 			_player.grapnel_enabled = false
 			_player._sprite.frame_coords = Vector2(0, 15)
+			
+			_cutscene_animator.play("enable_prompt")
+			$Tony/Barrier.collision_layer = 4
+			$Tony/Barrier.collision_mask = 1
+			_tony_player.play("gun_idle")
+
+
+func _on_gun_grab():
+	Game.fade_out(1)
+	var error = Game.connect("fade_finished", self, "end_of_demo", [], CONNECT_ONESHOT)
+	assert(error == 0, "Error connecting fade_finished: " + str(error))
+
+
+func end_of_demo():
+	Game.load_level(load("res://scenes/demo_end/demo_end.tscn"))

@@ -171,8 +171,13 @@ func play_walking():
 func _walking():
 	if inching:
 		_looking.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-		play_animation("inch_forward" if _looking.x < 0 else "inch_backward")
-		_animation_player.playback_active = _looking.x != 0
+		if _looking.x != 0:
+			play_animation("inch_forward" if _looking.x < 0 else "inch_backward")
+		if test_move(transform, Vector2(_looking.x, 0)):
+			_animation_player.stop(false)
+			_sprite.frame_coords = Vector2(0, 15)
+		else:
+			_animation_player.playback_active = _looking.x != 0
 		return 0
 	
 	var prev_looking = _looking
@@ -507,4 +512,5 @@ func _set_player_visible(value: bool):
 
 
 func inch(dir: float):
-	position.x += dir
+	if not test_move(transform, Vector2(dir, 0)):
+		position.x += dir

@@ -6,6 +6,7 @@ var _started_cutscene = false
 func _ready():
 	Game.pausable = false
 	Game.set_zoom(1)
+	Game.fade_in(0.5)
 	$Demo/RoadAnimation.play("ride")
 	$Demo/HeadAnimation.play("ride")
 	$Demo/CarSwayAnimation.play("sway")

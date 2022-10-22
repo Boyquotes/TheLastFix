@@ -12,6 +12,7 @@ export var grapnel_enabled = true
 export var air_frame = -1 setget _set_air_frame
 export var spawnpoint: Vector2
 export var snap_to_floor = false
+export var inching = false
 
 const _gravity = 12
 const _friction = 10
@@ -168,6 +169,12 @@ func play_walking():
 
 
 func _walking():
+	if inching:
+		_looking.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+		play_animation("inch_forward" if _looking.x < 0 else "inch_backward")
+		_animation_player.playback_active = _looking.x != 0
+		return 0
+	
 	var prev_looking = _looking
 	_looking.y = Input.get_action_strength("look_down") - Input.get_action_strength("look_up")
 	
@@ -318,7 +325,9 @@ func _physics_process(delta):
 		_velocity.x += _walking()
 
 	_velocity.y += _falling()
-	_velocity += _jumping()
+	if not inching:
+		_velocity += _jumping()
+
 	if control_enabled:
 		_velocity += _grappling(delta)
 	elif _target_pos != null:
@@ -495,3 +504,7 @@ func _set_player_visible(value: bool):
 	player_visible = value
 	_sprite.visible = value
 	_grapnel.hook_visible = value
+
+
+func inch(dir: float):
+	position.x += dir

@@ -42,3 +42,9 @@ func _on_Fridge_tony_angered(level: int):
 			_tony_player.play("pullout_gun")
 		4:
 			_tony_player.play("gun_idle")
+		5:
+			_player.inching = true
+			_player.visible = true
+			_player.control_enabled = true
+			_player.grapnel_enabled = false
+			_player._sprite.frame_coords = Vector2(0, 15)

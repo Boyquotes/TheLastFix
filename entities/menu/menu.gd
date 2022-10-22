@@ -8,6 +8,8 @@ export var right_side = false
 
 onready var _arrow = $Arrow
 onready var _arrow_animation = $ArrowAnimation
+onready var _select_sound = $SelectSound
+onready var _enter_sound = $EnterSound
 
 var _buttons = []
 var _select_index = -1
@@ -22,7 +24,7 @@ func _ready():
 func collect_children():
 	var i = 0
 	for child in get_children():
-		if child != _arrow and child != _arrow_animation:
+		if child.owner != self:
 			if child.visible and _select_index < 0:
 				_select_index = i
 			i += 1
@@ -49,12 +51,12 @@ func _process(_delta):
 				_select_index = _buttons.size() - 1
 			elif not _buttons[_select_index].visible:
 				continue
-			
+
 			break
-			
+
 		if not _buttons[_select_index].visible:
 			_select_index = origin_index
-
+	
 	var _button = _buttons[_select_index]
 	_arrow.global_position = (
 		_button.rect_global_position + Vector2(
@@ -63,5 +65,9 @@ func _process(_delta):
 		)
 	).round()
 	
-	if Input.is_action_just_pressed("interact"):
+	if origin_index != _select_index:
+		_select_sound.play()
+	
+	if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("enter"):
+		_enter_sound.play()
 		emit_signal("option_pressed", _select_index)

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/enter.mp3-e44a074639d35d59c06d86797327425a.mp3str"
+
+[deps]
+
+source_file="res://entities/menu/enter.mp3"
+dest_files=[ "res://.import/enter.mp3-e44a074639d35d59c06d86797327425a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

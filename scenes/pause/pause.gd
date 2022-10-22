@@ -4,7 +4,7 @@ extends GUIScene
 var prog = 0
 var dir = 1
 
-var _fade_speed = 10
+var _fade_speed = 5
 
 var _quitting = false
 

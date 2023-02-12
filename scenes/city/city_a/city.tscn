@@ -638,7 +638,6 @@ stream = ExtResource("40")
 volume_db = -30.0
 
 [node name="CarSound" type="AudioStreamPlayer" parent="Screens/city_intro" index="8"]
-stream = ExtResource("42")
 volume_db = -20.0
 
 [node name="RummageSound" type="AudioStreamPlayer" parent="Screens/city_intro" index="9"]

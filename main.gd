@@ -38,16 +38,17 @@ var zoom_speed = 0.0
 func _ready():
 	randomize()
 	var root = get_tree().root
-	_current_level = root.get_child(root.get_child_count() - 1)
-	root.call_deferred("remove_child", _current_level)
+
+	_current_level = root.get_child(0)
+	if _current_level == self:
+		_current_level = root.get_child(1)
+
 	if _current_level is Level:
-		_level_container.call_deferred("add_child", _current_level)
+		_current_level.call_deferred("reparent", _level_container)
 	elif _current_level is GUIScene:
-		_hud.call_deferred("add_child", _current_level)
+		_current_level.call_deferred("reparent", _hud)
 		_current_gui = _current_level
 		_current_level = null
-
-	_camera.set_deferred("current", true)
 
 
 func _process(delta):

@@ -8,7 +8,7 @@ var _fade_speed = 5
 
 var _quitting = false
 
-onready var menu = $Box/Menu
+@onready var menu = $Box/Menu
 
 
 func _ready():

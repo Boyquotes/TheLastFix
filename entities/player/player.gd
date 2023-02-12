@@ -1,18 +1,18 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 class_name Player
 
 signal reached_target
 
 
-export var player_visible = true setget _set_player_visible
-export var frozen = false
-export var control_enabled = true
-export var grapnel_enabled = true
-export var air_frame = -1 setget _set_air_frame
-export var spawnpoint: Vector2
-export var snap_to_floor = false
-export var inching = false
+@export var player_visible = true : set = _set_player_visible
+@export var frozen = false
+@export var control_enabled = true
+@export var grapnel_enabled = true
+@export var air_frame = -1 : set = _set_air_frame
+@export var spawnpoint: Vector2
+@export var snap_to_floor = false
+@export var inching = false
 
 const _gravity = 12
 const _friction = 10
@@ -28,7 +28,6 @@ const _feet_offset = 7
 const _autowalk_snap_prox = 1
 
 var _prev_velocity = Vector2.ZERO
-var _velocity = Vector2.ZERO
 var _looking = Vector2.RIGHT
 var _jump_time = -1
 var _coyote_time = 0.0
@@ -43,19 +42,18 @@ var _stuck_crouching = false
 var _target_pos = null
 var _target_flipped = false
 
-var _collision_extents = PoolVector2Array()
+var _collision_extents = PackedVector2Array()
 
 var _grapnel_origins = {}
 
-onready var _animation_player = $AnimationPlayer
-onready var _sprite = $Sprite
-onready var _collision = $Collision
-onready var _hook_origin = $HookOrigin
-onready var _light = $PlayerLight
-onready var _death_particles = $DeathParticles
-onready var _spawn_particles = $SpawnParticles
-onready var _land_sound = $Sound/Land
-onready var _death_sound = $Sound/Death
+@onready var _animation_player = $AnimationPlayer
+@onready var _sprite = $Sprite2D
+@onready var _collision = $Collision
+@onready var _hook_origin = $HookOrigin
+@onready var _light = $PlayerLight
+@onready var _death_particles = $DeathParticles
+@onready var _land_sound = $Sound/Land
+@onready var _death_sound = $Sound/Death
 
 
 func _ready():
@@ -68,9 +66,9 @@ func _ready():
 	_collision_extents.append(_collision.position + Vector2(-width, height))
 
 
+@warning_ignore("integer_division")
 func load_grapnel_origins():
 	var origins_image = preload("res://entities/player/player_grapnel_origins.png")
-	origins_image.lock()
 	for x in origins_image.get_width() / 18:
 		for y in origins_image.get_height() / 18:
 			var total_pixels = 0
@@ -82,15 +80,15 @@ func load_grapnel_origins():
 					var color = origins_image.get_pixel(x * 18 + sub_x, y * 18 + sub_y)
 					var found = true
 					match color:
-						Color.white:
+						Color.WHITE:
 							angle = 0
-						Color.red:
+						Color.RED:
 							angle = 90
-						Color.green:
+						Color.GREEN:
 							angle = 45
-						Color.blue:
+						Color.BLUE:
 							angle = 315
-						Color.magenta:
+						Color.MAGENTA:
 							angle = 270
 						_:
 							found = false
@@ -103,8 +101,6 @@ func load_grapnel_origins():
 				_grapnel_origins[Vector2(x, y)] = Vector3(avg_pos.x, avg_pos.y, angle)
 			else:
 				_grapnel_origins[Vector2(x, y)] = null
-
-	origins_image.unlock()
 
 
 func update_air_frame():
@@ -125,10 +121,10 @@ func _set_air_frame(frame: int):
 		update_air_frame()
 
 
-func play_animation(name: String):
+func play_animation(animation_name: String):
 	_animation_player.playback_active = true
-	_animation_player.play(name)
-	if name != "crouch" and name != "crawl" and name != "get_up":
+	_animation_player.play(animation_name)
+	if animation_name not in ["crouch", "crawl", "get_up"]:
 		_light.position.y = 0
 
 
@@ -139,7 +135,7 @@ func play_idle(reset_air_frame = true):
 		update_air_frame()
 		return
 
-	if is_on_floor() or _velocity.y == 0:
+	if is_on_floor() or velocity.y == 0:
 		if _looking.y == 0:
 			play_animation("idle")
 		elif _looking.y < 0:
@@ -151,7 +147,7 @@ func play_idle(reset_air_frame = true):
 			else:
 				play_animation("crouch")
 	else:
-		if _velocity.y > 0:
+		if velocity.y > 0:
 			play_animation("fall")
 		else:
 			play_animation("jump")
@@ -219,7 +215,7 @@ func _walking():
 			if _crouching:
 				play_animation("crouch")
 				_animation_player.queue("crawl")
-				return -_velocity.x
+				return -velocity.x
 			play_animation("get_up")
 
 		if _walkdir == 0:
@@ -231,8 +227,8 @@ func _walking():
 		update_air_frame()
 
 	if _crouching:
-		return _crawl_speed * _walkdir - _velocity.x
-	return lerp(_walk_speed * _walkdir * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(_velocity.x) / 100) - min(_friction, abs(_velocity.x)) * sign(_velocity.x)
+		return _crawl_speed * _walkdir - velocity.x
+	return lerp(_walk_speed * _walkdir * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(velocity.x) / 100) - min(_friction, abs(velocity.x)) * sign(velocity.x)
 
 
 func _jumping():
@@ -249,9 +245,9 @@ func _jumping():
 		if _coyote_time < _max_coyote_time:
 			_jump_time = 0
 			_coyote_time = _max_coyote_time
-			return Vector2(0, -_jump_speed - _velocity.y)
+			return Vector2(0, -_jump_speed - velocity.y)
 
-	if Input.is_action_just_released("jump") and _velocity.y < 0 and _jump_time >= 0:
+	if Input.is_action_just_released("jump") and velocity.y < 0 and _jump_time >= 0:
 		var pushdown = 0.6 * (_jump_speed - 0.7 * _jump_time * _gravity)
 		_jump_time = -1
 		return Vector2(0, pushdown)
@@ -270,8 +266,8 @@ func _falling():
 	if _pulling:
 		gravity_strength *= 0.6
 
-	if _gravity * gravity_strength + _velocity.y > _terminal_velocity:
-		return _terminal_velocity - _velocity.y
+	if _gravity * gravity_strength + velocity.y > _terminal_velocity:
+		return _terminal_velocity - velocity.y
 	return _gravity * gravity_strength
 
 
@@ -284,7 +280,7 @@ func _grappling(_delta):
 			_pulling = false
 
 	if _pulling:
-		var pull = _grapnel.get_pull(position, _velocity)
+		var pull = _grapnel.get_pull(position, velocity)
 		
 		if _holding_wall:
 			return pull
@@ -299,7 +295,7 @@ func _grappling(_delta):
 			_flipped = _grapnel.hit_angle == 0
 			return pull
 		
-		# Prevent the player getting stuck on ledges
+		# Prevent the player getting stuck checked ledges
 		var angle = int(-pull.normalized().angle() * 180 / PI)
 		if angle < 0:
 			angle += 360
@@ -307,10 +303,18 @@ func _grappling(_delta):
 		angle = int(round(angle / 90.0))
 		var space_state = get_world_2d().direct_space_state
 		var offset = Vector2.RIGHT.rotated(-angle * PI / 2)
-		var intersect_1 = space_state.intersect_point(_collision_extents[angle % 4] + offset + position, 1, [self], 2)
-		var intersect_2 = space_state.intersect_point(_collision_extents[(angle + 1) % 4] + offset + position, 1, [self], 2)
-		if intersect_1.empty() != intersect_2.empty():
-			pull += offset.rotated(PI / 2 * (-1 if intersect_2.empty() else 1)) * 15
+		
+		var params = PhysicsPointQueryParameters2D.new()
+		params.position = _collision_extents[angle % 4] + offset + position
+		params.exclude = [self]
+		params.collision_mask = 2
+		var intersect_1 = space_state.intersect_point(params, 1)
+
+		params.position = _collision_extents[(angle + 1) % 4] + offset + position
+		var intersect_2 = space_state.intersect_point(params, 2)
+
+		if intersect_1.is_empty() != intersect_2.is_empty():
+			pull += offset.rotated(PI / 2 * (-1 if intersect_2.is_empty() else 1)) * 15
 		
 		return pull
 	else:
@@ -323,31 +327,33 @@ func _physics_process(delta):
 	if frozen:
 		return
 
-	_prev_velocity = _velocity
+	_prev_velocity = velocity
 	var prev_flipped = _flipped
 
 	if not _holding_wall and control_enabled:
-		_velocity.x += _walking()
+		velocity.x += _walking()
 
-	_velocity.y += _falling()
+	velocity.y += _falling()
 	if not inching:
-		_velocity += _jumping()
+		velocity += _jumping()
 
 	if control_enabled:
-		_velocity += _grappling(delta)
+		velocity += _grappling(delta)
 	elif _target_pos != null:
-		_velocity.x += _autowalk(delta)
+		velocity.x += _autowalk(delta)
 	else:
 		_looking = Vector2.RIGHT
 	
 	if snap_to_floor:
-		_velocity = move_and_slide_with_snap(
-			_velocity,
-			Vector2.DOWN * 4 if not _pulling and _jump_time < 0 else Vector2.ZERO,
-			Vector2.UP,
-			true).limit_length(_max_velocity)
+		floor_snap_length = 4 if not _pulling and _jump_time < 0 else 0
+		floor_stop_on_slope = false
 	else:
-		_velocity = move_and_slide(_velocity, Vector2.UP, true).limit_length(_max_velocity)
+		floor_snap_length = 0
+		floor_stop_on_slope = true
+
+	up_direction = Vector2.UP
+	move_and_slide()
+	velocity = velocity.limit_length(_max_velocity)
 
 	if is_on_floor():
 		_coyote_time = 0.0
@@ -387,17 +393,17 @@ func _physics_process(delta):
 		_jump_time = -1
 		if _was_airborne and not _crouching:
 			_land_sound.volume_db = (_prev_velocity.y / _terminal_velocity - 1.2) * 40
-			_land_sound.play()
+			_land_sound.play_rand()
 			if _looking.y > 0 and not _grapnel.active:
 				air_frame = -1
 				play_animation("crouch")
-				_velocity.x = 0
+				velocity.x = 0
 			else:
 				play_animation("land")
 	else:
-		if _velocity.y < 0:
+		if velocity.y < 0:
 			play_animation("jump")
-		elif _velocity.y > 0:
+		elif velocity.y > 0:
 			_jump_time = -1
 			if _prev_velocity.y <= 0 and not _stuck_crouching:
 				play_animation("fall")
@@ -405,7 +411,7 @@ func _physics_process(delta):
 
 	_was_airborne = not is_on_floor()
 	
-	for i in get_slide_count():
+	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		if collision.collider.collision_layer & 16 != 0:
 			die(-collision.normal)
@@ -429,7 +435,7 @@ func _on_Grapnel_retract():
 
 
 func _on_Sprite_frame_changed():
-	var _origin_pos = _grapnel_origins[_sprite.frame_coords]
+	var _origin_pos = _grapnel_origins.get(_sprite.frame_coords)
 	if _origin_pos == null:
 		_grapnel.hook_visible = false
 	else:
@@ -441,11 +447,11 @@ func _on_Sprite_frame_changed():
 		_grapnel.hold_angle(angle)
 
 
-func go_to(position: Vector2, flipped = false):
+func go_to(target: Vector2, flipped = false):
 	control_enabled = false
 	if _grapnel.active:
 		_grapnel.retract()
-	_target_pos = position
+	_target_pos = target
 	_target_flipped = flipped
 	_looking = Vector2.ZERO
 
@@ -457,12 +463,12 @@ func _autowalk(delta):
 		if _animation_player.current_animation == "walk":
 			play_idle()
 		
-		var velocity = (_target_pos.x - position.x) / delta - _velocity.x
-		if is_on_floor() and velocity + _velocity.x == 0:
+		var walk_velocity = (_target_pos.x - position.x) / delta - velocity.x
+		if is_on_floor() and walk_velocity + velocity.x == 0:
 			emit_signal("reached_target")
 			_target_pos = null
 
-		return velocity
+		return walk_velocity
 
 	if air_frame < 0:
 		play_animation("walk")
@@ -474,11 +480,12 @@ func _autowalk(delta):
 		_walkdir = -1
 		_flipped = true
 	
-	return lerp((_walk_speed * _walkdir) * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(_velocity.x) / 100) - min(_friction, abs(_velocity.x)) * sign(_velocity.x)
+	return lerp((_walk_speed * _walkdir) * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(velocity.x) / 100) - min(_friction, abs(velocity.x)) * sign(velocity.x)
 
 
 func _on_Player_visibility_changed():
-	_grapnel.hook_visible = visible
+	if _grapnel != null:
+		_grapnel.hook_visible = visible
 
 
 func die(direction: Vector2):
@@ -486,9 +493,9 @@ func die(direction: Vector2):
 	_death_particles.position = Vector2.ZERO if collision == null else collision.position - position
 	_death_particles.process_material.direction = -Vector3(direction.x, direction.y, 0)
 	_death_particles.process_material.initial_velocity = max(_prev_velocity.length() / 2, 80)
-	_velocity = Vector2.ZERO
+	velocity = Vector2.ZERO
 	_death_sound.volume_db = (max(_prev_velocity.length(), 160) - _max_velocity) / 10
-	_death_sound.play()
+	_death_sound.play_rand()
 	
 	_grapnel.retract_immediately()
 	play_animation("death")

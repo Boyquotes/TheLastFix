@@ -24,10 +24,10 @@ const punctuation_lengths = {
 
 var server = DialogueServer.new()
 
-onready var _speaker_picture = $SpeakerPicture
-onready var _speaker_label = $SpeakerLabel
-onready var _speaker_sound = $SpeakerSound
-onready var _dialogue_label = $Dialogue
+@onready var _speaker_picture = $SpeakerPicture
+@onready var _speaker_label = $SpeakerLabel
+@onready var _speaker_sound = $SpeakerSound
+@onready var _dialogue_label = $Dialogue
 
 
 func _ready():
@@ -62,7 +62,7 @@ func _process(delta):
 				emit_signal("paused")
 				emit_signal("ended")
 		elif _current_line.nodes.size() == 1 and _current_line.nodes[0] is DialogueServer.TextNode:
-			_dialogue_label.percent_visible = 1
+			_dialogue_label.visible_ratio = 1
 			end_line()
 
 

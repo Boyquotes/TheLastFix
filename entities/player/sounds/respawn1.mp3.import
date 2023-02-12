@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/respawn1.mp3-88023049ad7b4d547d85c23d5acbff46.mp3str"
+uid="uid://bxxbavan4siq6"
+path="res://.godot/imported/respawn1.mp3-88023049ad7b4d547d85c23d5acbff46.mp3str"
 
 [deps]
 
 source_file="res://entities/player/sounds/respawn1.mp3"
-dest_files=[ "res://.import/respawn1.mp3-88023049ad7b4d547d85c23d5acbff46.mp3str" ]
+dest_files=["res://.godot/imported/respawn1.mp3-88023049ad7b4d547d85c23d5acbff46.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

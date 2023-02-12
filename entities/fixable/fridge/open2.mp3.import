@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/open2.mp3-3b3d79cad414ae75581c65c56edf12b6.mp3str"
+uid="uid://chtkee8f88vdi"
+path="res://.godot/imported/open2.mp3-3b3d79cad414ae75581c65c56edf12b6.mp3str"
 
 [deps]
 
 source_file="res://entities/fixable/fridge/open2.mp3"
-dest_files=[ "res://.import/open2.mp3-3b3d79cad414ae75581c65c56edf12b6.mp3str" ]
+dest_files=["res://.godot/imported/open2.mp3-3b3d79cad414ae75581c65c56edf12b6.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

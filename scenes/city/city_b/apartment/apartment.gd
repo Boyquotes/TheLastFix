@@ -2,9 +2,9 @@ extends Node2D
 
 var _tony_awake = false
 
-onready var _cutscene_animator = $CutsceneAnimator
-onready var cam_target = $CamTarget
-onready var _tony_player = $TonyPlayer
+@onready var _cutscene_animator = $CutsceneAnimator
+@onready var cam_target = $CamTarget
+@onready var _tony_player = $TonyPlayer
 
 var _player: Player
 var _screen: Screen
@@ -58,8 +58,8 @@ func _on_Fridge_tony_angered(level: int):
 
 func _on_gun_grab():
 	Game.fade_out(1)
-	var error = Game.connect("fade_finished", self, "end_of_demo", [], CONNECT_ONESHOT)
-	assert(error == 0, "Error connecting fade_finished: " + str(error))
+	var error = Game.connect("fade_finished",Callable(self,"end_of_demo").bind(),CONNECT_ONE_SHOT)
+	assert(error == 0) #,"Error connecting fade_finished: " + str(error))
 
 
 func end_of_demo():

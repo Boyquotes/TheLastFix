@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/drill3.mp3-a9428e5c6bbf5599120ce6a1469c5c5b.mp3str"
+uid="uid://ccu7bdp6v0yjf"
+path="res://.godot/imported/drill3.mp3-a9428e5c6bbf5599120ce6a1469c5c5b.mp3str"
 
 [deps]
 
 source_file="res://entities/fixable/fridge/drill3.mp3"
-dest_files=[ "res://.import/drill3.mp3-a9428e5c6bbf5599120ce6a1469c5c5b.mp3str" ]
+dest_files=["res://.godot/imported/drill3.mp3-a9428e5c6bbf5599120ce6a1469c5c5b.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

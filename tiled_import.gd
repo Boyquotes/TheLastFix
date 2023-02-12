@@ -5,8 +5,8 @@ const CameraArea = preload("res://scenes/screen/camera_area.tscn")
 const UtilityPole = preload("res://entities/utility_pole/utility_pole.tscn")
 
 
-func post_import(scene: Node2D):
-	var screen = Screen.instance()
+func _post_import(scene: Node2D):
+	var screen = Screen.instantiate()
 	var size = null
 	var spawnpoints = []
 
@@ -46,7 +46,7 @@ func post_import(scene: Node2D):
 					"camera_area":
 						var limits_body: StaticBody2D = object_layer.get_node(object.get_meta("limits"))
 						var collision: CollisionPolygon2D = object.get_child(0)
-						var camera_area = CameraArea.instance()
+						var camera_area = CameraArea.instantiate()
 
 						var camera_area_size = limits_body.get_child(0).shape.extents
 						camera_area.limits = Rect2(limits_body.position - size / 2, camera_area_size * 2)
@@ -62,7 +62,7 @@ func post_import(scene: Node2D):
 					"camera_limits":
 						pass
 					"upole":
-						var pole = UtilityPole.instance()
+						var pole = UtilityPole.instantiate()
 						pole.position = object.position - size / 2
 						
 						pole.right_end = connect_pole(object, "right_connect", object_layer)
@@ -84,8 +84,8 @@ func post_import(scene: Node2D):
 	screen.get_node("DeathArea").position = -size / 2
 	screen.get_node("DeathArea/Bottom").shape = make_segment_shape(Vector2(0, size.y), size)
 	
-	if not spawnpoints.empty():
-		screen.spawnpoints = PoolVector2Array(spawnpoints)
+	if not spawnpoints.is_empty():
+		screen.spawnpoints = PackedVector2Array(spawnpoints)
 	
 	return screen
 
@@ -102,7 +102,7 @@ func connect_pole(object: Node2D, tag: String, object_layer: Node2D):
 		return Vector2.ZERO
 
 	var end = object_layer.get_node(object.get_meta(tag))
-	if end is Sprite:  # Connects to pole
+	if end is Sprite2D:  # Connects to pole
 		return end.position - object.position + Vector2(35 if tag == "left_connect" else 1, -84)
 	return end.position - object.position
 

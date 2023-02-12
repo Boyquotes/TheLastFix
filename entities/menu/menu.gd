@@ -3,13 +3,13 @@ extends Control
 signal option_pressed(index)
 
 
-export var enabled = true
-export var right_side = false
+@export var enabled = true
+@export var right_side = false
 
-onready var _arrow = $Arrow
-onready var _arrow_animation = $ArrowAnimation
-onready var _select_sound = $SelectSound
-onready var _enter_sound = $EnterSound
+@onready var _arrow = $Arrow
+@onready var _arrow_animation = $ArrowAnimation
+@onready var _select_sound = $SelectSound
+@onready var _enter_sound = $EnterSound
 
 var _buttons = []
 var _select_index = -1
@@ -59,9 +59,9 @@ func _process(_delta):
 	
 	var _button = _buttons[_select_index]
 	_arrow.global_position = (
-		_button.rect_global_position + Vector2(
-			_button.rect_size.x + 7 if right_side else -7,
-			_button.rect_size.y / 2 + 1
+		_button.global_position + Vector2(
+			_button.size.x + 7 if right_side else -7,
+			_button.size.y / 2 + 1
 		)
 	).round()
 	

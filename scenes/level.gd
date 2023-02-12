@@ -2,9 +2,9 @@ extends Node2D
 
 class_name Level
 
-onready var camera: Camera2D = $Camera
+@onready var camera: Camera2D = $Camera
 
-var followed_node: Node2D setget _set_followed_node
+var followed_node: Node2D : set = _set_followed_node
 
 
 func get_save_data():

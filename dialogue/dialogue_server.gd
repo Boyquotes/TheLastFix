@@ -6,7 +6,7 @@ class_name DialogueServer
 var _last_speaker_name = ""
 
 class TextNode:
-	var content = "" setget _set_content
+	var content = "" : set = _set_content
 	var length = 0
 	
 	func _set_content(text: String):
@@ -77,7 +77,7 @@ func parse():
 func parse_node(parser: XMLParser):
 	if parser.get_node_type() == XMLParser.NODE_TEXT:
 		var data = parser.get_node_data()
-		if data.strip_edges().empty() and parser.read() == OK:
+		if data.strip_edges().is_empty() and parser.read() == OK:
 			parse_node(parser)
 			return
 

@@ -12,7 +12,7 @@ extents = Vector2( 17, 2.5 )
 extents = Vector2( 3.5, 12 )
 
 [sub_resource type="OccluderPolygon2D" id=4]
-polygon = PoolVector2Array( -65, -2, 35, -2, 30, 3, -65, 3 )
+polygon = PackedVector2Array( -65, -2, 35, -2, 30, 3, -65, 3 )
 
 [node name="Floor" type="StaticBody2D"]
 collision_layer = 2
@@ -25,7 +25,7 @@ shape = SubResource( 1 )
 
 [node name="Stairs" type="CollisionPolygon2D" parent="."]
 position = Vector2( 24, 21 )
-polygon = PoolVector2Array( 40, 17, 40, -23, 33, -23, -7, 17 )
+polygon = PackedVector2Array( 40, 17, 40, -23, 33, -23, -7, 17 )
 
 [node name="Entrance" type="CollisionShape2D" parent="."]
 position = Vector2( 47, 0.5 )
@@ -39,7 +39,7 @@ collision_layer = 0
 position = Vector2( 60.5, -14 )
 shape = SubResource( 3 )
 
-[node name="Occluder" type="LightOccluder2D" parent="."]
+[node name="OccluderInstance3D" type="LightOccluder2D" parent="."]
 occluder = SubResource( 4 )
 
 [connection signal="body_entered" from="TopOfStairs" to="." method="_on_TopOfStairs_body_entered"]

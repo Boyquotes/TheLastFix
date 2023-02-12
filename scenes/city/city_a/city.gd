@@ -2,7 +2,8 @@ extends PlayableLevel
 
 
 func _ready():
-	if start_at_screen.empty():
+	super()
+	if start_at_screen.is_empty():
 		followed_node = null
 		$CutsceneAnimator.play("intro")
 

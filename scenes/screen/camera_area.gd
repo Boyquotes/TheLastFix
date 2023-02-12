@@ -7,7 +7,7 @@ var _level: Level
 var _screen = null
 var _active = false
 
-export var limits: Rect2
+@export var limits: Rect2
 
 
 func _physics_process(_delta):

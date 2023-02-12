@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/crossout2.mp3-9e2c3fac0c62034345570d4c8364b4a1.mp3str"
+uid="uid://6c6h7y8jwx43"
+path="res://.godot/imported/crossout2.mp3-9e2c3fac0c62034345570d4c8364b4a1.mp3str"
 
 [deps]
 
 source_file="res://entities/page/sounds/crossout2.mp3"
-dest_files=[ "res://.import/crossout2.mp3-9e2c3fac0c62034345570d4c8364b4a1.mp3str" ]
+dest_files=["res://.godot/imported/crossout2.mp3-9e2c3fac0c62034345570d4c8364b4a1.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

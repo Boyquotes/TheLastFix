@@ -2,13 +2,13 @@ extends Level
 
 class_name PlayableLevel
 
-onready var _player = $Player
-onready var _grapnel = $Grapnel
-onready var _screens = $Screens
+@onready var _player = $Player
+@onready var _grapnel = $Grapnel
+@onready var _screens = $Screens
 
-export var start_at_screen = ""
-export var start_at_spawn = Vector2.ZERO
-export var end_cutscenes = false setget _set_end_cutscenes
+@export var start_at_screen = ""
+@export var start_at_spawn = Vector2.ZERO
+@export var end_cutscenes = false : set = _set_end_cutscenes
 
 var _cam_limits = []
 var _active_screens = []
@@ -23,13 +23,13 @@ func _ready():
 		if node is Screen:
 			node.set_level(self)
 
-	camera.smoothing_enabled = false
+	camera.position_smoothing_enabled = false
 	
-	if start_at_screen.empty():
+	if start_at_screen.is_empty():
 		start_at_screen = _screens.get_child(0).name
 
-	var screen = _screens.get_node(start_at_screen)
-	screen._cutscenes_played = end_cutscenes
+	var screen = _screens.get_node(NodePath(start_at_screen))
+	screen.cutscenes_played = end_cutscenes
 	screen.load_as_first(_player, start_at_spawn, end_cutscenes)
 	call_deferred("finish_prev_screens", screen)
 	
@@ -39,19 +39,19 @@ func _ready():
 	var timer = Timer.new()
 	timer.wait_time = 0.3
 	timer.one_shot = true
-	timer.connect("timeout", self, "_set_camera_smoothing")
+	timer.connect("timeout",Callable(self,"_set_camera_smoothing"))
 	add_child(timer)
 	timer.start()
 
 
 func _set_camera_smoothing():
-	camera.smoothing_enabled = true
+	camera.position_smoothing_enabled = true
 
 
 func _set_end_cutscenes(value: bool):
 	end_cutscenes = value
 	if _active_screen != null:
-		_active_screen._cutscenes_played = true
+		_active_screen.cutscenes_played = true
 
 
 func finish_prev_screens(screen: Screen):
@@ -64,7 +64,7 @@ func switch_to_screen(screen: Screen):
 	_active_screen = screen
 	screen.flush_blockers()
 	screen.active = true
-	end_cutscenes = screen._cutscenes_played
+	end_cutscenes = screen.cutscenes_played
 	
 	# Find spawnpoint closest to player
 	var min_dist = INF
@@ -94,7 +94,7 @@ func set_inactive_screen(screen: Screen):
 	remove_cam_limits(screen.get_extents())
 	
 	var index = _active_screens.find(screen)
-	_active_screens.remove(index)
+	_active_screens.remove_at(index)
 	if index == _active_screens.size() and index != 0:
 		switch_to_screen(_active_screens[-1])
 
@@ -115,7 +115,7 @@ func add_cam_limits(limits: Rect2):
 
 func remove_cam_limits(limits: Rect2):
 	var index = _cam_limits.find(limits)
-	_cam_limits.remove(index)
+	_cam_limits.remove_at(index)
 	if index == _cam_limits.size() and index != 0:
 		set_cam_limits(_cam_limits[-1])
 
@@ -126,8 +126,8 @@ func get_player() -> Player:
 
 func get_save_data():
 	return {
-		'level': filename,
-		'screen': _active_screen.name if _active_screen != null else '',
+		'level': scene_file_path,
+		'screen': _active_screen.name if _active_screen != null else &'',
 		'spawn': _player.spawnpoint,
 		'end_cutscenes': end_cutscenes
 	}

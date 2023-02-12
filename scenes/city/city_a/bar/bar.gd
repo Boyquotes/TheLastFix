@@ -1,8 +1,8 @@
 extends Node2D
 
 var _player: Player
-onready var _screen = $".."
-onready var _door_shadow = $DoorShadow
+@onready var _screen = $".."
+@onready var _door_shadow = $DoorShadow
 
 
 func _ready():

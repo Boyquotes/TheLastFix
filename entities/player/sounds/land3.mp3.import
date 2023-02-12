@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/land3.mp3-df0919128766704c84353d6c3384e26f.mp3str"
+uid="uid://deoqywf1p4p8h"
+path="res://.godot/imported/land3.mp3-df0919128766704c84353d6c3384e26f.mp3str"
 
 [deps]
 
 source_file="res://entities/player/sounds/land3.mp3"
-dest_files=[ "res://.import/land3.mp3-df0919128766704c84353d6c3384e26f.mp3str" ]
+dest_files=["res://.godot/imported/land3.mp3-df0919128766704c84353d6c3384e26f.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

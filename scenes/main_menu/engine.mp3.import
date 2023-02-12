@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/engine.mp3-0b13b038a0289f9c953c25aec82ffb96.mp3str"
+uid="uid://kjqpyanx2lmx"
+path="res://.godot/imported/engine.mp3-0b13b038a0289f9c953c25aec82ffb96.mp3str"
 
 [deps]
 
 source_file="res://scenes/main_menu/engine.mp3"
-dest_files=[ "res://.import/engine.mp3-0b13b038a0289f9c953c25aec82ffb96.mp3str" ]
+dest_files=["res://.godot/imported/engine.mp3-0b13b038a0289f9c953c25aec82ffb96.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

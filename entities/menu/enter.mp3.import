@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/enter.mp3-e44a074639d35d59c06d86797327425a.mp3str"
+uid="uid://j2mb2pr8fska"
+path="res://.godot/imported/enter.mp3-e44a074639d35d59c06d86797327425a.mp3str"
 
 [deps]
 
 source_file="res://entities/menu/enter.mp3"
-dest_files=[ "res://.import/enter.mp3-e44a074639d35d59c06d86797327425a.mp3str" ]
+dest_files=["res://.godot/imported/enter.mp3-e44a074639d35d59c06d86797327425a.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

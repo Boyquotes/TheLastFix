@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/light_beep.mp3-f74a19fb289e00108b1146acc17d29be.mp3str"
+uid="uid://tml1bnyccca5"
+path="res://.godot/imported/light_beep.mp3-f74a19fb289e00108b1146acc17d29be.mp3str"
 
 [deps]
 
 source_file="res://scenes/city/city_a/light_beep.mp3"
-dest_files=[ "res://.import/light_beep.mp3-f74a19fb289e00108b1146acc17d29be.mp3str" ]
+dest_files=["res://.godot/imported/light_beep.mp3-f74a19fb289e00108b1146acc17d29be.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

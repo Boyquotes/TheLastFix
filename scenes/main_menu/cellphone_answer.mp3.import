@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/cellphone_answer.mp3-d419d3af9bc02053048a09916e9e5b34.mp3str"
+uid="uid://btysa225vnjy5"
+path="res://.godot/imported/cellphone_answer.mp3-d419d3af9bc02053048a09916e9e5b34.mp3str"
 
 [deps]
 
 source_file="res://scenes/main_menu/cellphone_answer.mp3"
-dest_files=[ "res://.import/cellphone_answer.mp3-d419d3af9bc02053048a09916e9e5b34.mp3str" ]
+dest_files=["res://.godot/imported/cellphone_answer.mp3-d419d3af9bc02053048a09916e9e5b34.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

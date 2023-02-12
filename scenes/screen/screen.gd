@@ -3,26 +3,26 @@ extends Node2D
 class_name Screen
 
 
-onready var _screen_area = $ScreenArea
-onready var _collision_area = $ScreenArea/CollisionArea
+@onready var _screen_area = $ScreenArea
+@onready var _collision_area = $ScreenArea/CollisionArea
 
-onready var _left_blocker: CollisionShape2D = $Blockers/Left
-onready var _right_blocker: CollisionShape2D = $Blockers/Right
-onready var _top_blocker: CollisionShape2D = $Blockers/Top
-onready var _bottom_killer: CollisionShape2D = $DeathArea/Bottom
+@onready var _left_blocker: CollisionShape2D = $Blockers/Left
+@onready var _right_blocker: CollisionShape2D = $Blockers/Right
+@onready var _top_blocker: CollisionShape2D = $Blockers/Top
+@onready var _bottom_killer: CollisionShape2D = $DeathArea/Bottom
 
 var _level: Level
 
-export var active = false setget _set_active
-export var spawnpoints: PoolVector2Array
+@export var active = false : set = _set_active
+@export var spawnpoints: PackedVector2Array
 
-export var block_left = false setget _set_block_left
-export var block_right = false setget _set_block_right
-export var block_top = true setget _set_block_top
-export var kill_bottom = true setget _set_kill_bottom
+@export var block_left = false : set = _set_block_left
+@export var block_right = false : set = _set_block_right
+@export var block_top = true : set = _set_block_top
+@export var kill_bottom = true : set = _set_kill_bottom
+@export var cutscenes_played = false
 
 var _extents: Rect2
-var _cutscenes_played = false
 
 const pushoff_h = 10
 const pushoff_v = 20
@@ -120,7 +120,7 @@ func load_as_first(player, spawnpoint: Vector2, _end_cutscenes: bool):
 	_level.set_active_screen(self)
 	if spawnpoint == Vector2.ZERO:
 		spawnpoint = global_position + (
-			spawnpoints[0] if not spawnpoints.empty() else Vector2.ZERO
+			spawnpoints[0] if not spawnpoints.is_empty() else Vector2.ZERO
 		)
 	player.spawnpoint = spawnpoint
 	player.stand_on(spawnpoint)

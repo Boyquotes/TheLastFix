@@ -1,14 +1,12 @@
 extends Node2D
 
-onready var _animator = $Animator
-onready var _floor_1 = $Interior/Floors/Floor_1
-onready var _floor_2 = $Interior/Floors/Floor_2
-onready var _walls = $Interior/Walls
-onready var _occluder = $Interior/Walls/Occluder
-onready var _floor_shadow = $Interior/GroundFloor/FloorShadow
-onready var _exterior = $Exterior
-onready var _shadow = $Shadow
-onready var _mask = $Mask
+@onready var _animator = $Animator
+@onready var _walls = $Interior/Walls
+@onready var _occluder = $Interior/Walls/OccluderInstance3D
+@onready var _floor_shadow = $Interior/GroundFloor/FloorShadow
+@onready var _exterior = $Exterior
+@onready var _shadow = $Shadow
+@onready var _mask = $Mask
 
 
 
@@ -36,6 +34,7 @@ func _on_InteriorArea_body_entered(body):
 		_floor_shadow.range_item_cull_mask = 1
 		_animator.play("enter")
 		_mask.enabled = true
+		print("MASK ENABLED")
 
 
 func _on_InteriorArea_body_exited(body):
@@ -55,7 +54,7 @@ func _on_InteriorArea_body_exited(body):
 func _process(_delta):
 	if _player == null:
 		_player = Game.get_player()
-	_shadow.visible = _player.position.x > _shadow.global_position.x
+	_shadow.enabled = _player.position.x > _shadow.global_position.x
 	_shadow.global_scale.x = (_player.position.x - _shadow.global_position.x) / 10
 
 
@@ -63,8 +62,8 @@ func _on_FrankieTalkArea_body_entered(body):
 	if body is Player and not spoke_to_frankie:
 		spoke_to_frankie = true
 		_player.go_to($FrankieTalkPos.global_position)
-		var error = _player.connect("reached_target", _animator, "play", ["meet_frankie"], CONNECT_ONESHOT)
-		assert(error == 0, "Error connecting reached_target: " + str(error))
+		var error = _player.connect("reached_target",Callable(_animator,"play").bind("meet_frankie"),CONNECT_ONE_SHOT)
+		assert(error == 0) #,"Error connecting reached_target: " + str(error))
 
 
 func _on_6APrompt_used():
@@ -81,8 +80,8 @@ func open_apartment(collision: CollisionShape2D, flipped: bool, next_level: Stri
 	Game.set_zoom(1, collision.global_position)
 	_player.go_to(pos, flipped)
 	_next_level_path = next_level
-	var error = _player.connect("reached_target", _animator, "play", ["open_door"])
-	assert(error == 0, "Error connecting reached_target: " + str(error))
+	var error = _player.connect("reached_target",Callable(_animator,"play").bind("open_door"))
+	assert(error == 0) #,"Error connecting reached_target: " + str(error))
 
 
 func load_next_level():

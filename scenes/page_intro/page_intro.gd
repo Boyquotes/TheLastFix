@@ -4,8 +4,8 @@ extends GUIScene
 var _text_prog = 0
 const _text_speed = 0.5
 
-onready var _label = $Label
-onready var _page = $Page
+@onready var _label = $Label
+@onready var _page = $Page
 
 
 func _process(delta):
@@ -14,7 +14,7 @@ func _process(delta):
 		if _text_prog >= 1:
 			_text_prog = 1
 
-		_label.percent_visible = _text_prog
+		_label.visible_ratio = _text_prog
 		_page.prog = _text_prog * _text_prog * (3 - 2 * _text_prog) - (1 - _page.min_prog)  # Smoothstep
 	else:
 		_page.enabled = true

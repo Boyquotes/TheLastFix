@@ -1,7 +1,7 @@
 extends Screen
 
-onready var _car = $Car
-onready var _car_stand = $Car/CarStandArea
+@onready var _car = $Car
+@onready var _car_stand = $Car/CarStandArea
 var _stood_on_car = false
 
 
@@ -22,14 +22,14 @@ func load_as_first(player, _spawnpoint: Vector2, end_cutscenes: bool):
 		_cutscene_animator.seek(_cutscene_animator.current_animation_length)
 		player.play_idle()
 		_level.cam_follow_player()
-		_level.camera.drag_margin_h_enabled = true
+		_level.camera.drag_horizontal_enabled = true
 
 
 func finish():
 	_car.position = Vector2(-83, 18)
 	_car.frame_coords = Vector2(4, 1)
 	$Car/PlayerPuppet.visible = false
-	$Car/Light.enabled = false
+	$Car/Light3D.enabled = false
 	_level.cam_follow_player()
-	_level.camera.drag_margin_h_enabled = true
-	_cutscenes_played = true
+	_level.camera.drag_horizontal_enabled = true
+	cutscenes_played = true

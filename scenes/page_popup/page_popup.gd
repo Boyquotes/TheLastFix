@@ -7,7 +7,7 @@ const _speed = 1
 
 var _dir = 1
 
-onready var _page = $Page
+@onready var _page = $Page
 
 var already_crossed = 0
 

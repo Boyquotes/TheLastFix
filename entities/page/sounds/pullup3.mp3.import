@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/pullup3.mp3-405fffbb6cfa3249ada32d38f982b230.mp3str"
+uid="uid://drr8l3b5t56ed"
+path="res://.godot/imported/pullup3.mp3-405fffbb6cfa3249ada32d38f982b230.mp3str"
 
 [deps]
 
 source_file="res://entities/page/sounds/pullup3.mp3"
-dest_files=[ "res://.import/pullup3.mp3-405fffbb6cfa3249ada32d38f982b230.mp3str" ]
+dest_files=["res://.godot/imported/pullup3.mp3-405fffbb6cfa3249ada32d38f982b230.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

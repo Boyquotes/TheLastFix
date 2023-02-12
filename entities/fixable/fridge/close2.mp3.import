@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/close2.mp3-fe296400fd58ebc4516a5c0dc20f54db.mp3str"
+uid="uid://c3v3xv4opbavr"
+path="res://.godot/imported/close2.mp3-fe296400fd58ebc4516a5c0dc20f54db.mp3str"
 
 [deps]
 
 source_file="res://entities/fixable/fridge/close2.mp3"
-dest_files=[ "res://.import/close2.mp3-fe296400fd58ebc4516a5c0dc20f54db.mp3str" ]
+dest_files=["res://.godot/imported/close2.mp3-fe296400fd58ebc4516a5c0dc20f54db.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

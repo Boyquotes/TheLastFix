@@ -22,15 +22,22 @@ var _level: Level
 @export var kill_bottom = true : set = _set_kill_bottom
 @export var cutscenes_played = false
 
-var _extents: Rect2
+@export var size: Vector2
 
+var _extents: Rect2
 const pushoff_h = 10
 const pushoff_v = 20
 
 
 func _ready():
-	var size = _collision_area.shape.extents
-	_extents = Rect2(position - size, size * 2)
+	if size != Vector2.ZERO:
+		var shape = RectangleShape2D.new()
+		shape.size = size / 2
+		_collision_area.shape = shape
+	else:
+		size = _collision_area.shape.extents * 2
+
+	_extents = Rect2(position - size / 2, size)
 
 
 func set_level(level):
@@ -69,7 +76,7 @@ func _on_ScreenArea_body_exited(body):
 
 
 func get_extents() -> Rect2:
-	return Rect2(position - _collision_area.shape.extents, _collision_area.shape.extents * 2)
+	return Rect2(position - size / 2, size)
 
 
 func _set_block_left(value: bool):

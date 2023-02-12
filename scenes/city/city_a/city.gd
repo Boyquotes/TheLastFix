@@ -3,7 +3,7 @@ extends PlayableLevel
 
 func _ready():
 	super()
-	if start_at_screen.is_empty():
+	if start_at_screen == null:
 		followed_node = null
 		$CutsceneAnimator.play("intro")
 

@@ -1,22 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://bygf7i5dkibbp"]
 
-[ext_resource path="res://scenes/screen/screen.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://scenes/screen/screen.gd" id="1"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 128, 72 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(256, 144)
 
 [node name="Screen" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="ScreenArea" type="Area2D" parent="."]
 collision_layer = 32
 monitorable = false
 
 [node name="CollisionArea" type="CollisionShape2D" parent="ScreenArea"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="Blockers" type="StaticBody2D" parent="."]
-position = Vector2( -128, -128 )
+position = Vector2(-128, -128)
 collision_layer = 4
 collision_mask = 0
 
@@ -27,15 +27,15 @@ disabled = true
 disabled = true
 
 [node name="Top" type="CollisionShape2D" parent="Blockers"]
-position = Vector2( 0, -15 )
+position = Vector2(0, -15)
 disabled = true
 
 [node name="DeathArea" type="StaticBody2D" parent="."]
-position = Vector2( -128, -128 )
+position = Vector2(-128, -128)
 collision_layer = 16
 
 [node name="Bottom" type="CollisionShape2D" parent="DeathArea"]
-position = Vector2( 0, 6 )
+position = Vector2(0, 6)
 disabled = true
 
 [connection signal="body_entered" from="ScreenArea" to="." method="_on_ScreenArea_body_entered"]

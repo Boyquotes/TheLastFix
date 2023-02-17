@@ -29,7 +29,8 @@ func finish():
 	_car.position = Vector2(-83, 18)
 	_car.frame_coords = Vector2(4, 1)
 	$Car/PlayerPuppet.visible = false
-	$Car/Light3D.enabled = false
+	$Car/Light.enabled = false
 	_level.cam_follow_player()
 	_level.camera.drag_horizontal_enabled = true
+	Game.get_player().frozen = false
 	cutscenes_played = true

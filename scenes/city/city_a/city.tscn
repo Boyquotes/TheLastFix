@@ -615,7 +615,7 @@ polygon = PackedVector2Array(0, -8, 0, -17, -8, -17, -8, -22, -14, -22, -14, -8)
 
 [node name="Light" type="PointLight2D" parent="Screens/city_intro/Car" index="3"]
 position = Vector2(24, 10)
-range_z_max = -1
+range_z_max = 1
 range_layer_min = -100
 texture = ExtResource("12")
 offset = Vector2(133, 0)

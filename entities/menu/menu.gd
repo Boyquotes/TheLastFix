@@ -60,7 +60,7 @@ func _process(_delta):
 	var _button = _buttons[_select_index]
 	_arrow.global_position = (
 		_button.global_position + Vector2(
-			_button.size.x + 7 if right_side else -7,
+			_button.size.x + 8 if right_side else -8,
 			_button.size.y / 2 + 1
 		)
 	).round()

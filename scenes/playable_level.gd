@@ -7,7 +7,6 @@ class_name PlayableLevel
 @onready var _screens = $Screens
 
 @export var start_at_screen: Screen
-@export var start_at_spawn = Vector2.ZERO
 @export var end_cutscenes = false : set = _set_end_cutscenes
 
 var _cam_limits = []
@@ -29,7 +28,7 @@ func _ready():
 		screen = _screens.get_child(0)
 
 	screen.cutscenes_played = end_cutscenes
-	screen.load_as_first(_player, start_at_spawn, end_cutscenes)
+	screen.load_as_first(_player, end_cutscenes)
 	call_deferred("finish_prev_screens", screen)
 	
 	if followed_node != null:
@@ -64,18 +63,7 @@ func switch_to_screen(screen: Screen):
 	screen.flush_blockers()
 	screen.active = true
 	end_cutscenes = screen.cutscenes_played
-	
-	# Find spawnpoint closest to player
-	var min_dist = INF
-	var closest_spawn = null
-	for spawn in screen.spawnpoints:
-		var dist = (screen.global_position + spawn).distance_to(_player.global_position)
-		if dist < min_dist:
-			min_dist = dist
-			closest_spawn = screen.global_position + spawn
-
-	if closest_spawn != null:
-		_player.spawnpoint = closest_spawn
+	_player.spawnpoint = screen.get_closest_spawn(_player.global_position)
 
 
 func set_active_screen(screen: Screen):

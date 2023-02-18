@@ -14,7 +14,6 @@ class_name Screen
 var _level: Level
 
 @export var active = false : set = _set_active
-@export var spawnpoints: PackedVector2Array
 
 @export var block_left = false : set = _set_block_left
 @export var block_right = false : set = _set_block_right
@@ -25,6 +24,7 @@ var _level: Level
 @export var size: Vector2
 
 var _extents: Rect2
+var _spawnpoints: Array[Marker2D]
 const pushoff_h = 10
 const pushoff_v = 20
 
@@ -38,6 +38,9 @@ func _ready():
 		size = _collision_area.shape.extents * 2
 
 	_extents = Rect2(position - size / 2, size)
+	for child in get_children():
+		if child is Marker2D and child.name.begins_with("SP"):
+			_spawnpoints.append(child)
 
 
 func set_level(level):
@@ -123,18 +126,29 @@ func _set_active(value: bool):
 		_screen_area.set_deferred("monitorable", value)
 
 
-func load_as_first(player, spawnpoint: Vector2, _end_cutscenes: bool):
+func load_as_first(player, _end_cutscenes: bool):
 	_level.set_active_screen(self)
-	if spawnpoint == Vector2.ZERO:
-		spawnpoint = global_position + (
-			spawnpoints[0] if not spawnpoints.is_empty() else Vector2.ZERO
-		)
-	player.spawnpoint = spawnpoint
-	player.stand_on(spawnpoint)
+	if _spawnpoints.is_empty():
+		player.stand_on(global_position)
+	else:
+		var spawnpoint = _spawnpoints[0]
+		player.spawnpoint = spawnpoint
+		player.stand_on(spawnpoint.global_position)
+
 	player.control_enabled = true
 	player.visible = true
 	player.play_idle()
 
+
+func get_closest_spawn(pos: Vector2):
+	var min_dist = INF
+	var closest_spawn = null
+	for spawn in _spawnpoints:
+		var dist = spawn.global_position.distance_to(pos)
+		if dist < min_dist:
+			min_dist = dist
+			closest_spawn = spawn
+	return closest_spawn
 
 func finish():
 	pass

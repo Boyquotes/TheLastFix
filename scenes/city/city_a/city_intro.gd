@@ -14,7 +14,7 @@ func _physics_process(_delta):
 		_stood_on_car = false
 
 
-func load_as_first(player, _spawnpoint: Vector2, end_cutscenes: bool):
+func load_as_first(player, end_cutscenes: bool):
 	var _cutscene_animator = $"../../CutsceneAnimator"
 	_cutscene_animator.play("intro")
 	_level.followed_node = null

@@ -24,7 +24,6 @@ process_mode = 1
 disable_3d = true
 transparent_bg = true
 snap_2d_transforms_to_pixel = true
-snap_2d_vertices_to_pixel = true
 audio_listener_enable_2d = true
 size = Vector2i(256, 144)
 

@@ -643,25 +643,31 @@ stream = ExtResource("43")
 
 [node name="up_z" parent="Screens" index="1" instance=ExtResource("15_cu1oj")]
 position = Vector2(384, -88)
-spawnpoints = PackedVector2Array(-80, 56)
 block_top = false
 
-[node name="UpzSign" type="Sprite2D" parent="Screens/up_z" index="3"]
+[node name="SP1" type="Marker2D" parent="Screens/up_z" index="3"]
+position = Vector2(-80, 56)
+
+[node name="UpzSign" type="Sprite2D" parent="Screens/up_z" index="4"]
 z_index = -20
 position = Vector2(-76, 13)
 texture = ExtResource("29")
 
 [node name="easter_egg" parent="Screens" index="2" instance=ExtResource("15_cu1oj")]
 position = Vector2(384, -232)
-spawnpoints = PackedVector2Array(-72, 64)
 block_left = true
 kill_bottom = false
 
+[node name="SP1" type="Marker2D" parent="Screens/easter_egg" index="3"]
+position = Vector2(-72, 64)
+
 [node name="diagonal" parent="Screens" index="3" instance=ExtResource("15_cu1oj")]
 position = Vector2(640, -152)
-spawnpoints = PackedVector2Array(-24, 64)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Screens/diagonal" index="3"]
+[node name="SP1" type="Marker2D" parent="Screens/diagonal" index="0"]
+position = Vector2(-24, 64)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Screens/diagonal" index="4"]
 position = Vector2(128, -156)
 collision_layer = 4
 
@@ -671,8 +677,17 @@ shape = SubResource("11")
 [node name="navigate" parent="Screens" index="4" instance=ExtResource("9")]
 position = Vector2(928, -216)
 
+[node name="SP1" type="Marker2D" parent="Screens/navigate" index="6"]
+position = Vector2(-136, 48)
+
+[node name="SP2" type="Marker2D" parent="Screens/navigate" index="7"]
+position = Vector2(144, 56)
+
 [node name="swings" parent="Screens" index="5" instance=ExtResource("14")]
 position = Vector2(1368, -204)
+
+[node name="SP1" type="Marker2D" parent="Screens/swings" index="7"]
+position = Vector2(-224, 44)
 
 [node name="fire_hydrant" parent="Screens" index="6" instance=ExtResource("18")]
 position = Vector2(1776, -232)
@@ -680,18 +695,36 @@ script = ExtResource("32")
 block_left = true
 block_right = true
 
-[node name="FireHydrant" parent="Screens/fire_hydrant" index="5" instance=ExtResource("16")]
+[node name="SP1" type="Marker2D" parent="Screens/fire_hydrant" index="5"]
+position = Vector2(-92, 8)
+
+[node name="FireHydrant" parent="Screens/fire_hydrant" index="6" instance=ExtResource("16")]
 z_index = -2
 position = Vector2(23, 24)
 
 [node name="vines_intro" parent="Screens" index="7" instance=ExtResource("19")]
 position = Vector2(2032, -320)
 
+[node name="SP1" type="Marker2D" parent="Screens/vines_intro" index="7"]
+position = Vector2(-64, 112)
+
+[node name="SP2" type="Marker2D" parent="Screens/vines_intro" index="8"]
+position = Vector2(56, -88)
+
 [node name="spikes_intro" parent="Screens" index="8" instance=ExtResource("20")]
 position = Vector2(2288, -296)
 
+[node name="SP1" type="Marker2D" parent="Screens/spikes_intro" index="9"]
+position = Vector2(-72, -104)
+
+[node name="SP2" type="Marker2D" parent="Screens/spikes_intro" index="10"]
+position = Vector2(88, 104)
+
 [node name="icicle" parent="Screens" index="9" instance=ExtResource("21")]
 position = Vector2(2544, -208)
+
+[node name="SP1" type="Marker2D" parent="Screens/icicle" index="6"]
+position = Vector2(-104, 16)
 
 [node name="bar" parent="Screens" index="10" instance=ExtResource("24")]
 position = Vector2(2800, -296)
@@ -699,18 +732,36 @@ script = ExtResource("34")
 block_left = true
 block_right = true
 
-[node name="Bar" parent="Screens/bar" index="5" instance=ExtResource("22")]
+[node name="SP1" type="Marker2D" parent="Screens/bar" index="5"]
+position = Vector2(-104, 56)
+
+[node name="Bar" parent="Screens/bar" index="6" instance=ExtResource("22")]
 z_index = -10
 position = Vector2(-27, 19)
 
 [node name="spike_swing_1" parent="Screens" index="11" instance=ExtResource("25")]
 position = Vector2(3088, -296)
 
+[node name="SP1" type="Marker2D" parent="Screens/spike_swing_1" index="8"]
+position = Vector2(-128, 56)
+
+[node name="SP2" type="Marker2D" parent="Screens/spike_swing_1" index="9"]
+position = Vector2(128, 0)
+
 [node name="spike_swing_2" parent="Screens" index="12" instance=ExtResource("26")]
 position = Vector2(3448, -352)
 
+[node name="SP1" type="Marker2D" parent="Screens/spike_swing_2" index="8"]
+position = Vector2(-160, 56)
+
+[node name="SP2" type="Marker2D" parent="Screens/spike_swing_2" index="9"]
+position = Vector2(176, 56)
+
 [node name="scale" parent="Screens" index="13" instance=ExtResource("27")]
 position = Vector2(3776, -192)
+
+[node name="SP1" type="Marker2D" parent="Screens/scale" index="6"]
+position = Vector2(-96, -104)
 
 [node name="building" parent="Screens" index="14" instance=ExtResource("36")]
 position = Vector2(4032, -404)
@@ -718,7 +769,10 @@ script = ExtResource("33")
 block_left = true
 block_right = true
 
-[node name="Building" parent="Screens/building" index="5" instance=ExtResource("28")]
+[node name="SP1" type="Marker2D" parent="Screens/building" index="0"]
+position = Vector2(-96, 196)
+
+[node name="Building" parent="Screens/building" index="6" instance=ExtResource("28")]
 position = Vector2(34, -3)
 
 [node name="TileMap" type="TileMap" parent="." index="8"]

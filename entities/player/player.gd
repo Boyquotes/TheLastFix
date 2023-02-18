@@ -12,7 +12,7 @@ signal reached_target
 @export var control_enabled = true
 @export var grapnel_enabled = true
 @export var air_frame = -1 : set = _set_air_frame
-@export var spawnpoint: Vector2
+@export var spawnpoint: Marker2D
 @export var snap_to_floor = false
 @export var inching = false
 
@@ -499,7 +499,7 @@ func die(direction: Vector2):
 
 
 func respawn():
-	stand_on(spawnpoint)
+	stand_on(spawnpoint.global_position)
 	if _flipped:
 		scale.x = -1
 	_flipped = false

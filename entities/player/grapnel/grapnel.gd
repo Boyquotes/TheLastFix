@@ -219,24 +219,15 @@ func _physics_process(delta):
 			physics_query.transform = transform
 			_hit_sound.play_rand()
 			
-			for _i in 2:
-				physics_query.transform.origin = new_pos
-				var intersects = space_state.intersect_shape(physics_query)
-				var intersects_terrain = false
-				for coll in intersects:
-					var body = coll.collider
-					# TODO: Update this
-					#if body.collision_layer & 8 != 0:
-					#	_vine_sound.play_rand()
-					#	retract()
-					#	return
-					#if body.collision_layer & 2 != 0:
-					#	intersects_terrain = true
-				
-				if intersects_terrain:
-					break
-					
-				new_pos += velocity
+			physics_query.transform.origin = new_pos
+			physics_query.collision_mask = 8
+			var intersects = space_state.intersect_shape(physics_query)
+			physics_query.collision_mask = 2 | 8
+			
+			if not intersects.is_empty():
+				_vine_sound.play_rand()
+				retract()
+				return
 			
 			_latch_sound.play_rand()
 			_particles.emitting = true

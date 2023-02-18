@@ -503,7 +503,7 @@ b = Vector2(0, 84)
 
 [node name="City" node_paths=PackedStringArray("start_at_screen") instance=ExtResource("1")]
 script = ExtResource("5")
-start_at_screen = NodePath("Screens/diagonal")
+start_at_screen = NodePath("Screens/navigate")
 end_cutscenes = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]

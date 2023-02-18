@@ -487,7 +487,7 @@ func _on_Player_visibility_changed():
 
 func die(direction: Vector2):
 	var collision = move_and_collide(direction * 25, true, true, true)
-	_death_particles.position = Vector2.ZERO if collision == null else collision.position - position
+	_death_particles.position = Vector2.ZERO if collision == null else collision.get_position() - position
 	_death_particles.process_material.direction = -Vector3(direction.x, direction.y, 0)
 	_death_particles.process_material.initial_velocity_max = max(_prev_velocity.length() / 2, 80)
 	velocity = Vector2.ZERO

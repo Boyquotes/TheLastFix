@@ -541,11 +541,14 @@ _data = {
 }
 
 [sub_resource type="ParticleProcessMaterial" id="14"]
-lifetime_randomness = 1.0
+lifetime_randomness = 0.3
 direction = Vector3(0, -1, 0)
 gravity = Vector3(0, 150, 0)
 initial_velocity_max = 50.0
 color = Color(1, 0, 0, 1)
+collision_mode = 1
+collision_friction = 0.5
+collision_bounce = 0.5
 
 [sub_resource type="Gradient" id="16"]
 interpolation_mode = 2
@@ -563,6 +566,9 @@ gravity = Vector3(0, -10, 0)
 initial_velocity_max = 50.0
 color = Color(0, 0.584314, 1, 1)
 color_ramp = SubResource("17")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2

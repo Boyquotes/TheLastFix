@@ -18,3 +18,6 @@ collision_mask = 6
 grapnel = NodePath("../Grapnel")
 
 [node name="Screens" type="Node2D" parent="." index="3"]
+
+[connection signal="hit" from="Grapnel" to="Player" method="_on_Grapnel_hit"]
+[connection signal="retracted" from="Grapnel" to="Player" method="_on_Grapnel_retract"]

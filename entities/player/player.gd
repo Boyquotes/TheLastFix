@@ -102,9 +102,7 @@ func load_grapnel_origins():
 
 			if total_pixels > 0:
 				var avg_pos = total_pos / total_pixels - Vector2(8.5, 9.5)
-				_grapnel_origins[Vector2(x, y)] = Vector3(avg_pos.x, avg_pos.y, angle)
-			else:
-				_grapnel_origins[Vector2(x, y)] = null
+				_grapnel_origins[Vector2i(x, y)] = Vector3(avg_pos.x, avg_pos.y, angle)
 
 
 func update_air_frame():
@@ -435,10 +433,10 @@ func _on_Grapnel_retract():
 
 
 func _on_Sprite_frame_changed():
-	var _origin_pos = _grapnel_origins.get(_sprite.frame_coords)
-	if _origin_pos == null:
+	if not _grapnel_origins.has(_sprite.frame_coords):
 		grapnel.hook_visible = false
 	else:
+		var _origin_pos = _grapnel_origins[_sprite.frame_coords]
 		grapnel.hook_visible = visible
 		_hook_origin.position = Vector2(_origin_pos.x, _origin_pos.y)
 		var angle = int(_origin_pos.z)

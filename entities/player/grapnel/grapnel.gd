@@ -113,7 +113,7 @@ func shoot(direction: Vector2):
 	_joints.resize(0)
 	_joints.push_back(position)
 	_joints.push_back(position)
-	_prev_joints = _joints
+	_prev_joints = PackedVector2Array(_joints)
 	_prev_player_pos = _player.position
 	_pushoff = Vector2.ZERO
 
@@ -135,7 +135,7 @@ func retract():
 
 func retract_immediately():
 	if not _retracting:
-		emit_signal("retract")
+		emit_signal("retracted")
 		_retracting = false
 
 	_collision.set_deferred("disabled", true)
@@ -204,6 +204,8 @@ func _physics_process(delta):
 		params.position = position
 		params.exclude = [self]
 		params.collision_mask = 32
+		params.collide_with_bodies = false
+		params.collide_with_areas = true
 		var intersect = space_state.intersect_point(params, 1)
 		if intersect.is_empty():
 			retract()
@@ -212,7 +214,7 @@ func _physics_process(delta):
 		var collision = move_and_collide(velocity * _shoot_speed * delta)
 		
 		if collision != null:
-			var new_pos = position - collision.normal * 2
+			var new_pos = position - collision.get_normal() * 2
 			# If the tile hit belongs to the non_grapnel layer, retract the grapnel
 			physics_query.transform = transform
 			_hit_sound.play_rand()
@@ -223,12 +225,13 @@ func _physics_process(delta):
 				var intersects_terrain = false
 				for coll in intersects:
 					var body = coll.collider
-					if body.collision_layer & 8 != 0:
-						_vine_sound.play_rand()
-						retract()
-						return
-					if body.collision_layer & 2 != 0:
-						intersects_terrain = true
+					# TODO: Update this
+					#if body.collision_layer & 8 != 0:
+					#	_vine_sound.play_rand()
+					#	retract()
+					#	return
+					#if body.collision_layer & 2 != 0:
+					#	intersects_terrain = true
 				
 				if intersects_terrain:
 					break
@@ -238,7 +241,7 @@ func _physics_process(delta):
 			_latch_sound.play_rand()
 			_particles.emitting = true
 			_particles.restart()
-			hit_angle = -round((-collision.normal).angle() * 180 / PI)
+			hit_angle = -round((-collision.get_normal()).angle() * 180 / PI)
 			stuck = true
 			emit_signal("hit")
 			_collision.disabled = true
@@ -253,7 +256,7 @@ func _physics_process(delta):
 		if _origin_stuck_frames < 0:
 			_joints[-1] = _prev_player_pos
 			_make_joints(_joints.size() - 1, space_state)
-			_prev_joints = _joints
+			_prev_joints = PackedVector2Array(_joints)
 		_joints[-1] = _player.position
 		_origin_stuck_frames = 0
 	elif _origin_stuck_frames >= 0:
@@ -266,7 +269,7 @@ func _physics_process(delta):
 	if velocity != Vector2.ZERO:
 		_make_joints(1, space_state)
 
-	_prev_joints = _joints
+	_prev_joints = PackedVector2Array(_joints)
 
 	_remove_joints(space_state)
 	

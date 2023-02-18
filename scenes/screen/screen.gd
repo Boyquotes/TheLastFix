@@ -23,11 +23,14 @@ var _level: Level
 @export var cutscenes_played = false
 
 @export var size = Vector2(256, 144) : set = _set_size
+@export var camera_offset = Vector2.ZERO
 
 var _extents: Rect2
 var _spawnpoints: Array[Marker2D]
 const pushoff_h = 10
 const pushoff_v = 20
+
+var cam_state: CameraState
 
 
 func make_segment_shape(a: Vector2, b: Vector2):
@@ -59,6 +62,10 @@ func _ready():
 		return
 
 	_extents = Rect2(position - size / 2, size)
+	cam_state = CameraState.new()
+	cam_state.limits = _extents
+	cam_state.offset = camera_offset
+
 	for child in get_children():
 		if child is Marker2D and child.name.begins_with("SP"):
 			_spawnpoints.append(child)
@@ -97,10 +104,6 @@ func _on_ScreenArea_body_exited(body):
 		disable_blockers()
 	elif body is Grapnel and body.active and not body.stuck:
 		body.retract()
-
-
-func get_extents() -> Rect2:
-	return Rect2(position - size / 2, size)
 
 
 func _set_block_left(value: bool):

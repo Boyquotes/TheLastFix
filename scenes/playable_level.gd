@@ -9,7 +9,7 @@ class_name PlayableLevel
 @export var start_at_screen: Screen
 @export var end_cutscenes = false : set = _set_end_cutscenes
 
-var _cam_limits = []
+var _cam_states: Array[CameraState]
 var _active_screens = []
 var _active_screen: Screen
 
@@ -37,7 +37,7 @@ func _ready():
 	var timer = Timer.new()
 	timer.wait_time = 0.3
 	timer.one_shot = true
-	timer.connect("timeout",Callable(self,"_set_camera_smoothing"))
+	timer.connect("timeout", Callable(self, "_set_camera_smoothing"))
 	add_child(timer)
 	timer.start()
 
@@ -70,7 +70,7 @@ func set_active_screen(screen: Screen):
 	screen.active = true
 	_grapnel.retract()
 
-	add_cam_limits(screen.get_extents())
+	add_cam_state(screen.cam_state)
 	_active_screens.append(screen)
 	switch_to_screen(screen)
 
@@ -78,7 +78,7 @@ func set_active_screen(screen: Screen):
 func set_inactive_screen(screen: Screen):
 	screen.active = false
 	
-	remove_cam_limits(screen.get_extents())
+	remove_cam_state(screen.cam_state)
 	
 	var index = _active_screens.find(screen)
 	_active_screens.remove_at(index)
@@ -86,25 +86,26 @@ func set_inactive_screen(screen: Screen):
 		switch_to_screen(_active_screens[-1])
 
 
-func set_cam_limits(limits: Rect2):
-	var edge_1 = limits.position
-	var edge_2 = limits.end
+func set_cam_state(state: CameraState):
+	var edge_1 = state.limits.position
+	var edge_2 = state.limits.end
 	camera.limit_left = int(edge_1.x)
 	camera.limit_top = int(edge_1.y)
 	camera.limit_right = int(edge_2.x)
 	camera.limit_bottom = int(edge_2.y)
+	camera_offset = state.offset
 
 
-func add_cam_limits(limits: Rect2):
-	_cam_limits.append(limits)
-	set_cam_limits(limits)
+func add_cam_state(state: CameraState):
+	_cam_states.append(state)
+	set_cam_state(state)
 
 
-func remove_cam_limits(limits: Rect2):
-	var index = _cam_limits.find(limits)
-	_cam_limits.remove_at(index)
-	if index == _cam_limits.size() and index != 0:
-		set_cam_limits(_cam_limits[-1])
+func remove_cam_state(state: CameraState):
+	var index = _cam_states.find(state)
+	_cam_states.remove_at(index)
+	if index == _cam_states.size() and index != 0:
+		set_cam_state(_cam_states[-1])
 
 
 func get_player() -> Player:

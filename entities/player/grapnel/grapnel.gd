@@ -337,7 +337,7 @@ func _make_joints(index: int, space_state: PhysicsDirectSpaceState2D):
 			params.position = middle_target
 			params.exclude = [self]
 			params.collision_mask = 2
-			if opposite_ray_candidate.is_empty() and space_state.intersect_point(params, 1).is_empty():
+			if opposite_ray_candidate.is_empty():
 				#print("Stopping raycasting search (no opposite ray found) after ", _i, " iterations")
 				break
 

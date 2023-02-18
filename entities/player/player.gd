@@ -413,13 +413,13 @@ func _physics_process(delta):
 
 	_was_airborne = not is_on_floor()
 	
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		
-		# TODO: rewrite this
-		#if collision.get_collider().collision_layer & 16 != 0:
-		#	die(-collision.normal)
-		#	break
+	var params = PhysicsShapeQueryParameters2D.new()
+	params.shape = _collision.shape
+	params.transform = _collision.global_transform
+	params.collision_mask = 16
+	var death_collision = get_world_2d().direct_space_state.get_rest_info(params)
+	if not death_collision.is_empty():
+		die(-death_collision.normal)
 
 	grapnel.update_pos()
 
@@ -489,7 +489,7 @@ func die(direction: Vector2):
 	var collision = move_and_collide(direction * 25, true, true, true)
 	_death_particles.position = Vector2.ZERO if collision == null else collision.position - position
 	_death_particles.process_material.direction = -Vector3(direction.x, direction.y, 0)
-	_death_particles.process_material.initial_velocity = max(_prev_velocity.length() / 2, 80)
+	_death_particles.process_material.initial_velocity_max = max(_prev_velocity.length() / 2, 80)
 	velocity = Vector2.ZERO
 	_death_sound.volume_db = (max(_prev_velocity.length(), 160) - _max_velocity) / 10
 	_death_sound.play_rand()

@@ -543,9 +543,8 @@ _data = {
 [sub_resource type="ParticleProcessMaterial" id="14"]
 lifetime_randomness = 1.0
 direction = Vector3(0, -1, 0)
-spread = 70.0
-flatness = 1.0
 gravity = Vector3(0, 150, 0)
+initial_velocity_max = 50.0
 color = Color(1, 0, 0, 1)
 
 [sub_resource type="Gradient" id="16"]
@@ -561,6 +560,7 @@ width = 100
 lifetime_randomness = 0.7
 spread = 180.0
 gravity = Vector3(0, -10, 0)
+initial_velocity_max = 50.0
 color = Color(0, 0.584314, 1, 1)
 color_ramp = SubResource("17")
 
@@ -586,7 +586,7 @@ libraries = {
 [node name="PlayerLight" parent="." instance=ExtResource("3")]
 position = Vector2(0, 3)
 
-[node name="HookOrigin" type="Node2D" parent="."]
+[node name="HookOrigin" type="Marker2D" parent="."]
 position = Vector2(7, 0.5)
 
 [node name="DeathParticles" type="GPUParticles2D" parent="."]

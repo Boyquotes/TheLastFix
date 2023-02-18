@@ -1,3 +1,4 @@
+@tool
 extends Screen
 
 @onready var _car = $Car
@@ -6,6 +7,9 @@ var _stood_on_car = false
 
 
 func _physics_process(_delta):
+	if Engine.is_editor_hint():
+		return
+
 	if _car_stand.get_overlapping_bodies().has(_level._player) and _level._player.is_on_floor():
 		_stood_on_car = true
 		_car.frame = 11

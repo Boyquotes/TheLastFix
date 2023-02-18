@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 
 class_name Screen
@@ -21,7 +22,7 @@ var _level: Level
 @export var kill_bottom = true : set = _set_kill_bottom
 @export var cutscenes_played = false
 
-@export var size: Vector2
+@export var size = Vector2(256, 144) : set = _set_size
 
 var _extents: Rect2
 var _spawnpoints: Array[Marker2D]
@@ -29,13 +30,33 @@ const pushoff_h = 10
 const pushoff_v = 20
 
 
-func _ready():
-	if size != Vector2.ZERO:
+func make_segment_shape(a: Vector2, b: Vector2):
+	var segment = SegmentShape2D.new()
+	segment.a = a
+	segment.b = b
+	return segment
+
+
+func _set_size(_size: Vector2):
+	size = _size
+	if _collision_area != null:
 		var shape = RectangleShape2D.new()
-		shape.size = size / 2
+		shape.size = size
 		_collision_area.shape = shape
-	else:
-		size = _collision_area.shape.extents * 2
+		
+		$Blockers.position = -size / 2
+		_left_blocker.shape = make_segment_shape(Vector2.ZERO, Vector2(0, size.y))
+		_right_blocker.shape = make_segment_shape(Vector2(size.x, 0), size)
+		_top_blocker.shape = make_segment_shape(Vector2.ZERO, Vector2(size.x, 0))
+		
+		$DeathArea.position = -size / 2
+		_bottom_killer.shape = make_segment_shape(Vector2(0, size.y), size)
+
+
+func _ready():
+	_set_size(size)
+	if Engine.is_editor_hint():
+		return
 
 	_extents = Rect2(position - size / 2, size)
 	for child in get_children():
@@ -149,6 +170,7 @@ func get_closest_spawn(pos: Vector2):
 			min_dist = dist
 			closest_spawn = spawn
 	return closest_spawn
+
 
 func finish():
 	pass

@@ -2,5 +2,5 @@ extends Fixable
 
 
 func _ready():
-	$GPUParticles2D.emitting = true
+	$Particles.emitting = true
 	$AnimationPlayer.play("stream")

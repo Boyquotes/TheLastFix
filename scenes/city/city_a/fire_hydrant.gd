@@ -11,7 +11,7 @@ func load_as_first(_player, end_cutscenes: bool):
 
 func finish():
 	$FireHydrant/AnimationPlayer.stop()
-	$FireHydrant/GPUParticles2D.emitting = false
+	$FireHydrant/Particles.emitting = false
 	$FireHydrant/Sprite2D.frame_coords = Vector2(8, 1)
 	$FireHydrant/Prompt._used = true
 	$FireHydrant/Prompt.visible = false

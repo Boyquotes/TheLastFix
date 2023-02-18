@@ -1,18 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cvonrb0d8n3it"]
 
-[ext_resource path="res://scenes/gui_scene.tscn" type="PackedScene" id=1]
-[ext_resource path="res://entities/page/page.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/page_popup/page_popup.gd" type="Script" id=3]
+[ext_resource type="PackedScene" path="res://scenes/gui_scene.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dxmxms2gcyyhr" path="res://entities/page/page.tscn" id="2"]
+[ext_resource type="Script" path="res://scenes/page_popup/page_popup.gd" id="3"]
 
-[node name="PagePopup" instance=ExtResource( 1 )]
-script = ExtResource( 3 )
+[node name="PagePopup" instance=ExtResource("1")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+script = ExtResource("3")
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.627451 )
+color = Color(0, 0, 0, 0.627451)
 
-[node name="Page" parent="." index="1" instance=ExtResource( 2 )]
+[node name="Page" parent="." index="1" instance=ExtResource("2")]
 min_prog = -0.2
 max_prog = 0.4
 enabled = false

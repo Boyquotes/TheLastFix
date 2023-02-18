@@ -230,6 +230,7 @@ func _walking():
 
 	if _crouching:
 		return _crawl_speed * _walkdir - velocity.x
+
 	return lerp(_walk_speed * _walkdir * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(velocity.x) / 100) - min(_friction, abs(velocity.x)) * sign(velocity.x)
 
 
@@ -478,7 +479,7 @@ func _autowalk(delta):
 		_walkdir = -1
 		_flipped = true
 	
-	return lerp((_walk_speed * _walkdir) * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(velocity.x) / 100) - min(_friction, abs(velocity.x)) * sign(velocity.x)
+	return lerpf((_walk_speed * _walkdir) * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(velocity.x) / 100) - min(_friction, abs(velocity.x)) * sign(velocity.x)
 
 
 func _on_Player_visibility_changed():

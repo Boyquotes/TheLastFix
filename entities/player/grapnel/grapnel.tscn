@@ -12,6 +12,8 @@ size = Vector2(5, 5)
 [sub_resource type="ParticleProcessMaterial" id="2"]
 lifetime_randomness = 1.0
 gravity = Vector3(0, 0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
 
 [node name="Grapnel" type="CharacterBody2D"]
 collision_mask = 2
@@ -26,7 +28,7 @@ vframes = 2
 position = Vector2(1.5, 0)
 shape = SubResource("1")
 
-[node name="GPUParticles3D" type="GPUParticles2D" parent="."]
+[node name="Particles" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 7
 process_material = SubResource("2")

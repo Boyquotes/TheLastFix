@@ -26,7 +26,7 @@ var _prev_origin_pos = Vector2.ZERO
 
 @onready var _sprite = $Sprite2D
 @onready var _collision = $Collision
-@onready var _particles = $GPUParticles3D
+@onready var _particles = $Particles
 @onready var _light = $Light3D
 @onready var _shoot_sound = $ShootSound
 @onready var _latch_sound = $LatchSound

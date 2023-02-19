@@ -1,8 +1,8 @@
 extends Fixable
 
 
-@onready var _sprite = $Sprite2D
-@onready var _light = $Light3D
+@onready var _sprite = $Sprite
+@onready var _light = $Light
 @onready var _hum_sound = $HumSound
 @onready var _animation_player = $AnimationPlayer
 

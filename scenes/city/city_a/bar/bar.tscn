@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://f8u72vvsx2b" path="res://scenes/city/city_a/bar/lonely_guy.png" id="9"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(134, 8)
+size = Vector2(134, 7)
 
 [sub_resource type="Animation" id="2"]
 resource_name = "brooming"
@@ -85,6 +85,7 @@ script = ExtResource("3")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 3
 texture = ExtResource("2")
+offset = Vector2(-0.5, -0.5)
 
 [node name="DoorShadow" type="PointLight2D" parent="."]
 position = Vector2(-41, 23)
@@ -99,7 +100,7 @@ position = Vector2(-32, -15)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Overhang"]
-position = Vector2(1, 3)
+position = Vector2(1.5, 2.5)
 shape = SubResource("1")
 one_way_collision = true
 
@@ -108,27 +109,29 @@ position = Vector2(21, 17)
 
 [node name="Background" type="Sprite2D" parent="Window"]
 light_mask = 0
+position = Vector2(-0.5, 0.5)
 texture = ExtResource("5")
 
 [node name="BroomingGuy" type="Sprite2D" parent="Window"]
 light_mask = 0
-position = Vector2(27, 3)
+position = Vector2(26.5, 3)
 texture = ExtResource("7")
 hframes = 4
 
 [node name="SleepingGuy" type="Sprite2D" parent="Window"]
 light_mask = 0
-position = Vector2(8, 4)
+position = Vector2(9, 4)
 texture = ExtResource("8")
 hframes = 4
 
 [node name="LonelyGuy" type="Sprite2D" parent="Window"]
 light_mask = 0
-position = Vector2(-34, 3)
+position = Vector2(-33, 3)
 texture = ExtResource("9")
 hframes = 8
 
 [node name="Top" type="Sprite2D" parent="Window"]
+position = Vector2(-0.5, 0.5)
 texture = ExtResource("6")
 
 [node name="Brooming" type="AnimationPlayer" parent="Window"]

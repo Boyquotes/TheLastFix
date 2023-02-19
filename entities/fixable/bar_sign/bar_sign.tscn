@@ -124,7 +124,7 @@ length = 1.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -141,7 +141,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -169,7 +169,7 @@ position = Vector2(31, 14)
 z_index = 8
 position = Vector2(31, 7)
 texture = ExtResource("5")
-offset = Vector2(-1, -1)
+offset = Vector2(-1.5, -1)
 hframes = 18
 frame = 1
 
@@ -185,8 +185,9 @@ position = Vector2(41, -2)
 position = Vector2(-22, -6)
 shape = SubResource("5")
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="4"]
+[node name="Sprite" type="Sprite2D" parent="." index="4"]
 texture = ExtResource("2")
+offset = Vector2(0, -0.5)
 hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
@@ -194,7 +195,7 @@ libraries = {
 "": SubResource("AnimationLibrary_kpauq")
 }
 
-[node name="Light3D" type="PointLight2D" parent="." index="6"]
+[node name="Light" type="PointLight2D" parent="." index="6"]
 position = Vector2(0, 4)
 color = Color(1, 0, 0, 1)
 energy = 2.0
@@ -213,4 +214,4 @@ stream = ExtResource("11")
 max_distance = 200.0
 
 [connection signal="finished_fixing" from="." to="." method="on_finished_fixing"]
-[connection signal="frame_changed" from="Sprite2D" to="." method="_on_Sprite_frame_changed"]
+[connection signal="frame_changed" from="Sprite" to="." method="_on_Sprite_frame_changed"]

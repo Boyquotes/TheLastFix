@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var _animator = $Animator
 @onready var _walls = $Interior/Walls
-@onready var _occluder = $Interior/Walls/OccluderInstance3D
+@onready var _occluder = $Interior/Walls/Occluder
 @onready var _floor_shadow = $Interior/GroundFloor/FloorShadow
 @onready var _exterior = $Exterior
 @onready var _shadow = $Shadow
@@ -21,30 +21,30 @@ func _ready():
 	for i in range(1, 9):
 		_floors.append(get_node("Interior/Floors/Floor_" + str(i)))
 	$Facade/CatAnimation.play("wag")
+	$Facade/Frankie.play("default")
 
 
 func _on_InteriorArea_body_entered(body):
 	if body is Player:
-		body._grapnel.retract_immediately()
+		body.grapnel.retract_immediately()
 		body.snap_to_floor = true
 		for f in _floors:
 			f.enabled = true
 		_walls.collision_layer = 2
-		_occluder.light_mask = 1
+		_occluder.visible = true
 		_floor_shadow.range_item_cull_mask = 1
 		_animator.play("enter")
 		_mask.enabled = true
-		print("MASK ENABLED")
 
 
 func _on_InteriorArea_body_exited(body):
 	if body is Player:
-		body._grapnel.retract()
+		body.grapnel.retract()
 		body.snap_to_floor = false
 		for f in _floors:
 			f.enabled = false
 		_walls.collision_layer = 0
-		_occluder.light_mask = 0
+		_occluder.visible = false
 		_floor_shadow.range_item_cull_mask = 0
 		_animator.play("exit")
 		_exterior.z_index = -10
@@ -80,7 +80,7 @@ func open_apartment(collision: CollisionShape2D, flipped: bool, next_level: Stri
 	Game.set_zoom(1, collision.global_position)
 	_player.go_to(pos, flipped)
 	_next_level_path = next_level
-	var error = _player.connect("reached_target",Callable(_animator,"play").bind("open_door"))
+	var error = _player.connect("reached_target", Callable(_animator, "play").bind("open_door"))
 	assert(error == 0) #,"Error connecting reached_target: " + str(error))
 
 

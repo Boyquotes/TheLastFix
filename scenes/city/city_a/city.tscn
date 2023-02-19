@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c7s8xsin5owms" path="res://entities/fixable/fire_hydrant/fire_hydrant.tscn" id="16"]
 [ext_resource type="PackedScene" uid="uid://ewsibw21rcgo" path="res://scenes/city/city_a/bar/bar.tscn" id="22"]
 [ext_resource type="PackedScene" uid="uid://cx6opxhpwlnd3" path="res://scenes/screen/camera_area.tscn" id="25_sgo6g"]
-[ext_resource type="PackedScene" path="res://scenes/city/city_a/building/building.tscn" id="28"]
+[ext_resource type="PackedScene" uid="uid://dmjme817wudwn" path="res://scenes/city/city_a/building/building.tscn" id="28"]
 [ext_resource type="Texture2D" uid="uid://ch4yucorffv5l" path="res://scenes/city/city_a/upz_sign.png" id="29"]
 [ext_resource type="AudioStream" uid="uid://tml1bnyccca5" path="res://scenes/city/city_a/light_beep.mp3" id="30"]
 [ext_resource type="Script" path="res://scenes/city/city_a/city_intro.gd" id="31"]
@@ -490,7 +490,7 @@ b = Vector2(0, 84)
 
 [node name="City" node_paths=PackedStringArray("start_at_screen") instance=ExtResource("1")]
 script = ExtResource("5")
-start_at_screen = NodePath("Screens/spike_swing_2")
+start_at_screen = NodePath("Screens/building")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 

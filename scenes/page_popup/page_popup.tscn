@@ -8,6 +8,8 @@
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("3")
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]

@@ -1,21 +1,55 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://bcg7ecxrbj418"]
 
-[ext_resource path="res://scenes/playable_level.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/city/city_b/city.gd" type="Script" id=2]
-[ext_resource path="res://tiled/maps/city_b/apartment.tmx" type="PackedScene" id=3]
-[ext_resource path="res://scenes/city/city_b/apartment/apartment.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/city/city_b/apartment.gd" type="Script" id=5]
+[ext_resource type="PackedScene" uid="uid://dfowc2seo7idu" path="res://scenes/playable_level.tscn" id="1"]
+[ext_resource type="Script" path="res://scenes/city/city_b/city.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://bygf7i5dkibbp" path="res://scenes/screen/screen.tscn" id="3_yusjf"]
+[ext_resource type="PackedScene" path="res://scenes/city/city_b/apartment/apartment.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://cx6opxhpwlnd3" path="res://scenes/screen/camera_area.tscn" id="5_wdbac"]
+[ext_resource type="TileSet" uid="uid://cuxt5v2ehnpnj" path="res://tilesets/city.tres" id="6_bx6ml"]
 
-[node name="City" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="City" instance=ExtResource("1")]
+script = ExtResource("2")
 
 [node name="Player" parent="." index="2"]
-position = Vector2( 80, 25 )
+position = Vector2(80, 25)
 
-[node name="apartment" parent="Screens" index="0" instance=ExtResource( 3 )]
-script = ExtResource( 5 )
+[node name="apartment" parent="Screens" index="0" instance=ExtResource("3_yusjf")]
 
-[node name="EnterPos" type="Marker2D" parent="Screens/apartment" index="0"]
-position = Vector2( 80, 32 )
+[node name="EnterPos" type="Marker2D" parent="Screens/apartment" index="3"]
+position = Vector2(80, 32)
 
-[node name="Apartment" parent="Screens/apartment" index="5" instance=ExtResource( 4 )]
+[node name="Apartment" parent="Screens/apartment" index="4" instance=ExtResource("4")]
+
+[node name="CameraArea" parent="Screens/apartment" index="5" instance=ExtResource("5_wdbac")]
+position = Vector2(80, -40)
+limits = Rect2(-152, -72, 304, 144)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Screens/apartment/CameraArea" index="0"]
+polygon = PackedVector2Array(-176, 72, -176, 0, 16, 0, 16, 72)
+
+[node name="TileMap" type="TileMap" parent="." index="4"]
+tile_set = ExtResource("6_bx6ml")
+format = 2
+layer_0/name = "terrain"
+layer_0/tile_data = PackedInt32Array(-524304, 131073, 1, -524303, 131073, 1, -524302, 131073, 1, -524301, 131073, 1, -524300, 131073, 1, -524299, 131073, 1, -524298, 131073, 1, -524297, 131073, 1, -524296, 131073, 1, -524295, 131073, 1, -524294, 131073, 1, -524293, 131073, 1, -524292, 131073, 1, -524291, 131073, 1, -524290, 131073, 1, -524289, 131073, 1, -589824, 131073, 1, -589823, 131073, 1, -589822, 131073, 1, -589821, 131073, 1, -589820, 131073, 1, -589819, 131073, 1, -589818, 131073, 1, -589817, 131073, 1, -589816, 131073, 1, -589815, 131073, 1, -589814, 131073, 1, -589813, 131073, 1, -589812, 131073, 1, -589811, 131073, 1, -589810, 131073, 1, -589809, 131073, 1, -524273, 131073, 1, -458737, 131073, 1, -393201, 131073, 1, -327665, 131073, 1, -262129, 131073, 1, -196593, 131073, 1, -131057, 131073, 1, -65521, 131073, 1, 15, 131073, 1, 65551, 131073, 1, 131087, 131073, 1, 196623, 131073, 1, 262159, 131073, 1, 327695, 131073, 1, 393231, 131073, 1, 458767, 131073, 1, 524303, 131073, 1, 589808, 131073, 1, 589809, 131073, 1, 589810, 131073, 1, 589811, 131073, 1, 589812, 131073, 1, 589813, 131073, 1, 589814, 131073, 1, 589815, 131073, 1, 589816, 131073, 1, 589817, 131073, 1, 589818, 131073, 1, 589819, 131073, 1, 589820, 131073, 1, 589821, 131073, 1, 589822, 131073, 1, 589823, 131073, 1, 524288, 131073, 1, 524289, 131073, 1, 524290, 131073, 1, 524291, 131073, 1, 524292, 131073, 1, 524293, 131073, 1, 524294, 131073, 1, 524295, 131073, 1, 524296, 131073, 1, 524297, 131073, 1, 524298, 131073, 1, 524299, 131073, 1, 524300, 131073, 1, 524301, 131073, 1, 524302, 131073, 1, -458768, 131073, 1, -393232, 131073, 1, -327696, 131073, 1, -262160, 131073, 1, -196624, 131073, 1, -131088, 131073, 1, -65552, 131073, 1, -16, 131073, 1, 65520, 131073, 1, 131056, 131073, 1, 196592, 131073, 1, 262128, 131073, 1, 327664, 131073, 1, 393200, 131073, 1, 458736, 131073, 1, 524272, 131073, 1)
+layer_1/name = "background"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = -20
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "overgrowth"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "killer"
+layer_3/enabled = true
+layer_3/modulate = Color(1, 1, 1, 1)
+layer_3/y_sort_enabled = false
+layer_3/y_sort_origin = 0
+layer_3/z_index = 0
+layer_3/tile_data = PackedInt32Array()

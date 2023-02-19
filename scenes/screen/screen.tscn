@@ -2,20 +2,20 @@
 
 [ext_resource type="Script" path="res://scenes/screen/screen.gd" id="1"]
 
-[sub_resource type="RectangleShape2D" id="1"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x86yb"]
 size = Vector2(256, 144)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_x1j4e"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_1mu4r"]
 b = Vector2(0, 144)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_bng1r"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_e8ujf"]
 a = Vector2(256, 0)
 b = Vector2(256, 144)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_gbdm2"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_3ieeb"]
 b = Vector2(256, 0)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_a3xst"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_m3732"]
 a = Vector2(0, 144)
 b = Vector2(256, 144)
 
@@ -27,7 +27,7 @@ collision_layer = 32
 monitorable = false
 
 [node name="CollisionArea" type="CollisionShape2D" parent="ScreenArea"]
-shape = SubResource("1")
+shape = SubResource("RectangleShape2D_x86yb")
 
 [node name="Blockers" type="StaticBody2D" parent="."]
 position = Vector2(-128, -72)
@@ -35,16 +35,16 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="Left" type="CollisionShape2D" parent="Blockers"]
-shape = SubResource("SegmentShape2D_x1j4e")
+shape = SubResource("SegmentShape2D_1mu4r")
 disabled = true
 
 [node name="Right" type="CollisionShape2D" parent="Blockers"]
-shape = SubResource("SegmentShape2D_bng1r")
+shape = SubResource("SegmentShape2D_e8ujf")
 disabled = true
 
 [node name="Top" type="CollisionShape2D" parent="Blockers"]
 position = Vector2(0, -15)
-shape = SubResource("SegmentShape2D_gbdm2")
+shape = SubResource("SegmentShape2D_3ieeb")
 disabled = true
 
 [node name="DeathArea" type="StaticBody2D" parent="."]
@@ -53,7 +53,7 @@ collision_layer = 16
 
 [node name="Bottom" type="CollisionShape2D" parent="DeathArea"]
 position = Vector2(0, 6)
-shape = SubResource("SegmentShape2D_a3xst")
+shape = SubResource("SegmentShape2D_m3732")
 disabled = true
 
 [connection signal="body_entered" from="ScreenArea" to="." method="_on_ScreenArea_body_entered"]

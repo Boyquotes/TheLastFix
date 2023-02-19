@@ -87,7 +87,7 @@ layout_mode = 0
 [node name="Quit" type="Label" parent="Box/Container/Menu/Submenu" index="2"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "New Game"
+text = "Save & Quit"
 
 [node name="TextureRect" type="TextureRect" parent="Box" index="1"]
 layout_mode = 2

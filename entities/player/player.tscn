@@ -605,6 +605,7 @@ one_shot = true
 explosiveness = 1.0
 randomness = 0.45
 fixed_fps = 20
+interpolate = false
 visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 
 [node name="SpawnParticles" type="GPUParticles2D" parent="."]
@@ -617,6 +618,7 @@ one_shot = true
 preprocess = 0.1
 explosiveness = 0.8
 fixed_fps = 10
+interpolate = false
 
 [node name="Sound" type="Node2D" parent="."]
 

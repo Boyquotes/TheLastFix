@@ -16,7 +16,7 @@ func _ready():
 
 func _on_TonySeeArea_body_entered(body):
 	if body is Player and not _tony_awake:
-		body._grapnel.retract()
+		body.grapnel.retract()
 		body.go_to($TonySeeArea/StopPos.global_position, true)
 		_tony_awake = true
 		_cutscene_animator.play("tony_wakeup")

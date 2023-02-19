@@ -36,6 +36,7 @@ lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 24
+interpolate = false
 visibility_rect = Rect2(-256, -144, 512, 288)
 
 [node name="Light3D" type="PointLight2D" parent="."]

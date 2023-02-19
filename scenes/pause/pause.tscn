@@ -1,21 +1,25 @@
-[gd_scene load_steps=9 format=3 uid="uid://5os34rv6jdec"]
+[gd_scene load_steps=11 format=3 uid="uid://rjaovxskem53"]
 
 [ext_resource type="PackedScene" path="res://scenes/gui_scene.tscn" id="1"]
 [ext_resource type="Script" path="res://scenes/pause/pause.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://coet0w1rwxfwu" path="res://dialogue/alonebold.ttf" id="3"]
 [ext_resource type="StyleBox" uid="uid://dpqa480smykeb" path="res://scenes/pause/stylebox.tres" id="3_6fnot"]
 [ext_resource type="PackedScene" uid="uid://bu215xb6omgkq" path="res://entities/menu/menu.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://brj3oho8dobm" path="res://entities/menu/settings/settings.tscn" id="6_fvbjh"]
+[ext_resource type="PackedScene" uid="uid://b2g327gemsnxe" path="res://entities/menu/submenu.tscn" id="6_y87lg"]
 
 [sub_resource type="Theme" id="3"]
 
 [sub_resource type="Theme" id="Theme_7bvm1"]
 default_font = ExtResource("3")
 
-[sub_resource type="Theme" id="Theme_apalq"]
+[sub_resource type="Theme" id="Theme_eqd7q"]
 default_font = ExtResource("3")
 default_font_size = 8
 Label/colors/font_color = Color(0, 0, 0, 1)
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
 Label/constants/line_spacing = 0
+Label/constants/outline_size = 0
 
 [node name="Pause" instance=ExtResource("1")]
 process_mode = 3
@@ -31,51 +35,61 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0, 0, 0, 0.313726)
 
-[node name="Box" type="Panel" parent="." index="1"]
-layout_mode = 0
-anchor_left = 0.3
+[node name="Box" type="PanelContainer" parent="." index="1"]
+custom_minimum_size = Vector2(102.4, 24)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
 anchor_top = 0.05
-anchor_right = 0.7
-anchor_bottom = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.05
+offset_left = -51.2
+offset_right = 51.2
+offset_bottom = 29.0
+grow_horizontal = 2
 theme = SubResource("3")
 theme_override_styles/panel = ExtResource("3_6fnot")
 
-[node name="PauseLabel" type="Label" parent="Box" index="0"]
-layout_mode = 0
-anchor_right = 1.0
-offset_bottom = 20.0
+[node name="Container" type="VBoxContainer" parent="Box" index="0"]
+layout_mode = 2
+
+[node name="PauseLabel" type="Label" parent="Box/Container" index="0"]
+layout_mode = 2
+size_flags_vertical = 0
 theme = SubResource("Theme_7bvm1")
 theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
 text = "PAUSED"
 horizontal_alignment = 1
 
-[node name="Menu" parent="Box" index="1" instance=ExtResource("5")]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 5.0
-offset_top = 30.0
-offset_right = 5.0
-offset_bottom = 30.0
-grow_horizontal = 2
-theme = SubResource("Theme_apalq")
+[node name="Menu" parent="Box/Container" index="1" instance=ExtResource("5")]
+layout_mode = 2
+theme = SubResource("Theme_eqd7q")
 enabled = false
 right_side = true
 
-[node name="Resume" type="Label" parent="Box/Menu" index="2"]
-layout_mode = 0
-offset_right = 36.0
-offset_bottom = 10.0
+[node name="Submenu" parent="Box/Container/Menu" index="2" instance=ExtResource("6_y87lg")]
+layout_mode = 2
+
+[node name="Resume" type="Label" parent="Box/Container/Menu/Submenu" index="0"]
+layout_mode = 2
+size_flags_horizontal = 0
 text = "Resume"
 
-[node name="Quit" type="Label" parent="Box/Menu" index="3"]
-layout_mode = 0
-offset_top = 11.0
-text = "Save & Quit"
+[node name="Settings" type="Label" parent="Box/Container/Menu/Submenu" index="1"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Settings"
 
-[node name="TextureRect" type="TextureRect" parent="Box" index="2"]
+[node name="SettingsMenu" parent="Box/Container/Menu/Submenu/Settings" index="0" instance=ExtResource("6_fvbjh")]
+visible = false
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
-[connection signal="option_pressed" from="Box/Menu" to="." method="_on_Menu_option_pressed"]
+[node name="Quit" type="Label" parent="Box/Container/Menu/Submenu" index="2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "New Game"
+
+[node name="TextureRect" type="TextureRect" parent="Box" index="1"]
+layout_mode = 2
+
+[connection signal="option_pressed" from="Box/Container/Menu/Submenu" to="." method="_on_submenu_option_pressed"]

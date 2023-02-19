@@ -1,6 +1,6 @@
 extends Control
 
-signal option_pressed(index)
+class_name Menu
 
 
 @export var enabled = true
@@ -11,8 +11,10 @@ signal option_pressed(index)
 @onready var _select_sound = $SelectSound
 @onready var _enter_sound = $EnterSound
 
-var _buttons = []
-var _select_index = -1
+var _submenu_stack: Array[Submenu]
+
+var _active_submenu: Submenu
+var _select_index = 0
 
 
 func _ready():
@@ -22,17 +24,40 @@ func _ready():
 
 
 func collect_children():
-	var i = 0
 	for child in get_children():
-		if child.owner != self:
-			if child.visible and _select_index < 0:
-				_select_index = i
-			i += 1
-			_buttons.append(child)
+		if child is Submenu:
+			set_active_submenu(child)
+			break
+
+
+func set_active_submenu(submenu: Submenu):
+	if _active_submenu != null:
+		_submenu_stack.append(_active_submenu)
+		_active_submenu.visible = false
+		_active_submenu.disconnect("back", self.exit_submenu)
+
+	_select_index = 0
+	_active_submenu = submenu
+	submenu.reparent(self)
+	submenu.visible = true
+	submenu.connect("back", self.exit_submenu)
+
+
+func exit_submenu():
+	var submenu_button = _active_submenu.original_parent
+	_active_submenu.visible = false
+	_active_submenu.disconnect("back", self.exit_submenu)
+	_active_submenu.reparent(submenu_button)
+	
+	_active_submenu = _submenu_stack.pop_front()
+	_active_submenu.visible = true
+	_active_submenu.connect("back", self.exit_submenu)
+	# Return arrow to the submenu's button
+	_select_index = _active_submenu.get_children().find(submenu_button)
 
 
 func _process(_delta):
-	if not enabled:
+	if not enabled or _active_submenu == null:
 		return
 
 	var _select_dir = 0
@@ -47,21 +72,21 @@ func _process(_delta):
 			_select_index += _select_dir
 			if _select_index < 0:
 				_select_index = 0
-			elif _select_index >= _buttons.size():
-				_select_index = _buttons.size() - 1
-			elif not _buttons[_select_index].visible:
+			elif _select_index >= _active_submenu.get_child_count():
+				_select_index = _active_submenu.get_child_count() - 1
+			elif not _active_submenu.get_child(_select_index).visible:
 				continue
 
 			break
 
-		if not _buttons[_select_index].visible:
+		if not _active_submenu.get_child(_select_index).visible:
 			_select_index = origin_index
 	
-	var _button = _buttons[_select_index]
+	var button = _active_submenu.get_child(_select_index)
 	_arrow.global_position = (
-		_button.global_position + Vector2(
-			_button.size.x + 8 if right_side else -8,
-			_button.size.y / 2 + 1
+		button.global_position + Vector2(
+			button.size.x + 8 if right_side else -8,
+			button.size.y / 2 + 1
 		)
 	).round()
 	
@@ -70,4 +95,10 @@ func _process(_delta):
 	
 	if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("enter"):
 		_enter_sound.play()
-		emit_signal("option_pressed", _select_index)
+		_active_submenu.select_option(button.name)
+		
+		if button.get_child_count() == 1:
+			var child = button.get_child(0)
+			if child is Submenu:  # Open up sub-menu
+				set_active_submenu(child)
+		

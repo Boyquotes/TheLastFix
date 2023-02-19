@@ -53,13 +53,15 @@ func load_first_level():
 	Game.load_gui(load("res://scenes/page_intro/page_intro.tscn"))
 
 
-func _on_Menu_option_pressed(index):
-	$GUI/Menu.enabled = false
-	match index:
-		0:
+func _on_submenu_option_pressed(option: String):
+	match option:
+		"Continue":
 			if not try_game_load():
 				start_new_game()
-		1:
+		"NewGame":
 			start_new_game()
-		2:
+		"Settings":
+			return
+		"Exit":
 			get_tree().quit()
+	$GUI/Menu.enabled = false

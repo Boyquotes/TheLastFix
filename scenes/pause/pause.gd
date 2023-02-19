@@ -8,7 +8,7 @@ var _fade_speed = 5
 
 var _quitting = false
 
-@onready var menu = $Box/Menu
+@onready var menu = $Box/Container/Menu
 
 
 func _ready():
@@ -46,11 +46,11 @@ func _process(delta):
 	menu.enabled = dir >= 0
 
 
-func _on_Menu_option_pressed(index):
-	match index:
-		0:
+func _on_submenu_option_pressed(option):
+	match option:
+		"Resume":
 			dir = -1
-		1:
+		"Quit":
 			Game.save_game()
 			Game.fade_enabled = true
 			Game.fade_out(1.0 / _fade_speed)

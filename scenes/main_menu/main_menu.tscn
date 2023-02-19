@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://hmfedir4sxxt"]
+[gd_scene load_steps=41 format=3 uid="uid://c5a88bqwkymar"]
 
 [ext_resource type="Texture2D" uid="uid://bnwqufd8566eo" path="res://scenes/main_menu/road.png" id="1"]
 [ext_resource type="Script" path="res://scenes/main_menu/main_menu.gd" id="2"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://bjkl2f0d50jd1" path="res://scenes/main_menu/phone.png" id="13"]
 [ext_resource type="PackedScene" path="res://entities/player/player_light.tscn" id="14"]
 [ext_resource type="PackedScene" uid="uid://bu215xb6omgkq" path="res://entities/menu/menu.tscn" id="15"]
+[ext_resource type="PackedScene" uid="uid://brj3oho8dobm" path="res://entities/menu/settings/settings.tscn" id="15_ottye"]
+[ext_resource type="PackedScene" uid="uid://b2g327gemsnxe" path="res://entities/menu/submenu.tscn" id="15_ssqiy"]
 [ext_resource type="AudioStream" uid="uid://cwnqn4tef13jl" path="res://scenes/main_menu/road.mp3" id="16"]
 [ext_resource type="AudioStream" uid="uid://cbsmudertqtbl" path="res://scenes/main_menu/cellphone.mp3" id="17"]
 [ext_resource type="AudioStream" uid="uid://btysa225vnjy5" path="res://scenes/main_menu/cellphone_answer.mp3" id="18"]
@@ -182,9 +184,10 @@ _data = {
 "sway": SubResource("24")
 }
 
-[sub_resource type="Theme" id="31"]
+[sub_resource type="Theme" id="Theme_dd6te"]
 default_font = ExtResource("12")
 default_font_size = 8
+Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/line_spacing = 0
 Label/constants/outline_size = 4
@@ -435,22 +438,33 @@ offset_left = 4.2
 offset_top = -2.4
 offset_right = 3.0
 offset_bottom = -2.0
-theme = SubResource("31")
+theme = SubResource("Theme_dd6te")
 
-[node name="Continue" type="Label" parent="GUI/Menu" index="2"]
-layout_mode = 0
-offset_right = 44.0
-offset_bottom = 10.0
+[node name="Submenu" parent="GUI/Menu" index="2" instance=ExtResource("15_ssqiy")]
+layout_mode = 2
+
+[node name="Continue" type="Label" parent="GUI/Menu/Submenu" index="0"]
+layout_mode = 2
+size_flags_horizontal = 0
 text = "Continue"
 
-[node name="NewGame" type="Label" parent="GUI/Menu" index="3"]
-layout_mode = 0
-offset_top = 12.0
+[node name="NewGame" type="Label" parent="GUI/Menu/Submenu" index="1"]
+layout_mode = 2
+size_flags_horizontal = 0
 text = "New Game"
 
-[node name="Exit" type="Label" parent="GUI/Menu" index="4"]
+[node name="Settings" type="Label" parent="GUI/Menu/Submenu" index="2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Settings"
+
+[node name="SettingsMenu" parent="GUI/Menu/Submenu/Settings" index="0" instance=ExtResource("15_ottye")]
+visible = false
 layout_mode = 0
-offset_top = 24.0
+
+[node name="Exit" type="Label" parent="GUI/Menu/Submenu" index="3"]
+layout_mode = 2
+size_flags_horizontal = 0
 text = "Exit"
 
 [node name="CutsceneAnimator" type="AnimationPlayer" parent="." index="4"]
@@ -471,4 +485,4 @@ autoplay = true
 [node name="CellphoneRing" type="AudioStreamPlayer" parent="." index="7"]
 stream = ExtResource("18")
 
-[connection signal="option_pressed" from="GUI/Menu" to="." method="_on_Menu_option_pressed"]
+[connection signal="option_pressed" from="GUI/Menu/Submenu" to="." method="_on_submenu_option_pressed"]

@@ -2,8 +2,8 @@
 extends Screen
 
 
-func load_as_first(_player, end_cutscenes: bool):
-	super(_player, end_cutscenes)
+func load_as_first(_player: Player, spawnpoint: Node2D, end_cutscenes: bool):
+	super(_player, spawnpoint, end_cutscenes)
 	if end_cutscenes:
 		_player.stand_on($FireHydrant/FixingPosition.global_position)
 		finish()

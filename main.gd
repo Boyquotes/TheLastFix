@@ -182,7 +182,9 @@ func load_save(save: Dictionary):
 	var level_path = save['level']
 	load_level(load(level_path), false)
 	_current_level.end_cutscenes = save['end_cutscenes']
-	_current_level.start_at_screen = save['screen']
-	_current_level.start_at_spawn = str_to_var("Vector2" + save['spawn'])
+	if save['screen'] != &'':
+		_current_level.start_at_screen = _current_level.get_node(save['screen'])
+	if save['screen'] != &'':
+		_current_level.start_at_spawn = _current_level.get_node(save['spawn'])
 	_level_container.add_child(_current_level)
 	Game.pausable = true

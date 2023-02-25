@@ -150,14 +150,16 @@ func _set_active(value: bool):
 		_screen_area.set_deferred("monitorable", value)
 
 
-func load_as_first(player, _end_cutscenes: bool):
+func load_as_first(player: Player, spawnpoint: Node2D, _end_cutscenes: bool):
 	_level.set_active_screen(self)
-	if _spawnpoints.is_empty():
-		player.stand_on(global_position)
-	else:
-		var spawnpoint = _spawnpoints[0]
-		player.spawnpoint = spawnpoint
-		player.stand_on(spawnpoint.global_position)
+	if spawnpoint == null:
+		if _spawnpoints.is_empty():
+			spawnpoint = self
+		else:
+			spawnpoint = _spawnpoints[0]
+			player.spawnpoint = spawnpoint
+
+	player.stand_on(spawnpoint.global_position)
 
 	player.control_enabled = true
 	player.visible = true

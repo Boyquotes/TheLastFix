@@ -44,7 +44,7 @@ func try_game_load():
 
 
 func load_game(save: Dictionary):
-	await get_tree().idle_frame
+	await get_tree().process_frame
 	Game.fade_in(0.3)
 	Game.load_save(save)
 

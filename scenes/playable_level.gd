@@ -7,6 +7,7 @@ class_name PlayableLevel
 @onready var _screens = $Screens
 
 @export var start_at_screen: Screen
+@export var start_at_spawn: Marker2D
 @export var end_cutscenes = false : set = _set_end_cutscenes
 
 var _cam_states: Array[CameraState]
@@ -28,7 +29,7 @@ func _ready():
 		screen = _screens.get_child(0)
 
 	screen.cutscenes_played = end_cutscenes
-	screen.load_as_first(_player, end_cutscenes)
+	screen.load_as_first(_player, start_at_spawn, end_cutscenes)
 	call_deferred("finish_prev_screens", screen)
 	
 	if followed_node != null:
@@ -115,7 +116,7 @@ func get_player() -> Player:
 func get_save_data():
 	return {
 		'level': scene_file_path,
-		'screen': _active_screen.name if _active_screen != null else &'',
-		'spawn': _player.spawnpoint,
+		'screen': get_path_to(_active_screen) if _active_screen != null else &'',
+		'spawn': get_path_to(_player.spawnpoint) if _player.spawnpoint != null else &'',
 		'end_cutscenes': end_cutscenes
 	}

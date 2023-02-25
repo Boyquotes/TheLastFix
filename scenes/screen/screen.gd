@@ -177,7 +177,3 @@ func get_closest_spawn(pos: Vector2):
 
 func finish():
 	pass
-
-
-func _on_FireHydrant_finished_fixing():
-	pass # Replace with function body.

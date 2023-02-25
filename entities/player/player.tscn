@@ -547,8 +547,8 @@ gravity = Vector3(0, 150, 0)
 initial_velocity_max = 50.0
 color = Color(1, 0, 0, 1)
 collision_mode = 1
-collision_friction = 0.5
-collision_bounce = 0.5
+collision_friction = 1.0
+collision_bounce = 0.0
 
 [sub_resource type="Gradient" id="16"]
 interpolation_mode = 2

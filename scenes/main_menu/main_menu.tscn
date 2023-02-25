@@ -369,6 +369,7 @@ frame_progress = 0.103691
 z_index = 2
 position = Vector2(5, 3)
 texture = ExtResource("4")
+offset = Vector2(0, -0.5)
 hframes = 4
 
 [node name="CarLight" type="PointLight2D" parent="Demo/Car" index="1"]
@@ -389,6 +390,7 @@ visible = false
 z_index = 2
 position = Vector2(2, 4)
 texture = ExtResource("13")
+offset = Vector2(-0.5, 0)
 vframes = 2
 
 [node name="Road" type="Sprite2D" parent="Demo" index="2"]

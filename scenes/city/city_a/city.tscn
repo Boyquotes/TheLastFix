@@ -490,7 +490,7 @@ b = Vector2(0, 84)
 
 [node name="City" node_paths=PackedStringArray("start_at_screen") instance=ExtResource("1")]
 script = ExtResource("5")
-start_at_screen = NodePath("Screens/building")
+start_at_screen = NodePath("")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
 
@@ -525,9 +525,9 @@ centered = false
 
 [node name="Camera" parent="." index="1"]
 position = Vector2(-112, -72)
+limit_top = -144
+limit_bottom = 0
 drag_horizontal_enabled = false
-drag_horizontal_offset = 1.0
-drag_right_margin = 0.0
 
 [node name="Grapnel" parent="." index="2"]
 position = Vector2(-132, -113)
@@ -560,6 +560,7 @@ vframes = 2
 z_index = 1
 position = Vector2(5, 6)
 texture = ExtResource("11")
+offset = Vector2(-0.5, -0.5)
 hframes = 16
 
 [node name="PlayerLight" parent="Screens/city_intro/Car/PlayerPuppet" index="0" instance=ExtResource("13")]

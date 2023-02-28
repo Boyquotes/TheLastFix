@@ -6,8 +6,6 @@
 
 [node name="PagePopup" instance=ExtResource("1")]
 process_mode = 3
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("3")
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]

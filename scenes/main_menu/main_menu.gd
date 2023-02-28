@@ -4,9 +4,8 @@ extends GUIScene
 func _ready():
 	Game.load_level(preload("res://scenes/intro/intro.tscn"))
 	if not Game.save_file_exists():
-		$Menu.offset_top = -12
-		$Menu/Continue.visible = false
-		$Menu/NewGame.text = "Start"
+		$Menu/Submenu/Continue.visible = false
+		$Menu/Submenu/NewGame.text = "Start"
 
 
 func start_new_game():

@@ -23,8 +23,6 @@ Label/constants/outline_size = 0
 
 [node name="Pause" instance=ExtResource("1")]
 process_mode = 3
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("2")
 allow_fade = false
 

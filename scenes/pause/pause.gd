@@ -34,7 +34,7 @@ func _process(delta):
 			if _quitting:
 				Game.fade_in(1.0 / _fade_speed)
 				Game.clear_guis()
-				Game.load_level(preload("res://scenes/main_menu/main_menu.tscn"))
+				Game.load_gui(preload("res://scenes/main_menu/main_menu.tscn"))
 				Game.get_dialogue().clear()
 			else:
 				Game.pausable = true

@@ -1,34 +1,17 @@
-extends Level
-
-var _started_cutscene = false
+extends GUIScene
 
 
 func _ready():
-	Game.pausable = false
-	Game.set_zoom(1)
-	Game.fade_in(0.5)
-	$Demo/RoadAnimation.play("ride")
-	$Demo/HeadAnimation.play("ride")
-	$Demo/CarSwayAnimation.play("sway")
-	$Demo/Car.play("default")
-	
+	Game.load_level(preload("res://scenes/intro/intro.tscn"))
 	if not Game.save_file_exists():
-		$GUI/Menu.offset_top = -12
-		$GUI/Menu/Continue.visible = false
-		$GUI/Menu/NewGame.text = "Start"
-
-
-func _process(delta):
-	$Demo/ParallaxBackground.scroll_base_offset.x -= delta * 60
-	
-	if _started_cutscene:
-		return
+		$Menu.offset_top = -12
+		$Menu/Continue.visible = false
+		$Menu/NewGame.text = "Start"
 
 
 func start_new_game():
-	$CutsceneAnimator.play("start")
-	$GUI/Menu.visible = false
-	_started_cutscene = true
+	Game._current_level.play_intro()
+	$Menu.visible = false
 	Game.pausable = true
 
 
@@ -47,10 +30,7 @@ func load_game(save: Dictionary):
 	await get_tree().process_frame
 	Game.fade_in(0.3)
 	Game.load_save(save)
-
-
-func load_first_level():
-	Game.load_gui(load("res://scenes/page_intro/page_intro.tscn"))
+	close()
 
 
 func _on_submenu_option_pressed(option: String):
@@ -64,4 +44,4 @@ func _on_submenu_option_pressed(option: String):
 			return
 		"Exit":
 			get_tree().quit()
-	$GUI/Menu.enabled = false
+	$Menu.enabled = false

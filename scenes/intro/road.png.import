@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbsu7b815ae3d"
-path="res://.godot/imported/car.png-f10f4e55eabe4c40f384b840815e8b67.ctex"
+uid="uid://bnwqufd8566eo"
+path="res://.godot/imported/road.png-fe73182732af9ed67c3b93d8ab926420.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/main_menu/car.png"
-dest_files=["res://.godot/imported/car.png-f10f4e55eabe4c40f384b840815e8b67.ctex"]
+source_file="res://scenes/intro/road.png"
+dest_files=["res://.godot/imported/road.png-fe73182732af9ed67c3b93d8ab926420.ctex"]
 
 [params]
 

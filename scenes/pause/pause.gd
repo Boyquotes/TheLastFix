@@ -28,14 +28,17 @@ func _process(delta):
 		prog -= delta * _fade_speed
 		if prog <= 0:
 			prog = 0
-			if _quitting:
-				Game.fade_in(1.0 / _fade_speed)
-				Game.load_level(preload("res://scenes/main_menu/main_menu.tscn"))
-				Game.get_dialogue().clear()
 			Game.fade_enabled = true
 			Game.zoom_enabled = true
 			get_tree().paused = false
-			Game.unload_gui()
+			if _quitting:
+				Game.fade_in(1.0 / _fade_speed)
+				Game.clear_guis()
+				Game.load_level(preload("res://scenes/main_menu/main_menu.tscn"))
+				Game.get_dialogue().clear()
+			else:
+				Game.pausable = true
+				close()
 			
 
 	modulate = Color(1, 1, 1, prog)

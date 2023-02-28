@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://rjaovxskem53"]
 
-[ext_resource type="PackedScene" path="res://scenes/gui_scene.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://1njhn8lbjif7" path="res://scenes/gui_scene.tscn" id="1"]
 [ext_resource type="Script" path="res://scenes/pause/pause.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://coet0w1rwxfwu" path="res://dialogue/alonebold.ttf" id="3"]
 [ext_resource type="StyleBox" uid="uid://dpqa480smykeb" path="res://scenes/pause/stylebox.tres" id="3_6fnot"]
@@ -23,11 +23,10 @@ Label/constants/outline_size = 0
 
 [node name="Pause" instance=ExtResource("1")]
 process_mode = 3
-layout_mode = 3
-anchors_preset = 15
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2")
+allow_fade = false
 
 [node name="Background" type="ColorRect" parent="." index="0"]
 layout_mode = 0

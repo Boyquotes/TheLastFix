@@ -116,7 +116,7 @@ func get_player() -> Player:
 func get_save_data():
 	return {
 		'level': scene_file_path,
-		'screen': get_path_to(_active_screen) if _active_screen != null else &'',
-		'spawn': get_path_to(_player.spawnpoint) if _player.spawnpoint != null else &'',
+		'screen': get_path_to(_active_screen) if _active_screen != null else NodePath(''),
+		'spawn': get_path_to(_player.spawnpoint) if _player.spawnpoint != null else NodePath(''),
 		'end_cutscenes': end_cutscenes
 	}

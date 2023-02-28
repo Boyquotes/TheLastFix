@@ -22,5 +22,5 @@ func _process(delta):
 
 
 func _on_Page_reached_max():
-	Game.unload_gui()
+	close()
 	Game.load_level(load("res://scenes/city/city_a/city.tscn"))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c5nmt5wya5nqc"]
+[gd_scene load_steps=36 format=3 uid="uid://c7uyh8y2pf267"]
 
 [ext_resource type="PackedScene" uid="uid://dfowc2seo7idu" path="res://scenes/playable_level.tscn" id="1"]
 [ext_resource type="Script" path="res://scenes/city/city_a/city.gd" id="5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ck2al55pbkmlp" path="res://scenes/city/city_a/bg0.png" id="7"]
 [ext_resource type="AudioStream" uid="uid://tsajjbjqvr70" path="res://scenes/city/city_a/car_brake.mp3" id="8"]
 [ext_resource type="Texture2D" uid="uid://cdogyr2ubg8t7" path="res://scenes/city/city_a/car_rollup.png" id="10"]
+[ext_resource type="AudioStream" uid="uid://cwnqn4tef13jl" path="res://scenes/intro/road.mp3" id="10_34qaq"]
 [ext_resource type="Texture2D" uid="uid://b4hubc2dbvfi3" path="res://scenes/city/city_a/player_rollup.png" id="11"]
 [ext_resource type="Texture2D" uid="uid://p3btdwepwdu8" path="res://scenes/city/city_a/car_light.png" id="12"]
 [ext_resource type="PackedScene" path="res://entities/player/player_light.tscn" id="13"]
@@ -23,8 +24,6 @@
 [ext_resource type="Script" path="res://entities/animator/animator.gd" id="37"]
 [ext_resource type="AudioStream" uid="uid://wtff77xwl3dr" path="res://scenes/city/city_a/car_open.mp3" id="38"]
 [ext_resource type="AudioStream" uid="uid://bg8miclppd1lh" path="res://scenes/city/city_a/car_fall.mp3" id="39"]
-[ext_resource type="AudioStream" uid="uid://kjqpyanx2lmx" path="res://scenes/main_menu/engine.mp3" id="40"]
-[ext_resource type="AudioStream" uid="uid://cwnqn4tef13jl" path="res://scenes/main_menu/road.mp3" id="41"]
 [ext_resource type="AudioStream" uid="uid://bbhg7no1e0lil" path="res://scenes/city/city_a/ignition.mp3" id="42"]
 [ext_resource type="AudioStream" uid="uid://dqdpwnc2w3gsa" path="res://entities/player/sounds/pocket_rummage.mp3" id="43"]
 [ext_resource type="Texture2D" uid="uid://qycd1ll6o3vh" path="res://scenes/city/city_a/bg1.png" id="44"]
@@ -400,7 +399,7 @@ tracks/26/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("41")
+"stream": ExtResource("10_34qaq")
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -612,7 +611,6 @@ texture = ExtResource("35")
 stream = ExtResource("30")
 
 [node name="EngineSound" type="AudioStreamPlayer" parent="Screens/city_intro" index="6"]
-stream = ExtResource("40")
 volume_db = -30.0
 
 [node name="CarSound" type="AudioStreamPlayer" parent="Screens/city_intro" index="7"]

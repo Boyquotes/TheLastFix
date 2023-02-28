@@ -29,7 +29,7 @@ func _process(delta):
 			_dir = 0
 			_page.cross_out(already_crossed + 1)
 		elif _prog < 0:
-			Game.unload_gui()
+			close()
 
 		modulate.a = _prog
 		if _dir > 0:

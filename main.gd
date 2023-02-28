@@ -15,9 +15,8 @@ signal player_light_changed(energy)
 const save_path = "user://save.json"
 
 
-var _current_level = null
+var _current_level: Level
 var _last_loaded_level: Resource
-var _current_gui = null
 @onready var _dialogue = $HUD/DialogueBox
 
 @export var pausable = true
@@ -39,20 +38,20 @@ func _ready():
 	randomize()
 	var root = get_tree().root
 
-	_current_level = root.get_child(0)
-	if _current_level == self:
-		_current_level = root.get_child(1)
+	var level = root.get_child(0)
+	if level == self:
+		level = root.get_child(1)
 
-	if _current_level is Level:
-		_current_level.call_deferred("reparent", _level_container)
-	elif _current_level is GUIScene:
-		_current_level.call_deferred("reparent", _hud)
-		_current_gui = _current_level
-		_current_level = null
+	if level is Level:
+		level.call_deferred("reparent", _level_container)
+		_current_level = level
+	elif level is GUIScene:
+		level.call_deferred("reparent", _hud)
 
 
 func _process(delta):
-	if _current_gui == null and pausable and Input.is_action_just_pressed("escape"):
+	if pausable and Input.is_action_just_pressed("escape"):
+		pausable = false
 		load_gui(preload("res://scenes/pause/pause.tscn"))
 
 	if fade_enabled and fade_speed != 0:
@@ -67,6 +66,9 @@ func _process(delta):
 			emit_signal("fade_finished")
 		
 		_level_view.modulate = Color(fade_level, fade_level, fade_level)
+		for child in _hud.get_children():
+			if child is GUIScene and child.allow_fade:
+				child.modulate = _level_view.modulate
 
 	if zoom_enabled and zoom_speed != 0:
 		zoom_prog += zoom_speed * delta
@@ -135,14 +137,19 @@ func load_level(level: Resource, start = true):
 
 
 func load_gui(gui: Resource):
-	_current_gui = gui.instantiate()
-	_hud.add_child(_current_gui)
-	return _current_gui
+	var scene = gui.instantiate()
+	_hud.add_child(scene)
+	return scene
 
 
-func unload_gui():
-	_hud.remove_child(_current_gui)
-	_current_gui = null
+func unload_gui(scene: GUIScene):
+	_hud.remove_child(scene)
+
+
+func clear_guis():
+	for child in _hud.get_children():
+		if child is GUIScene:
+			_hud.remove_child(child)
 
 
 func get_view() -> Sprite2D:

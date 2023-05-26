@@ -94,7 +94,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Light3D:energy")
+tracks/4/path = NodePath("Light:energy")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -134,13 +134,9 @@ tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "clips": [{
-"end_offset": 0.0,
+"end_offset": 0.725,
 "start_offset": 0.0,
 "stream": ExtResource("19")
-}, {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": null
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -154,25 +150,17 @@ tracks/6/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("11")
 }, {
-"end_offset": 0.0,
+"end_offset": 0.9241,
 "start_offset": 0.0,
 "stream": ExtResource("19")
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": null
-}, {
-"end_offset": 0.0,
-"start_offset": 0.0,
 "stream": ExtResource("14")
 }, {
-"end_offset": 0.0,
+"end_offset": 2.74,
 "start_offset": 0.0,
 "stream": ExtResource("17")
-}, {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": null
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -182,33 +170,21 @@ tracks/6/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("20")
 }, {
-"end_offset": 0.0,
+"end_offset": 4.4372,
 "start_offset": 0.0,
 "stream": ExtResource("17")
 }, {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": null
-}, {
-"end_offset": 0.0,
+"end_offset": 4.5372,
 "start_offset": 0.0,
 "stream": ExtResource("17")
-}, {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": null
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
 "stream": ExtResource("21")
 }, {
-"end_offset": 0.0,
+"end_offset": 4.5372,
 "start_offset": 0.0,
 "stream": ExtResource("17")
-}, {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": null
 }, {
 "end_offset": 0.0,
 "start_offset": 0.0,
@@ -226,7 +202,7 @@ tracks/6/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("16")
 }],
-"times": PackedFloat32Array(0.6, 1.6, 2.2, 4.85, 5.7, 7.1, 7.9, 7.95, 8.7, 10.9, 14, 14.2, 15.1, 15.6, 18.6, 19, 19.75, 24.5, 24.9, 25.4, 26.6, 28.6, 29.35)
+"times": PackedFloat32Array(0.6, 2.2, 4.85, 5.7, 7.1, 7.95, 8.7, 14, 14.2, 15.1, 18.6, 19.75, 24.5, 25.4, 26.6, 28.6, 29.35)
 }
 tracks/6/use_blend = true
 tracks/7/type = "animation"
@@ -263,10 +239,10 @@ tracks/9/path = NodePath("FridgeSound:volume_db")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(10.5, 10.9, 10.95, 15.3, 15.6, 15.65, 18.8, 19, 19.05, 24.7, 24.9, 25.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(10.5, 10.9, 15.3, 15.6, 18.8, 19, 19.05, 24.7, 24.9, 25.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -40.0, 0.0, 0.0, -50.0, 0.0, 0.0, -50.0, 0.0, 0.0, -50.0, 0.0]
+"values": [0.0, -40.0, 0.0, -50.0, 0.0, -50.0, 0.0, 0.0, -50.0, 0.0]
 }
 tracks/10/type = "method"
 tracks/10/imported = false
@@ -479,7 +455,6 @@ texture = ExtResource("3")
 offset = Vector2(2, 0)
 hframes = 15
 vframes = 15
-frame = 137
 
 [node name="FixAnimator" parent="." index="2"]
 libraries = {
@@ -508,8 +483,9 @@ light_mask = 3
 z_index = -1
 position = Vector2(-22, 11)
 texture = ExtResource("4")
+offset = Vector2(0, -0.5)
 
-[node name="Light3D" type="PointLight2D" parent="." index="7"]
+[node name="Light" type="PointLight2D" parent="." index="7"]
 position = Vector2(-5, -4)
 energy = 0.0
 range_item_cull_mask = 2

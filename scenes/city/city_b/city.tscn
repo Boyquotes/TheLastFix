@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcg7ecxrbj418"]
+[gd_scene load_steps=8 format=3 uid="uid://bcg7ecxrbj418"]
 
 [ext_resource type="PackedScene" uid="uid://dfowc2seo7idu" path="res://scenes/playable_level.tscn" id="1"]
 [ext_resource type="Script" path="res://scenes/city/city_b/city.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bygf7i5dkibbp" path="res://scenes/screen/screen.tscn" id="3_yusjf"]
-[ext_resource type="PackedScene" path="res://scenes/city/city_b/apartment/apartment.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://ekolkaypxjrq" path="res://scenes/city/city_b/apartment/apartment.tscn" id="4"]
+[ext_resource type="Script" path="res://scenes/city/city_b/apartment.gd" id="4_ek0fg"]
 [ext_resource type="PackedScene" uid="uid://cx6opxhpwlnd3" path="res://scenes/screen/camera_area.tscn" id="5_wdbac"]
 [ext_resource type="TileSet" uid="uid://cuxt5v2ehnpnj" path="res://tilesets/city.tres" id="6_bx6ml"]
 
@@ -14,6 +15,7 @@ script = ExtResource("2")
 position = Vector2(80, 25)
 
 [node name="apartment" parent="Screens" index="0" instance=ExtResource("3_yusjf")]
+script = ExtResource("4_ek0fg")
 
 [node name="EnterPos" type="Marker2D" parent="Screens/apartment" index="3"]
 position = Vector2(80, 32)

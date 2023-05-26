@@ -100,10 +100,11 @@ func _progress_selection(dir):
 
 
 func _choose(index: int):
-	if _active_submenu.choose():
+	var submenu = _active_submenu
+	if submenu.choose():
 		_enter_sound.play()
 
-		var button = _active_submenu.get_child(index)
+		var button = submenu.get_child(index)
 		if button.get_child_count() == 1:
 			var child = button.get_child(0)
 			if child is Submenu:  # Open up sub-menu

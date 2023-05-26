@@ -18,7 +18,7 @@ func _physics_process(_delta):
 		_stood_on_car = false
 
 
-func load_as_first(player: Player, spawnpoint: Node2D, end_cutscenes: bool):
+func load_as_first(player: Player, _spawnpoint: Node2D, end_cutscenes: bool):
 	var _cutscene_animator = $"../../CutsceneAnimator"
 	_cutscene_animator.play("intro")
 	_level.followed_node = null

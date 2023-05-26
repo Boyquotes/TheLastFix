@@ -347,14 +347,7 @@ func _physics_process(delta):
 	else:
 		_looking = Vector2.RIGHT
 	
-	if snap_to_floor:
-		floor_snap_length = 4 if not _pulling and _jump_time < 0 else 0
-		floor_stop_on_slope = false
-	else:
-		floor_snap_length = 0
-		floor_stop_on_slope = true
-
-	up_direction = Vector2.UP
+	floor_snap_length = 4 if snap_to_floor else 0
 	move_and_slide()
 	velocity = velocity.limit_length(_max_velocity)
 

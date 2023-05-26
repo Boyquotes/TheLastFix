@@ -59,7 +59,7 @@ func _ready():
 	physics_query.set_shape(_collision.shape)
 	physics_query.collision_mask = 2 | 8
 	
-	var error = Game.connect("player_light_changed",Callable(self,"_set_player_light"))
+	var error = Game.connect("player_light_changed", _set_player_light)
 	assert(error == 0)
 
 

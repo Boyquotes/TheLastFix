@@ -62,7 +62,7 @@ func _on_FrankieTalkArea_body_entered(body):
 	if body is Player and not spoke_to_frankie:
 		spoke_to_frankie = true
 		_player.go_to($FrankieTalkPos.global_position)
-		var error = _player.connect("reached_target",Callable(_animator,"play").bind("meet_frankie"),CONNECT_ONE_SHOT)
+		var error = _player.connect("reached_target", _animator.play.bind("meet_frankie"), CONNECT_ONE_SHOT)
 		assert(error == 0) #,"Error connecting reached_target: " + str(error))
 
 
@@ -80,7 +80,7 @@ func open_apartment(collision: CollisionShape2D, flipped: bool, next_level: Stri
 	Game.set_zoom(1, collision.global_position)
 	_player.go_to(pos, flipped)
 	_next_level_path = next_level
-	var error = _player.connect("reached_target", Callable(_animator, "play").bind("open_door"))
+	var error = _player.connect("reached_target", _animator.play.bind("open_door"))
 	assert(error == 0) #,"Error connecting reached_target: " + str(error))
 
 

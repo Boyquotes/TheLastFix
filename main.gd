@@ -188,7 +188,7 @@ func get_save() -> Dictionary:
 
 
 func load_save(save: Dictionary):
-	var level_path = save['path']
+	var level_path = save['level']
 	load_level(load(level_path), false)
 	_current_level.end_cutscenes = save['end_cutscenes']
 	if save['screen'] != &'':

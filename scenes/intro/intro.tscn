@@ -328,7 +328,6 @@ centered = false
 [node name="City" type="ParallaxLayer" parent="Demo/ParallaxBackground" index="1"]
 z_index = -99
 motion_scale = Vector2(0, 0)
-motion_offset = Vector2(-133, -70)
 
 [node name="Sprite2D" type="Sprite2D" parent="Demo/ParallaxBackground/City" index="0"]
 texture_repeat = 2

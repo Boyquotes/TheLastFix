@@ -504,17 +504,16 @@ centered = false
 [node name="City" type="ParallaxLayer" parent="ParallaxBackground" index="1"]
 z_index = -99
 motion_scale = Vector2(0.05, 0.05)
-motion_offset = Vector2(-133, 0)
+motion_offset = Vector2(-11, -51)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/City" index="0"]
-position = Vector2(0, -120)
 texture = ExtResource("44")
 centered = false
 
 [node name="Buildings" type="ParallaxLayer" parent="ParallaxBackground" index="2"]
 z_index = -97
 motion_scale = Vector2(0.8, 0.8)
-motion_offset = Vector2(0, -400)
+motion_offset = Vector2(26, -385)
 motion_mirroring = Vector2(1000, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Buildings" index="0"]

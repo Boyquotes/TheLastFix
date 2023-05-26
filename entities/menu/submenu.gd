@@ -3,13 +3,16 @@ extends VBoxContainer
 class_name Submenu
 
 signal option_pressed(name)
-signal back;
+signal back
 
-var original_parent;
-
-func _ready():
-	original_parent = get_parent();
+@onready var original_parent = get_parent()
+var current_option
 
 
-func select_option(option: String):
-	emit_signal("option_pressed", option)
+func exit():
+	pass
+
+
+func choose():
+	emit_signal("option_pressed", current_option)
+	return true

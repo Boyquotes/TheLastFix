@@ -12,7 +12,7 @@ signal player_light_changed(energy)
 @onready var _level_view = $LevelView
 @onready var _hud = $HUD
 
-const save_path = "user://save.json"
+const SAVE_PATH = "user://save.json"
 
 
 var _current_level: Level
@@ -32,6 +32,8 @@ var zoom_prog = 0.0
 var zoom_origin = 1.0
 var zoom_target = 1.0
 var zoom_speed = 0.0
+
+@onready var Settings = $Settings
 
 
 func _ready():
@@ -167,26 +169,26 @@ func get_dialogue() -> Dialogue:
 
 
 func save_game():
-	var save_file = FileAccess.open(save_path, FileAccess.WRITE)
+	var save_file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	save_file.store_string(JSON.stringify(_current_level.get_save_data()))
 
 
 func save_file_exists() -> bool:
-	return FileAccess.file_exists(save_path)
+	return FileAccess.file_exists(SAVE_PATH)
 
 
 func get_save() -> Dictionary:
-	if not FileAccess.file_exists(save_path):
+	if not FileAccess.file_exists(SAVE_PATH):
 		return {}
 
-	var save_file = FileAccess.open(save_path, FileAccess.READ)
-	var test_json_conv = JSON.new()
-	test_json_conv.parse(save_file.get_as_text())
-	return test_json_conv.get_data()
+	var save_file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	var json_conv = JSON.new()
+	json_conv.parse(save_file.get_as_text())
+	return json_conv.get_data()
 
 
 func load_save(save: Dictionary):
-	var level_path = save['level']
+	var level_path = save['path']
 	load_level(load(level_path), false)
 	_current_level.end_cutscenes = save['end_cutscenes']
 	if save['screen'] != &'':

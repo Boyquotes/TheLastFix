@@ -46,6 +46,8 @@ func set_active_submenu(submenu: Submenu):
 	submenu.visible = true
 	submenu.connect("back", self.exit_submenu)
 	
+	submenu.current_option = submenu.get_child(_select_index).name
+	
 	call_deferred("update_arrow_pos")
 
 
@@ -54,6 +56,7 @@ func exit_submenu():
 	_active_submenu.visible = false
 	_active_submenu.disconnect("back", self.exit_submenu)
 	_active_submenu.reparent(submenu_button)
+	_active_submenu.exit()
 	
 	_active_submenu = _submenu_stack.pop_front()
 	_active_submenu.visible = true
@@ -93,17 +96,18 @@ func _progress_selection(dir):
 	if origin_index != _select_index:
 		_select_sound.play()
 		update_arrow_pos()
+		_active_submenu.current_option = _active_submenu.get_child(_select_index).name
 
 
 func _choose(index: int):
-	var button = _active_submenu.get_child(index)
-	_enter_sound.play()
-	_active_submenu.select_option(button.name)
+	if _active_submenu.choose():
+		_enter_sound.play()
 
-	if button.get_child_count() == 1:
-		var child = button.get_child(0)
-		if child is Submenu:  # Open up sub-menu
-			set_active_submenu(child)
+		var button = _active_submenu.get_child(index)
+		if button.get_child_count() == 1:
+			var child = button.get_child(0)
+			if child is Submenu:  # Open up sub-menu
+				set_active_submenu(child)
 
 
 func _process(_delta):

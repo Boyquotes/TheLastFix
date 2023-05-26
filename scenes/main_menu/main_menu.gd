@@ -20,7 +20,8 @@ func try_game_load():
 		return false
 
 	Game.fade_out(0.3)
-	var error = Game.connect("fade_finished", Callable(self, "load_game").bind(save), CONNECT_ONE_SHOT)
+	var load_level_callback = Callable(self, "load_game").bind(save)
+	var error = Game.connect("fade_finished", load_level_callback, CONNECT_ONE_SHOT)
 	assert(error == 0)
 	return true
 

@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dbsu7b815ae3d" path="res://scenes/intro/car.png" id="6_kxgnn"]
 [ext_resource type="Texture2D" uid="uid://cqdxaewsfxs0k" path="res://scenes/intro/head.png" id="7_vp835"]
 [ext_resource type="Texture2D" uid="uid://p3btdwepwdu8" path="res://scenes/city/city_a/car_light.png" id="8_7wkh6"]
-[ext_resource type="PackedScene" path="res://entities/player/player_light.tscn" id="9_7jiup"]
+[ext_resource type="PackedScene" uid="uid://cx6wy1pubfcxb" path="res://entities/player/player_light.tscn" id="9_7jiup"]
 [ext_resource type="Texture2D" uid="uid://bjkl2f0d50jd1" path="res://scenes/intro/phone.png" id="10_unopm"]
 [ext_resource type="Texture2D" uid="uid://bnwqufd8566eo" path="res://scenes/intro/road.png" id="11_5u0y3"]
 [ext_resource type="Texture2D" uid="uid://cra80krl6cvc6" path="res://scenes/intro/title.png" id="12_uylm5"]

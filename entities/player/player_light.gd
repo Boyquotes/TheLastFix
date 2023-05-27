@@ -6,5 +6,5 @@ func _ready():
 	assert(error == 0) #,"Error connecting player_light_changed: " + str(error))
 
 
-func _on_change(_energy: float):
-	energy = _energy
+func _on_change(player_energy: float, _grapnel_energy: float):
+	energy = player_energy

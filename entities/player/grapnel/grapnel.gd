@@ -27,7 +27,7 @@ var _prev_origin_pos = Vector2.ZERO
 @onready var _sprite = $Sprite2D
 @onready var _collision = $Collision
 @onready var _particles = $Particles
-@onready var _light = $Light3D
+@onready var _light = $Light
 @onready var _shoot_sound = $ShootSound
 @onready var _latch_sound = $LatchSound
 @onready var _vine_sound = $VineSound
@@ -63,7 +63,7 @@ func _ready():
 	assert(error == 0)
 
 
-func _set_player_light(energy: float):
+func _set_player_light(_player_energy: float, energy: float):
 	_light.energy = energy * 0.7
 
 
@@ -98,9 +98,9 @@ func shoot(direction: Vector2):
 	var intersects = space_state.intersect_shape(physics_query)
 	
 	if not intersects.is_empty():
-		position = _player.position - direction * 1.5
+		global_position = _player.global_position - direction * 1.5
 	else:
-		position = _origin.global_position
+		global_position = _origin.global_position
 
 	velocity = direction
 	_sprite.frame = 1 if velocity.x != 0 and velocity.y != 0 else 0
@@ -111,10 +111,10 @@ func shoot(direction: Vector2):
 	_particles.rotation = velocity.angle() - rotation + PI
 	_collision.set_deferred("disabled", false)
 	_joints.resize(0)
-	_joints.push_back(position)
-	_joints.push_back(position)
+	_joints.push_back(global_position)
+	_joints.push_back(global_position)
 	_prev_joints = PackedVector2Array(_joints)
-	_prev_player_pos = _player.position
+	_prev_player_pos = _player.global_position
 	_pushoff = Vector2.ZERO
 
 	active = true
@@ -152,7 +152,7 @@ func retract_immediately():
 
 
 func get_pull(origin: Vector2, player_velocity: Vector2) -> Vector2:
-	var dist = (_joints[-2] if _joints.size() >= 3 else position) - origin
+	var dist = (_joints[-2] if _joints.size() >= 3 else global_position) - origin
 	
 	# In rare cases the player may be directed towards a joint created purely due to the grapnel
 	# origin's visual positioning. In such a case, to prevent this causing the player to get stuck
@@ -183,25 +183,25 @@ func _physics_process(delta):
 
 	var space_state = get_world_2d().direct_space_state
 	
-	_joints[0] = position + _first_joint_offset
+	_joints[0] = global_position + _first_joint_offset
 	var origin_pos = _origin.global_position + 2 * Vector2.LEFT.rotated(-_held_angle / 180.0 * PI)
-	_joints[-1] = _player.position if _origin_stuck_frames >= 0 else origin_pos
+	_joints[-1] = _player.global_position if _origin_stuck_frames >= 0 else origin_pos
 
 	if _retracting:
 		if _joints.size() <= 2:
-			var dist = _joints[1] - position
-			position += dist.normalized() * max(min(dist.length(), 8), 4)
+			var dist = _joints[1] - global_position
+			global_position += dist.normalized() * max(min(dist.length(), 8), 4)
 		else:
-			position += (_joints[1] - position).normalized() * 8
-		if position.distance_to(_joints[1]) < 10:
-			position = _joints[1]
+			global_position += (_joints[1] - global_position).normalized() * 8
+		if global_position.distance_to(_joints[1]) < 10:
+			global_position = _joints[1]
 			_joints.remove_at(1)
 			if _joints.size() <= 1:
 				retract_immediately()
 				return
 	else:
 		var params = PhysicsPointQueryParameters2D.new()
-		params.position = position
+		params.position = global_position
 		params.exclude = [self]
 		params.collision_mask = 32
 		params.collide_with_bodies = false
@@ -214,7 +214,7 @@ func _physics_process(delta):
 		var collision = move_and_collide(velocity * _shoot_speed * delta)
 		
 		if collision != null:
-			var new_pos = position - collision.get_normal() * 2
+			var new_pos = global_position - collision.get_normal() * 2
 			# If the tile hit belongs to the non_grapnel layer, retract the grapnel
 			physics_query.transform = transform
 			_hit_sound.play_rand()
@@ -236,7 +236,7 @@ func _physics_process(delta):
 			stuck = true
 			emit_signal("hit")
 			_collision.disabled = true
-			position = new_pos
+			global_position = new_pos
 			velocity = Vector2.ZERO
 	
 	var params = PhysicsPointQueryParameters2D.new()
@@ -248,7 +248,7 @@ func _physics_process(delta):
 			_joints[-1] = _prev_player_pos
 			_make_joints(_joints.size() - 1, space_state)
 			_prev_joints = PackedVector2Array(_joints)
-		_joints[-1] = _player.position
+		_joints[-1] = _player.global_position
 		_origin_stuck_frames = 0
 	elif _origin_stuck_frames >= 0:
 		_origin_stuck_frames += 1
@@ -264,7 +264,7 @@ func _physics_process(delta):
 
 	_remove_joints(space_state)
 	
-	_prev_player_pos = _player.position
+	_prev_player_pos = _player.global_position
 	_prev_origin_pos = origin_pos
 
 
@@ -391,21 +391,21 @@ func _process(_delta):
 
 func update_pos():
 	if not active:
-		position = _origin.global_position
+		global_position = _origin.global_position
 
 
 func _draw():
 	if not active or not hook_visible:
 		return
 
-	var prev_joint = position + _first_joint_offset
+	var prev_joint = global_position + _first_joint_offset
 	var even = false
 	for i in range(1, _joints.size()):
 		var joint = _joints[i]
 		var target = joint - prev_joint
 
 		draw_set_transform(
-			(prev_joint - position - Vector2(1.5, 1.5).rotated(target.angle())).round().rotated(-rotation),
+			(prev_joint - global_position - Vector2(1.5, 1.5).rotated(target.angle())).round().rotated(-rotation),
 			target.angle() - rotation,
 			Vector2(1, 1)
 		)

@@ -39,7 +39,7 @@ fixed_fps = 24
 interpolate = false
 visibility_rect = Rect2(-256, -144, 512, 288)
 
-[node name="Light3D" type="PointLight2D" parent="."]
+[node name="Light" type="PointLight2D" parent="."]
 energy = 0.7
 range_z_min = -98
 range_z_max = -10

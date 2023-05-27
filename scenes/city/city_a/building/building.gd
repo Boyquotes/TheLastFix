@@ -13,6 +13,7 @@ extends Node2D
 var _player: Player
 var spoke_to_frankie = false
 var _next_level_path = ""
+var _player_prev_parent = null
 
 var _floors = []
 
@@ -25,7 +26,7 @@ func _ready():
 
 
 func _on_InteriorArea_body_entered(body):
-	if body is Player:
+	if body is Player and body.get_parent() != _mask:
 		body.grapnel.retract_immediately()
 		body.snap_to_floor = true
 		for f in _floors:
@@ -34,11 +35,19 @@ func _on_InteriorArea_body_entered(body):
 		_occluder.visible = true
 		_floor_shadow.range_item_cull_mask = 1
 		_animator.play("enter")
-		_mask.enabled = true
+		
+		_player_prev_parent = body.get_parent()
+		Game.set_player_light(1, 0)
+		
+		body.grapnel.z_index = 0
+		body.grapnel.call_deferred("reparent", _mask)
+		
+		body.z_index = 0
+		body.call_deferred("reparent", _mask)
 
 
 func _on_InteriorArea_body_exited(body):
-	if body is Player:
+	if body is Player and body.get_parent() == _mask:
 		body.grapnel.retract()
 		body.snap_to_floor = false
 		for f in _floors:
@@ -48,7 +57,14 @@ func _on_InteriorArea_body_exited(body):
 		_floor_shadow.range_item_cull_mask = 0
 		_animator.play("exit")
 		_exterior.z_index = -10
-		_mask.enabled = false
+		
+		Game.set_player_light(1)
+		
+		body.grapnel.z_index = -2
+		body.grapnel.call_deferred("reparent", _player_prev_parent)
+		
+		body.z_index = -1
+		body.call_deferred("reparent", _player_prev_parent)
 
 
 func _process(_delta):

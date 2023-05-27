@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b4hubc2dbvfi3" path="res://scenes/city/city_a/player_rollup.png" id="11"]
 [ext_resource type="Texture2D" uid="uid://p3btdwepwdu8" path="res://scenes/city/city_a/car_light.png" id="12"]
 [ext_resource type="AudioStream" uid="uid://kjqpyanx2lmx" path="res://scenes/intro/engine.mp3" id="12_uyxkq"]
-[ext_resource type="PackedScene" path="res://entities/player/player_light.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://cx6wy1pubfcxb" path="res://entities/player/player_light.tscn" id="13"]
 [ext_resource type="PackedScene" uid="uid://bygf7i5dkibbp" path="res://scenes/screen/screen.tscn" id="15_cu1oj"]
 [ext_resource type="PackedScene" uid="uid://c7s8xsin5owms" path="res://entities/fixable/fire_hydrant/fire_hydrant.tscn" id="16"]
 [ext_resource type="PackedScene" uid="uid://ewsibw21rcgo" path="res://scenes/city/city_a/bar/bar.tscn" id="22"]
@@ -515,6 +515,7 @@ hook_visible = false
 
 [node name="Player" parent="." index="3"]
 visible = false
+z_as_relative = false
 position = Vector2(-49, -39)
 frozen = true
 

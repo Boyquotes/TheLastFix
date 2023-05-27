@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d2ttwqp56qfis"]
 
 [ext_resource type="Script" path="res://entities/fixable/fixable.gd" id="1"]
-[ext_resource type="PackedScene" path="res://entities/player/player_light.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://cx6wy1pubfcxb" path="res://entities/player/player_light.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://lg0xflmk6o18" path="res://entities/prompt/prompt.tscn" id="3"]
 [ext_resource type="Script" path="res://entities/animator/animator.gd" id="4"]
 

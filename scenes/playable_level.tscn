@@ -10,9 +10,10 @@ script = ExtResource("2")
 end_cutscenes = false
 
 [node name="Grapnel" parent="." index="1" instance=ExtResource("3")]
-z_index = -1
+z_index = -2
 
 [node name="Player" parent="." index="2" node_paths=PackedStringArray("grapnel") instance=ExtResource("1")]
+z_index = -1
 collision_mask = 6
 grapnel = NodePath("../Grapnel")
 

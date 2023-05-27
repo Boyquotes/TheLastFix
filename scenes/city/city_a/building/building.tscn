@@ -144,7 +144,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 15]
+"values": [0, 16]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -321,6 +321,7 @@ frame_progress = 0.846913
 offset = Vector2(-0.5, -0.5)
 
 [node name="Interior" type="Node2D" parent="."]
+clip_children = 1
 z_index = -15
 position = Vector2(3, 19)
 
@@ -445,16 +446,16 @@ script = ExtResource("13")
 [node name="Shadow" type="PointLight2D" parent="."]
 position = Vector2(-66, 160)
 blend_mode = 2
+range_layer_min = -200
+range_layer_max = 200
 texture = ExtResource("9")
 offset = Vector2(-10, 0)
 
-[node name="Mask" type="PointLight2D" parent="."]
+[node name="Mask" type="Sprite2D" parent="."]
+clip_children = 1
 position = Vector2(2, -1)
-enabled = false
-blend_mode = 2
-range_z_min = -2
-range_z_max = 0
 texture = ExtResource("11")
+offset = Vector2(0.5, 0)
 
 [node name="FrankieTalkArea" type="Area2D" parent="."]
 position = Vector2(-73, 189)

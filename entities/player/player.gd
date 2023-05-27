@@ -283,7 +283,7 @@ func _grappling(_delta):
 			_pulling = false
 
 	if _pulling:
-		var pull = grapnel.get_pull(position, velocity)
+		var pull = grapnel.get_pull(global_position, velocity)
 		
 		if _holding_wall:
 			return pull
@@ -450,12 +450,12 @@ func go_to(target: Vector2, flipped = false):
 
 func _autowalk(delta):
 	var _walkdir = 0
-	if abs(position.x - _target_pos.x) < _autowalk_snap_prox:
+	if abs(global_position.x - _target_pos.x) < _autowalk_snap_prox:
 		_flipped = _target_flipped
 		if _animation_player.current_animation == "walk":
 			play_idle()
 		
-		var walk_velocity = (_target_pos.x - position.x) / delta - velocity.x
+		var walk_velocity = (_target_pos.x - global_position.x) / delta - velocity.x
 		if is_on_floor() and walk_velocity + velocity.x == 0:
 			emit_signal("reached_target")
 			_target_pos = null
@@ -465,10 +465,10 @@ func _autowalk(delta):
 	if air_frame < 0:
 		play_animation("walk")
 
-	if position.x < _target_pos.x:
+	if global_position.x < _target_pos.x:
 		_walkdir = 1
 		_flipped = false
-	elif position.x > _target_pos.x:
+	elif global_position.x > _target_pos.x:
 		_walkdir = -1
 		_flipped = true
 	

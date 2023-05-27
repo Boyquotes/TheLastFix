@@ -62,4 +62,4 @@ func mark_end_cutscene():
 func set_player_movement(enabled: bool):
 	Game.get_player().control_enabled = enabled
 	if not enabled:
-		Game.get_player()._grapnel.retract()
+		Game.get_player().grapnel.retract()

@@ -231,6 +231,7 @@ func _walking():
 	if _crouching:
 		return _crawl_speed * _walkdir - velocity.x
 
+	$Sound/Footstep.volume_db = -20 + 20 * abs(velocity.x) / 100
 	return lerp(_walk_speed * _walkdir * (0.25 if is_on_floor() else 0.15), _walkdir * _friction, abs(velocity.x) / 100) - min(_friction, abs(velocity.x)) * sign(velocity.x)
 
 
@@ -388,7 +389,7 @@ func _physics_process(delta):
 	elif is_on_floor():
 		_jump_time = -1
 		if _was_airborne and not _crouching:
-			_land_sound.volume_db = (_prev_velocity.y / _terminal_velocity - 1.2) * 40
+			_land_sound.volume_db = (_prev_velocity.y / _terminal_velocity - 1) * 40
 			_land_sound.play_rand()
 			if _looking.y > 0 and not grapnel.active:
 				air_frame = -1

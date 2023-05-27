@@ -67,6 +67,15 @@ func exit_submenu():
 	update_arrow_pos()
 
 
+func exit():
+	_submenu_stack.append(_active_submenu)
+	_submenu_stack.reverse()
+	for submenu in _submenu_stack:
+		submenu.exit()
+
+	enabled = false
+
+
 func update_arrow_pos():
 	var button = _active_submenu.get_child(_select_index)
 	_arrow.global_position = (

@@ -61,7 +61,6 @@ horizontal_alignment = 1
 [node name="Menu" parent="Box/Container" index="1" instance=ExtResource("5")]
 layout_mode = 2
 theme = SubResource("Theme_eqd7q")
-enabled = false
 right_side = true
 
 [node name="Submenu" parent="Box/Container/Menu" index="2" instance=ExtResource("6_y87lg")]

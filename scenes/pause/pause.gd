@@ -44,14 +44,14 @@ func _process(delta):
 	modulate = Color(1, 1, 1, prog)
 	
 	if Input.is_action_just_pressed("escape"):
+		menu.exit()
 		dir = -1
-
-	menu.enabled = dir >= 0
 
 
 func _on_submenu_option_pressed(option):
 	match option:
 		"Resume":
+			menu.exit()
 			dir = -1
 		"Quit":
 			Game.save_game()

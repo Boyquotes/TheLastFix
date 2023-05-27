@@ -538,6 +538,7 @@ hframes = 8
 vframes = 2
 
 [node name="PlayerPuppet" type="Sprite2D" parent="Screens/city_intro/Car" index="0"]
+light_mask = 0
 z_index = 1
 position = Vector2(5, 6)
 texture = ExtResource("11")
@@ -669,7 +670,7 @@ block_right = true
 position = Vector2(-92, 8)
 
 [node name="FireHydrant" parent="Screens/fire_hydrant" index="4" instance=ExtResource("16")]
-z_index = -2
+z_index = -5
 position = Vector2(23, 24)
 
 [node name="vines_intro" parent="Screens" index="7" instance=ExtResource("15_cu1oj")]

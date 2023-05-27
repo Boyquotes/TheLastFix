@@ -42,7 +42,7 @@ func _on_InteriorArea_body_entered(body):
 		body.grapnel.z_index = 0
 		body.grapnel.call_deferred("reparent", _mask)
 		
-		body.z_index = 0
+		body.z_index = 1
 		body.call_deferred("reparent", _mask)
 
 

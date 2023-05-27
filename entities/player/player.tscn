@@ -592,6 +592,7 @@ libraries = {
 
 [node name="PlayerLight" parent="." instance=ExtResource("3")]
 position = Vector2(0, 3)
+range_z_max = -3
 
 [node name="HookOrigin" type="Marker2D" parent="."]
 position = Vector2(7, 0.5)

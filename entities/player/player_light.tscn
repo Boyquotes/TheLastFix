@@ -5,7 +5,7 @@
 
 [node name="PlayerLight" type="PointLight2D"]
 range_z_min = -98
-range_z_max = -10
+range_z_max = -3
 range_layer_min = -100
 shadow_enabled = true
 texture = ExtResource("1")

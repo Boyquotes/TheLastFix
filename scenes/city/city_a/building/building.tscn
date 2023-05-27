@@ -314,6 +314,7 @@ libraries = {
 
 [node name="Frankie" type="AnimatedSprite2D" parent="Facade"]
 modulate = Color(0.843137, 0.843137, 0.843137, 1)
+light_mask = 0
 z_index = 5
 position = Vector2(-65, 117)
 sprite_frames = SubResource("SpriteFrames_pyirx")

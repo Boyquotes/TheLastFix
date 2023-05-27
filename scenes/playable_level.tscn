@@ -10,14 +10,14 @@ script = ExtResource("2")
 end_cutscenes = false
 
 [node name="Grapnel" parent="." index="1" instance=ExtResource("3")]
-z_index = -2
+z_index = -1
 
 [node name="Player" parent="." index="2" node_paths=PackedStringArray("grapnel") instance=ExtResource("1")]
-z_index = -1
 collision_mask = 6
 grapnel = NodePath("../Grapnel")
 
 [node name="Screens" type="Node2D" parent="." index="3"]
+z_index = 1
 
 [connection signal="hit" from="Grapnel" to="Player" method="_on_Grapnel_hit"]
 [connection signal="retracted" from="Grapnel" to="Player" method="_on_Grapnel_retract"]

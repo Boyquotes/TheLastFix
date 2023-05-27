@@ -1,7 +1,7 @@
 extends Screen
 
 
-func load_as_first(player, _spawnpoint: Vector2, _end_cutscenes: bool):
+func load_as_first(player, _spawnpoint: Node2D, _end_cutscenes: bool):
 	player.stand_on($EnterPos.global_position)
 	Game.set_zoom(0.5625, Vector2(0, -2))
 	Game.fade_in(0.5)
@@ -11,6 +11,6 @@ func load_as_first(player, _spawnpoint: Vector2, _end_cutscenes: bool):
 	player.play_idle()
 	
 	_level.followed_node = $Apartment.cam_target
-	_level.camera.drag_margin_h_enabled = false
+	_level.camera.drag_horizontal_enabled = false
 	_level.camera.position = _level.followed_node.global_position
 

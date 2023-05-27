@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/footstep5.mp3-1d3e3600691441904975dd3d5b43875d.mp3str"
+uid="uid://5wcktc6cpaai"
+path="res://.godot/imported/footstep5.mp3-1d3e3600691441904975dd3d5b43875d.mp3str"
 
 [deps]
 
 source_file="res://entities/player/sounds/footstep5.mp3"
-dest_files=[ "res://.import/footstep5.mp3-1d3e3600691441904975dd3d5b43875d.mp3str" ]
+dest_files=["res://.godot/imported/footstep5.mp3-1d3e3600691441904975dd3d5b43875d.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

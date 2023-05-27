@@ -3,7 +3,7 @@ extends Node2D
 signal used
 
 
-onready var _prompt_animation = $PromptAnimation
+@onready var _prompt_animation = $PromptAnimation
 
 var _ready_to_use = false
 var _player: Player

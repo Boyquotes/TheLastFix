@@ -1,10 +1,10 @@
 extends StaticBody2D
 
-onready var _entrance = $Entrance
-onready var _occluder = $Occluder
-onready var _stairs = $Stairs
-onready var _ceiling = $Ceiling
-export var enabled = true setget _set_enabled
+@onready var _entrance = $Entrance
+@onready var _occluder = $OccluderInstance3D
+@onready var _stairs = $Stairs
+@onready var _ceiling = $Ceiling
+@export var enabled = true : set = _set_enabled
 
 
 func _ready():

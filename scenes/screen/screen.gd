@@ -1,36 +1,74 @@
+@tool
 extends Node2D
 
 class_name Screen
 
 
-onready var _screen_area = $ScreenArea
-onready var _collision_area = $ScreenArea/CollisionArea
+@onready var _screen_area = $ScreenArea
+@onready var _collision_area = $ScreenArea/CollisionArea
 
-onready var _left_blocker: CollisionShape2D = $Blockers/Left
-onready var _right_blocker: CollisionShape2D = $Blockers/Right
-onready var _top_blocker: CollisionShape2D = $Blockers/Top
-onready var _bottom_killer: CollisionShape2D = $DeathArea/Bottom
+@onready var _left_blocker: CollisionShape2D = $Blockers/Left
+@onready var _right_blocker: CollisionShape2D = $Blockers/Right
+@onready var _top_blocker: CollisionShape2D = $Blockers/Top
+@onready var _bottom_killer: CollisionShape2D = $DeathArea/Bottom
 
 var _level: Level
 
-export var active = false setget _set_active
-export var spawnpoints: PoolVector2Array
+@export var active = false : set = _set_active
 
-export var block_left = false setget _set_block_left
-export var block_right = false setget _set_block_right
-export var block_top = true setget _set_block_top
-export var kill_bottom = true setget _set_kill_bottom
+@export var block_left = false : set = _set_block_left
+@export var block_right = false : set = _set_block_right
+@export var block_top = true : set = _set_block_top
+@export var kill_bottom = true : set = _set_kill_bottom
+@export var cutscenes_played = false
+
+@export var size = Vector2(256, 144) : set = _set_size
+@export var camera_offset = Vector2.ZERO
 
 var _extents: Rect2
-var _cutscenes_played = false
-
+var _spawnpoints: Array[Marker2D]
 const pushoff_h = 10
 const pushoff_v = 20
 
+var cam_state: CameraState
+
+
+func make_segment_shape(a: Vector2, b: Vector2):
+	var segment = SegmentShape2D.new()
+	segment.a = a
+	segment.b = b
+	return segment
+
+
+func _set_size(_size: Vector2):
+	size = _size
+	if _collision_area != null:
+		var shape = RectangleShape2D.new()
+		shape.size = size
+		_collision_area.shape = shape
+		
+		$Blockers.position = -size / 2
+		_left_blocker.shape = make_segment_shape(Vector2.ZERO, Vector2(0, size.y))
+		_right_blocker.shape = make_segment_shape(Vector2(size.x, 0), size)
+		_top_blocker.shape = make_segment_shape(Vector2.ZERO, Vector2(size.x, 0))
+		
+		$DeathArea.position = -size / 2
+		_bottom_killer.shape = make_segment_shape(Vector2(0, size.y), size)
+
 
 func _ready():
-	var size = _collision_area.shape.extents
-	_extents = Rect2(position - size, size * 2)
+	_set_size(size)
+	if Engine.is_editor_hint():
+		return
+
+	_extents = Rect2(position - size / 2, size)
+	cam_state = CameraState.new()
+	cam_state.limits = _extents
+	cam_state.offset = camera_offset
+
+	for child in get_children():
+		if child is Marker2D and child.name.begins_with("SP"):
+			_spawnpoints.append(child)
 
 
 func set_level(level):
@@ -66,10 +104,6 @@ func _on_ScreenArea_body_exited(body):
 		disable_blockers()
 	elif body is Grapnel and body.active and not body.stuck:
 		body.retract()
-
-
-func get_extents() -> Rect2:
-	return Rect2(position - _collision_area.shape.extents, _collision_area.shape.extents * 2)
 
 
 func _set_block_left(value: bool):
@@ -116,17 +150,31 @@ func _set_active(value: bool):
 		_screen_area.set_deferred("monitorable", value)
 
 
-func load_as_first(player, spawnpoint: Vector2, _end_cutscenes: bool):
+func load_as_first(player: Player, spawnpoint: Node2D, _end_cutscenes: bool):
 	_level.set_active_screen(self)
-	if spawnpoint == Vector2.ZERO:
-		spawnpoint = global_position + (
-			spawnpoints[0] if not spawnpoints.empty() else Vector2.ZERO
-		)
-	player.spawnpoint = spawnpoint
-	player.stand_on(spawnpoint)
+	if spawnpoint == null:
+		if _spawnpoints.is_empty():
+			spawnpoint = self
+		else:
+			spawnpoint = _spawnpoints[0]
+			player.spawnpoint = spawnpoint
+
+	player.stand_on(spawnpoint.global_position)
+
 	player.control_enabled = true
 	player.visible = true
 	player.play_idle()
+
+
+func get_closest_spawn(pos: Vector2):
+	var min_dist = INF
+	var closest_spawn = null
+	for spawn in _spawnpoints:
+		var dist = spawn.global_position.distance_to(pos)
+		if dist < min_dist:
+			min_dist = dist
+			closest_spawn = spawn
+	return closest_spawn
 
 
 func finish():

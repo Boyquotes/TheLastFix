@@ -5,10 +5,10 @@ signal reached_max
 signal finished_crossing
 
 
-export var prog = 0.0 setget _set_prog
-export var min_prog = 0.0
-export var max_prog = 1.0
-export var enabled = true setget _set_enabled
+@export var prog = 0.0 : set = _set_prog
+@export var min_prog = 0.0
+@export var max_prog = 1.0
+@export var enabled = true : set = _set_enabled
 
 var _speed = 0
 var _played_sound = false
@@ -18,12 +18,12 @@ const height = 196
 
 var _items = []
 
-onready var _page = $Page
-onready var _animation_player = $AnimationPlayer
-onready var _up_arrow = $UpArrow
-onready var _down_arrow = $DownArrow
-onready var _pullup_sound = $PullupSound
-onready var _crossout_sound = $CrossoutSound
+@onready var _page = $Page
+@onready var _animation_player = $AnimationPlayer
+@onready var _up_arrow = $UpArrow
+@onready var _down_arrow = $DownArrow
+@onready var _pullup_sound = $PullupSound
+@onready var _crossout_sound = $CrossoutSound
 
 
 func _ready():
@@ -39,7 +39,7 @@ func set_crossed(count: int):
 
 
 func cross_out(index: int):
-	_crossout_sound.play()
+	_crossout_sound.play_rand()
 	_animation_player.play(str(index))
 
 
@@ -54,7 +54,7 @@ func _set_prog(_prog):
 	_page.position.y = -prog * height
 	
 	if prog >= -0.8 and not _played_sound:
-		_pullup_sound.play()
+		_pullup_sound.play_rand()
 		_played_sound = true
 
 

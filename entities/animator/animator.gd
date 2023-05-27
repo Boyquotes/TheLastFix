@@ -17,16 +17,16 @@ func play_dialogue_sequence(id: String):
 	_dialogue.play_sequence(id)
 	playback_active = false
 	_paused_for_dialogue = true
-	var error = _dialogue.connect("paused", self, "on_dialogue_paused", [], CONNECT_ONESHOT)
-	assert(error == 0, "Error connecting dialogue_paused: " + str(error))
+	var error = _dialogue.connect("paused", self.on_dialogue_paused, CONNECT_ONE_SHOT)
+	assert(error == 0) #,"Error connecting dialogue_paused: " + str(error))
 
 
 func continue_dialogue():
 	_dialogue.resume()
 	playback_active = false
 	_paused_for_dialogue = true
-	var error = _dialogue.connect("paused", self, "on_dialogue_paused", [], CONNECT_ONESHOT)
-	assert(error == 0, "Error connecting dialogue_paused: " + str(error))
+	var error = _dialogue.connect("paused", self.on_dialogue_paused, CONNECT_ONE_SHOT)
+	assert(error == 0) #,"Error connecting dialogue_paused: " + str(error))
 
 
 func on_dialogue_paused():
@@ -62,4 +62,4 @@ func mark_end_cutscene():
 func set_player_movement(enabled: bool):
 	Game.get_player().control_enabled = enabled
 	if not enabled:
-		Game.get_player()._grapnel.retract()
+		Game.get_player().grapnel.retract()

@@ -1,428 +1,473 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=37 format=3 uid="uid://dmjme817wudwn"]
 
-[ext_resource path="res://scenes/city/city_a/building/exterior.png" type="Texture" id=1]
-[ext_resource path="res://scenes/city/city_a/building/building.gd" type="Script" id=2]
-[ext_resource path="res://scenes/city/city_a/building/hallway.png" type="Texture" id=3]
-[ext_resource path="res://scenes/city/city_a/building/stairs.png" type="Texture" id=4]
-[ext_resource path="res://scenes/city/city_a/building/floor.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/city/city_a/building/interior_shadow.png" type="Texture" id=6]
-[ext_resource path="res://scenes/city/city_a/building/cat.png" type="Texture" id=7]
-[ext_resource path="res://scenes/city/city_a/building/facade.png" type="Texture" id=8]
-[ext_resource path="res://scenes/city/city_a/building/building_shadow.png" type="Texture" id=9]
-[ext_resource path="res://scenes/city/city_a/building/frankie.png" type="Texture" id=10]
-[ext_resource path="res://scenes/city/city_a/building/building_mask.png" type="Texture" id=11]
-[ext_resource path="res://entities/prompt/prompt.tscn" type="PackedScene" id=12]
-[ext_resource path="res://entities/animator/animator.gd" type="Script" id=13]
+[ext_resource type="Texture2D" uid="uid://vftw3vppsxow" path="res://scenes/city/city_a/building/exterior.png" id="1"]
+[ext_resource type="Script" path="res://scenes/city/city_a/building/building.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://0fhkfwrejopo" path="res://scenes/city/city_a/building/hallway.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dy3h7chpvr722" path="res://scenes/city/city_a/building/stairs.png" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/city/city_a/building/floor.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://b5sgigh342g70" path="res://scenes/city/city_a/building/interior_shadow.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://c7nqsljvg3mx7" path="res://scenes/city/city_a/building/cat.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://cfnbjbrknyabf" path="res://scenes/city/city_a/building/facade.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://b82ccqid2sv23" path="res://scenes/city/city_a/building/building_shadow.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://e6ijvkaaj1oo" path="res://scenes/city/city_a/building/frankie.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://bsfhfvtdjxs5" path="res://scenes/city/city_a/building/building_mask.png" id="11"]
+[ext_resource type="PackedScene" uid="uid://lg0xflmk6o18" path="res://entities/prompt/prompt.tscn" id="12"]
+[ext_resource type="Script" path="res://entities/animator/animator.gd" id="13"]
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id="7"]
 resource_name = "wag"
 length = 1.9
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Cat:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.3, 1.5, 1.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1.3, 1.5, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 10 )
-region = Rect2( 0, 0, 17, 41 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eqvml"]
+_data = {
+"wag": SubResource("7")
+}
 
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 10 )
-region = Rect2( 17, 0, 17, 41 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_ais2o"]
+atlas = ExtResource("10")
+region = Rect2(0, 0, 17, 41)
 
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 10 )
-region = Rect2( 34, 0, 17, 41 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_slqi6"]
+atlas = ExtResource("10")
+region = Rect2(17, 0, 17, 41)
 
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 10 )
-region = Rect2( 51, 0, 17, 41 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbfm6"]
+atlas = ExtResource("10")
+region = Rect2(34, 0, 17, 41)
 
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 10 )
-region = Rect2( 68, 0, 17, 41 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_eriky"]
+atlas = ExtResource("10")
+region = Rect2(51, 0, 17, 41)
 
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 10 )
-region = Rect2( 85, 0, 17, 41 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_oujlt"]
+atlas = ExtResource("10")
+region = Rect2(68, 0, 17, 41)
 
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 10 )
-region = Rect2( 102, 0, 17, 41 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4ykn"]
+atlas = ExtResource("10")
+region = Rect2(85, 0, 17, 41)
 
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 10 )
-region = Rect2( 119, 0, 17, 41 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxnx8"]
+atlas = ExtResource("10")
+region = Rect2(102, 0, 17, 41)
 
-[sub_resource type="SpriteFrames" id=27]
-animations = [ {
-"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ) ],
+[sub_resource type="AtlasTexture" id="AtlasTexture_eok4y"]
+atlas = ExtResource("10")
+region = Rect2(119, 0, 17, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pyirx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ais2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slqi6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbfm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eriky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oujlt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4ykn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jxnx8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eok4y")
+}],
 "loop": true,
-"name": "default",
+"name": &"default",
 "speed": 3.33
-} ]
+}]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 49.5, 2 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(99, 4)
 
-[sub_resource type="RectangleShape2D" id=18]
-extents = Vector2( 4.5, 177 )
+[sub_resource type="RectangleShape2D" id="18"]
+size = Vector2(9, 354)
 
-[sub_resource type="SegmentShape2D" id=17]
-a = Vector2( -65, -174 )
-b = Vector2( -194, -174 )
+[sub_resource type="SegmentShape2D" id="17"]
+a = Vector2(-65, -174)
+b = Vector2(-194, -174)
 
-[sub_resource type="OccluderPolygon2D" id=6]
-polygon = PoolVector2Array( -65, -174, -65, 180, 65, 180, 65, -174 )
+[sub_resource type="OccluderPolygon2D" id="6"]
+polygon = PackedVector2Array(-65, -174, -65, 180, 65, 180, 65, -174)
 
-[sub_resource type="RectangleShape2D" id=28]
-extents = Vector2( 9, 17.5 )
+[sub_resource type="RectangleShape2D" id="28"]
+size = Vector2(18, 35)
 
-[sub_resource type="RectangleShape2D" id=29]
-extents = Vector2( 9, 15 )
+[sub_resource type="RectangleShape2D" id="29"]
+size = Vector2(18, 30)
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 resource_name = "enter"
 length = 0.5
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Facade:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Interior/Floors/Sprite:z_index")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Interior/Floors/Sprite2D:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ 0, 15 ]
+"values": [0, 16]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Exterior:z_index")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ 20 ]
+"values": [20]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id="5"]
 resource_name = "exit"
 length = 0.5
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Facade:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Interior/Floors/Sprite:z_index")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Interior/Floors/Sprite2D:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ 0 ]
+"values": [0]
 }
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id="31"]
 resource_name = "meet_frankie"
 length = 4.0
 tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Animator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.5, 2.5, 3, 4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"values": [ {
-"args": [ 1.5, 0.5, Vector2( 4000, -210 ) ],
-"method": "zoom_in"
+"times": PackedFloat32Array(0.5, 2.5, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [1.5, 0.5, Vector2(4000, -210)],
+"method": &"zoom_in"
 }, {
-"args": [ "meet_frankie" ],
-"method": "play_dialogue_sequence"
+"args": ["meet_frankie"],
+"method": &"play_dialogue_sequence"
 }, {
-"args": [ 1.0 ],
-"method": "zoom_out"
+"args": [1.0],
+"method": &"zoom_out"
 }, {
-"args": [ true ],
-"method": "set_player_movement"
-} ]
+"args": [true],
+"method": &"set_player_movement"
+}]
 }
 tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Animator")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 4 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "mark_end_cutscene"
-} ]
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"mark_end_cutscene"
+}]
 }
 
-[sub_resource type="Animation" id=32]
+[sub_resource type="Animation" id="32"]
 resource_name = "open_door"
 length = 2.2
 tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 2.2 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "load_next_level"
-} ]
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"load_next_level"
+}]
 }
 tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Animator")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ 2.0 ],
-"method": "fade_out"
-} ]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [2.0],
+"method": &"fade_out"
+}]
 }
 tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Animator")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ 2.0, 0.3 ],
-"method": "zoom_in"
-} ]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [2.0, 0.3],
+"method": &"zoom_in"
+}]
 }
 
-[sub_resource type="RectangleShape2D" id=30]
-extents = Vector2( 15, 32 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bkvgi"]
+_data = {
+"enter": SubResource("4"),
+"exit": SubResource("5"),
+"meet_frankie": SubResource("31"),
+"open_door": SubResource("32")
+}
+
+[sub_resource type="RectangleShape2D" id="30"]
+size = Vector2(30, 64)
 
 [node name="Building" type="Node2D"]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
-[node name="Exterior" type="Sprite" parent="."]
+[node name="Exterior" type="Sprite2D" parent="."]
 z_index = -10
-texture = ExtResource( 1 )
+texture = ExtResource("1")
+offset = Vector2(-0.5, -0.5)
 
 [node name="Facade" type="Node2D" parent="."]
-position = Vector2( 4, 62 )
 z_index = -10
+position = Vector2(4, 62)
 
-[node name="Sprite" type="Sprite" parent="Facade"]
-position = Vector2( -1, -40 )
-texture = ExtResource( 8 )
+[node name="Sprite2D" type="Sprite2D" parent="Facade"]
+position = Vector2(-1, -40)
+texture = ExtResource("8")
+offset = Vector2(-0.5, 0)
 
-[node name="Cat" type="Sprite" parent="Facade"]
-position = Vector2( -25, 40 )
-texture = ExtResource( 7 )
+[node name="Cat" type="Sprite2D" parent="Facade"]
+position = Vector2(-25, 40)
+texture = ExtResource("7")
 hframes = 8
-frame = 1
 
 [node name="CatAnimation" type="AnimationPlayer" parent="Facade"]
-anims/wag = SubResource( 7 )
+libraries = {
+"": SubResource("AnimationLibrary_eqvml")
+}
 
-[node name="Frankie" type="AnimatedSprite" parent="Facade"]
-modulate = Color( 0.843137, 0.843137, 0.843137, 1 )
-position = Vector2( -65, 117 )
+[node name="Frankie" type="AnimatedSprite2D" parent="Facade"]
+modulate = Color(0.843137, 0.843137, 0.843137, 1)
+light_mask = 0
 z_index = 5
-frames = SubResource( 27 )
-frame = 3
-playing = true
+position = Vector2(-65, 117)
+sprite_frames = SubResource("SpriteFrames_pyirx")
+frame_progress = 0.846913
+offset = Vector2(-0.5, -0.5)
 
 [node name="Interior" type="Node2D" parent="."]
-position = Vector2( 3, 19 )
+clip_children = 1
 z_index = -15
+position = Vector2(3, 19)
 
-[node name="Background" type="Sprite" parent="Interior"]
-position = Vector2( 0, -1 )
-texture = ExtResource( 3 )
+[node name="Background" type="Sprite2D" parent="Interior"]
+position = Vector2(0, -1)
+texture = ExtResource("3")
+offset = Vector2(-0.5, -0.5)
 
 [node name="Floors" type="Node2D" parent="Interior"]
-position = Vector2( 0, 2 )
+position = Vector2(0, 2)
 
-[node name="Sprite" type="Sprite" parent="Interior/Floors"]
-position = Vector2( 0, -1 )
-texture = ExtResource( 4 )
+[node name="Sprite2D" type="Sprite2D" parent="Interior/Floors"]
+position = Vector2(0, -1)
+texture = ExtResource("4")
+offset = Vector2(-0.5, -0.5)
 
-[node name="Floor_1" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, 136 )
+[node name="Floor_1" parent="Interior/Floors" instance=ExtResource("5")]
+position = Vector2(0, 136)
 enabled = false
 
-[node name="Floor_2" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( -1, 96 )
-scale = Vector2( -1, 1 )
+[node name="Floor_2" parent="Interior/Floors" instance=ExtResource("5")]
+position = Vector2(-1, 96)
+scale = Vector2(-1, 1)
 enabled = false
 
-[node name="Floor_3" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, 56 )
+[node name="Floor_3" parent="Interior/Floors" instance=ExtResource("5")]
+position = Vector2(0, 56)
 enabled = false
 
-[node name="Floor_4" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( -1, 16 )
-scale = Vector2( -1, 1 )
+[node name="Floor_4" parent="Interior/Floors" instance=ExtResource("5")]
+position = Vector2(-1, 16)
+scale = Vector2(-1, 1)
 enabled = false
 
-[node name="Floor_5" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, -24 )
+[node name="Floor_5" parent="Interior/Floors" instance=ExtResource("5")]
+position = Vector2(0, -24)
 enabled = false
 
-[node name="Floor_6" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( -1, -64 )
-scale = Vector2( -1, 1 )
+[node name="Floor_6" parent="Interior/Floors" instance=ExtResource("5")]
+position = Vector2(-1, -64)
+scale = Vector2(-1, 1)
 enabled = false
 
-[node name="Floor_7" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( 0, -104 )
+[node name="Floor_7" parent="Interior/Floors" instance=ExtResource("5")]
+position = Vector2(0, -104)
 enabled = false
 
-[node name="Floor_8" parent="Interior/Floors" instance=ExtResource( 5 )]
-position = Vector2( -1, -144 )
-scale = Vector2( -1, 1 )
+[node name="Floor_8" parent="Interior/Floors" instance=ExtResource("5")]
+position = Vector2(-1, -144)
+scale = Vector2(-1, 1)
 enabled = false
 
 [node name="GroundFloor" type="StaticBody2D" parent="Interior"]
-position = Vector2( 0, 36 )
+position = Vector2(0, 36)
 collision_layer = 2
 
 [node name="Stairs_0" type="CollisionPolygon2D" parent="Interior/GroundFloor"]
-position = Vector2( -38, 142 )
-polygon = PoolVector2Array( 3, 2, -13, 2, 3, -2 )
+position = Vector2(-38, 142)
+polygon = PackedVector2Array(3, 2, -13, 2, 3, -2)
 
 [node name="Floor_0" type="CollisionShape2D" parent="Interior/GroundFloor"]
-position = Vector2( 14.5, 142 )
-shape = SubResource( 2 )
+position = Vector2(14.5, 142)
+shape = SubResource("2")
 
-[node name="FloorShadow" type="Light2D" parent="Interior/GroundFloor"]
-position = Vector2( -1, -56 )
-texture = ExtResource( 6 )
-mode = 2
+[node name="FloorShadow" type="PointLight2D" parent="Interior/GroundFloor"]
+position = Vector2(-1, -56)
+blend_mode = 2
 range_z_max = -10
 range_layer_min = -100
+range_item_cull_mask = 0
+texture = ExtResource("6")
+offset = Vector2(0.5, 0)
 
 [node name="InteriorArea" type="Area2D" parent="Interior"]
 collision_layer = 0
 
 [node name="Collision" type="CollisionPolygon2D" parent="Interior/InteriorArea"]
-polygon = PoolVector2Array( -52, 101, -52, 180, 64, 180, 64, -174, -64, -174, -64, 101 )
+polygon = PackedVector2Array(-52, 101, -52, 180, 64, 180, 64, -174, -64, -174, -64, 101)
 
 [node name="Walls" type="StaticBody2D" parent="Interior"]
 collision_layer = 0
 collision_mask = 0
 
 [node name="Collision_1" type="CollisionShape2D" parent="Interior/Walls"]
-position = Vector2( -69.5, 3 )
-shape = SubResource( 18 )
+position = Vector2(-69.5, 3)
+shape = SubResource("18")
 
 [node name="Collision_2" type="CollisionShape2D" parent="Interior/Walls"]
-position = Vector2( 69, 3 )
-shape = SubResource( 18 )
+position = Vector2(69, 3)
+shape = SubResource("18")
 
 [node name="Collision_3" type="CollisionShape2D" parent="Interior/Walls"]
-position = Vector2( 129, 0 )
-shape = SubResource( 17 )
+position = Vector2(129, 0)
+shape = SubResource("17")
 
 [node name="Occluder" type="LightOccluder2D" parent="Interior/Walls"]
+visible = false
 light_mask = 0
-occluder = SubResource( 6 )
-light_mask = 0
+occluder = SubResource("6")
 
-[node name="6APrompt" parent="Interior" instance=ExtResource( 12 )]
-position = Vector2( -16, -39 )
+[node name="6APrompt" parent="Interior" instance=ExtResource("12")]
+position = Vector2(-16, -39)
 
 [node name="Collision" type="CollisionShape2D" parent="Interior/6APrompt"]
-position = Vector2( 16, -2.5 )
-shape = SubResource( 28 )
+position = Vector2(16, -2.5)
+shape = SubResource("28")
 
-[node name="PenthousePrompt" parent="Interior" instance=ExtResource( 12 )]
-position = Vector2( 17, -159 )
+[node name="PenthousePrompt" parent="Interior" instance=ExtResource("12")]
+position = Vector2(17, -159)
 monitoring = false
 
 [node name="Collision" type="CollisionShape2D" parent="Interior/PenthousePrompt"]
-position = Vector2( -17, 0 )
-shape = SubResource( 29 )
+position = Vector2(-17, 0)
+shape = SubResource("29")
 
 [node name="Animator" type="AnimationPlayer" parent="."]
-anims/enter = SubResource( 4 )
-anims/exit = SubResource( 5 )
-anims/meet_frankie = SubResource( 31 )
-anims/open_door = SubResource( 32 )
-script = ExtResource( 13 )
+libraries = {
+"": SubResource("AnimationLibrary_bkvgi")
+}
+script = ExtResource("13")
 
-[node name="Shadow" type="Light2D" parent="."]
-position = Vector2( -66, 160 )
-texture = ExtResource( 9 )
-offset = Vector2( -10, 0 )
-mode = 2
+[node name="Shadow" type="PointLight2D" parent="."]
+position = Vector2(-66, 160)
+blend_mode = 2
+range_layer_min = -200
+range_layer_max = 200
+texture = ExtResource("9")
+offset = Vector2(-10, 0)
 
-[node name="Mask" type="Light2D" parent="."]
-position = Vector2( 2, -1 )
-enabled = false
-texture = ExtResource( 11 )
-mode = 3
-range_z_min = -2
-range_z_max = 0
+[node name="Mask" type="Sprite2D" parent="."]
+clip_children = 1
+position = Vector2(2, -1)
+texture = ExtResource("11")
+offset = Vector2(0.5, 0)
 
 [node name="FrankieTalkArea" type="Area2D" parent="."]
-position = Vector2( -73, 189 )
+position = Vector2(-73, 189)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FrankieTalkArea"]
-position = Vector2( 5, -22 )
-shape = SubResource( 30 )
+position = Vector2(5, -22)
+shape = SubResource("30")
 
-[node name="FrankieTalkPos" type="Position2D" parent="."]
-position = Vector2( -78, 199 )
+[node name="FrankieTalkPos" type="Marker2D" parent="."]
+position = Vector2(-78, 199)
 
 [connection signal="body_entered" from="Interior/InteriorArea" to="." method="_on_InteriorArea_body_entered"]
 [connection signal="body_exited" from="Interior/InteriorArea" to="." method="_on_InteriorArea_body_exited"]

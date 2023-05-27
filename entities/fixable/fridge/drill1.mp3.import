@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/drill1.mp3-110d71a49480b832511746b71026ac97.mp3str"
+uid="uid://18yxldnplnss"
+path="res://.godot/imported/drill1.mp3-110d71a49480b832511746b71026ac97.mp3str"
 
 [deps]
 
 source_file="res://entities/fixable/fridge/drill1.mp3"
-dest_files=[ "res://.import/drill1.mp3-110d71a49480b832511746b71026ac97.mp3str" ]
+dest_files=["res://.godot/imported/drill1.mp3-110d71a49480b832511746b71026ac97.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

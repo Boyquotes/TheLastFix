@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/toolbox_search.mp3-f77130c0e92e54636a4d434f2ad81576.mp3str"
+uid="uid://rvr3bqfx7qv5"
+path="res://.godot/imported/toolbox_search.mp3-f77130c0e92e54636a4d434f2ad81576.mp3str"
 
 [deps]
 
 source_file="res://entities/fixable/fridge/toolbox_search.mp3"
-dest_files=[ "res://.import/toolbox_search.mp3-f77130c0e92e54636a4d434f2ad81576.mp3str" ]
+dest_files=["res://.godot/imported/toolbox_search.mp3-f77130c0e92e54636a4d434f2ad81576.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

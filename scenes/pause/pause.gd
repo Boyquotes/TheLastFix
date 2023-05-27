@@ -8,7 +8,7 @@ var _fade_speed = 5
 
 var _quitting = false
 
-onready var menu = $Box/Menu
+@onready var menu = $Box/Container/Menu
 
 
 func _ready():
@@ -28,29 +28,32 @@ func _process(delta):
 		prog -= delta * _fade_speed
 		if prog <= 0:
 			prog = 0
-			if _quitting:
-				Game.fade_in(1.0 / _fade_speed)
-				Game.load_level(preload("res://scenes/main_menu/main_menu.tscn"))
-				Game.get_dialogue().clear()
 			Game.fade_enabled = true
 			Game.zoom_enabled = true
 			get_tree().paused = false
-			Game.unload_gui()
+			if _quitting:
+				Game.fade_in(1.0 / _fade_speed)
+				Game.clear_guis()
+				Game.load_gui(preload("res://scenes/main_menu/main_menu.tscn"))
+				Game.get_dialogue().clear()
+			else:
+				Game.pausable = true
+				close()
 			
 
 	modulate = Color(1, 1, 1, prog)
 	
 	if Input.is_action_just_pressed("escape"):
+		menu.exit()
 		dir = -1
 
-	menu.enabled = dir >= 0
 
-
-func _on_Menu_option_pressed(index):
-	match index:
-		0:
+func _on_submenu_option_pressed(option):
+	match option:
+		"Resume":
+			menu.exit()
 			dir = -1
-		1:
+		"Quit":
 			Game.save_game()
 			Game.fade_enabled = true
 			Game.fade_out(1.0 / _fade_speed)

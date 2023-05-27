@@ -2,34 +2,33 @@ extends Level
 
 class_name PlayableLevel
 
-onready var _player = $Player
-onready var _grapnel = $Grapnel
-onready var _screens = $Screens
+@onready var _player = $Player
+@onready var _grapnel = $Grapnel
+@onready var _screens = $Screens
 
-export var start_at_screen = ""
-export var start_at_spawn = Vector2.ZERO
-export var end_cutscenes = false setget _set_end_cutscenes
+@export var start_at_screen: Screen
+@export var start_at_spawn: Marker2D
+@export var end_cutscenes = false : set = _set_end_cutscenes
 
-var _cam_limits = []
+var _cam_states: Array[CameraState]
 var _active_screens = []
 var _active_screen: Screen
 
 
 func _ready():
 	followed_node = _player
-	_player.set_grapnel(_grapnel)
 	
 	for node in _screens.get_children():
 		if node is Screen:
 			node.set_level(self)
 
-	camera.smoothing_enabled = false
+	camera.position_smoothing_enabled = false
 	
-	if start_at_screen.empty():
-		start_at_screen = _screens.get_child(0).name
+	var screen = start_at_screen
+	if screen == null:
+		screen = _screens.get_child(0)
 
-	var screen = _screens.get_node(start_at_screen)
-	screen._cutscenes_played = end_cutscenes
+	screen.cutscenes_played = end_cutscenes
 	screen.load_as_first(_player, start_at_spawn, end_cutscenes)
 	call_deferred("finish_prev_screens", screen)
 	
@@ -39,19 +38,19 @@ func _ready():
 	var timer = Timer.new()
 	timer.wait_time = 0.3
 	timer.one_shot = true
-	timer.connect("timeout", self, "_set_camera_smoothing")
+	timer.connect("timeout", _set_camera_smoothing)
 	add_child(timer)
 	timer.start()
 
 
 func _set_camera_smoothing():
-	camera.smoothing_enabled = true
+	camera.position_smoothing_enabled = true
 
 
 func _set_end_cutscenes(value: bool):
 	end_cutscenes = value
 	if _active_screen != null:
-		_active_screen._cutscenes_played = true
+		_active_screen.cutscenes_played = true
 
 
 func finish_prev_screens(screen: Screen):
@@ -64,26 +63,15 @@ func switch_to_screen(screen: Screen):
 	_active_screen = screen
 	screen.flush_blockers()
 	screen.active = true
-	end_cutscenes = screen._cutscenes_played
-	
-	# Find spawnpoint closest to player
-	var min_dist = INF
-	var closest_spawn = null
-	for spawn in screen.spawnpoints:
-		var dist = (screen.global_position + spawn).distance_to(_player.global_position)
-		if dist < min_dist:
-			min_dist = dist
-			closest_spawn = screen.global_position + spawn
-
-	if closest_spawn != null:
-		_player.spawnpoint = closest_spawn
+	end_cutscenes = screen.cutscenes_played
+	_player.spawnpoint = screen.get_closest_spawn(_player.global_position)
 
 
 func set_active_screen(screen: Screen):
 	screen.active = true
 	_grapnel.retract()
 
-	add_cam_limits(screen.get_extents())
+	add_cam_state(screen.cam_state)
 	_active_screens.append(screen)
 	switch_to_screen(screen)
 
@@ -91,33 +79,34 @@ func set_active_screen(screen: Screen):
 func set_inactive_screen(screen: Screen):
 	screen.active = false
 	
-	remove_cam_limits(screen.get_extents())
+	remove_cam_state(screen.cam_state)
 	
 	var index = _active_screens.find(screen)
-	_active_screens.remove(index)
+	_active_screens.remove_at(index)
 	if index == _active_screens.size() and index != 0:
 		switch_to_screen(_active_screens[-1])
 
 
-func set_cam_limits(limits: Rect2):
-	var edge_1 = limits.position
-	var edge_2 = limits.end
+func set_cam_state(state: CameraState):
+	var edge_1 = state.limits.position
+	var edge_2 = state.limits.end
 	camera.limit_left = int(edge_1.x)
 	camera.limit_top = int(edge_1.y)
 	camera.limit_right = int(edge_2.x)
 	camera.limit_bottom = int(edge_2.y)
+	camera_offset = state.offset
 
 
-func add_cam_limits(limits: Rect2):
-	_cam_limits.append(limits)
-	set_cam_limits(limits)
+func add_cam_state(state: CameraState):
+	_cam_states.append(state)
+	set_cam_state(state)
 
 
-func remove_cam_limits(limits: Rect2):
-	var index = _cam_limits.find(limits)
-	_cam_limits.remove(index)
-	if index == _cam_limits.size() and index != 0:
-		set_cam_limits(_cam_limits[-1])
+func remove_cam_state(state: CameraState):
+	var index = _cam_states.find(state)
+	_cam_states.remove_at(index)
+	if index == _cam_states.size() and index != 0:
+		set_cam_state(_cam_states[-1])
 
 
 func get_player() -> Player:
@@ -126,8 +115,8 @@ func get_player() -> Player:
 
 func get_save_data():
 	return {
-		'level': filename,
-		'screen': _active_screen.name if _active_screen != null else '',
-		'spawn': _player.spawnpoint,
+		'level': scene_file_path,
+		'screen': get_path_to(_active_screen) if _active_screen != null else NodePath(''),
+		'spawn': get_path_to(_player.spawnpoint) if _player.spawnpoint != null else NodePath(''),
 		'end_cutscenes': end_cutscenes
 	}

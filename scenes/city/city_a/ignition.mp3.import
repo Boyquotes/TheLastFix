@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/ignition.mp3-3383d20954dbffd84dba9862b6b781b2.mp3str"
+uid="uid://bbhg7no1e0lil"
+path="res://.godot/imported/ignition.mp3-3383d20954dbffd84dba9862b6b781b2.mp3str"
 
 [deps]
 
 source_file="res://scenes/city/city_a/ignition.mp3"
-dest_files=[ "res://.import/ignition.mp3-3383d20954dbffd84dba9862b6b781b2.mp3str" ]
+dest_files=["res://.godot/imported/ignition.mp3-3383d20954dbffd84dba9862b6b781b2.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

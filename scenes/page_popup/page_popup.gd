@@ -7,7 +7,7 @@ const _speed = 1
 
 var _dir = 1
 
-onready var _page = $Page
+@onready var _page = $Page
 
 var already_crossed = 0
 
@@ -29,7 +29,7 @@ func _process(delta):
 			_dir = 0
 			_page.cross_out(already_crossed + 1)
 		elif _prog < 0:
-			Game.unload_gui()
+			close()
 
 		modulate.a = _prog
 		if _dir > 0:

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/vine1.mp3-dab54c4d53a4bb33d6e05c840a428bec.mp3str"
+uid="uid://bthwswvig6n0o"
+path="res://.godot/imported/vine1.mp3-dab54c4d53a4bb33d6e05c840a428bec.mp3str"
 
 [deps]
 
 source_file="res://entities/player/grapnel/sounds/vine1.mp3"
-dest_files=[ "res://.import/vine1.mp3-dab54c4d53a4bb33d6e05c840a428bec.mp3str" ]
+dest_files=["res://.godot/imported/vine1.mp3-dab54c4d53a4bb33d6e05c840a428bec.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

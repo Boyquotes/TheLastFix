@@ -1,10 +1,10 @@
 extends Fixable
 
 
-onready var _sprite = $Sprite
-onready var _light = $Light
-onready var _hum_sound = $HumSound
-onready var _animation_player = $AnimationPlayer
+@onready var _sprite = $Sprite
+@onready var _light = $Light
+@onready var _hum_sound = $HumSound
+@onready var _animation_player = $AnimationPlayer
 
 
 func _ready():
@@ -18,4 +18,4 @@ func _on_Sprite_frame_changed():
 
 
 func on_finished_fixing():
-	_hum_sound.pause_mode = PAUSE_MODE_INHERIT
+	_hum_sound.process_mode = PROCESS_MODE_INHERIT

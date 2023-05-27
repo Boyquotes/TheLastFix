@@ -8,8 +8,8 @@ const gravity = 500
 const left_start = Vector2(35, -84)
 const right_start = Vector2(1, -84)
 
-export var left_end: Vector2
-export var right_end: Vector2
+@export var left_end: Vector2
+@export var right_end: Vector2
 
 class Particle:
 	var position: Vector2
@@ -82,4 +82,4 @@ func _draw():
 			var new_pos = line[i].position
 			prev_pos.y += (line[i - 1].init_pos.y - prev_pos.y) * 0.98
 			new_pos.y += (line[i].init_pos.y - new_pos.y) * 0.98
-			draw_line(prev_pos, new_pos, Color.blue)
+			draw_line(prev_pos, new_pos, Color.BLUE)
